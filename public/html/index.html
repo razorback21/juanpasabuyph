@@ -1,272 +1,461 @@
-<html><head>
-    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
-    <title>ShopSmart</title>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-        .plus-jakarta-sans-font {
-          font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
-        }
-      </style>
-    </head>
-    <body class="plus-jakarta-sans-font">
-    <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
+<html>
+
+<head>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect" />
+  <link as="style"
+    href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B700%3B800"
+    onload="this.rel='stylesheet'" rel="stylesheet" />
+  <title>ShopSmart</title>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+    .plus-jakarta-sans-font {
+      font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="plus-jakarta-sans-font">
+  <div class="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
     <div class="layout-container flex h-full grow flex-col">
-    <header class="flex flex-col md:flex-row items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-4 sm:px-6 md:px-10 py-4 shadow-sm">
-    <div class="flex items-center gap-4 md:gap-10 mb-4 md:mb-0">
-    <div class="flex items-center gap-3 text-gray-900">
-    <div class="size-8 text-red-600">
-    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
-    </svg>
-    </div>
-    <h1 class="text-gray-900 text-xl sm:text-2xl font-bold leading-tight tracking-tight">ShopSmart</h1>
-    </div>
-    <nav class="hidden md:flex items-center gap-4 lg:gap-8">
-    <a class="text-gray-700 hover:text-red-600 text-sm lg:text-base font-medium leading-normal transition-colors" href="#">Products</a>
-    <a class="text-gray-700 hover:text-red-600 text-sm lg:text-base font-medium leading-normal transition-colors" href="#">Stores</a>
-    <a class="text-gray-700 hover:text-red-600 text-sm lg:text-base font-medium leading-normal transition-colors" href="#">About Us</a>
-    <a class="text-gray-700 hover:text-red-600 text-sm lg:text-base font-medium leading-normal transition-colors" href="#">Contact</a>
-    </nav>
-    </div>
-    <div class="flex w-full md:w-auto flex-1 justify-center md:justify-end items-center gap-3 sm:gap-6">
-    <label class="flex flex-col min-w-0 sm:min-w-48 !h-10 sm:!h-11 w-full max-w-xs sm:max-w-md">
-    <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
-    <div class="text-gray-500 flex border border-gray-300 bg-gray-50 items-center justify-center pl-3 sm:pl-4 rounded-l-lg border-r-0" data-icon="MagnifyingGlass" data-size="24px" data-weight="regular">
-    <svg fill="currentColor" height="18px" sm:height="20px" sm:width="20px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-    </svg>
-    </div>
-    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 border border-gray-300 bg-gray-50 h-full placeholder:text-gray-500 px-2 sm:px-4 rounded-l-none border-l-0 pl-2 text-sm sm:text-base font-normal leading-normal" placeholder="Search products..." value=""/>
-    </div>
-    </label>
-    <button class="flex items-center justify-center rounded-lg h-10 sm:h-11 bg-gray-100 hover:bg-gray-200 text-gray-700 hover:text-red-600 gap-1 sm:gap-2 text-xs sm:text-sm font-bold leading-normal tracking-[0.015em] min-w-0 px-2 sm:px-3 transition-colors" title="Wishlist">
-    <div data-icon="Heart" data-size="20px" data-weight="regular" sm:data-size="24px">
-    <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z"></path>
-    </svg>
-    </div>
-    </button>
-    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 sm:size-11 border-2 border-gray-300 hover:border-red-500 transition-colors" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDd1-8_ksVD3cdIeH-HRTs5i09f7B5QD36Nj0F5ZmQg11hqERzVi4piwSRU0HT3NCZUfh21dD3HJIys1jWCGLJwee8NNCY5NMe33Viu_0jMZfJ-FfT6fp2r0RNCoWQNNDd6fBeE3tLJNegF9uYtdw7ucsWMgi8tfKPdONRweOzpGqxFvnkUBV1b3GgQEvUXMYpmELt1vvJNhFYa1O8xp0cmHwuog3cA01xYJnHMN_QZI0FZes2GaIpwPLt36_ThMYliICvNSqexLQVz");' title="My Account"></div>
-    </div>
-    <nav class="md:hidden flex items-center justify-center gap-4 sm:gap-6 mt-4 w-full border-t border-gray-200 pt-4">
-    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Products</a>
-    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Stores</a>
-    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">About Us</a>
-    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Contact</a>
-    </nav>
+      <header
+      class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
+      <div class="flex items-center gap-3 sm:gap-10">
+        <div class="flex items-center gap-3 text-[#e92933]">
+          <div class="size-6">
+            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+          <h2 class="text-[#111827] text-xl font-bold leading-tight tracking-[-0.015em]">JUANPASABUY<span class="text-[#111827]">PH</span></h2>
+        </div>
+        <nav class="hidden lg:flex items-center gap-6">
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
+            href="#">Home</a>
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
+            href="#">Stores</a>
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
+            href="#">Categories</a>
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
+            href="#">Deals</a>
+        </nav>
+      </div>
+      <div class="flex flex-1 justify-end items-center gap-2 sm:gap-4">
+        <label class="relative flex-col min-w-0 sm:min-w-48 !h-10 max-w-xs hidden md:flex">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
+            <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
+              </path>
+            </svg>
+          </div>
+          <input
+            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal"
+            placeholder="Search products..." value="" />
+        </label>
+        <div class="flex gap-2">
+          <button
+            class="flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
+            <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z">
+              </path>
+            </svg>
+          </button>
+          <button
+            class="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
+            <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z">
+              </path>
+            </svg>
+            <span
+              class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#e92933] text-xs font-bold text-white">3</span>
+          </button>
+        </div>
+        <button
+          class="lg:hidden flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]"
+          id="menu-button">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+          </svg>
+        </button>
+      </div>
+      <div class="hidden lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 p-4" id="mobile-menu">
+        <nav class="flex flex-col gap-4">
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
+            href="#">Home</a>
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
+            href="#">Stores</a>
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
+            href="#">Categories</a>
+          <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
+            href="#">Deals</a>
+          <label class="relative flex-col min-w-0 !h-10 max-w-xs mt-2 md:hidden">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
+              <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
+                </path>
+              </svg>
+            </div>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal"
+              placeholder="Search products..." value="" />
+          </label>
+        </nav>
+      </div>
     </header>
-    <main class="flex-1 bg-gray-50">
-    <div class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 flex flex-1 justify-center py-6 sm:py-8">
-    <div class="layout-content-container flex flex-col max-w-screen-xl flex-1">
-    <section class="w-full @container mb-8 sm:mb-12">
-    <div class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[300px] sm:min-h-[400px] @[640px]:min-h-[500px] shadow-lg" style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 50%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQg5pGmCR-wlLQ-Pwbh8WLr58lK6LBXvQfF8qvPfo5XrUbCSVD-NIFrz70s9noN94FcYb8dIxxwvrIuJ_-XMCmyqmnaR_kgAiHtpuvtunFo84mYSyaWtxZxYnHXx-19RwqAQbytVOeTCEhWo5fjo0yoWJr2xPhziAtjL9IOD04ilo0qEfJ_i-2BxSdB1D8EmATWRwKcYidvSxnxQKhGGDmiybqM0hFpcrpXa56RFAFQVDEwh0Fglx1srivZHJF_FxLgAEAybHDK0U7");'>
-    <div class="p-6 sm:p-8 @[640px]:p-12">
-    <h2 class="text-white text-2xl sm:text-3xl @[640px]:text-5xl font-bold leading-tight tracking-tight max-w-md sm:max-w-lg @[640px]:max-w-2xl">
-                        Discover the Best Deals Across Your Favorite Stores
-                      </h2>
-    <p class="text-gray-200 mt-3 sm:mt-4 text-base sm:text-lg @[640px]:text-xl max-w-sm sm:max-w-md @[640px]:max-w-xl">Your one-stop shop for incredible savings and unique finds.</p>
-    <button class="mt-6 sm:mt-8 px-6 py-2.5 sm:px-8 sm:py-3 bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-                        Shop Now
-                      </button>
+      <main class="flex-1 bg-gray-50">
+        <div class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 flex flex-1 justify-center py-6 sm:py-8">
+          <div class="layout-content-container flex flex-col max-w-screen-xl flex-1">
+            <section class="w-full @container mb-8 sm:mb-12">
+              <div
+                class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[300px] sm:min-h-[400px] @[640px]:min-h-[500px] shadow-lg"
+                style='background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.1) 50%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQg5pGmCR-wlLQ-Pwbh8WLr58lK6LBXvQfF8qvPfo5XrUbCSVD-NIFrz70s9noN94FcYb8dIxxwvrIuJ_-XMCmyqmnaR_kgAiHtpuvtunFo84mYSyaWtxZxYnHXx-19RwqAQbytVOeTCEhWo5fjo0yoWJr2xPhziAtjL9IOD04ilo0qEfJ_i-2BxSdB1D8EmATWRwKcYidvSxnxQKhGGDmiybqM0hFpcrpXa56RFAFQVDEwh0Fglx1srivZHJF_FxLgAEAybHDK0U7");'>
+                <div class="p-6 sm:p-8 @[640px]:p-12">
+                  <h2
+                    class="text-white text-2xl sm:text-3xl @[640px]:text-5xl font-bold leading-tight tracking-tight max-w-md sm:max-w-lg @[640px]:max-w-2xl">
+                    Discover the Best Deals Across Your Favorite Stores
+                  </h2>
+                  <p
+                    class="text-gray-200 mt-3 sm:mt-4 text-base sm:text-lg @[640px]:text-xl max-w-sm sm:max-w-md @[640px]:max-w-xl">
+                    Your one-stop shop for incredible savings and unique finds.</p>
+                  <button
+                    class="mt-6 sm:mt-8 px-6 py-2.5 sm:px-8 sm:py-3 bg-red-600 hover:bg-red-700 text-white text-base sm:text-lg font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                    Shop Now
+                  </button>
+                </div>
+              </div>
+            </section>
+            <section class="mb-8 sm:mb-12">
+              <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">
+                Featured Products</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 p-4">
+                <div
+                  class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCY-wVJE0w8ZrAtAtrEgCz8ypKEWHc_bRkAci3is6QPYXsH9l0sZHuAcUKvxzOrTRnjRTiL_pT1b0D8U1nbvC89Ns9wz-r6guXov8t6L79ckS3yVGYz3zXLKgBsbQhQoNeWhds7D4rlg9epbnU3vT8AfjxzSLSf0n81t4Qbdql_-xDoZGwHVKsS8ZbKYPdaf-K55Q1wQxAYJsMrMgCLBERrmbS09b8MkFMtWygT-Ikyt0azG2wUW02TUlbSiOrzHqafGtQj4BQYgMDm");'>
+                  </div>
+                  <div>
+                    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Elegant Sofa</h3>
+                    <p class="text-gray-600 text-sm font-normal leading-normal">Perfect for your living room</p>
+                    <p class="text-red-600 text-lg font-bold mt-2">$499.99</p>
+                  </div>
+                </div>
+                <div
+                  class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlVVOOPX23T-GXOmKCji3aXTYxA3slaMTsUmp3ZGxcK0nws1EvhS7KTqzMvnP67hMLqqF2-QGK9C6zXXeSYnn0UNe_SvOmSPAG8Q_sGk3t8-o0eajrA_ppueecZCV62IocEAKoEA7aysNJyuXEX3i7AE03_ke5WVRJs3ty-frSWQTYoj2Yg1NCSp8SvjYIpTYmEl5cBGgHLagcAH_-tR7cy5W_axp0hSwUlEF14T3bsfb9GcaF3yQbXn6nEQgBapUaxw0_XqhJZ122");'>
+                  </div>
+                  <div>
+                    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Dining Table Set</h3>
+                    <p class="text-gray-600 text-sm font-normal leading-normal">Ideal for family dinners</p>
+                    <p class="text-red-600 text-lg font-bold mt-2">$799.00</p>
+                  </div>
+                </div>
+                <div
+                  class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbgtT2joGYIjUgyFWV4zM3Xj5imlapcuzlsKL_aorYd8DITHAZLlLVB6MMXEpf0WUjx2HcEoESf0XJZZbMprBKzLMuNaEZ5RtIy4YBWExAmzujKafaKrmgEi15ozhsH0zb5o-2cccHJ_qgLP7B29rdLmGjOCoM_SUSsUDch8HUjFAryqtWTiOWnM8SJTxw7BgCpcdIlE--0dg01aZI1bUiqtTXD0VBYtCdIdDZOWb-n1480W5y-NuBh7G2yab0M3QG3a_CPSaGaCQx");'>
+                  </div>
+                  <div>
+                    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Comfortable Bed</h3>
+                    <p class="text-gray-600 text-sm font-normal leading-normal">Sleep soundly and wake refreshed</p>
+                    <p class="text-red-600 text-lg font-bold mt-2">$650.50</p>
+                  </div>
+                </div>
+                <div
+                  class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6SwkO35IjE83Ya0mByR8JdBE2qlqL1hvEmyKTGsd6R3V0KLhV0wHSYHVByZtxnWSstyQwHo4PVWLRvVNPgoCdkwaTBh29aolUl5i1ITH4N_jUGFUm0HzFEI-mh5VRNVHQVABS_PoCPpMvEA1zk8jRS2dyP-qOj7rgf7lLK4Jc8_Y26CwyoP4B4IuNLmH0q8JYqZW0mcIZxu_xoCVFbHR-XuCcgV1Rq4RLXtBXhaiIo-fUrFugoHBGT_nIMW1eTEu8sft3Ys1ZiWds");'>
+                  </div>
+                  <div>
+                    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Stylish Desk</h3>
+                    <p class="text-gray-600 text-sm font-normal leading-normal">Work from home in style</p>
+                    <p class="text-red-600 text-lg font-bold mt-2">$220.00</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- <section class="mb-8 sm:mb-12">
+              <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">
+                Popular Stores</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-4">
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBllCm32StbDkfdtJwKixgOXhhDeSdg-sW5PerRDsq1qGlyrxil_qxV3LXsOxufEy5Y8N39cdbhYY9ZcFjyqKMWMKN4JJnoCrWyXfcsgOBUd7YmO1IZMMYxZsiCdq0wKyg_PO2xNcuUQ7DWRATgPrtjF3RVpgTOxt_ZZiKck41Jt9NI4ngPUgobmp8-Bvu5jp9LX8aASvEfz4u6HH_HvtNnGLDfa_QDD_by00VXh1BZGlIiCXmCigKHA9HADD9pEydzH-DT3f0Np_dB");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Home Decor Haven</h3>
+                  <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store
+                    →</a>
+                </div>
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDK6FKJ4Vr5XJrMCytB2_biR9FjSll3WPgTLxolPtmCg6w1DtihxpyYR4F7qIlRQ5nCHOf7m48hgY_VG1oX2I90TDeZu9KBiYrdvgHJFllK0kCxxBKXrhqs2q6zCJL0mBf_2YOuAgIE1hluhlW6Sd0-3jI2vf-YqrHFNXNrRLfIbz5kbFTA_5XWCPdD9rg2FkG36FKW8plrns6VNF8sOA7msCLAQcdzGtTQ0pG78Fdfdq2Ud-8Jerp4-N9M87M_bGgzOf3_fKIS5C5b");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Tech Gadget Emporium</h3>
+                  <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store
+                    →</a>
+                </div>
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD1ktQBatt16aFqIfY_YJwiDqYVYU67ynbhL10Iav-f6R6QJn8lmiz4T_CJlEw6VEpE3B0KzLPCQQc5S7KxU9vCijCVhApyVM3eGGB-hK41OqcIUu0ReqHckHjYToKrXPvhdRExqvRZw42GvMG0tUfibrtT_dEgRqc1sI-310lN5x4y1EJj2kBsGSAaQShqeEeHzwth94nqVoKi3fTPHjD4bIcGBTQelgp-8UIw1p6sv0HYjxhh28wip1RUjnQF9MODfwLxeeT5_P0w");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Fashion Forward Boutique
+                  </h3>
+                  <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store
+                    →</a>
+                </div>
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJsYwE8CgcUl9NJAzdDRaY54gDQ1Qe08pg8Ke13hD0fymn9esCu-PgJXiZFsHmM6Vpa49fL-q63kChPQ936OFrCuUI8fy4j5EE4Q2lqpEOlSDlmE2D9I5Fr4iEDg-epqMsYlsjN-2Y_d2tenMGjWHQlE0mYiM_Z-SvFH1MhvjdNgr5RXKO8Z3mh9WxRw5FP8NWg244uHwgIeIgAMzFy-3BehqqzCk8haRuPd-VNnSf5gjUak7Lf5_P3ESZWH81qQFDA7DSe-ZOqcc6");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Outdoor Adventure
+                    Outfitters</h3>
+                  <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store
+                    →</a>
+                </div>
+              </div>
+            </section> -->
+            <section class="mb-8 sm:mb-12">
+              <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">
+                New Arrivals</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 p-4">
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAndIFj5-ldEBUngqZ0Nibs1hhgS8tJmpR5SQuPrnqjT1UYICipfs_aD28qwIcPjOkBsOM33ZEMvvYf72Z3hAxm7DX5VaVr7Q2Swk2nGvqB0Z7syfd0zriZ4UOh6syF0IZDBdFIZNukNigREU2wpvFKlBYWF-sKqpOxLGc1eTOGNiDplP7OPKM596Ik245pW1j5NXeebB9JEK-seDJPEYlkcleFwhRS1croeWQztxSZSeFLJsGjKK17zwzijBAnXiYK8OaHEoyRYp5m");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Latest Smartwatch</h3>
+                  <p class="text-gray-600 text-sm">Stay connected and track your fitness.</p>
+                  <p class="text-red-600 text-lg font-bold mt-1">$249.99</p>
+                </div>
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBoBFdjOzEKheBi4sib6EeXYS79Y_rE6Z40Act7Uby9u4d9n_NBzr409-TuKvhRMRax1pivU9uO2vvPXezpRlUtKGgxiBUyNFnkk21V-kCIomOMMyQ7n6GXNLhJmbikw0Usq9SiTPYT83rOi5Bt0lGvFySxShnQTv-MRrAXVts6zHgsXgAWxEpaQxFXySjWFmsUM1yG699JgcjBbwyi57xEdT7-01Cbe23cMwQkBDz05eNVBmPCqJ2dmV-kX7bV0k0p42UlLvWsAiG");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Designer Handbag</h3>
+                  <p class="text-gray-600 text-sm">Elevate your style with this chic accessory.</p>
+                  <p class="text-red-600 text-lg font-bold mt-1">$350.00</p>
+                </div>
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUREMakJRiChF6fIU55Lp30TQIIQh0OSj7crH7hqY1olki-1sOj2rhbrNsecUkDJe6SFL5Fc63jfWfKq2GUaMMiQ7NVIjp-vAXgEreJnJ-a8ZhlcqbA6t2OQJpSTic7rUIzgUpAKoWLQB2h3BaPePbnCty2j5LgKgACsetZC60Tj-EsTIclEQym76JSmLxkGGOWHpAreBqgrA--nMs8wXj1go_4IITp0afqm5kTaRYJzQhl_P5oXRSpSELu5iCTm7TL8Xl0OAoCcOx");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Wireless Headphones</h3>
+                  <p class="text-gray-600 text-sm">Immersive sound experience on the go.</p>
+                  <p class="text-red-600 text-lg font-bold mt-1">$129.50</p>
+                </div>
+                <div
+                  class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
+                  <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg"
+                    style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAt7EMgU_SAsV7D4jAIytwOK82iQxzElNXMr3dThwr4JeOT1XemqBR5BuO8p75PDLlEPICFQwajLdiwvicnR4-kebegTmLJOp0DXaQCdUbFhc7w4Eosdhe-2-JaNYva2b-Bx5KS65-yLoeI_4cQiRIt-8Vf4xBXjZ1Sj5VeaKDlkKczHlgoiGe9QfR8d_dwqDUaw3MhO2AVz66tod5fXRuziIt-n9WCe8Ohgq9XzyQqHB0ABerfzN22aGN-Fl48wZ8s79GeBsjFCHNS");'>
+                  </div>
+                  <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Hiking Backpack</h3>
+                  <p class="text-gray-600 text-sm">Durable and spacious for your adventures.</p>
+                  <p class="text-red-600 text-lg font-bold mt-1">$89.99</p>
+                </div>
+              </div>
+            </section>
+            <section class="mb-8 sm:mb-12">
+              <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">
+                Customer Reviews</h2>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col">
+                  <div class="flex items-center mb-3">
+                    <h4 class="text-gray-800 text-base sm:text-lg font-semibold">Smartwatch is a game-changer!</h4>
+                  </div>
+                  
+                  <p class="text-gray-600 text-sm mb-4 leading-relaxed">"Absolutely love the new smartwatch! The battery
+                    life is amazing, and it tracks my workouts perfectly. Highly recommend it for anyone looking to stay
+                    active and connected."</p>
+                    <p class="mr-3 text-yellow-400 flex">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                    </p>  
+                  <p class="text-gray-700 text-sm font-medium mt-auto">- Sarah M.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col">
+                  <div class="flex items-center mb-3">
+                    <h4 class="text-gray-800 text-base sm:text-lg font-semibold">Designer Handbag is stunning!</h4>
+                  </div>
+                  <p class="text-gray-600 text-sm mb-4 leading-relaxed">"The quality of this handbag is exceptional.
+                    It's even more beautiful in person! I've received so many compliments. A perfect addition to my
+                    collection."</p>
+                    <p class="mr-3 text-yellow-400 flex">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                    </p>  
+                  <p class="text-gray-700 text-sm font-medium mt-auto">- John B.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col">
+                  <div class="flex items-center mb-3">
+                    
+                    <h4 class="text-gray-800 text-base sm:text-lg font-semibold">Best Headphones I've owned!</h4>
+                  </div>
+                  <p class="text-gray-600 text-sm mb-4 leading-relaxed">"The sound quality of these wireless headphones
+                    is incredible! They are comfortable for long listening sessions and the noise cancellation is
+                    top-notch. Definitely worth the price."</p>
+                    <p class="mr-3 text-yellow-400 flex">
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                        </path>
+                      </svg>
+                    </p>  
+                  <p class="text-gray-700 text-sm font-medium mt-auto">- Emily K.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+      <footer class="bg-gray-800 text-gray-300">
+        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 @container">
+          <div class="grid grid-cols-1 @[480px]:grid-cols-2 @[768px]:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
+            <div>
+              <h3 class="text-white text-lg font-semibold mb-3 sm:mb-4">ShopSmart</h3>
+              <p class="text-sm">Your ultimate destination for finding the best products from various stores, all in one
+                place.</p>
+            </div>
+            <div>
+              <h4 class="text-white text-base font-semibold mb-3 sm:mb-4">Quick Links</h4>
+              <ul class="space-y-1.5 sm:space-y-2">
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Products</a></li>
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Stores</a></li>
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">New Arrivals</a></li>
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Featured Products</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-white text-base font-semibold mb-3 sm:mb-4">Information</h4>
+              <ul class="space-y-1.5 sm:space-y-2">
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">About Us</a></li>
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Contact Us</a></li>
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Privacy Policy</a></li>
+                <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Terms of Service</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-white text-base font-semibold mb-3 sm:mb-4">Follow Us</h4>
+              <div class="flex space-x-3 sm:space-x-4">
+                <a aria-label="Twitter" class="text-gray-400 hover:text-red-500 transition-colors" href="#">
+                  <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256"
+                    width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z">
+                    </path>
+                  </svg>
+                </a>
+                <a aria-label="Instagram" class="text-gray-400 hover:text-red-500 transition-colors" href="#">
+                  <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256"
+                    width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                    </path>
+                  </svg>
+                </a>
+                <a aria-label="Facebook" class="text-gray-400 hover:text-red-500 transition-colors" href="#">
+                  <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256"
+                    width="20px" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="border-t border-gray-700 pt-6 sm:pt-8 text-center">
+            <p class="text-sm">© 2024 ShopSmart. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
-    </div>
-    </section>
-    <section class="mb-8 sm:mb-12">
-    <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">Featured Products</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 p-4">
-    <div class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCY-wVJE0w8ZrAtAtrEgCz8ypKEWHc_bRkAci3is6QPYXsH9l0sZHuAcUKvxzOrTRnjRTiL_pT1b0D8U1nbvC89Ns9wz-r6guXov8t6L79ckS3yVGYz3zXLKgBsbQhQoNeWhds7D4rlg9epbnU3vT8AfjxzSLSf0n81t4Qbdql_-xDoZGwHVKsS8ZbKYPdaf-K55Q1wQxAYJsMrMgCLBERrmbS09b8MkFMtWygT-Ikyt0azG2wUW02TUlbSiOrzHqafGtQj4BQYgMDm");'></div>
-    <div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Elegant Sofa</h3>
-    <p class="text-gray-600 text-sm font-normal leading-normal">Perfect for your living room</p>
-    <p class="text-red-600 text-lg font-bold mt-2">$499.99</p>
-    </div>
-    </div>
-    <div class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAlVVOOPX23T-GXOmKCji3aXTYxA3slaMTsUmp3ZGxcK0nws1EvhS7KTqzMvnP67hMLqqF2-QGK9C6zXXeSYnn0UNe_SvOmSPAG8Q_sGk3t8-o0eajrA_ppueecZCV62IocEAKoEA7aysNJyuXEX3i7AE03_ke5WVRJs3ty-frSWQTYoj2Yg1NCSp8SvjYIpTYmEl5cBGgHLagcAH_-tR7cy5W_axp0hSwUlEF14T3bsfb9GcaF3yQbXn6nEQgBapUaxw0_XqhJZ122");'></div>
-    <div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Dining Table Set</h3>
-    <p class="text-gray-600 text-sm font-normal leading-normal">Ideal for family dinners</p>
-    <p class="text-red-600 text-lg font-bold mt-2">$799.00</p>
-    </div>
-    </div>
-    <div class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCbgtT2joGYIjUgyFWV4zM3Xj5imlapcuzlsKL_aorYd8DITHAZLlLVB6MMXEpf0WUjx2HcEoESf0XJZZbMprBKzLMuNaEZ5RtIy4YBWExAmzujKafaKrmgEi15ozhsH0zb5o-2cccHJ_qgLP7B29rdLmGjOCoM_SUSsUDch8HUjFAryqtWTiOWnM8SJTxw7BgCpcdIlE--0dg01aZI1bUiqtTXD0VBYtCdIdDZOWb-n1480W5y-NuBh7G2yab0M3QG3a_CPSaGaCQx");'></div>
-    <div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Comfortable Bed</h3>
-    <p class="text-gray-600 text-sm font-normal leading-normal">Sleep soundly and wake refreshed</p>
-    <p class="text-red-600 text-lg font-bold mt-2">$650.50</p>
-    </div>
-    </div>
-    <div class="flex h-full flex-1 flex-col gap-3 rounded-lg bg-white p-4 shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6SwkO35IjE83Ya0mByR8JdBE2qlqL1hvEmyKTGsd6R3V0KLhV0wHSYHVByZtxnWSstyQwHo4PVWLRvVNPgoCdkwaTBh29aolUl5i1ITH4N_jUGFUm0HzFEI-mh5VRNVHQVABS_PoCPpMvEA1zk8jRS2dyP-qOj7rgf7lLK4Jc8_Y26CwyoP4B4IuNLmH0q8JYqZW0mcIZxu_xoCVFbHR-XuCcgV1Rq4RLXtBXhaiIo-fUrFugoHBGT_nIMW1eTEu8sft3Ys1ZiWds");'></div>
-    <div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Stylish Desk</h3>
-    <p class="text-gray-600 text-sm font-normal leading-normal">Work from home in style</p>
-    <p class="text-red-600 text-lg font-bold mt-2">$220.00</p>
-    </div>
-    </div>
-    </div>
-    </section>
-    <section class="mb-8 sm:mb-12">
-    <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">Popular Stores</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 p-4">
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBllCm32StbDkfdtJwKixgOXhhDeSdg-sW5PerRDsq1qGlyrxil_qxV3LXsOxufEy5Y8N39cdbhYY9ZcFjyqKMWMKN4JJnoCrWyXfcsgOBUd7YmO1IZMMYxZsiCdq0wKyg_PO2xNcuUQ7DWRATgPrtjF3RVpgTOxt_ZZiKck41Jt9NI4ngPUgobmp8-Bvu5jp9LX8aASvEfz4u6HH_HvtNnGLDfa_QDD_by00VXh1BZGlIiCXmCigKHA9HADD9pEydzH-DT3f0Np_dB");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Home Decor Haven</h3>
-    <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store →</a>
-    </div>
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDK6FKJ4Vr5XJrMCytB2_biR9FjSll3WPgTLxolPtmCg6w1DtihxpyYR4F7qIlRQ5nCHOf7m48hgY_VG1oX2I90TDeZu9KBiYrdvgHJFllK0kCxxBKXrhqs2q6zCJL0mBf_2YOuAgIE1hluhlW6Sd0-3jI2vf-YqrHFNXNrRLfIbz5kbFTA_5XWCPdD9rg2FkG36FKW8plrns6VNF8sOA7msCLAQcdzGtTQ0pG78Fdfdq2Ud-8Jerp4-N9M87M_bGgzOf3_fKIS5C5b");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Tech Gadget Emporium</h3>
-    <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store →</a>
-    </div>
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD1ktQBatt16aFqIfY_YJwiDqYVYU67ynbhL10Iav-f6R6QJn8lmiz4T_CJlEw6VEpE3B0KzLPCQQc5S7KxU9vCijCVhApyVM3eGGB-hK41OqcIUu0ReqHckHjYToKrXPvhdRExqvRZw42GvMG0tUfibrtT_dEgRqc1sI-310lN5x4y1EJj2kBsGSAaQShqeEeHzwth94nqVoKi3fTPHjD4bIcGBTQelgp-8UIw1p6sv0HYjxhh28wip1RUjnQF9MODfwLxeeT5_P0w");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Fashion Forward Boutique</h3>
-    <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store →</a>
-    </div>
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBJsYwE8CgcUl9NJAzdDRaY54gDQ1Qe08pg8Ke13hD0fymn9esCu-PgJXiZFsHmM6Vpa49fL-q63kChPQ936OFrCuUI8fy4j5EE4Q2lqpEOlSDlmE2D9I5Fr4iEDg-epqMsYlsjN-2Y_d2tenMGjWHQlE0mYiM_Z-SvFH1MhvjdNgr5RXKO8Z3mh9WxRw5FP8NWg244uHwgIeIgAMzFy-3BehqqzCk8haRuPd-VNnSf5gjUak7Lf5_P3ESZWH81qQFDA7DSe-ZOqcc6");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Outdoor Adventure Outfitters</h3>
-    <a class="text-red-600 hover:text-red-700 font-medium text-sm transition-colors" href="#">Visit Store →</a>
-    </div>
-    </div>
-    </section>
-    <section class="mb-8 sm:mb-12">
-    <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">New Arrivals</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 p-4">
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAndIFj5-ldEBUngqZ0Nibs1hhgS8tJmpR5SQuPrnqjT1UYICipfs_aD28qwIcPjOkBsOM33ZEMvvYf72Z3hAxm7DX5VaVr7Q2Swk2nGvqB0Z7syfd0zriZ4UOh6syF0IZDBdFIZNukNigREU2wpvFKlBYWF-sKqpOxLGc1eTOGNiDplP7OPKM596Ik245pW1j5NXeebB9JEK-seDJPEYlkcleFwhRS1croeWQztxSZSeFLJsGjKK17zwzijBAnXiYK8OaHEoyRYp5m");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Latest Smartwatch</h3>
-    <p class="text-gray-600 text-sm">Stay connected and track your fitness.</p>
-    <p class="text-red-600 text-lg font-bold mt-1">$249.99</p>
-    </div>
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCBoBFdjOzEKheBi4sib6EeXYS79Y_rE6Z40Act7Uby9u4d9n_NBzr409-TuKvhRMRax1pivU9uO2vvPXezpRlUtKGgxiBUyNFnkk21V-kCIomOMMyQ7n6GXNLhJmbikw0Usq9SiTPYT83rOi5Bt0lGvFySxShnQTv-MRrAXVts6zHgsXgAWxEpaQxFXySjWFmsUM1yG699JgcjBbwyi57xEdT7-01Cbe23cMwQkBDz05eNVBmPCqJ2dmV-kX7bV0k0p42UlLvWsAiG");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Designer Handbag</h3>
-    <p class="text-gray-600 text-sm">Elevate your style with this chic accessory.</p>
-    <p class="text-red-600 text-lg font-bold mt-1">$350.00</p>
-    </div>
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUREMakJRiChF6fIU55Lp30TQIIQh0OSj7crH7hqY1olki-1sOj2rhbrNsecUkDJe6SFL5Fc63jfWfKq2GUaMMiQ7NVIjp-vAXgEreJnJ-a8ZhlcqbA6t2OQJpSTic7rUIzgUpAKoWLQB2h3BaPePbnCty2j5LgKgACsetZC60Tj-EsTIclEQym76JSmLxkGGOWHpAreBqgrA--nMs8wXj1go_4IITp0afqm5kTaRYJzQhl_P5oXRSpSELu5iCTm7TL8Xl0OAoCcOx");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Wireless Headphones</h3>
-    <p class="text-gray-600 text-sm">Immersive sound experience on the go.</p>
-    <p class="text-red-600 text-lg font-bold mt-1">$129.50</p>
-    </div>
-    <div class="flex flex-col gap-3 pb-3 bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition-shadow">
-    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-lg" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAt7EMgU_SAsV7D4jAIytwOK82iQxzElNXMr3dThwr4JeOT1XemqBR5BuO8p75PDLlEPICFQwajLdiwvicnR4-kebegTmLJOp0DXaQCdUbFhc7w4Eosdhe-2-JaNYva2b-Bx5KS65-yLoeI_4cQiRIt-8Vf4xBXjZ1Sj5VeaKDlkKczHlgoiGe9QfR8d_dwqDUaw3MhO2AVz66tod5fXRuziIt-n9WCe8Ohgq9XzyQqHB0ABerfzN22aGN-Fl48wZ8s79GeBsjFCHNS");'></div>
-    <h3 class="text-gray-800 text-base sm:text-lg font-semibold leading-normal">Hiking Backpack</h3>
-    <p class="text-gray-600 text-sm">Durable and spacious for your adventures.</p>
-    <p class="text-red-600 text-lg font-bold mt-1">$89.99</p>
-    </div>
-    </div>
-    </section>
-    <section class="mb-8 sm:mb-12">
-    <h2 class="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4 pb-4 sm:pb-6">Customer Reviews</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4">
-    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col">
-    <div class="flex items-center mb-3">
-    <div class="mr-3 text-yellow-400 flex">
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    </div>
-    <h4 class="text-gray-800 text-base sm:text-lg font-semibold">Smartwatch is a game-changer!</h4>
-    </div>
-    <p class="text-gray-600 text-sm mb-4 leading-relaxed">"Absolutely love the new smartwatch! The battery life is amazing, and it tracks my workouts perfectly. Highly recommend it for anyone looking to stay active and connected."</p>
-    <p class="text-gray-700 text-sm font-medium mt-auto">- Sarah M.</p>
-    </div>
-    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col">
-    <div class="flex items-center mb-3">
-    <div class="mr-3 text-yellow-400 flex">
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    </div>
-    <h4 class="text-gray-800 text-base sm:text-lg font-semibold">Designer Handbag is stunning!</h4>
-    </div>
-    <p class="text-gray-600 text-sm mb-4 leading-relaxed">"The quality of this handbag is exceptional. It's even more beautiful in person! I've received so many compliments. A perfect addition to my collection."</p>
-    <p class="text-gray-700 text-sm font-medium mt-auto">- John B.</p>
-    </div>
-    <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col">
-    <div class="flex items-center mb-3">
-    <div class="mr-3 text-yellow-400 flex">
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-    </div>
-    <h4 class="text-gray-800 text-base sm:text-lg font-semibold">Best Headphones I've owned!</h4>
-    </div>
-    <p class="text-gray-600 text-sm mb-4 leading-relaxed">"The sound quality of these wireless headphones is incredible! They are comfortable for long listening sessions and the noise cancellation is top-notch. Definitely worth the price."</p>
-    <p class="text-gray-700 text-sm font-medium mt-auto">- Emily K.</p>
-    </div>
-    </div>
-    </section>
-    </div>
-    </div>
-    </main>
-    <footer class="bg-gray-800 text-gray-300">
-    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12 @container">
-    <div class="grid grid-cols-1 @[480px]:grid-cols-2 @[768px]:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">
-    <div>
-    <h3 class="text-white text-lg font-semibold mb-3 sm:mb-4">ShopSmart</h3>
-    <p class="text-sm">Your ultimate destination for finding the best products from various stores, all in one place.</p>
-    </div>
-    <div>
-    <h4 class="text-white text-base font-semibold mb-3 sm:mb-4">Quick Links</h4>
-    <ul class="space-y-1.5 sm:space-y-2">
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Products</a></li>
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Stores</a></li>
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">New Arrivals</a></li>
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Featured Products</a></li>
-    </ul>
-    </div>
-    <div>
-    <h4 class="text-white text-base font-semibold mb-3 sm:mb-4">Information</h4>
-    <ul class="space-y-1.5 sm:space-y-2">
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">About Us</a></li>
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Contact Us</a></li>
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Privacy Policy</a></li>
-    <li><a class="hover:text-red-500 transition-colors text-sm" href="#">Terms of Service</a></li>
-    </ul>
-    </div>
-    <div>
-    <h4 class="text-white text-base font-semibold mb-3 sm:mb-4">Follow Us</h4>
-    <div class="flex space-x-3 sm:space-x-4">
-    <a aria-label="Twitter" class="text-gray-400 hover:text-red-500 transition-colors" href="#">
-    <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z"></path>
-    </svg>
-    </a>
-    <a aria-label="Instagram" class="text-gray-400 hover:text-red-500 transition-colors" href="#">
-    <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path>
-    </svg>
-    </a>
-    <a aria-label="Facebook" class="text-gray-400 hover:text-red-500 transition-colors" href="#">
-    <svg fill="currentColor" height="20px" sm:height="24px" sm:width="24px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"></path>
-    </svg>
-    </a>
-    </div>
-    </div>
-    </div>
-    <div class="border-t border-gray-700 pt-6 sm:pt-8 text-center">
-    <p class="text-sm">© 2024 ShopSmart. All rights reserved.</p>
-    </div>
-    </div>
-    </footer>
-    </div>
-    </div>
-    </body></html>
+  </div>
+</body>
+
+</html>
