@@ -1,1 +1,1 @@
-Juan PAdala PH - Laravel E-commerce site
+Juan Padala PH - Laravel E-commerce site
