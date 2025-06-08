@@ -1,0 +1,299 @@
+<html><head>
+    <meta charset="utf-8"/>
+    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B600%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+    <title>ShopSmart - All Products</title>
+    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <style>
+          .product-card:hover .add-to-cart {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          .product-card:hover .product-details {
+            transform: translateY(-40px);}
+          .add-to-cart {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+          }
+          .product-details {
+            transition: transform 0.3s ease;
+          }
+        </style>
+    </head>
+    <body class="bg-white">
+    <div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+    <div class="layout-container flex h-full grow flex-col">
+    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 px-6 md:px-10 py-4 shadow-sm">
+    <div class="flex items-center gap-6 lg:gap-8">
+    <div class="flex items-center gap-2 text-red-600">
+    <div class="size-6 md:size-7">
+    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+    <path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+    </svg>
+    </div>
+    <h2 class="text-gray-900 text-xl md:text-2xl font-bold tracking-tight">ShopSmart</h2>
+    </div>
+    <nav class="hidden md:flex items-center gap-6 lg:gap-8">
+    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Home</a>
+    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Categories</a>
+    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Stores</a>
+    <a class="text-gray-700 hover:text-red-600 text-sm font-medium leading-normal transition-colors" href="#">Deals</a>
+    </nav>
+    </div>
+    <div class="flex flex-1 justify-end items-center gap-3 md:gap-4">
+    <label class="relative flex-col min-w-32 md:min-w-40 !h-10 max-w-sm hidden sm:flex">
+    <div class="flex w-full flex-1 items-stretch rounded-lg h-full shadow-sm">
+    <div class="text-gray-500 flex border-none bg-gray-100 items-center justify-center pl-3 rounded-l-lg border-r-0">
+    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+    </svg>
+    </div>
+    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 border-none bg-gray-100 h-full placeholder:text-gray-500 px-3 text-sm font-normal leading-normal" placeholder="Search products..." value=""/>
+    </div>
+    </label>
+    <div class="flex gap-2">
+    <button aria-label="Wishlist" class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors">
+    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z"></path>
+    </svg>
+    </button>
+    <button aria-label="Shopping Cart" class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-100 text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors">
+    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+    </svg>
+    </button>
+    </div>
+    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-gray-200 hover:border-red-500 transition-colors" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDKbhnZIXGFD4XHTj-BnWvcGqU5oSFQtMZihNp9pxmUZc0VVYvqnESX7Gijmy3lvxzzvUTLo1f4l3YCpXwMkMTaT6RPj7sjaIKm6W-7ix8M-XyqKDkKuq2wRi8DrdFWg8F-e4EaDxbHRK7Vuuole6FFH9WgXdfdwT40loOdrcTg7327BPnJkS5hdu6iKNruuHDTj0YtN-fuuMuu2fkrRQA6jbCjKi6NSIsPXaECYE1AmWKVzVW1PiI2Kg6LRb85_3BI_XrhwzB6dKQe");'></div>
+    </div>
+    </header>
+    <main class="px-4 sm:px-6 lg:px-10 xl:px-20 2xl:px-40 flex flex-1 justify-center py-8 bg-gray-50">
+    <div class="layout-content-container flex flex-col w-full max-w-screen-xl">
+    <div class="flex flex-wrap justify-between items-center gap-4 p-4 mb-6">
+    <h1 class="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">All Products</h1>
+    </div>
+    <div class="flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
+    <button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors">
+    <p class="text-sm font-medium">Categories</p>
+    <div class="text-gray-500 hover:text-red-600" data-icon="CaretDown" data-size="20px" data-weight="regular">
+    <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+    </svg>
+    </div>
+    </button>
+    <button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors">
+    <p class="text-sm font-medium">Price Range</p>
+    <div class="text-gray-500 hover:text-red-600" data-icon="CaretDown" data-size="20px" data-weight="regular">
+    <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+    </svg>
+    </div>
+    </button>
+    <button class="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors">
+    <p class="text-sm font-medium">Stores</p>
+    <div class="text-gray-500 hover:text-red-600" data-icon="CaretDown" data-size="20px" data-weight="regular">
+    <svg fill="currentColor" height="18px" viewBox="0 0 256 256" width="18px" xmlns="http://www.w3.org/2000/svg">
+    <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+    </svg>
+    </div>
+    </button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAd0E7IiHdnrKFB7aq-WXfZgse26EehwP7GUSBbFk8k5XmsG-CHzJqNpXzSfnr6ClrKqBiGgH6HLVux8jAEbc7FznDXG7CxEw4Vh0NT_az-Qjgde_nVfokdGR0KN8L_YR_d4TVw_oCnrdF5qrjNxXpPaQ2NFH3RWdCJ7DmS64xkPGIZ8cRzRw8YC0Ph24bVVx3zvJRrjytpBeuVW_75ScYyrRrSkKuBuCvy79Cv6cYas3npVVidvQxYuEEGTfO4x8i0av1nT5u0s2mX");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Wireless Headphones</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$129.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">High-fidelity sound with noise cancellation. Up to 20 hours battery life.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBBIQ3ziUPqfAyk1Y9TP8nAwEqErcRo-Xow6Gy2u5iJN2oXWPU1_v4ZN1ubw5xmhCxenJTGkobXjqGPoMnCvHqY1r8oOIHnzyvMNFqCi4VRxkxkpW05OGxWn2xoQLoUJWlF3qEEpkhT5iRAv2lMRYHZddoaJ5jy97lVtwMeh8Q5XUsDNZQSZ7ATIcvL1quuSNKBqBHIRP_ZgLMQjiL-K1wjfC5ADeifeKQQKv1wf65WUkEbFTVHb95SuoCR_NraSXto4l6E6ApPNbG3");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Smart Watch</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$199.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Fitness tracking, notifications, and customizable faces.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDQu7UcDFs60nh7zTbTucwH9qyOqBBpIQRPK_oYxeFOi1CkayIHEZElwW1vHiDo9zvLTNYRqyU7fwTDb0sv1scRnYRXSKnO6hElrH3_jsMSoG2O1SC23POpeZg6wb-of-5r6zl1Fugn2qfFgWArp3TTgW03Dn7ekIgk88pTHQsMMuUHee_OykmoM1MEpkfttJ-X4GiXTP9Ep9WzKpJBKfyJNRghHI0iddceAETWW97OiAkBaW0j-VzbbUUdq0yxDaX8WBSOr-v_dQ63");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Running Shoes</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$89.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Lightweight and breathable for maximum comfort.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBcdQTha7iO5DOun5hj1x2JScJj9lpyR75XV5nQYWxmCYfI17a99WOqXDy5wcVAlnYsfywT1Cl_vabdXQqFTEw2CZu4V7QAtfbG7aanJxC10FcvN6qHwPkT0AAkiN_CGr3k4RqBMg5Oz7kFn3ktZYeVtVailhcK_d-esDTcdhlUpV5XTfpPghFtqX-WYZcqVaWNxoxNbxAiYXI6eGwEu7C2iU0-ff3TYNi5zvbkcqVflEor41pqScjEuFHyn526681jVdDoKo6m_mbx");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Laptop</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$799.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Powerful performance for work and play. Sleek design.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDNCDgauhLSf0CB_DmrbckBalxyCb3oMqjhTqUK7Lt_KLHhRMo-iZZtoCzoQYV8S3edoy9K0ok5XIM5yxU0yHrTWmHSC1s3VnZkqTfn9z6rXoj0fEOJW7KCTh2jfLnWCu-afj6jJQrlbbCj3BCaficaO8OObTyV_zvmmHz497SbCEMizkvChn4HEJMjC7Dav1NtrfJsy7kF07Ly65EQJ5KgXNJ1UzQyTqEbakdixwxKt13TWqwvCctSayTjNTr4vikgWPVi8Jkr6y-V");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Coffee Maker</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$49.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Brew your perfect cup every morning. Programmable.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBUhJb1onSQKX2FfzgT3Jb7DEXw9CKrEtUfv2AI2mwEVnd4Q5gvwFxv2ccINRuxZgxOqVXQV5IcZ1TGIJOxyw-phWmICd28vRLmI20ahga1l2cwcZ8tmR9MB2-3gfwFzx3ipKchwP_UvX05ZNiBeVKgrkGcIobgW22HxW5fFFG8hGetwMBD5xTsnTtIMgbD173VgodElZNW7e1vrIQxxNBD_fsbZYZUXvDPdpgCZroUrhJFmum_1-l_ZygCTPQMAe9tHT-9I5K_TVxM");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Backpack</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$39.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Durable and spacious for daily commute or travel.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDfAHfC09i2Na9lpcIFtKBvIP6d3pbN-U1cFGgXJ9bn2q4-TpzqU2rZzNxLP-AoxRNHXi4nH9FnDjkOLGRknqkCkKmqjARDnWwpoVgwfXJLBw8cWocypQr_TemS_ZBSM3ckrvO28GyYELuH14X-2TLGpSKX7NhrHQyq9XMo4A8Aw6re3ur4p4JXzwqyX4w80NpNZHaK6OPoDwHMgoPLNNCboKVOkhRpauzPilRzF_0pa1cOV38xO4Ly5T1pDCmPWN9867p7C_bn2gQn");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Gaming Mouse</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$29.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Ergonomic design with customizable buttons for precision gaming.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDUTrL0eTlOyq4vx0cFzEYEwKy09ng-zV_3G6_3vmWfRaqJTceQPjDVO4E_XwGpRY_IlC7OJc_7JAXULoF2clG3p1xphnLMnSxicuAX6yjxC0ynrcr_Elb3ynvxzfpF4OX26XqB_wA8wRpN9KzpZ5xjNRr_2GeM-gmxj7ljeNQR9_wk8tLoAMs_vYjaWfnnUXSxX9oV0qf_ra8rSmcYKGyvcILNCk7Rhq2i7uHHLvC6KQ-R5K5r6kl9QYKAzqRrw80yhKZlsGJuX1g3");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Bluetooth Speaker</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$59.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Portable with rich sound and long battery life.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBPmDQ8MeqgfzZZaiVcfD-dlQevtiMtDSZSYWTF7qKUFhdJmScB4ONbcsM4ztH95nv57jcxm0yVH2-f_ghRpuvQg0RRNrcHvl9dEzRuLEQXtmUqiXXD83RmcE8OMqO8_bxLUqw1eud35rMuv3ND_fjiWGcQQ37Q7L_RceQykJgOeOHQgRYxyMLWF68D35jML6PxWoJZI6LmZ7KGGFpL1jlglxLGpl9uFte4MKT7O3zCuVxQNrxB64dXVx4aoLr-PNASpeg11HfYKoxx");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Digital Camera</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$349.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Capture stunning photos and videos with advanced features.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA-15sFv4P43W6Mk8J2il3uqBsrLbM56mxI7711nOXDWoap7U2RDCLuNoP9-O5D0gmk6LORLcIaEUPjHAmYhRrp4aDNIMeesYE9T2eNo-867WCh19tKK1sB4BUXC83d-2iePvzGXbt1WOE6b7xMjRDvSZ1iqYDmNksDBUwYiTf__giF1r0PbLKjqrF3X5dZJdsw8eiPdHzmZKUAGF72rdcqq1x_7aPNU0EfL4jeWGd8kp3wOvKMU4KjX7YhugylCH1Nw77O4Pb-SEq6");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Tablet</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$249.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Versatile for entertainment, work, and creativity on the go.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDjlQn4k0VV3ohClFeUdpUIyNH6V9MjnAPisFVQGm7hprr9YwBdBTyK-LvP3DjebcJd-thAehu_qeLUpiy-7Eqx6ObShlCEv015AvO0LWKf-WQO7dlmpLwQ4G5owgt0AjJ_TDuerDl7RrBNpDbrODm-4zQft93DXuQ_k8n0sL3e9Ii1r2ex5TptnQ80kqQs2LRaayVeCcu1U-LoXpvw63Tm0aoWRAnrdb7IoevMIaWmYxqPR4Lhy-RNh8I2_xrQQypBUm5Xs_cW8Wed");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Fitness Tracker</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$79.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Monitor your activity, sleep, and health metrics.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    <div class="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative">
+    <div class="relative">
+    <div class="w-full bg-center bg-no-repeat aspect-square bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA1dyhPD2aV7OaiqZJA41HL_s8yhoQ0UsfpxdcB0ojxc19sAhs07HyawqPoa5ZT9I1HV9x-gidiMrwJV_D2byA0GvbR6aBulfDdvpA8_3z_ygLWrX8aCPMK-pc7XCCaG_rgUJ-NCetPhXyWwBnDgINY1q_aDra5zqjg31MVNgcmJpjnwqjdnGtZGFretB2bLP51I6W3fS3uBOz2Rj4sm67GKk7eJ_bwtAhhKpipT7G9aO9BepkyAjpI7cqmsE8ajNVnh3GvgRn2WbZQ");'></div>
+    </div>
+    <div class="p-4 product-details flex flex-col flex-grow">
+    <h3 class="text-gray-800 text-base font-semibold leading-tight mb-1 truncate group-hover:whitespace-normal group-hover:overflow-visible">Portable Charger</h3>
+    <p class="text-red-600 text-lg font-bold leading-normal mb-2">$19.99</p>
+    <p class="text-gray-500 text-xs font-normal leading-normal flex-grow">Keep your devices powered up on the move. Compact and high-capacity.</p>
+    </div>
+    <div class="add-to-cart absolute bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full bg-white/80 backdrop-blur-sm">
+    <button class="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors">
+    <svg fill="currentColor" height="16" viewBox="0 0 256 256" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path></svg>
+                            Add to Cart
+                        </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    </main>
+    </div>
+    </div>
+    
+    </body></html>
