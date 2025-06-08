@@ -1,184 +1,194 @@
 <html><head>
-    <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
-    <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B600%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
-    <meta charset="utf-8"/>
-    <title>ShopSmart Product Details</title>
-    <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <style>
-        .menu-open {
-          display: block !important;
-        }
-      </style>
-    </head>
-    <body class="bg-[#f8f9fa]">
-    <div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
-    <div class="layout-container flex h-full grow flex-col">
-    <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
-    <div class="flex items-center gap-3 sm:gap-10">
-    <div class="flex items-center gap-3 text-[#e92933]">
-    <div class="size-6">
-    <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-    <path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
-    </svg>
-    </div>
-    <h2 class="text-[#111827] text-xl font-bold leading-tight tracking-[-0.015em]">ShopSmart</h2>
-    </div>
-    <nav class="hidden lg:flex items-center gap-6">
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Home</a>
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Stores</a>
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Categories</a>
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Deals</a>
-    </nav>
-    </div>
-    <div class="flex flex-1 justify-end items-center gap-2 sm:gap-4">
-    <label class="relative flex-col min-w-0 sm:min-w-48 !h-10 max-w-xs hidden md:flex">
-    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
-    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-    </svg>
-    </div>
-    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal" placeholder="Search products..." value=""/>
-    </label>
-    <div class="flex gap-2">
-    <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
-    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z"></path>
-    </svg>
-    </button>
-    <button class="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
-    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
-    </svg>
-    <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#e92933] text-xs font-bold text-white">3</span>
-    </button>
-    </div>
-    <button class="lg:hidden flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]" id="menu-button">
-    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-    </svg>
-    </button>
-    </div>
-    <div class="hidden lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 p-4" id="mobile-menu">
-    <nav class="flex flex-col gap-4">
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Home</a>
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Stores</a>
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Categories</a>
-    <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Deals</a>
-    <label class="relative flex-col min-w-0 !h-10 max-w-xs mt-2 md:hidden">
-    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
-    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
-    </svg>
-    </div>
-    <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal" placeholder="Search products..." value=""/>
-    </label>
-    </nav>
-    </div>
-    </header>
-    <main class="flex-1 bg-[#f8f9fa] py-8 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-6xl mx-auto">
-    <div class="mb-6 text-sm text-[#6b7280]">
-    <a class="hover:text-[#e92933] transition-colors" href="#">Clothing</a>
-    <span class="mx-1">/</span>
-    <span class="text-[#1f2937] font-medium">T-Shirts</span>
-    </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-    <div class="bg-white p-6 rounded-xl shadow-lg">
-    <div class="aspect-[4/3] w-full bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCnBI-8wN1v7g2c3Ya4ZsxJT9J17qCGHBNRi4klpLdLHJd3GvWDLvco8wIdJArcV0tV-IRVjgqoZwmSfTT3H--lySO1WECpb7agjzwkg_x3S1vuWAt7ndxCI0E9viMLNOvzCrDXci4YPGPqW9b_mnWV206m9YxSnNC3ohRP9TyGLT6Yt6X1zKGdQ0fF2G3vWEDdewhWeOcNUkkNlPW_rTudgo05QCpmEtP5Qe-hPlWOWlK63t2ck33X51gO43MX1U00cfjVHszfEPK5");'></div>
-    </div>
-    <div class="bg-white p-8 rounded-xl shadow-lg">
-    <h1 class="text-3xl font-bold text-[#1f2937] mb-2">Men's Black Cotton T-Shirt</h1>
-    <p class="text-[#4b5563] text-base leading-relaxed mb-6">A classic black cotton t-shirt, perfect for everyday wear. Made from high-quality, breathable fabric for maximum comfort.</p>
-    <div class="mb-6">
-    <h3 class="text-sm font-semibold text-[#1f2937] mb-2">Sold by:</h3>
-    <a class="flex items-center gap-3 group" href="#">
-    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border border-[#e5e7eb]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIAAMDUCF-FxIgmud6jvtDs0YELtxWr6YDeXy7E5KDrmzY0WTqjwIbhDnJa45fouylrkjQF_Vx8-aDD3TSF4WZhBLzWXrvM6WCCpLyVqBQuVVvZz7OlwaAD3IFGwm3hNomPsqdVhiZssc8oS2NKSe1FPC7ZmVg6VLRd2e3JSU6UPa_m2bZB-8qendRNVyJQCDnFdRIS4LgPg38Kle8xOsC4hY-2jOPefG8LklQPV_ymf5ZOw2hv4wYjn620eTTrJZ_KB7jJYxrwH0y");'></div>
-    <p class="text-[#e92933] text-base font-semibold group-hover:underline">Urban Threads</p>
-    </a>
-    </div>
-    <div class="mb-6">
-    <h3 class="text-sm font-semibold text-[#1f2937] mb-1">Price:</h3>
-    <p class="text-3xl font-bold text-[#e92933]">$25.00</p>
-    </div>
-    <div class="mb-6">
-    <h3 class="text-sm font-semibold text-[#1f2937] mb-2">Quantity:</h3>
-    <div class="flex items-center">
-    <button class="flex items-center justify-center h-10 w-10 rounded-l-md border border-r-0 border-[#d1d5db] text-[#4b5563] hover:bg-[#f3f4f6] transition-colors">-</button>
-    <input class="form-input h-10 w-16 text-center border-y border-x-0 border-[#d1d5db] text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] focus:border-[#e92933]" type="number" value="1"/>
-    <button class="flex items-center justify-center h-10 w-10 rounded-r-md border border-l-0 border-[#d1d5db] text-[#4b5563] hover:bg-[#f3f4f6] transition-colors">+</button>
-    </div>
-    </div>
-    <button class="w-full flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-[#e92933] text-white text-base font-semibold hover:bg-red-700 transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#e92933] focus:ring-opacity-50">
-    <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
-    <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
-    </svg>
-                      Add to Cart
-                    </button>
-    </div>
-    </div>
-    <div class="mt-12">
-    <h2 class="text-2xl font-bold text-[#1f2937] mb-6">Related Products</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-    <a class="block" href="#">
-    <div class="w-full aspect-[3/4] bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmy5L8zzB7abPOXO0JwsoFODw2NPKpHLQNXkLKAVciyHMnUVDYk3GJWKou0ap5Nygy_bhQAqX9jfja7Rj0szF-b-DIa8OBHC3hZ5LdSnpWszZHW_OuufgGlbI63iwetFc9E6SDzBy5prz3lDO3ign8mvIcA5svvXtlAXW2sl99Yp9tKW0i9GkuLtmrOSVK-izx5iSWPYtkdV7EIuJvBpQIAGip0LzbKqozhUxkWkFOMdcbAJVWGpR-DL4Yxo9YzaOxsHSSG80Z4Dke");'></div>
-    <div class="p-4">
-    <h3 class="text-base font-semibold text-[#1f2937] group-hover:text-[#e92933] transition-colors mb-1 truncate">Men's Blue Jeans</h3>
-    <p class="text-sm text-[#e92933] font-bold">$50.00</p>
-    <p class="text-xs text-[#6b7280] mt-1">Urban Threads</p>
-    </div>
-    </a>
-    </div>
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-    <a class="block" href="#">
-    <div class="w-full aspect-[3/4] bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyFnoq6pr-x3IGHrJ-cj4zpRZB1AnLn4UGLirWB7eRa0tePaWgUY-cE-puVQlpiZWxLYQrFCcQgA8V2MLBC_njtrcsKZNlMotIOWTFJLmbN76kb6uhpUb2NHrVeQRkYEO05VxK_8keSPls5vRbrGnMB4N4xdPGC63Mb6Ol0W1vOIKA345syDeXYVDonWhHZFkPEtPCtepQDxD6OrJd-zBHlXqTmbatIUhwlKFy_L_GRmt2H6Za9sfPFfyZUUfqxOs50FzrmpdSm_iY");'></div>
-    <div class="p-4">
-    <h3 class="text-base font-semibold text-[#1f2937] group-hover:text-[#e92933] transition-colors mb-1 truncate">Men's White Sneakers</h3>
-    <p class="text-sm text-[#e92933] font-bold">$80.00</p>
-    <p class="text-xs text-[#6b7280] mt-1">Active Gear Co.</p>
-    </div>
-    </a>
-    </div>
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-    <a class="block" href="#">
-    <div class="w-full aspect-[3/4] bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvaBa7_bMTcyhXvqt3VaFrl2NUFFblfUjC-qhWnhT8x2uSqJk1C95prNtXHQLzzbTz2u9_CNYlDOXRPtmIejKG9e5NH2aL8l_O3VHIfM3tVD3lhRV4U5gItf-mJndetRT0uQKRwUnX8YSEKv-nTVxJni4iFrkGyTn2MHCUHVi_cwTGwQEi3g-PN_-N5KH7yq8iUVo-Gc599pQgXSAI5WHwZnp5LIxMcFiyAobtmExoO4jnMs5Z7qzoZKWd3CXNcjl_kq9mu8B7ntgL");'></div>
-    <div class="p-4">
-    <h3 class="text-base font-semibold text-[#1f2937] group-hover:text-[#e92933] transition-colors mb-1 truncate">Men's Black Jacket</h3>
-    <p class="text-sm text-[#e92933] font-bold">$120.00</p>
-    <p class="text-xs text-[#6b7280] mt-1">Outer Style</p>
-    </div>
-    </a>
-    </div>
-    <div class="bg-white rounded-xl shadow-lg overflow-hidden group">
-    <a class="block" href="#">
-    <div class="w-full aspect-[3/4] bg-gray-200 animate-pulse"></div>
-    <div class="p-4">
-    <div class="h-5 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
-    <div class="h-4 bg-gray-200 rounded w-1/4 mb-1 animate-pulse"></div>
-    <div class="h-3 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-    </div>
-    </a>
-    </div>
-    </div>
-    </div>
-    </div>
-    </main>
-    <footer class="bg-white border-t border-[#e0e0e0] py-8 px-4 sm:px-6 lg:px-8 text-center">
-    <p class="text-sm text-[#6b7280]">© 2024 ShopSmart. All rights reserved.</p>
-    <div class="mt-2 flex justify-center gap-4">
-    <a class="text-sm text-[#6b7280] hover:text-[#e92933] transition-colors" href="#">Privacy Policy</a>
-    <a class="text-sm text-[#6b7280] hover:text-[#e92933] transition-colors" href="#">Terms of Service</a>
-    </div>
-    </footer>
-    </div>
-    </div>
-    <script>
-      const menuButton = document.getElementById('menu-button');
-      const mobileMenu = document.getElementById('mobile-menu');
-      menuButton.addEventListener('click', () => {
-        mobileMenu.classList.toggle('menu-open');
-        mobileMenu.classList.toggle('hidden');
-      });
-    </script>
-    </body></html>
+  <link crossorigin="" href="https://fonts.gstatic.com/" rel="preconnect"/>
+  <link as="style" href="https://fonts.googleapis.com/css2?display=swap&amp;family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&amp;family=Plus+Jakarta+Sans%3Awght%40400%3B500%3B600%3B700%3B800" onload="this.rel='stylesheet'" rel="stylesheet"/>
+  <meta charset="utf-8"/>
+  <title>ShopSmart Product Details</title>
+  <link href="data:image/x-icon;base64," rel="icon" type="image/x-icon"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <style>
+      .menu-open {
+        display: block !important;
+      }
+      .add-to-cart-button:hover .add-to-cart-text {
+        display: none;
+      }
+      .add-to-cart-button .add-to-cart-text-hover {
+        display: none;
+      }
+      .add-to-cart-button:hover .add-to-cart-text-hover {
+        display: inline;
+      }
+    </style>
+  </head>
+  <body class="bg-[#f8f9fa]">
+  <div class="relative flex size-full min-h-screen flex-col group/design-root overflow-x-hidden" style='font-family: "Plus Jakarta Sans", "Noto Sans", sans-serif;'>
+  <div class="layout-container flex h-full grow flex-col">
+  <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
+  <div class="flex items-center gap-3 sm:gap-10">
+  <div class="flex items-center gap-3 text-[#e92933]">
+  <div class="size-6">
+  <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+  <path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+  </svg>
+  </div>
+  <h2 class="text-[#111827] text-xl font-bold leading-tight tracking-[-0.015em]">ShopSmart</h2>
+  </div>
+  <nav class="hidden lg:flex items-center gap-6">
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Home</a>
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Stores</a>
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Categories</a>
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors" href="#">Deals</a>
+  </nav>
+  </div>
+  <div class="flex flex-1 justify-end items-center gap-2 sm:gap-4">
+  <label class="relative flex-col min-w-0 sm:min-w-48 !h-10 max-w-xs hidden md:flex">
+  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
+  <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+  <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+  </svg>
+  </div>
+  <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal" placeholder="Search products..." value=""/>
+  </label>
+  <div class="flex gap-2">
+  <button class="flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
+  <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+  <path d="M178,32c-20.65,0-38.73,8.88-50,23.89C116.73,40.88,98.65,32,78,32A62.07,62.07,0,0,0,16,94c0,70,103.79,126.66,108.21,129a8,8,0,0,0,7.58,0C136.21,220.66,240,164,240,94A62.07,62.07,0,0,0,178,32ZM128,206.8C109.74,196.16,32,147.69,32,94A46.06,46.06,0,0,1,78,48c19.45,0,35.78,10.36,42.6,27a8,8,0,0,0,14.8,0c6.82-16.67,23.15-27,42.6-27a46.06,46.06,0,0,1,46,46C224,147.61,146.24,196.15,128,206.8Z"></path>
+  </svg>
+  </button>
+  <button class="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
+  <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+  <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+  </svg>
+  <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#e92933] text-xs font-bold text-white">3</span>
+  </button>
+  </div>
+  <button class="lg:hidden flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]" id="menu-button">
+  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path d="M4 6h16M4 12h16m-7 6h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+  </svg>
+  </button>
+  </div>
+  <div class="hidden lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 p-4" id="mobile-menu">
+  <nav class="flex flex-col gap-4">
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Home</a>
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Stores</a>
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Categories</a>
+  <a class="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2" href="#">Deals</a>
+  <label class="relative flex-col min-w-0 !h-10 max-w-xs mt-2 md:hidden">
+  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
+  <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+  <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+  </svg>
+  </div>
+  <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal" placeholder="Search products..." value=""/>
+  </label>
+  </nav>
+  </div>
+  </header>
+  <main class="flex-1 bg-[#f8f9fa] py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+  <div class="mb-6 text-sm text-[#6b7280]">
+  <a class="hover:text-[#e92933] transition-colors" href="#">Clothing</a>
+  <span class="mx-1">/</span>
+  <span class="text-[#1f2937] font-medium">T-Shirts</span>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+  <div class="bg-white p-6 rounded-xl shadow-lg">
+  <div class="aspect-[4/3] w-full bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCnBI-8wN1v7g2c3Ya4ZsxJT9J17qCGHBNRi4klpLdLHJd3GvWDLvco8wIdJArcV0tV-IRVjgqoZwmSfTT3H--lySO1WECpb7agjzwkg_x3S1vuWAt7ndxCI0E9viMLNOvzCrDXci4YPGPqW9b_mnWV206m9YxSnNC3ohRP9TyGLT6Yt6X1zKGdQ0fF2G3vWEDdewhWeOcNUkkNlPW_rTudgo05QCpmEtP5Qe-hPlWOWlK63t2ck33X51gO43MX1U00cfjVHszfEPK5");'></div>
+  </div>
+  <div class="bg-white p-8 rounded-xl shadow-lg">
+  <h1 class="text-3xl font-bold text-[#1f2937] mb-2">Men's Black Cotton T-Shirt</h1>
+  <p class="text-[#4b5563] text-base leading-relaxed mb-6">A classic black cotton t-shirt, perfect for everyday wear. Made from high-quality, breathable fabric for maximum comfort.</p>
+  <div class="mb-6">
+  <h3 class="text-sm font-semibold text-[#1f2937] mb-2">Sold by:</h3>
+  <a class="flex items-center gap-3 group" href="#">
+  <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-10 w-10 border border-[#e5e7eb]" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIAAMDUCF-FxIgmud6jvtDs0YELtxWr6YDeXy7E5KDrmzY0WTqjwIbhDnJa45fouylrkjQF_Vx8-aDD3TSF4WZhBLzWXrvM6WCCpLyVqBQuVVvZz7OlwaAD3IFGwm3hNomPsqdVhiZssc8oS2NKSe1FPC7ZmVg6VLRd2e3JSU6UPa_m2bZB-8qendRNVyJQCDnFdRIS4LgPg38Kle8xOsC4hY-2jOPefG8LklQPV_ymf5ZOw2hv4wYjn620eTTrJZ_KB7jJYxrwH0y");'></div>
+  <p class="text-[#e92933] text-base font-semibold group-hover:underline">Urban Threads</p>
+  </a>
+  </div>
+  <div class="mb-6">
+  <h3 class="text-sm font-semibold text-[#1f2937] mb-1">Price:</h3>
+  <p class="text-3xl font-bold text-[#e92933]">$25.00</p>
+  </div>
+  <div class="mb-6">
+  <h3 class="text-sm font-semibold text-[#1f2937] mb-2">Quantity:</h3>
+  <div class="flex items-center">
+  <button class="flex items-center justify-center h-10 w-10 rounded-l-md border border-r-0 border-[#d1d5db] text-[#4b5563] hover:bg-[#f3f4f6] transition-colors">-</button>
+  <input class="form-input h-10 w-16 text-center border-y border-x-0 border-[#d1d5db] text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] focus:border-[#e92933]" type="number" value="1"/>
+  <button class="flex items-center justify-center h-10 w-10 rounded-r-md border border-l-0 border-[#d1d5db] text-[#4b5563] hover:bg-[#f3f4f6] transition-colors">+</button>
+  </div>
+  </div>
+  <button class="add-to-cart-button w-full flex items-center justify-center gap-2 rounded-lg h-12 px-6 bg-[#e92933] text-white text-base font-semibold hover:bg-red-700 transition-colors shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#e92933] focus:ring-opacity-50">
+  <svg fill="currentColor" height="20px" viewBox="0 0 256 256" width="20px" xmlns="http://www.w3.org/2000/svg">
+  <path d="M222.14,58.87A8,8,0,0,0,216,56H54.68L49.79,29.14A16,16,0,0,0,34.05,16H16a8,8,0,0,0,0,16h18L59.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,152,204a28,28,0,1,0,28-28H83.17a8,8,0,0,1-7.87-6.57L72.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,222.14,58.87ZM96,204a12,12,0,1,1-12-12A12,12,0,0,1,96,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,192,204Zm4-74.57A8,8,0,0,1,188.1,136H69.22L57.59,72H206.41Z"></path>
+  </svg>
+  <span class="add-to-cart-text">Add to Cart</span>
+  <span class="add-to-cart-text-hover">Added!</span>
+  </button>
+  </div>
+  </div>
+  <div class="mt-12">
+  <h2 class="text-2xl font-bold text-[#1f2937] mb-6">Related Products</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+  <a class="block" href="#">
+  <div class="w-full aspect-[3/4] bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmy5L8zzB7abPOXO0JwsoFODw2NPKpHLQNXkLKAVciyHMnUVDYk3GJWKou0ap5Nygy_bhQAqX9jfja7Rj0szF-b-DIa8OBHC3hZ5LdSnpWszZHW_OuufgGlbI63iwetFc9E6SDzBy5prz3lDO3ign8mvIcA5svvXtlAXW2sl99Yp9tKW0i9GkuLtmrOSVK-izx5iSWPYtkdV7EIuJvBpQIAGip0LzbKqozhUxkWkFOMdcbAJVWGpR-DL4Yxo9YzaOxsHSSG80Z4Dke");'></div>
+  <div class="p-4">
+  <h3 class="text-base font-semibold text-[#1f2937] group-hover:text-[#e92933] transition-colors mb-1 truncate">Men's Blue Jeans</h3>
+  <p class="text-sm text-[#e92933] font-bold">$50.00</p>
+  <p class="text-xs text-[#6b7280] mt-1">Urban Threads</p>
+  </div>
+  </a>
+  </div>
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+  <a class="block" href="#">
+  <div class="w-full aspect-[3/4] bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAyFnoq6pr-x3IGHrJ-cj4zpRZB1AnLn4UGLirWB7eRa0tePaWgUY-cE-puVQlpiZWxLYQrFCcQgA8V2MLBC_njtrcsKZNlMotIOWTFJLmbN76kb6uhpUb2NHrVeQRkYEO05VxK_8keSPls5vRbrGnMB4N4xdPGC63Mb6Ol0W1vOIKA345syDeXYVDonWhHZFkPEtPCtepQDxD6OrJd-zBHlXqTmbatIUhwlKFy_L_GRmt2H6Za9sfPFfyZUUfqxOs50FzrmpdSm_iY");'></div>
+  <div class="p-4">
+  <h3 class="text-base font-semibold text-[#1f2937] group-hover:text-[#e92933] transition-colors mb-1 truncate">Men's White Sneakers</h3>
+  <p class="text-sm text-[#e92933] font-bold">$80.00</p>
+  <p class="text-xs text-[#6b7280] mt-1">Active Gear Co.</p>
+  </div>
+  </a>
+  </div>
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+  <a class="block" href="#">
+  <div class="w-full aspect-[3/4] bg-center bg-no-repeat bg-cover" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBvaBa7_bMTcyhXvqt3VaFrl2NUFFblfUjC-qhWnhT8x2uSqJk1C95prNtXHQLzzbTz2u9_CNYlDOXRPtmIejKG9e5NH2aL8l_O3VHIfM3tVD3lhRV4U5gItf-mJndetRT0uQKRwUnX8YSEKv-nTVxJni4iFrkGyTn2MHCUHVi_cwTGwQEi3g-PN_-N5KH7yq8iUVo-Gc599pQgXSAI5WHwZnp5LIxMcFiyAobtmExoO4jnMs5Z7qzoZKWd3CXNcjl_kq9mu8B7ntgL");'></div>
+  <div class="p-4">
+  <h3 class="text-base font-semibold text-[#1f2937] group-hover:text-[#e92933] transition-colors mb-1 truncate">Men's Black Jacket</h3>
+  <p class="text-sm text-[#e92933] font-bold">$120.00</p>
+  <p class="text-xs text-[#6b7280] mt-1">Outer Style</p>
+  </div>
+  </a>
+  </div>
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden group hover:shadow-2xl transition-shadow duration-300">
+  <a class="block" href="#">
+  <div class="w-full aspect-[3/4] bg-gray-200 animate-pulse"></div>
+  <div class="p-4">
+  <div class="h-5 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
+  <div class="h-4 bg-gray-200 rounded w-1/4 mb-1 animate-pulse"></div>
+  <div class="h-3 bg-gray-200 rounded w-1/2 animate-pulse"></div>
+  </div>
+  </a>
+  </div>
+  </div>
+  </div>
+  </div>
+  </main>
+  <footer class="bg-white border-t border-[#e0e0e0] py-8 px-4 sm:px-6 lg:px-8 text-center">
+  <p class="text-sm text-[#6b7280]">© 2024 ShopSmart. All rights reserved.</p>
+  <div class="mt-2 flex justify-center gap-4">
+  <a class="text-sm text-[#6b7280] hover:text-[#e92933] transition-colors" href="#">Privacy Policy</a>
+  <a class="text-sm text-[#6b7280] hover:text-[#e92933] transition-colors" href="#">Terms of Service</a>
+  </div>
+  </footer>
+  </div>
+  </div>
+  <script>
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('menu-open');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+  </body></html>
