@@ -20,7 +20,7 @@ Table orders {
 	id integer [ pk, increment, not null, unique ]
 	created_at datetime [ not null ]
 	customer_id integer [ not null ]
-	status varchar [ not null, default: 'placed', note: 'placed, processing, shipped' ]
+	status varchar [ not null, default: 'placed', note: 'placed, cancelled, processing, shipped' ]
 	notes text
 }
 
