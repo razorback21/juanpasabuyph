@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9fbf7bcf087325fd1afab0108b78b700",
+    "content-hash": "9fdd3dd2bd4e8c340d018aa0c8f76f7f",
     "packages": [
         {
             "name": "brick/math",
@@ -2993,6 +2993,38 @@
                 "source": "https://github.com/marc-mabe/php-enum/tree/v4.7.1"
             },
             "time": "2024-11-28T04:54:44+00:00"
+        },
+        {
+            "name": "modules/customer",
+            "version": "1.0",
+            "dist": {
+                "type": "path",
+                "url": "app-modules/customer",
+                "reference": "f37223c16975d5e39b97869efbf6bad0d7fec57d"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Modules\\Customer\\Providers\\CustomerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Modules\\Customer\\": "src/",
+                    "Modules\\Customer\\Tests\\": "tests/",
+                    "Modules\\Customer\\Database\\Factories\\": "database/factories/",
+                    "Modules\\Customer\\Database\\Seeders\\": "database/seeders/"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "monolog/monolog",
