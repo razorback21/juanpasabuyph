@@ -27,6 +27,7 @@
 
 ## Model Relationships
 20. Product hasMany Inventory
+20a. Product belongsTo ProductCategory
 21. Customer hasMany Orders
 22. Order hasMany OrderItems
 23. OrderItem belongsTo Product
@@ -86,7 +87,7 @@
 63. Implement backup strategies for critical data
 
 ## Current Project Structure
-- Models: Product, Customer, Order, OrderItem, Inventory, OrderItemReservation
+- Models: Product, ProductCategory, Customer, Order, OrderItem, Inventory, OrderItemReservation
 - Controllers: ProductController (with CRUD operations)
 - Frontend: Inertia.js with React components
 - Database: MySQL with proper relationships
