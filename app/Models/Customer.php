@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,7 +46,7 @@ class Customer extends Model
     public function getTotalSpent(): float
     {
         return $this->orders()
-            ->where('status', '!=', Order::STATUS_CANCELLED)
+            ->where('status', '!=', OrderStatusEnum::CANCELLED)
             ->get()
             ->sum(function ($order) {
                 return $order->getTotalAmount();
@@ -67,7 +67,7 @@ class Customer extends Model
     public function getCompletedOrdersCount(): int
     {
         return $this->orders()
-            ->where('status', Order::STATUS_SHIPPED)
+            ->where('status', OrderStatusEnum::SHIPPED)
             ->count();
     }
 
@@ -86,8 +86,8 @@ class Customer extends Model
     {
         return $query->whereHas('orders', function ($query) {
             $query->whereIn('status', [
-                Order::STATUS_PLACED,
-                Order::STATUS_PROCESSING
+                OrderStatusEnum::PLACED,
+                OrderStatusEnum::PROCESSING
             ]);
         });
     }
