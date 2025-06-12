@@ -3,6 +3,14 @@ Table products {
 	name varchar [ not null ]
 	description varchar
 	price real [ not null ]
+	product_category_id integer [ not null ]
+	featured_image text [ not null ]
+}
+
+Table ProductCategory {
+	id integer [ pk, increment, not null, unique ]
+	name varchar [ not null ]
+	description 
 }
 
 Table inventory {
@@ -10,7 +18,7 @@ Table inventory {
 	quantity integer [ not null ]
 	product_id integer [ not null ]
 	uom varchar [ not null ]
-	movement_type varchar [ not null, default: 'in', note: 'in, out' ]
+	movement_type varchar [ not null, default: 'in' ]
 	created_at datetime [ not null ]
 	updated_at datetime [ not null ]
 	reason varchar
@@ -20,15 +28,17 @@ Table orders {
 	id integer [ pk, increment, not null, unique ]
 	created_at datetime [ not null ]
 	customer_id integer [ not null ]
-	status varchar [ not null, default: 'placed', note: 'placed, cancelled, processing, shipped' ]
+	status varchar [ not null, default: 'placed' ]
 	notes text
 }
 
 Table order_items {
 	id integer [ pk, increment, not null, unique ]
+	product_id integer [ not null ]
 	quantity integer [ not null ]
 	price real [ not null ]
-	uom varchar
+	net_price real [ not null ]
+	uom varchar [ not null ]
 	order_id integer [ not null ]
 }
 
@@ -47,22 +57,30 @@ Table order_item_reservations {
 	order_item_id integer [ not null ]
 }
 
-Ref fk_products_id_inventory {
-	products.id < inventory.product_id [ delete: restrict, update: no action ]
+Ref fk_inventory_product_id_products {
+	inventory.product_id < products.id [ delete: restrict, update: no action ]
 }
 
-Ref fk_customers_id_orders {
-	customers.id - orders.customer_id [ delete: no action, update: no action ]
+Ref fk_orders_customer_id_customers {
+	orders.customer_id - customers.id [ delete: no action, update: no action ]
 }
 
-Ref fk_orders_id_order_items {
-	orders.id < order_items.order_id [ delete: cascade, update: no action ]
+Ref fk_order_items_order_id_orders {
+	order_items.order_id < orders.id [ delete: cascade, update: no action ]
 }
 
-Ref fk_inventory_id_order_reservations {
-	inventory.id - order_item_reservations.inventory_id [ delete: no action, update: no action ]
+Ref fk_order_item_reservations_inventory_id_inventory {
+	order_item_reservations.inventory_id - inventory.id [ delete: no action, update: no action ]
 }
 
-Ref fk_order_items_id_order_reservations {
-	order_items.id - order_item_reservations.order_item_id [ delete: no action, update: no action ]
+Ref fk_order_item_reservations_order_item_id_order_items {
+	order_item_reservations.order_item_id - order_items.id [ delete: no action, update: no action ]
+}
+
+Ref fk_products_product_category_id_ProductCategory {
+	products.product_category_id < ProductCategory.id [ delete: no action, update: no action ]
+}
+
+Ref fk_order_items_product_id_products {
+	order_items.product_id - products.id [ delete: no action, update: no action ]
 }
