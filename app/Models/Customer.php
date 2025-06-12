@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Models;
+
 use App\Enums\OrderStatusEnum;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -27,9 +29,11 @@ class Customer extends Model
     /**
      * Get the customer's full name.
      */
-    public function getFullNameAttribute(): string
+    public function fullName(): Attribute
     {
-        return "{$this->firstname} {$this->lastname}";
+        return Attribute::make(
+            get: fn (mixed $value, array $attributes) => "{$attributes['firstname']} {$attributes['lastname']}"
+        );
     }
 
     /**
