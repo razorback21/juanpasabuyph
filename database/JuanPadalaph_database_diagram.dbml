@@ -5,6 +5,8 @@ Table products {
 	price real [ not null ]
 	product_category_id integer [ not null ]
 	featured_image text [ not null ]
+	is_featured boolean [ not null, default: 0 ]
+	shareable_image text [ not null ]
 }
 
 Table ProductCategory {
