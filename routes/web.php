@@ -38,9 +38,7 @@ Route::middleware('auth')->group(function () {
 });
 
 // Public product routes (no auth required)
-Route::get('/catalog', [ProductController::class, 'catalog'])
-    ->name('products.catalog');
-Route::get('/catalog/{product}', [ProductController::class, 'catalogShow'])
-    ->name('products.catalog.show');
+Route::get('/catalog', [ProductController::class, 'catalog'])->name('products.catalog');
+Route::get('/catalog/{product}', [ProductController::class, 'catalogShow'])->name('products.catalog.show');
 
 require __DIR__.'/auth.php';
