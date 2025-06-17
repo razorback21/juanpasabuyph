@@ -1,18 +1,42 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import Pagination from '@/Components/Pagination';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+  } from "@/components/ui/table"
 
 export default function Dashboard({products}) {
 
-    const Pagination = ({links}) => {
-        return <>
-            {Object.entries(links).map(([key, value]) => (
-                <Link href={value.url??'#'} key={key}>
-                    {value.label}
-                </Link>
-            ))}
-        </>
+    const ProductsTable = ({products}) => {
+        return (
+            <Table>
+                <TableHeader>
+                    <TableRow>
+                    <TableHead>Image</TableHead>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Description</TableHead>
+                    <TableHead >Price</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {Object.entries(products).map(([key, product]) => (
+                    <TableRow key={product.id}>
+                        <TableCell></TableCell>
+                        <TableCell>{product.name}</TableCell>
+                        <TableCell>{product.description}</TableCell>
+                        <TableCell className="text-right">{product.price}</TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+            </Table>
+        )
     }
-    
+
     return (
         <AuthenticatedLayout
             header={
@@ -25,29 +49,12 @@ export default function Dashboard({products}) {
 
             <div className="py-12">
 
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {products.data.map((item) => (
-                                    <tr key={item.id}>
-                                        <td>{item.id}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.price}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
+                    <div className="overflow-hidden p-6  bg-white shadow-sm sm:rounded-lg">
+                        <div>
+                            <ProductsTable products={products.data} />
+                        </div>
+                        <div className="text-gray-900 text-center">
                             <Pagination links={products.links} />
                         </div>
                     </div>
