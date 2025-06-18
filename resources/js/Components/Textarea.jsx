@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 
 export default forwardRef(function Textarea(
-    { value = '', className = '', isFocused = false, ...props },
+    { children = null, className = '', isFocused = false, ...props },
     ref,
 ) {
     const localRef = useRef(null);
@@ -24,6 +24,6 @@ export default forwardRef(function Textarea(
                 className
             }
             ref={localRef}
-        >{value}</textarea>
+        >{children}</textarea>
     );
 });
