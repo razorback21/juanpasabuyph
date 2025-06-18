@@ -19,9 +19,9 @@ class DashboardController extends Controller
 
         // Apply category filter
         (new ProductFilterService())->filter($query, $request);
-
+        
         $products = $query->paginate(3)
-            ->appends($request->except('page'))  // We need this to ensure query string does not get wiped out when traversing the paginator
+            ->withQueryString()
             ->through(function ($product) {
                 return [
                     ...$product->toArray(),
