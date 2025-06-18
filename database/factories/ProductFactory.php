@@ -45,7 +45,7 @@ class ProductFactory extends Factory
             'description' => $this->faker->paragraph(3),
             'price' => $this->faker->randomFloat(2, 9.99, 999.99),
             'product_category_id' => ProductCategory::factory(),
-            'featured_image' => $this->faker->imageUrl(640, 480, 'products', true),
+            'featured_image' => 'https://picsum.photos/1080/1080',
         ];
     }
 
