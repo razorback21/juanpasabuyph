@@ -10,7 +10,7 @@ export default ({links}) => {
                     ? 'bg-gray-600 text-white font-medium' 
                     : 'bg-white text-gray-700 hover:bg-gray-100 border'}`}
             >
-                {value.label.replace('&laquo;', '«').replace('&raquo;', '»')}
+                {value.label.replace('&laquo; Previous', '«').replace('Next &raquo;', '»')}
             </Link>
         ))}
     </div>
