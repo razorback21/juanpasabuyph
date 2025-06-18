@@ -21,17 +21,18 @@ export default function Dashboard({ products, categories, category_name }) {
         }),
         columnHelper.accessor("description", {
             cell: (info) => info.getValue(),
-            header: () => <span>Description</span>,
+            header: () => <div>Description</div>,
+            size: 270,
         }),
         columnHelper.accessor("price", {
             cell: (info) => info.getValue(),
             header: () => <span>Price</span>,
         }),
         columnHelper.accessor("actions", {
-            cell: (info) => (
+            cell: (product) => (
                 <div className="flex items-center justify-end gap-2">
                     <LinkButton
-                        href={info.row.original.edit_url}
+                        href={route('products.edit', {product: product.row.original})}
                         className="text-indigo-600 hover:text-indigo-900"
                     >
                         Edit
@@ -44,7 +45,7 @@ export default function Dashboard({ products, categories, category_name }) {
                     </LinkButton>
                 </div>
             ),
-            header: () => <span>Actions</span>,
+            header: () => <div className="flex justify-end mr-2">Actions</div>,
         }),
     ];
 
