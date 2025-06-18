@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -30,6 +31,9 @@ class Product extends Model
     protected $casts = [
         'price' => 'decimal:2',
     ];
+
+    // append mutated attribute to arraay or json response
+    protected $appends = ['product_category'];
 
     /**
      * Get the category that owns the product.
@@ -64,5 +68,13 @@ class Product extends Model
             $this->inventory()
             ->where('movement_type', 'out')
             ->sum('quantity');
+    }
+
+    // Add this method to the Product model
+    public function productCategory(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->category ? ucwords($this->category->name) : null,
+        );
     }
 }
