@@ -9,28 +9,22 @@ import Textarea from "@/Components/Textarea";
 import { useRef } from "react";
 
 export default function EditProduct({ product, categories }) {
-    const props = usePage().props
+    const props = usePage().props;
     const formDataRef = useRef({
         name: product.name,
         description: product.description,
         price: product.price,
         category_id: product.category_id,
-    })
+    });
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(formDataRef.current);
-        // router.post(`/products/${product.id}/update`, {
-        //     name: product.name,
-        //     description: product.description,
-        //     price: product.price,
-        //     category_id: product.category_id,
-        // })
-    }
+        router.put(route('products.update', product), formDataRef.current)
+    };
 
     const formInputHandler = (e) => {
         formDataRef.current[e.target.name] = e.target.value;
-    }
+    };
 
     return (
         <AuthenticatedLayout
@@ -45,43 +39,90 @@ export default function EditProduct({ product, categories }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                     <div className="flex justify-center pt-10 pb-5">
-                        <img src={product.featured_image} alt={product.name} className="h-[300px] object-cover rounded-md"/>
+                        <img
+                            src={product.featured_image}
+                            alt={product.name}
+                            className="h-[300px] object-cover rounded-md"
+                        />
                     </div>
                     <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg">
-                        <form onSubmit={submitHandler} action="post">
+                        <form onSubmit={submitHandler}>
                             <div className="mb-4">
-                                <select className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value=""> -- Select Category --</option>
+                                <select 
+                                    name="product_category_id"
+                                    onChange={formInputHandler}
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                                    <option value="">
+                                        {" "}
+                                        -- Select Category --
+                                    </option>
                                     {categories.map((category) => (
-                                        <option key={category.id} value={category.id}>
+                                        <option
+                                            key={category.id}
+                                            value={category.id}
+                                            selected={
+                                                category.id ===
+                                                product.product_category_id
+                                            }
+                                        >
                                             {category.name}
                                         </option>
                                     ))}
                                 </select>
+                                {props.errors?.product_category_id && (
+                                    <p className="text-red-500 text-sm py-1">Category field is required</p>
+                                )}
                             </div>
                             <div className="mb-4">
-                                <InputLabel value="Name" for="name"/>
-                                <TextInput 
-                                className="w-full mt-1"
-                                defaultValue={product.name} name="name" onChange={formInputHandler}/>
+                                <InputLabel value="Name" htmlFor="name" />
+                                <TextInput
+                                    className="w-full mt-1"
+                                    defaultValue={product.name}
+                                    name="name"
+                                    onChange={formInputHandler}
+                                />
+                                {props.errors?.name && (
+                                    <p className="text-red-500 text-sm py-1">Name field is required</p>
+                                )}
+
                             </div>
                             <div className="mb-4">
-                                <InputLabel value="Description" for="description"/>
-                                <Textarea 
-                                className="w-full mt-1"
-                                rows="8"
-                                value={product.description} name="description" onChange={formInputHandler}/>
+                                <InputLabel
+                                    value="Description"
+                                    htmlFor="description"
+                                />
+                                <Textarea
+                                    className="w-full mt-1"
+                                    rows="8"
+                                    name="description"
+                                    onChange={formInputHandler}
+                                >{product.description}</Textarea>
+                                {props.errors?.description && (
+                                    <p className="text-red-500 text-sm py-1">Description field is required</p>
+                                )}
+
                             </div>
                             <div>
-                                <InputLabel value="Price" for="price"/> 
-                                <TextInput 
-                                className="w-full mt-1"
-                                defaultValue={product.price} name="price" onChange={formInputHandler}/>
+                                <InputLabel value="Price" htmlFor="price" />
+                                <TextInput
+                                    className="w-full mt-1"
+                                    type="number"
+                                    defaultValue={product.price}
+                                    name="price"
+                                    onChange={formInputHandler}
+                                />
+                                {props.errors?.price && (
+                                    <p className="text-red-500 text-sm py-1">Price field is required</p>
+                                )}
+
                             </div>
-                            <div className="mt-4">
-                                <PrimaryButton type="submit">Save</PrimaryButton>
-                            </div>
+                            
                         </form>
+                        <div className="mt-4">
+                            <PrimaryButton type="button" onClick={submitHandler}>
+                                Save
+                            </PrimaryButton>
+                            </div>
                     </div>
                 </div>
             </div>
