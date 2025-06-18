@@ -91,13 +91,12 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
-            'product_category_id' => 'required|exists:product_categories,id',
+            'product_category_id' => 'required',
         ]);
 
         $product->update($validated);
 
-        return redirect()
-            ->route('products.index')
+        return to_route('dashboard')
             ->with('success', 'Product updated successfully.');
     }
 
