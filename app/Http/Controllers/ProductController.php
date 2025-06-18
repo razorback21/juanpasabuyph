@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -76,6 +77,7 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         return Inertia::render('Products/Edit', [
+            'categories' => ProductCategory::all()->toArray(),
             'product' => $product
         ]);
     }
