@@ -3,17 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
+use App\Services\ProductFilterService;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {   
-        return Inertia::render('Dashboard',[
-            'products' => Product::latest()->paginate(3),
+    public function index(Request $request)
+    {
+        $query = Product::latest();
+
+        // Apply category filter
+        (new ProductFilterService())->filter($query, $request);
+
+        $products = $query->paginate(3)
+            ->appends($request->except('page'))  // We need this to ensure query string does not get wiped out when traversing the paginator
+            ->through(function ($product) {
+                return [
+                    ...$product->toArray(),
+                    'description' => Str::limit($product->description, 100),
+                ];
+            });
+
+        $categories = ProductCategory::all();
+
+        return Inertia::render('Dashboard', [
+            'products' => $products,
+            'categories' => $categories,
         ]);
     }
 }
