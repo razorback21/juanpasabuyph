@@ -12,12 +12,16 @@ export default function Dashboard({ products, categories, category_name }) {
 
     const columns = [
         columnHelper.accessor("featured_image", {
-            cell: (info) => null,
+            cell: (info) => <img src={info.getValue()} alt={info.getValue()} className="w-12 h-12 rounded-[10px]" />,
             header: () => <span>Image</span>,
         }),
         columnHelper.accessor("name", {
             cell: (info) => info.getValue(),
             header: () => <span>Name</span>,
+        }),
+        columnHelper.accessor("product_category", {
+            cell: (info) => info.getValue(),
+            header: () => <span>Category</span>,
         }),
         columnHelper.accessor("description", {
             cell: (info) => info.getValue(),
@@ -54,7 +58,7 @@ export default function Dashboard({ products, categories, category_name }) {
         
         return  <Dropdown align="left" width="48">
         <Dropdown.Trigger>
-            <button className="p-2 px-4 bg-blue-500 text-white rounded">
+            <button className="p-1 px-4 bg-blue-500 text-white rounded">
                 Categories : {category_name}
             </button>
         </Dropdown.Trigger>
@@ -100,7 +104,7 @@ export default function Dashboard({ products, categories, category_name }) {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
-                    <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg">
+                    <div className="overflow-hidden px-6 py-12 bg-white shadow-sm sm:rounded-lg">
                         <div className="flex justify-end mb-2">
                            <CategoryFilter categories={categories} />
                         </div>
