@@ -16,10 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // Create admin user
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        // cleanup databse before seeding
+        Product::truncate();
+        ProductCategory::truncate();
 
         // Create product categories
         $electronicsCategory = ProductCategory::factory()->create(['name' => 'Electronics']);
@@ -28,6 +32,7 @@ class DatabaseSeeder extends Seeder
 
         // Create sample products
         // Electronics
+        
         Product::factory()
             ->count(5)
             ->for($electronicsCategory, 'category')
