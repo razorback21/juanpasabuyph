@@ -1,41 +1,50 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
-import Pagination from '@/Components/Pagination';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { Head, Link } from "@inertiajs/react";
+import Pagination from "@/Components/Pagination";
+import DataTable from "@/Components/DataTable";
+import { createColumnHelper } from "@tanstack/react-table";
+import LinkButton from "@/Components/LinkButton";
 
-export default function Dashboard({products}) {
+export default function Dashboard({ products }) {
+    const columnHelper = createColumnHelper();
 
-    const ProductsTable = ({products}) => {
-        return (
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                    <TableHead>Image</TableHead>
-                    <TableHead>Name</TableHead>
-                    <TableHead>Description</TableHead>
-                    <TableHead >Price</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {Object.entries(products).map(([key, product]) => (
-                    <TableRow key={product.id}>
-                        <TableCell></TableCell>
-                        <TableCell>{product.name}</TableCell>
-                        <TableCell>{product.description}</TableCell>
-                        <TableCell className="text-right">{product.price}</TableCell>
-                    </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        )
-    }
+    const columns = [
+        columnHelper.accessor("featured_image", {
+            cell: (info) => null,
+            header: () => <span>Image</span>,
+        }),
+        columnHelper.accessor("name", {
+            cell: (info) => info.getValue(),
+            header: () => <span>Name</span>,
+        }),
+        columnHelper.accessor("description", {
+            cell: (info) => info.getValue(),
+            header: () => <span>Description</span>,
+        }),
+        columnHelper.accessor("price", {
+            cell: (info) => info.getValue(),
+            header: () => <span>Price</span>,
+        }),
+        columnHelper.accessor("actions", {
+            cell: (info) => (
+                <div className="flex items-center justify-end gap-2">
+                    <LinkButton
+                        href={info.row.original.edit_url}
+                        className="text-indigo-600 hover:text-indigo-900"
+                    >
+                        Edit
+                    </LinkButton>
+                    <LinkButton
+                        type="button"
+                        className="bg-red-500 hover:bg-red-600"
+                    >
+                        Delete
+                    </LinkButton>
+                </div>
+            ),
+            header: () => <span>Actions</span>,
+        }),
+    ];
 
     return (
         <AuthenticatedLayout
@@ -48,16 +57,16 @@ export default function Dashboard({products}) {
             <Head title="Dashboard" />
 
             <div className="py-12">
-
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
-                    <div className="overflow-hidden p-6  bg-white shadow-sm sm:rounded-lg">
+                    <div className="overflow-hidden px-6 py-10 bg-white shadow-sm sm:rounded-lg">
                         <div>
-                            <ProductsTable products={products.data} />
+                            <DataTable columns={columns} data={products.data} />
                         </div>
-                        <div className="text-gray-900 text-center">
-                            <Pagination links={products.links} />
-                        </div>
+                        
                     </div>
+                </div>
+                <div className="text-gray-900 text-center">
+                     <Pagination links={products.links} />
                 </div>
             </div>
         </AuthenticatedLayout>
