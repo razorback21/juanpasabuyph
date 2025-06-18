@@ -45,7 +45,7 @@ export default function EditProduct({ product, categories }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                     <div className="flex justify-center pt-10 pb-5">
-                        <img src={product.image_url} alt={product.name} className="object-cover rounded-md"/>
+                        <img src={product.featured_image} alt={product.name} className="h-[300px] object-cover rounded-md"/>
                     </div>
                     <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg">
                         <form onSubmit={submitHandler} action="post">
