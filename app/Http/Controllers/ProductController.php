@@ -78,7 +78,8 @@ class ProductController extends Controller
     {
         return Inertia::render('Products/Edit', [
             'categories' => ProductCategory::all()->toArray(),
-            'product' => $product
+            'product' => $product,
+            'from' => request()->query('from'),
         ]);
     }
 
