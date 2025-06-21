@@ -1,8 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, usePage, router } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import TextInput from "@/Components/TextInput";
 import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/LinkButton";
+import PrimaryButton from "@/Components/PrimaryButton";
+import LinkButton from "@/Components/LinkButton";
 import Textarea from "@/Components/Textarea";
 
 // /import Dropdown from "@/Components/Dropdown";
@@ -38,6 +39,9 @@ export default function EditProduct({ product, categories }) {
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
+                    <div className="text-right pt-4">
+                        <LinkButton href={route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
+                    </div>
                     <div className="flex justify-center pt-10 pb-5">
                         <img
                             src={product.featured_image}
@@ -119,8 +123,9 @@ export default function EditProduct({ product, categories }) {
                             
                         </form>
                         <div className="mt-4">
+                            <LinkButton href={route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
                             <PrimaryButton type="button" onClick={submitHandler}>
-                                Save
+                                Save 
                             </PrimaryButton>
                             </div>
                     </div>
