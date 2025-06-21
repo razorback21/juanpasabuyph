@@ -1,9 +1,9 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import Pagination from "@/Components/Pagination";
-import ProductsTable from "@/Components/dashboard/ProductsTable";
+import ProductsTable from "@/Pages/Dashboard/ProductsTable";
 
-export default function Dashboard({ products, categories, active_category }) {
+export default function({ products, categories, active_category }) {
     return (
         <AuthenticatedLayout
             header={
