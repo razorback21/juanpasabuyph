@@ -3,36 +3,43 @@ import LinkButton from "@/Components/LinkButton";
 import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import DataTable from "@/Components/DataTable";
+import { Link } from "@inertiajs/react";
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();
 
     const columns = [
         columnHelper.accessor("featured_image", {
-            cell: (info) => (
-                <img
-                    src={info.getValue()}
-                    alt={info.getValue()}
-                    className="w-12 h-12 rounded-[10px]"
-                />
+            cell: (product) => (
+                <Link href={route('products.show', {
+                    'product': product.row.original
+                })} className="hover:underline cursor-pointer">
+                    <img
+                        src={product.getValue()}
+                        alt={product.getValue()}
+                        className="w-12 h-12 rounded-[10px]"
+                    />
+                </Link>
             ),
             header: () => <span>Image</span>,
         }),
         columnHelper.accessor("name", {
-            cell: (info) => info.getValue(),
-            header: () => <span>Name</span>,
+            cell: (product) => <Link href={route('products.show', {
+                'product': product.row.original
+            })} className="hover:underline cursor-pointer">{product.getValue()}</Link>,
+            header: () => <span>Name</span>, 
         }),
         columnHelper.accessor("product_category", {
-            cell: (info) => info.getValue(),
+            cell: (product) => product.getValue(),
             header: () => <span>Category</span>,
         }),
         columnHelper.accessor("description", {
-            cell: (info) => info.getValue(),
+            cell: (product) => product.getValue(),
             header: () => <div>Description</div>,
             size: 270,
         }),
         columnHelper.accessor("price", {
-            cell: (info) => info.getValue(),
+            cell: (product) => product.getValue(),
             header: () => <span>Price</span>,
         }),
         columnHelper.accessor("actions", {
