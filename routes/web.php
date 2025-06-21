@@ -2,13 +2,12 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Models\Product;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Modules\Customer\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -50,6 +49,9 @@ Route::middleware('auth')->group(function() {
 
     // Inventory
     Route::resource('inventory', InventoryController::class);
+
+    // Orders
+    Route::resource('orders', OrderController::class);
 });
 
 
