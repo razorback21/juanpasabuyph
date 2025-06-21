@@ -9,7 +9,7 @@ import Textarea from "@/Components/Textarea";
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
 
-export default function EditProduct({ product, categories }) {
+export default function EditProduct({ product, categories, from }) {
     const props = usePage().props;
     const formDataRef = useRef({
         name: product.name,
@@ -17,7 +17,7 @@ export default function EditProduct({ product, categories }) {
         price: product.price,
         category_id: product.category_id,
     });
-
+    console.log(usePage());
     const submitHandler = (e) => {
         e.preventDefault();
         router.put(route('products.update', product), formDataRef.current)
@@ -40,7 +40,7 @@ export default function EditProduct({ product, categories }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                     <div className="text-right pt-4">
-                        <LinkButton href={route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
+                        <LinkButton href={from??route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
                     </div>
                     <div className="flex justify-center pt-10 pb-5">
                         <img
@@ -123,7 +123,7 @@ export default function EditProduct({ product, categories }) {
                             
                         </form>
                         <div className="mt-4">
-                            <LinkButton href={route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
+                            <LinkButton href={from??route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
                             <PrimaryButton type="button" onClick={submitHandler}>
                                 Save 
                             </PrimaryButton>
