@@ -7,6 +7,7 @@ Table products {
 	featured_image text(65535) [ not null ]
 	is_featured boolean [ not null, default: 0 ]
 	socialmedia_image text(65535) [ not null ]
+	disabled boolean [ not null, default: 0 ]
 }
 
 Table ProductCategory {
