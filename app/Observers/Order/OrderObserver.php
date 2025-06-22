@@ -40,7 +40,11 @@ class OrderObserver
      */
     public function deleted(Order $order): void
     {
-        //
+        // Delete related order items
+        $order->items()->delete();
+
+        // delete related inventory reservations
+        $order->inventoryReservations()->delete();
     }
 
     /**
