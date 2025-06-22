@@ -2,10 +2,23 @@
 
 namespace App\Observers\Order;
 
+use App\Actions\Order\GenerateOrderNumberAction;
 use App\Models\Order;
 
 class OrderObserver
 {
+
+
+    /**
+     * Handle the Order "creating" event.
+     */
+    public function creating(Order $order): void
+    {
+        if (empty($order->order_number)) {
+            $order->order_number = GenerateOrderNumberAction::run();
+        }
+    }
+
     /**
      * Handle the Order "created" event.
      */
