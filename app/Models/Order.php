@@ -52,6 +52,14 @@ class Order extends Model
     }
 
     /**
+    * Get Inventory Order reservations
+    */
+    public function inventoryReservations(): HasMany
+    {
+        return $this->hasMany(Inventory::class);
+    }
+
+    /**
      * Calculate the total amount of the order
      */
     public function getTotalAmount(): float
