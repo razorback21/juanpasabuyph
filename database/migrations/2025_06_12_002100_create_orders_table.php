@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('order_number')->unique();
-            $table->foreignIdFor(Customer::class)->constrained()->onDelete('restrict');
+            $table->foreignIdFor(Customer::class)->onDelete('restrict');
             $table->string('status')->default('placed');
             $table->text('notes')->nullable();
             $table->timestamps();
