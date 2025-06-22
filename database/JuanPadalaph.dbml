@@ -21,18 +21,20 @@ Table inventory {
 	quantity integer [ not null ]
 	product_id integer [ not null ]
 	uom varchar(10) [ not null ]
-	movement_type varchar(255) [ not null, default: 'in' ]
+	movement_type varchar(255) [ not null, default: 'inbound' ]
 	created_at datetime [ not null ]
 	updated_at datetime [ not null ]
-	reason varchar(255)
+	notes varchar(255)
 }
 
 Table orders {
 	id integer [ pk, increment, not null, unique ]
-	created_at datetime [ not null ]
 	customer_id integer [ not null ]
 	status varchar(100) [ not null, default: 'placed' ]
 	notes text(65535)
+	created_at datetime [ not null ]
+	updated_at datetime [ not null ]
+	order_number varchar(20) [ not null, unique ]
 }
 
 Table order_items {
