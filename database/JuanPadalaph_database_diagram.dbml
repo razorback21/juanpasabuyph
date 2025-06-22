@@ -1,17 +1,17 @@
 Table products {
 	id integer [ pk, increment, not null, unique ]
-	name varchar [ not null ]
-	description varchar
+	name varchar(255) [ not null ]
+	description varchar(255)
 	price real [ not null ]
 	product_category_id integer [ not null ]
-	featured_image text [ not null ]
+	featured_image text(65535) [ not null ]
 	is_featured boolean [ not null, default: 0 ]
-	shareable_image text [ not null ]
+	socialmedia_image text(65535) [ not null ]
 }
 
 Table ProductCategory {
 	id integer [ pk, increment, not null, unique ]
-	name varchar [ not null ]
+	name varchar(255) [ not null ]
 	description 
 }
 
@@ -19,19 +19,19 @@ Table inventory {
 	id integer [ pk, increment, not null, unique ]
 	quantity integer [ not null ]
 	product_id integer [ not null ]
-	uom varchar [ not null ]
-	movement_type varchar [ not null, default: 'in' ]
+	uom varchar(10) [ not null ]
+	movement_type varchar(255) [ not null, default: 'in' ]
 	created_at datetime [ not null ]
 	updated_at datetime [ not null ]
-	reason varchar
+	reason varchar(255)
 }
 
 Table orders {
 	id integer [ pk, increment, not null, unique ]
 	created_at datetime [ not null ]
 	customer_id integer [ not null ]
-	status varchar [ not null, default: 'placed' ]
-	notes text
+	status varchar(100) [ not null, default: 'placed' ]
+	notes text(65535)
 }
 
 Table order_items {
@@ -40,23 +40,17 @@ Table order_items {
 	quantity integer [ not null ]
 	price real [ not null ]
 	net_price real [ not null ]
-	uom varchar [ not null ]
+	uom varchar(255) [ not null ]
 	order_id integer [ not null ]
 }
 
 Table customers {
 	id integer [ pk, increment, not null, unique ]
-	firstname varchar [ not null ]
-	lastname varchar [ not null ]
-	email varchar
-	phone varchar [ not null ]
-	address text [ not null ]
-}
-
-Table order_item_reservations {
-	id integer [ pk, increment, not null, unique ]
-	inventory_id integer [ not null ]
-	order_item_id integer [ not null ]
+	firstname varchar(255) [ not null ]
+	lastname varchar(255) [ not null ]
+	email varchar(255)
+	phone varchar(255) [ not null ]
+	address text(65535) [ not null ]
 }
 
 Ref fk_inventory_product_id_products {
@@ -69,14 +63,6 @@ Ref fk_orders_customer_id_customers {
 
 Ref fk_order_items_order_id_orders {
 	order_items.order_id < orders.id [ delete: cascade, update: no action ]
-}
-
-Ref fk_order_item_reservations_inventory_id_inventory {
-	order_item_reservations.inventory_id - inventory.id [ delete: no action, update: no action ]
-}
-
-Ref fk_order_item_reservations_order_item_id_order_items {
-	order_item_reservations.order_item_id - order_items.id [ delete: no action, update: no action ]
 }
 
 Ref fk_products_product_category_id_ProductCategory {
