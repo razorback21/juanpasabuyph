@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
+use App\Enums\MovementTypeEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Product extends Model
 {
@@ -21,6 +22,10 @@ class Product extends Model
         'description',
         'price',
         'product_category_id',
+        'featured_image,',
+        'is_featured',
+        'socialmedia_image',
+        'disabled',
     ];
 
     /**
@@ -40,7 +45,7 @@ class Product extends Model
      */
     public function category()
     {
-        return $this->belongsTo(ProductCategory::class, 'product_category_id');
+        return $this->belongsTo(ProductCategory::class);
     }
 
     /**
@@ -63,11 +68,20 @@ class Product extends Model
     public function getCurrentStock(): int
     {
         return $this->inventory()
-            ->where('movement_type', 'in')
-            ->sum('quantity') - 
-            $this->inventory()
-            ->where('movement_type', 'out')
-            ->sum('quantity');
+            ->selectRaw('SUM(CASE 
+                WHEN movement_type IN (?, ?) THEN quantity 
+                WHEN movement_type IN (?, ?, ?) THEN -quantity 
+                ELSE 0 
+            END) as stock', [
+                // Plus
+                MovementTypeEnum::INBOUND,
+                MovementTypeEnum::RETURNED,
+                // Minus
+                MovementTypeEnum::OUTBOUND,
+                MovementTypeEnum::ADJUSTMENT,
+                MovementTypeEnum::RESERVED
+            ])
+            ->value('stock') ?? 0;
     }
 
     // Add this method to the Product model
