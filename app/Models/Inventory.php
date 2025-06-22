@@ -44,11 +44,11 @@ class Inventory extends Model
     }
 
     /**
-     * Get the order item reservations for the inventory.
+     * Get the order that owns the inventory.
      */
-    public function orderItemReservations(): HasMany
+    public function order(): BelongsTo
     {
-        return $this->hasMany(OrderItemReservation::class);
+        return $this->belongsTo(Order::class);
     }
 
     /**
