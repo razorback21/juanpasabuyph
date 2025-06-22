@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Customer;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,9 +14,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained()->onDelete('restrict');
-            $table->enum('status', ['placed', 'processing', 'shipped', 'cancelled'])->default('placed');
-            $table->decimal('total_amount', 10, 2);
+            $table->string('order_number')->unique();
+            $table->foreignIdFor(Customer::class)->constrained()->onDelete('restrict');
+            $table->string('status')->default('placed');
             $table->text('notes')->nullable();
             $table->timestamps();
         });
