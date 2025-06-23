@@ -1,4 +1,5 @@
 import * as React from "react"
+import { usePage } from "@inertiajs/react"
 import {
   ArrowUpCircleIcon,
   BarChartIcon,
@@ -44,22 +45,22 @@ const data = {
       icon: LayoutDashboardIcon,
     },
     {
-      title: "Lifecycle",
+      title: "Products",
       url: "#",
       icon: ListIcon,
     },
     {
-      title: "Analytics",
+      title: "Inventory",
       url: "#",
       icon: BarChartIcon,
     },
     {
-      title: "Projects",
+      title: "Orders",
       url: "#",
       icon: FolderIcon,
     },
     {
-      title: "Team",
+      title: "Customers",
       url: "#",
       icon: UsersIcon,
     },
@@ -151,6 +152,8 @@ const data = {
 export function AppSidebar({
   ...props
 }) {
+  const inertiaProps = usePage().props;
+  console.log(inertiaProps);
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -159,7 +162,7 @@ export function AppSidebar({
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
               <a href="#">
                 <ArrowUpCircleIcon className="h-5 w-5" />
-                <span className="text-base font-semibold">Acme Inc.</span>
+                <span className="text-base font-semibold">JUANPSABUYPH</span>
               </a>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -171,7 +174,7 @@ export function AppSidebar({
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={inertiaProps.auth.user} />
       </SidebarFooter>
     </Sidebar>
   );
