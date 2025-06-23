@@ -6,7 +6,7 @@
 3. Follow Laravel best practices and conventions
 4. Use Eloquent ORM for database operations
 5. Implement proper validation using Form Requests
-6. Use Inertia.js with React for frontend components
+6. Use Inertia.js with ShadCN React for frontend components
 
 ## E-commerce Specific Rules
 7. Always consider inventory management when dealing with products
@@ -45,7 +45,8 @@
 
 ## Frontend Integration
 33. Use Inertia.js for seamless SPA experience
-34. Create reusable React components
+34. Create reusable ShadCN React components when applicable
+34a. Use context7 MCP tool to find applicable components and packages if you dont know about one. You can also use this to know about the package if you know about the library or component.
 35. Implement proper form validation on frontend
 36. Use Tailwind CSS for styling
 37. Ensure responsive design for mobile compatibility
@@ -87,9 +88,9 @@
 63. Implement backup strategies for critical data
 
 ## Current Project Structure
-- Models: Product, ProductCategory, Customer, Order, OrderItem, Inventory, OrderItemReservation
+- Models: Product, ProductCategory, Customer, Order, OrderItem, Inventory
 - Controllers: ProductController (with CRUD operations)
-- Frontend: Inertia.js with React components
+- Frontend: Inertia.js with ShadCN React components
 - Database: MySQL with proper relationships
 - Authentication: Laravel Breeze with Inertia
 - Styling: Tailwind CSS
@@ -103,3 +104,6 @@
 6. Add product search and filtering
 7. Create admin dashboard
 8. Implement reporting and analytics
+
+## Research
+1. You can use fetch MCP to find applicable components and packages.
