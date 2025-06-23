@@ -31,7 +31,7 @@ class DashboardController extends Controller
 
         $categories = ProductCategory::all();
 
-        return Inertia::render('dashboard', [
+        return Inertia::render('Dashboard/Index', [
             'products' => $products,
             'categories' => $categories,
             'active_category' => $request->query('active_category') ?? 'All',
