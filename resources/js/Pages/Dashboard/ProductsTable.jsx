@@ -223,7 +223,7 @@ export function ProductsTable() {
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <Link href={route('products.create')}>
-                    <Button variant="outline" className="ml-2">
+                    <Button className="ml-2">
                         + Add new Product
                     </Button>
                 </Link>
