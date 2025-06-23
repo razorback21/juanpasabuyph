@@ -40,30 +40,28 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
-      url: "#",
-      icon: LayoutDashboardIcon,
-    },
-    {
       title: "Products",
       url: "#",
+      route: "dashboard",
       icon: ListIcon,
+    },
+    {
+      title: "Orders",
+      url: "orders",
+      icon: FolderIcon,
     },
     {
       title: "Inventory",
       url: "#",
+      route: 'inventory',
       icon: BarChartIcon,
     },
-    {
-      title: "Orders",
-      url: "#",
-      icon: FolderIcon,
-    },
-    {
-      title: "Customers",
-      url: "#",
-      icon: UsersIcon,
-    },
+    
+    // {
+    //   title: "Customers",
+    //   url: "#",
+    //   icon: UsersIcon,
+    // },
   ],
   navClouds: [
     {
@@ -170,8 +168,8 @@ export function AppSidebar({
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
-        <NavDocuments items={data.documents} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        {/* <NavDocuments items={data.documents} /> */}
+        {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={inertiaProps.auth.user} />
