@@ -1,6 +1,6 @@
-export default function NoImage({ text ='No Image', size = 300 }) {
+export default function NoImage({ text = 'No Image', height = '300px', width ='300px' }) {
     return (
-        <div className={`bg-gray-200 h-[${size}px] w-[${size}px] rounded-md flex items-center justify-center`}>
+        <div style={{ height, width }} className="bg-gray-200 rounded-md flex items-center justify-center">
             <p className="text-gray-500 text-2xl font-medium">{ text }</p>
         </div>
     );
