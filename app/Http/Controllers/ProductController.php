@@ -48,6 +48,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'product_category_id' => 'required',
+            'is_featured' => 'nullable|boolean',
         ]);
 
         $product = Product::create($validated);
