@@ -1,5 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, usePage } from "@inertiajs/react";
+import { Head, usePage, router } from "@inertiajs/react";
 import TextInput from "@/Components/TextInput";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
@@ -15,7 +15,7 @@ export default function EditProduct({ product, categories, from }) {
         name: product.name,
         description: product.description,
         price: product.price,
-        category_id: product.category_id,
+        product_category_id: product.product_category_id,
     });
     console.log(usePage());
     const submitHandler = (e) => {
@@ -56,10 +56,7 @@ export default function EditProduct({ product, categories, from }) {
                                     name="product_category_id"
                                     onChange={formInputHandler}
                                     className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value="">
-                                        {" "}
-                                        -- Select Category --
-                                    </option>
+                                    <option value="">-- Select Category --</option>
                                     {categories.map((category) => (
                                         <option
                                             key={category.id}
