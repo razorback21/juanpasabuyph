@@ -33,7 +33,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Products/Create');
+        return Inertia::render('Products/Create',[
+             'categories' => ProductCategory::all()->toArray(),
+        ]);
     }
 
     /**
@@ -45,13 +47,12 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
-            'product_category_id' => 'required|exists:product_categories,id',
+            'product_category_id' => 'required',
         ]);
 
         $product = Product::create($validated);
 
-        return redirect()
-            ->route('products.index')
+        return redirect(route('products.show', $product))
             ->with('success', 'Product created successfully.');
     }
 
