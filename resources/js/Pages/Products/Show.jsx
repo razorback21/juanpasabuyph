@@ -39,10 +39,10 @@ export default function EditProduct({ product }) {
                                 className="h-[300px] object-cover rounded-md"
                             />
                         ) : (
-                            <NoImage />
+                            <NoImage height="300px" width="300px" />
                         )}
 
-                        <div class="">
+                        <div>
                             <h1 className="text-2xl font-bold">
                                 {product.name}
                             </h1>

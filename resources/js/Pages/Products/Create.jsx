@@ -8,19 +8,22 @@ import Textarea from "@/Components/Textarea";
 
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
+import { Switch } from "@/Components/ui/switch";
+import { Label } from "@/Components/ui/label";
 
 export default function EditProduct({ categories }) {
     const props = usePage().props;
     const formDataRef = useRef({
-        name: '',
-        description: '',
+        name: "",
+        description: "",
         price: null,
         product_category_id: null,
     });
-    console.log(usePage());
+
     const submitHandler = (e) => {
         e.preventDefault();
-        router.post(route('products.store'), formDataRef.current)
+        console.log(formDataRef.current);
+        router.post(route("products.store"), formDataRef.current);
     };
 
     const formInputHandler = (e) => {
@@ -40,7 +43,12 @@ export default function EditProduct({ categories }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                     <div className="text-right pt-4">
-                        <LinkButton href={route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
+                        <LinkButton
+                            href={route("dashboard")}
+                            className="mr-2 bg-red-500 text-white"
+                        >
+                            Back
+                        </LinkButton>
                     </div>
                     {/* <div className="flex justify-center pt-10 pb-5">
                         <img
@@ -52,11 +60,14 @@ export default function EditProduct({ categories }) {
                     <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg">
                         <form onSubmit={submitHandler}>
                             <div className="mb-4">
-                                <select 
+                                <select
                                     name="product_category_id"
                                     onChange={formInputHandler}
-                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
-                                    <option value="">-- Select Category --</option>
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                >
+                                    <option value="">
+                                        -- Select Category --
+                                    </option>
                                     {categories.map((category) => (
                                         <option
                                             value={category.id}
@@ -67,7 +78,9 @@ export default function EditProduct({ categories }) {
                                     ))}
                                 </select>
                                 {props.errors?.product_category_id && (
-                                    <p className="text-red-500 text-sm py-1">Category field is required</p>
+                                    <p className="text-red-500 text-sm py-1">
+                                        Category field is required
+                                    </p>
                                 )}
                             </div>
                             <div className="mb-4">
@@ -78,9 +91,10 @@ export default function EditProduct({ categories }) {
                                     onChange={formInputHandler}
                                 />
                                 {props.errors?.name && (
-                                    <p className="text-red-500 text-sm py-1">Name field is required</p>
+                                    <p className="text-red-500 text-sm py-1">
+                                        Name field is required
+                                    </p>
                                 )}
-
                             </div>
                             <div className="mb-4">
                                 <InputLabel
@@ -94,9 +108,25 @@ export default function EditProduct({ categories }) {
                                     onChange={formInputHandler}
                                 ></Textarea>
                                 {props.errors?.description && (
-                                    <p className="text-red-500 text-sm py-1">Description field is required</p>
+                                    <p className="text-red-500 text-sm py-1">
+                                        Description field is required
+                                    </p>
                                 )}
-
+                            </div>
+                            <div className="mb-4">
+                                <div className="flex items-center space-x-2">
+                                    <Switch
+                                        name="is_featured"
+                                        defaultChecked={false}
+                                        onCheckedChange={(checked) => {
+                                            formDataRef.current.is_featured =
+                                                checked;
+                                        }}
+                                    />{" "}
+                                    <Label htmlFor="is_featured">
+                                        Set as Featured Product
+                                    </Label>
+                                </div>
                             </div>
                             <div>
                                 <InputLabel value="Price" htmlFor="price" />
@@ -107,18 +137,26 @@ export default function EditProduct({ categories }) {
                                     onChange={formInputHandler}
                                 />
                                 {props.errors?.price && (
-                                    <p className="text-red-500 text-sm py-1">Price field is required</p>
+                                    <p className="text-red-500 text-sm py-1">
+                                        Price field is required
+                                    </p>
                                 )}
-
                             </div>
-                            
                         </form>
                         <div className="mt-4">
-                            <LinkButton href={route('dashboard')} className="mr-2 bg-red-500 text-white">Back</LinkButton>
-                            <PrimaryButton type="button" onClick={submitHandler}>
-                                Save 
+                            <LinkButton
+                                href={route("dashboard")}
+                                className="mr-2 bg-red-500 text-white"
+                            >
+                                Back
+                            </LinkButton>
+                            <PrimaryButton
+                                type="button"
+                                onClick={submitHandler}
+                            >
+                                Save
                             </PrimaryButton>
-                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
