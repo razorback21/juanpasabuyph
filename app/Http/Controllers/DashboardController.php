@@ -20,7 +20,7 @@ class DashboardController extends Controller
         // Apply category filter
         (new ProductFilterService())->filter($query, $request);
         
-        $products = $query->paginate(3)
+        $products = $query->paginate(10)
             ->withQueryString()
             ->through(function ($product) {
                 return [
