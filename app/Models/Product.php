@@ -56,6 +56,14 @@ class Product extends Model
         return $this->hasMany(Inventory::class);
     }
 
+    /**
+     * Get the order items for the product.
+     */
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
 
     protected static function boot()
     {
@@ -91,4 +99,5 @@ class Product extends Model
             get: fn () => $this->category ? ucwords($this->category->name) : null,
         );
     }
+
 }
