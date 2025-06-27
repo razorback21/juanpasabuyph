@@ -2,6 +2,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import ProductsTable from "./ProductsTable";
+import Pagination from "@/Components/Pagination";
 
 export default function (props) {
     return (
@@ -11,6 +12,9 @@ export default function (props) {
                 <ProductsTable
                    {...props}
                 />
+            </div>
+            <div className="text-gray-900 text-center">
+                <Pagination links={props.products.links} />
             </div>
         </AuthenticatedLayout>
     );

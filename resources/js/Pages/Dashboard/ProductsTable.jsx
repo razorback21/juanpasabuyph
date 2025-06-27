@@ -54,7 +54,9 @@ export default function ({ products, categories, active_category }) {
                         Edit
                     </LinkButton>
                     <LinkButton
+                        href={route("products.destroy", product.row.original)}
                         type="button"
+                        method="DELETE"
                         className="bg-red-500 hover:bg-red-600"
                     >
                         Delete
