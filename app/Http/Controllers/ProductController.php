@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -106,15 +107,13 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // Check if product can be deleted (no inventory reservations)
-        if ($product->inventory()->whereHas('orderItemReservations')->exists()) {
-            return back()->with('error', 'Cannot delete product with existing reservations.');
-        }
+        
+        Gate::authorize('delete', $product);
 
         $product->delete();
 
         return redirect()
-            ->route('products.index')
+            ->route('dashboard',)
             ->with('success', 'Product deleted successfully.');
     }
 
