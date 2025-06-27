@@ -110,7 +110,7 @@ class ProductController extends Controller
         
         Gate::authorize('delete', $product);
 
-        //$product->delete();
+        $product->delete();
 
         return redirect()
             ->route('dashboard', request()->query())
