@@ -92,7 +92,7 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
-            'product_category_id' => 'required',
+            'product_category_id' => 'required|exists:product_categories,id',
         ]);
 
         $product->update($validated);
