@@ -74,7 +74,7 @@ export default function ({ products, categories, active_category }) {
             <Dropdown align="left" width="48">
                 <Dropdown.Trigger>
                     <span className="mr-2 font-medium">{active_category} : </span>
-                    <Button className="p-1 px-4 bg-primary text-white rounded">
+                    <Button variant="outline">
                         Categories
                     </Button>
                 </Dropdown.Trigger>
@@ -109,6 +109,9 @@ export default function ({ products, categories, active_category }) {
         <>
             <div className="flex justify-end mb-2">
                 <CategoryFilter categories={categories} />
+                <Button className="ml-2">
+                   + Add Product
+                </Button>
             </div>
             <div>
                 <DataTable columns={columns} data={products.data} />
