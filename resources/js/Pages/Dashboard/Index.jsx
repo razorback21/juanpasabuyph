@@ -1,7 +1,7 @@
 //import { DataTable } from "@/components/data-table"
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { ProductsTable } from "./ProductsTable.jsx.TanStack";
+import { ProductsTable } from "./ProductsTable.jsx";
 
 export default function (props) {
     return (
