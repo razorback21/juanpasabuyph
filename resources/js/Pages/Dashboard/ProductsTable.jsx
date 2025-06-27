@@ -4,6 +4,7 @@ import Dropdown from "@/Components/Dropdown";
 import { useState } from "react";
 import DataTable from "@/Components/DataTable";
 import { Link } from "@inertiajs/react";
+import { Button } from "@/Components/ui/button";
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();
@@ -57,7 +58,7 @@ export default function ({ products, categories, active_category }) {
                         href={route("products.destroy", product.row.original)}
                         type="button"
                         method="DELETE"
-                        className="bg-red-500 hover:bg-red-600"
+                        className="bg-red-600 hover:bg-red-600"
                     >
                         Delete
                     </LinkButton>
@@ -73,9 +74,10 @@ export default function ({ products, categories, active_category }) {
         return (
             <Dropdown align="left" width="48">
                 <Dropdown.Trigger>
-                    <button className="p-1 px-4 bg-blue-500 text-white rounded">
-                        Categories : {active_category}
-                    </button>
+                    <span className="mr-2 font-medium">{active_category} : </span>
+                    <Button className="p-1 px-4 bg-primary text-white rounded">
+                        Categories
+                    </Button>
                 </Dropdown.Trigger>
 
                 <Dropdown.Content>
