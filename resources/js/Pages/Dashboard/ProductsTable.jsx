@@ -50,7 +50,6 @@ export default function ({ products, categories, active_category }) {
                         href={route("products.edit", {
                             product: product.row.original,
                         })}
-                        className="text-indigo-600 hover:text-indigo-900"
                     >
                         Edit
                     </LinkButton>
@@ -58,7 +57,7 @@ export default function ({ products, categories, active_category }) {
                         href={route("products.destroy", product.row.original)+window.location.search}
                         type="button"
                         method="DELETE"
-                        className="bg-red-600 hover:bg-red-600"
+                        className="bg-red-600 hover:bg-red-500"
                     >
                         Delete
                     </LinkButton>
