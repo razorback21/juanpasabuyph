@@ -21,7 +21,7 @@ class Inventory extends Model
         'product_id',
         'uom',
         'movement_type',
-        'reason',
+        'notes',
     ];
 
     /**
