@@ -12,9 +12,12 @@ export default function ({ products, categories, active_category }) {
     const columns = [
         columnHelper.accessor("featured_image", {
             cell: (product) => (
-                <Link href={route('products.show', {
-                    'product': product.row.original
-                })} className="hover:underline cursor-pointer">
+                <Link
+                    href={route("products.show", {
+                        product: product.row.original,
+                    })}
+                    className="hover:underline cursor-pointer"
+                >
                     <img
                         src={product.getValue()}
                         alt={product.getValue()}
@@ -25,10 +28,17 @@ export default function ({ products, categories, active_category }) {
             header: () => <span>Image</span>,
         }),
         columnHelper.accessor("name", {
-            cell: (product) => <Link href={route('products.show', {
-                'product': product.row.original
-            })} className="hover:underline cursor-pointer">{product.getValue()}</Link>,
-            header: () => <span>Name</span>, 
+            cell: (product) => (
+                <Link
+                    href={route("products.show", {
+                        product: product.row.original,
+                    })}
+                    className="hover:underline cursor-pointer"
+                >
+                    {product.getValue()}
+                </Link>
+            ),
+            header: () => <span>Name</span>,
         }),
         columnHelper.accessor("product_category", {
             cell: (product) => product.getValue(),
@@ -54,7 +64,10 @@ export default function ({ products, categories, active_category }) {
                         Edit
                     </LinkButton>
                     <LinkButton
-                        href={route("products.destroy", product.row.original)+window.location.search}
+                        href={
+                            route("products.destroy", product.row.original) +
+                            window.location.search
+                        }
                         type="button"
                         method="DELETE"
                         className="bg-red-600 hover:bg-red-500"
@@ -73,10 +86,10 @@ export default function ({ products, categories, active_category }) {
         return (
             <Dropdown align="left" width="48">
                 <Dropdown.Trigger>
-                    <span className="mr-2 font-medium">{active_category} : </span>
-                    <Button variant="outline">
-                        Categories
-                    </Button>
+                    <span className="mr-2 font-medium">
+                        {active_category} :{" "}
+                    </span>
+                    <Button variant="outline">Categories</Button>
                 </Dropdown.Trigger>
 
                 <Dropdown.Content>
@@ -109,9 +122,9 @@ export default function ({ products, categories, active_category }) {
         <>
             <div className="flex justify-end mb-2">
                 <CategoryFilter categories={categories} />
-                <Button className="ml-2">
-                   + Add Product
-                </Button>
+                <Link href={route("products.create")}>
+                    <Button className="ml-2">+ Add Product</Button>
+                </Link>
             </div>
             <div>
                 <DataTable columns={columns} data={products.data} />
