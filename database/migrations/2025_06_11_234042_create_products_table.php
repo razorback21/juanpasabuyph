@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->foreignIdFor(ProductCategory::class, 'product_category_id');
+            $table->foreignIdFor(ProductCategory::class, 'product_category_id')->nullable();
             $table->string('featured_image')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->string('socialmedia_image')->nullable();
