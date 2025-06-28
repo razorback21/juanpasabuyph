@@ -49,17 +49,21 @@ const data = {
       url: "#",
       route: "dashboard",
       icon: Rows2Icon,
+      activeKey: 'dashboard',
     },
         {
       title: "Categories",
       url: "#",
-      route: 'categories',
+      route: 'categories.index',
       icon: FoldersIcon,
+      activeKey: 'product-category',
     },
     {
       title: "Orders",
-      url: "orders",
+      url:'#',
+      route: "orders.index",
       icon: Package2Icon,
+      activeKey: 'order',
     },
     // {
     //   title: "Customers",
