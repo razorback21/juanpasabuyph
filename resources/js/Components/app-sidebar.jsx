@@ -1,5 +1,5 @@
 import * as React from "react"
-import { usePage } from "@inertiajs/react"
+import { usePage, Link } from "@inertiajs/react"
 import {
   ArrowUpCircleIcon,
   BarChartIcon,
@@ -166,10 +166,10 @@ export function AppSidebar({
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="data-[slot=sidebar-menu-button]:!p-1.5">
-              <a href="#">
+              <Link href="/">
                 <ArrowUpCircleIcon className="h-5 w-5" />
                 <span className="text-base font-semibold">JUANPSABUYPH</span>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
