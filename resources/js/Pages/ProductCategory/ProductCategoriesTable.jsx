@@ -11,9 +11,7 @@ export default function ({ categories }) {
         columnHelper.accessor("name", {
             cell: (row) => (
                 <Link
-                    href={route("product-categories.show", {
-                        product_category: row.row.original,
-                    })}
+                    href={route("product-categories.show", row.row.original)}
                     className="hover:underline cursor-pointer"
                 >
                     {row.getValue()}
@@ -24,7 +22,7 @@ export default function ({ categories }) {
         columnHelper.accessor("description", {
             cell: (row) => (
                 <Link
-                    href={route("product-categories.show", row.row.original.id)}
+                    href={route("product-categories.show", row.row.original)}
                     className="hover:underline cursor-pointer"
                 >
                     {row.getValue()}
