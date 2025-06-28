@@ -1,11 +1,23 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import LinkButton from "@/Components/LinkButton";
 import DataTable from "@/Components/DataTable";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 
 export default function ({ categories }) {
     const columnHelper = createColumnHelper();
+    const deleteHandler = (productCategory) => {
+        if (
+            confirm(
+                `Are you sure you want to to delete category "${productCategory.name}"?`
+            )
+        ) {
+            router.delete(
+                route("product-categories.destroy", productCategory) +
+                    window.location.search
+            );
+        }
+    };
 
     const columns = [
         columnHelper.accessor("name", {
@@ -20,23 +32,20 @@ export default function ({ categories }) {
             cell: (row) => (
                 <div className="flex items-center justify-end gap-2">
                     <LinkButton
-                        href={route("product-categories.edit", row.row.original.id)}
+                        href={route(
+                            "product-categories.edit",
+                            row.row.original.id
+                        )}
                     >
                         Edit
                     </LinkButton>
-                    <LinkButton
-                        href={
-                            route(
-                                "product-categories.destroy",
-                                row.row.original
-                            ) + window.location.search
-                        }
+                    <Button
+                        onClick={() => deleteHandler(row.row.original)}
                         type="button"
-                        method="DELETE"
                         className="bg-red-600 hover:bg-red-500"
                     >
                         Delete
-                    </LinkButton>
+                    </Button>
                 </div>
             ),
             header: () => <div className="flex justify-end mr-2">Actions</div>,

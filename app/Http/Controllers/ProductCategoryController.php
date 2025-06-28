@@ -13,10 +13,12 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        return Inertia::render('ProductCategory/Index',
-        [
-            'categories' => ProductCategory::paginate(10),
-        ]);
+        return Inertia::render(
+            'ProductCategory/Index',
+            [
+                'categories' => ProductCategory::paginate(10),
+            ]
+        );
     }
 
     /**
@@ -55,7 +57,7 @@ class ProductCategoryController extends Controller
      */
     public function edit(ProductCategory $productCategory)
     {
-       return Inertia::render('ProductCategory/Edit', [
+        return Inertia::render('ProductCategory/Edit', [
             'category' => $productCategory,
         ]);
     }
@@ -73,7 +75,7 @@ class ProductCategoryController extends Controller
         $productCategory->update($validated);
 
         return redirect()->route('product-categories.index')
-        ->with('success','Product category updated successfully.');
+            ->with('success', 'Product category updated successfully.');
     }
 
     /**
@@ -81,6 +83,9 @@ class ProductCategoryController extends Controller
      */
     public function destroy(ProductCategory $productCategory)
     {
-        //
+        $productCategory->delete();
+
+        return redirect()->route('product-categories.index')
+            ->with('success', 'Product category updated successfully.');
     }
 }
