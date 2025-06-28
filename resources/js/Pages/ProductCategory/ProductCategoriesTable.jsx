@@ -9,26 +9,12 @@ export default function ({ categories }) {
 
     const columns = [
         columnHelper.accessor("name", {
-            cell: (row) => (
-                <Link
-                    href={route("product-categories.show", row.row.original)}
-                    className="hover:underline cursor-pointer"
-                >
-                    {row.getValue()}
-                </Link>
-            ),
+            cell: (row) => <span>{row.getValue()}</span>,
             header: () => <span>Name</span>,
         }),
         columnHelper.accessor("description", {
-            cell: (row) => (
-                <Link
-                    href={route("product-categories.show", row.row.original)}
-                    className="hover:underline cursor-pointer"
-                >
-                    {row.getValue()}
-                </Link>
-            ),
-            header: () => <span>Name</span>,
+            cell: (row) => <span>{row.getValue()}</span>,
+            header: () => <span>Description</span>,
         }),
         columnHelper.accessor("actions", {
             cell: (row) => (
