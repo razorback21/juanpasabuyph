@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class ProductCategoryController extends Controller
 {
@@ -11,7 +12,7 @@ class ProductCategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('ProductCategory/Index');
     }
 
     /**
