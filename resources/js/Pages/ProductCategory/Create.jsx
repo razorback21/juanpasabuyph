@@ -21,7 +21,7 @@ export default function EditProduct({ categories }) {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(formDataRef.current);
-        router.post(route("products.store"), formDataRef.current);
+        router.post(route("product-categories.store"), formDataRef.current);
     };
 
     const formInputHandler = (e) => {

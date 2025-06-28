@@ -32,7 +32,14 @@ class ProductCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        ProductCategory::create($validated);
+
+        return redirect()->route('product-categories.index');
     }
 
     /**
