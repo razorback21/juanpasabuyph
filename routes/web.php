@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('products', ProductController::class);
 
     // Product category
-    Route::resource('categories', ProductCategoryController::class);
+    Route::resource('product-categories', ProductCategoryController::class);
 
     // Inventory
     Route::resource('inventory', InventoryController::class);
