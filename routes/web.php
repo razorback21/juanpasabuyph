@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
@@ -31,21 +32,11 @@ Route::middleware('auth')->group(function () {
 
 // Pdoucts
 Route::middleware('auth')->group(function() {
-    // Product management routes
-    // Route::get('/products/search', [ProductController::class, 'search'])->name('products.search');
+    // Product 
     Route::resource('products', ProductController::class);
-    
-    
-    // Product inventory management (we'll implement these controllers later)
-    // Route::post('/products/{product}/stock/add', [ProductController::class, 'addStock'])
-    //     ->name('products.stock.add');
-    // Route::post('/products/{product}/stock/remove', [ProductController::class, 'removeStock'])
-    //     ->name('products.stock.remove');
 
-    
-    // Public product routes (no auth required)
-    //Route::get('/catalog', [ProductController::class, 'catalog'])->name('products.catalog');
-    //Route::get('/catalog/{product}', [ProductController::class, 'catalogShow'])->name('products.catalog.show');
+    // Product category
+    Route::resource('categories', ProductCategoryController::class);
 
     // Inventory
     Route::resource('inventory', InventoryController::class);
