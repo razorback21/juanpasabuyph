@@ -6,7 +6,7 @@ import Pagination from "@/Components/Pagination";
 
 export default function (props) {
     return (
-        <AuthenticatedLayout>
+        <AuthenticatedLayout header='Products'>
             <Head title="Dashboard" />
             <div className="flex flex-col px-4 lg:px-6">
                 <ProductsTable
