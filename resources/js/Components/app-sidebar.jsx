@@ -54,9 +54,9 @@ const data = {
         {
       title: "Categories",
       url: "#",
-      route: 'categories.index',
+      route: 'product-categories.index',
       icon: FoldersIcon,
-      activeKey: 'product-category',
+      activeKey: 'product-categories',
     },
     {
       title: "Orders",
