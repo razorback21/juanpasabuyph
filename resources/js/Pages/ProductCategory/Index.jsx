@@ -1,17 +1,19 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import ProductCategoriesTable from "./ProductCategoriesTable";
+import Pagination from "@/Components/Pagination";
 
-export default function ({}) {
+export default function ({ categories }) {
     return (
         <AuthenticatedLayout header='Categories'>
             <Head title="Categories" />
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
-                    <div className="overflow-hidden px-6 py-12 bg-white shadow-sm sm:rounded-lg">
-                        <h1>Categories</h1>
-                    </div>
-                </div>
+            <div className="flex flex-col px-4 lg:px-6">
+                <ProductCategoriesTable categories={categories.data} />
             </div>
+            <div className="text-gray-900 text-center">
+                <Pagination links={categories.links} />
+            </div>
+            
         </AuthenticatedLayout>
     );
 }
