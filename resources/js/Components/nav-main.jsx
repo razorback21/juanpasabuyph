@@ -1,5 +1,4 @@
-import LinkWithChildren from "./LinkWithChildren";
-import { usePage } from "@inertiajs/react";
+import { usePage, Link } from "@inertiajs/react";
 
 import {
     SidebarGroup,
@@ -35,7 +34,7 @@ export function NavMain({ items }) {
                 <SidebarMenu>
                     {items.map((item) => (
                         <SidebarMenuItem key={item.title}>
-                            <LinkWithChildren href={route(item.route)}>
+                            <Link href={route(item.route)}>
                                 <SidebarMenuButton
                                     tooltip={item.title}
                                     isActive={ziggy.location.includes(item.activeKey)}
@@ -43,7 +42,7 @@ export function NavMain({ items }) {
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>
                                 </SidebarMenuButton>
-                            </LinkWithChildren>
+                            </Link>
                         </SidebarMenuItem>
                     ))}
                 </SidebarMenu>
