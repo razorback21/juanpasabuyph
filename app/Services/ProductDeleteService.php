@@ -11,11 +11,11 @@ class ProductDeleteService
     public function canDelete(Product $product): bool
     {
         if ($product->inventory()->count() > 0) {
-            throw new CannotDeleteProductException("Cannot delete product with existing inventory.");
+            throw new CannotDeleteProductException("Cannot delete product with existing inventory.",403);
         }
 
         if ($product->orderItems()->count() > 0) {
-            throw new CannotDeleteProductException("Cannot delete product with existing order items.");
+            throw new CannotDeleteProductException("Cannot delete product with existing order items.", 403);
         }
 
         return true;
