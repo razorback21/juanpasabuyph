@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\CannotDeleteProductException;
+use App\Http\Requests\Product\ProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Services\ProductDeleteService;
@@ -45,15 +46,9 @@ class ProductController extends Controller
     /**
      * Store a newly created product in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'product_category_id' => 'required',
-            'is_featured' => 'nullable|boolean',
-        ]);
+        $validated = $request->validated();
 
         $product = Product::create($validated);
 
@@ -95,14 +90,9 @@ class ProductController extends Controller
     /**
      * Update the specified product in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric|min:0',
-            'product_category_id' => 'required',
-        ]);
+        $validated = $request->validated();
 
         $product->update($validated);
 
@@ -115,9 +105,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-
         Gate::authorize('delete', $product);
-        
+
         $product->delete();
 
         return redirect()
