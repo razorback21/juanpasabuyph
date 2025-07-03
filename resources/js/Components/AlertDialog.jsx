@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 
-const ConfirmAlert = forwardRef(({ children, buttonName = 'Continue' }, ref) => {
+const ConfirmAlert = forwardRef(({ buttonName = 'Continue' }, ref) => {
     const [open, setOpen] = useState(false);
     const [dialogProps, setDialogProps] = useState({
         title:'',
@@ -34,11 +34,6 @@ const ConfirmAlert = forwardRef(({ children, buttonName = 'Continue' }, ref) => 
     }));
     return (
         <AlertDialog open={open} onOpenChange={() => setOpen(!open)}>
-            {children ? children : (
-                <AlertDialogTrigger asChild>
-                    <Button variant="outline">Show Dialog</Button>
-                </AlertDialogTrigger>
-            )}
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>{dialogProps.title}</AlertDialogTitle>
