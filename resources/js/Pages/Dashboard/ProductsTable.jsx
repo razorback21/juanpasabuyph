@@ -1,14 +1,17 @@
+import { useState, useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import LinkButton from "@/Components/LinkButton";
 import Dropdown from "@/Components/Dropdown";
-import { useState } from "react";
 import DataTable from "@/Components/DataTable";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
-import { Badge } from "@/components/ui/badge"
+import { Badge } from "@/components/ui/badge";
+import DeleteConfirmDialog from "@/Components/DeleteConfirmDialog";
+import { DialogTrigger } from "@/components/ui/dialog";
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();
+    const dialogRef = useRef(null)
 
     const columns = [
         columnHelper.accessor("featured_image", {
@@ -50,8 +53,13 @@ export default function ({ products, categories, active_category }) {
             header: () => <div>Description</div>,
             size: 270,
         }),
-         columnHelper.accessor("is_featured", {
-            cell: (product) => !product.getValue() ? "" : <Badge variant="secondary">Yes</Badge>,
+        columnHelper.accessor("is_featured", {
+            cell: (product) =>
+                !product.getValue() ? (
+                    ""
+                ) : (
+                    <Badge variant="secondary">Yes</Badge>
+                ),
             header: () => <span>Feat. Product</span>,
         }),
         columnHelper.accessor("price", {
@@ -68,7 +76,7 @@ export default function ({ products, categories, active_category }) {
                     >
                         Edit
                     </LinkButton>
-                    <LinkButton
+                    {/* <LinkButton
                         href={
                             route("products.destroy", product.row.original) +
                             window.location.search
@@ -78,12 +86,30 @@ export default function ({ products, categories, active_category }) {
                         className="bg-red-600 hover:bg-red-500"
                     >
                         Delete
-                    </LinkButton>
+                    </LinkButton> */}
+
+                    <DeleteConfirmDialog
+                        ref={dialogRef}
+                        title="Delete Product"
+                        description={`Are you sure you want to to delete product "${product.row.original.name}"?`}
+                        confirmhandler={() =>
+                            deleteHandler(product.row.original)
+                        }
+                    >
+                        <Button onClick={()=> dialogRef.current?.open()} variant="destructive">DELETE</Button>
+                    </DeleteConfirmDialog>
+                        
                 </div>
             ),
             header: () => <div className="flex justify-end mr-2">Actions</div>,
         }),
     ];
+
+    const deleteHandler = (row) => {
+        router.delete(route("products.destroy", row) + window.location.search);
+        console.log(dialogRef.current,'FFFFF');
+        dialogRef.current?.close();
+    };
 
     function CategoryFilter({ categories }) {
         const [categoryName, setCategoryName] = useState("All");
