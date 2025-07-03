@@ -76,22 +76,10 @@ export default function ({ products, categories, active_category }) {
                     >
                         Edit
                     </LinkButton>
-                    {/* <LinkButton
-                        href={
-                            route("products.destroy", product.row.original) +
-                            window.location.search
-                        }
-                        type="button"
-                        method="DELETE"
-                        className="bg-red-600 hover:bg-red-500"
-                    >
-                        Delete
-                    </LinkButton> */}
-
                     <DeleteConfirmDialog
                         ref={dialogRef}
                         title="Delete Product"
-                        description={`Are you sure you want to to delete product "${product.row.original.name}"?`}
+                        description={`#${product.row.original.id} ${product.row.original.name} Are you sure you want to to delete product "${product.row.original.name}"?`}
                         confirmhandler={() =>
                             deleteHandler(product.row.original)
                         }
