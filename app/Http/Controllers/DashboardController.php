@@ -15,12 +15,11 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::latest();
-
-        // Apply category filter
-        (new ProductFilterService())->filter($query, $request);
         
-        $products = $query->paginate(10)
+        // Apply category filter
+        $filter = new ProductFilterService($request);
+        
+        $products = $filter->getQuery()->paginate(10)
             ->withQueryString()
             ->through(function ($product) {
                 return [
