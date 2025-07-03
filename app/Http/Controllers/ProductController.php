@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\CannotDeleteProductException;
 use App\Models\Product;
 use App\Models\ProductCategory;
-use App\Service\ProductDeleteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
