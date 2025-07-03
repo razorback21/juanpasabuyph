@@ -9,6 +9,8 @@ import NoImage from "@/Components/NoImage";
 
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
+import { Switch } from "@/Components/ui/switch";
+import { Label } from "@/Components/ui/label";
 
 export default function EditProduct({ product, categories, from }) {
     const props = usePage().props;
@@ -121,6 +123,21 @@ export default function EditProduct({ product, categories, from }) {
                                         Description field is required
                                     </p>
                                 )}
+                            </div>
+                            <div className="mb-4">
+                                <div className="flex items-center space-x-2">
+                                    <Switch
+                                        name="is_featured"
+                                        defaultChecked={product.is_featured}
+                                        onCheckedChange={(checked) => {
+                                            formDataRef.current.is_featured =
+                                                checked;
+                                        }}
+                                    />{" "}
+                                    <Label htmlFor="is_featured">
+                                        Set as Featured Product
+                                    </Label>
+                                </div>
                             </div>
                             <div>
                                 <InputLabel value="Price" htmlFor="price" />
