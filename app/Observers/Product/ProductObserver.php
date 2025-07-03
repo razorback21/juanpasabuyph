@@ -4,7 +4,8 @@ namespace App\Observers\Product;
 
 use App\Exceptions\CannotDeleteProductException;
 use App\Models\Product;
-use App\Service\ProductDeleteService;
+use App\Services\ProductDeleteService;
+use Illuminate\Support\Facades\Log;
 
 class ProductObserver
 {
@@ -21,7 +22,18 @@ class ProductObserver
      */
     public function updated(Product $product): void
     {
-        //
+
+    }
+    /**
+     *  Handle pre "deleting" event
+     */
+    public function deleting(Product $product)
+    {
+        try {
+            return ((new ProductDeleteService())->canDelete($product));
+        } catch (CannotDeleteProductException $exception) {
+            abort(403, $exception->getMessage());
+        }
     }
 
     /**
@@ -29,7 +41,7 @@ class ProductObserver
      */
     public function deleted(Product $product): void
     {
-        //
+
     }
 
     /**

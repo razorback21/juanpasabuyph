@@ -117,14 +117,8 @@ class ProductController extends Controller
     {
 
         Gate::authorize('delete', $product);
-
-        try {
-            if ((new ProductDeleteService())->canDelete($product)) {
-                $product->delete();
-            }
-        } catch (CannotDeleteProductException $e) {
-            abort(403, $e->getMessage());
-        }
+        
+        $product->delete();
 
         return redirect()
             ->route('dashboard', request()->query())
