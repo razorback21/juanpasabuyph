@@ -23,17 +23,6 @@ class ProductObserver
     {
         //
     }
-    // Pre-delete logic
-    public function deleting(Product $product)
-    {
-        try {
-            if ((new ProductDeleteService())->canDelete($product)) {
-                $product->delete();
-            }
-        } catch (CannotDeleteProductException $e) {
-            abort(403, $e->getMessage());
-        }
-    }
 
     /**
      * Handle the Product "deleted" event.
