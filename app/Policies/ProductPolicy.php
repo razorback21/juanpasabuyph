@@ -43,19 +43,9 @@ class ProductPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Product $product): Response
+    public function delete(User $user, Product $product): bool
     {
-        //check if product has inventory
-        if($product->inventory()->count() > 0){
-            return Response::deny('Cannot delete product with existing inventory.');
-        }
-
-        // check if product has order items
-        if($product->orderItems()->count() > 0){
-            return Response::deny('Cannot delete product with existing order items.');
-        }
-
-        return Response::allow();
+        return true;
     }
 
     /**
