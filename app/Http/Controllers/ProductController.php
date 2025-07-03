@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CannotDeleteProductException;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Service\ProductDeleteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -17,9 +19,11 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::query()
-            ->withCount(['inventory as stock' => function ($query) {
-                $query->selectRaw('COALESCE(SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END), 0)');
-            }])
+            ->withCount([
+                'inventory as stock' => function ($query) {
+                    $query->selectRaw('COALESCE(SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END), 0)');
+                }
+            ])
             ->latest()
             ->paginate(10);
 
@@ -33,8 +37,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Products/Create',[
-             'categories' => ProductCategory::all()->toArray(),
+        return Inertia::render('Products/Create', [
+            'categories' => ProductCategory::all()->toArray(),
         ]);
     }
 
@@ -62,9 +66,11 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $product->load(['inventory' => function ($query) {
-            $query->latest();
-        }]);
+        $product->load([
+            'inventory' => function ($query) {
+                $query->latest();
+            }
+        ]);
 
         $currentStock = $product->getCurrentStock();
 
@@ -109,7 +115,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        
+
         Gate::authorize('delete', $product);
 
         $product->delete();
@@ -138,9 +144,11 @@ class ProductController extends Controller
         }
 
         $query = Product::query()
-            ->withCount(['inventory as stock' => function ($query) {
-                $query->selectRaw('COALESCE(SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END), 0)');
-            }]);
+            ->withCount([
+                'inventory as stock' => function ($query) {
+                    $query->selectRaw('COALESCE(SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END), 0)');
+                }
+            ]);
 
         // Apply search filters
         if ($request->filled('query')) {
@@ -152,11 +160,11 @@ class ProductController extends Controller
         }
 
         if ($request->filled('min_price')) {
-            $query->where('price', '>=', (float)$request->input('min_price'));
+            $query->where('price', '>=', (float) $request->input('min_price'));
         }
 
         if ($request->filled('max_price')) {
-            $query->where('price', '<=', (float)$request->input('max_price'));
+            $query->where('price', '<=', (float) $request->input('max_price'));
         }
 
         if ($request->boolean('in_stock')) {
