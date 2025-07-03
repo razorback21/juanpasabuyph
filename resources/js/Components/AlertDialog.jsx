@@ -36,14 +36,14 @@ const ConfirmAlert = forwardRef(({ buttonName = 'Continue' }, ref) => {
         <AlertDialog open={open} onOpenChange={() => setOpen(!open)}>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{dialogProps.title}</AlertDialogTitle>
+                    <AlertDialogTitle>{title}</AlertDialogTitle>
                     <AlertDialogDescription>
-                        {dialogProps.description}
+                        {description}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={dialogProps.onContinue}>
+                    <AlertDialogAction onClick={onContinue}>
                         {buttonName}
                     </AlertDialogAction>
                 </AlertDialogFooter>
