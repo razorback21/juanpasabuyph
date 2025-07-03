@@ -5,6 +5,7 @@ import { useState } from "react";
 import DataTable from "@/Components/DataTable";
 import { Link } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
+import { Badge } from "@/components/ui/badge"
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();
@@ -48,6 +49,10 @@ export default function ({ products, categories, active_category }) {
             cell: (product) => product.getValue(),
             header: () => <div>Description</div>,
             size: 270,
+        }),
+         columnHelper.accessor("is_featured", {
+            cell: (product) => !product.getValue() ? "" : <Badge variant="secondary">Yes</Badge>,
+            header: () => <span>Feat. Product</span>,
         }),
         columnHelper.accessor("price", {
             cell: (product) => product.getValue(),
