@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exceptions\CannotDeleteProductException;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Services\ProductDeleteService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
@@ -116,7 +118,13 @@ class ProductController extends Controller
 
         Gate::authorize('delete', $product);
 
-        $product->delete();
+        try {
+            if ((new ProductDeleteService())->canDelete($product)) {
+                $product->delete();
+            }
+        } catch (CannotDeleteProductException $e) {
+            abort(403, $e->getMessage());
+        }
 
         return redirect()
             ->route('dashboard', request()->query())
