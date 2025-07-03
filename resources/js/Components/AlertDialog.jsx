@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -8,9 +8,7 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
 
 const ConfirmAlert = forwardRef(({ buttonName = 'Continue' }, ref) => {
     const [open, setOpen] = useState(false);
