@@ -13,23 +13,20 @@ import { Button } from "@/Components/ui/button";
 
 const DeleteConfirmDialog = forwardRef((props, ref) => {
     const { title, description, confirmhandler, children } = props;
-    const [isOpen, setIsOpen] = useState(false);
     const [open, setOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
         open: () => { 
             setOpen(true)
-            setIsOpen(true)
         },
         close: () => {
             setOpen(false)
-            setIsOpen(false);
             console.log("close dialog");
         },
     }));
 
     return (
-        <Dialog open={open} onOpenChange={isOpen}>
+        <Dialog open={open} onOpenChange={() => setOpen(!open)}>
 
             {children ? (
                 children
