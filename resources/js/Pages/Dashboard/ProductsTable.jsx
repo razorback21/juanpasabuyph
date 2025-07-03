@@ -6,12 +6,11 @@ import DataTable from "@/Components/DataTable";
 import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import DeleteConfirmDialog from "@/Components/DeleteConfirmDialog";
-import { DialogTrigger } from "@/components/ui/dialog";
+import ConfirmAlert from "@/Components/AlertDialog";
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();
-    const dialogRef = useRef(null)
+    const dialogRef = useRef(null);
 
     const columns = [
         columnHelper.accessor("featured_image", {
@@ -76,17 +75,21 @@ export default function ({ products, categories, active_category }) {
                     >
                         Edit
                     </LinkButton>
-                    <DeleteConfirmDialog
-                        ref={dialogRef}
-                        title="Delete Product"
-                        description={`#${product.row.original.id} ${product.row.original.name} Are you sure you want to to delete product "${product.row.original.name}"?`}
-                        confirmhandler={() =>
-                            deleteHandler(product.row.original)
-                        }
+                    <Button
+                        onClick={() => {
+                            dialogRef.current?.setDialogProps({
+                                title: `${product.row.original.name}`,
+                                description: `Are you sure you want to to delete product?`,
+                                product,
+                                onContinue: () =>
+                                    deleteHandler(product.row.original),
+                            });
+                            dialogRef.current?.open();
+                        }}
+                        variant="destructive"
                     >
-                        <Button onClick={()=> dialogRef.current?.open()} variant="destructive">DELETE</Button>
-                    </DeleteConfirmDialog>
-                        
+                        DELETE
+                    </Button>
                 </div>
             ),
             header: () => <div className="flex justify-end mr-2">Actions</div>,
@@ -95,7 +98,7 @@ export default function ({ products, categories, active_category }) {
 
     const deleteHandler = (row) => {
         router.delete(route("products.destroy", row) + window.location.search);
-        console.log(dialogRef.current,'FFFFF');
+        console.log(dialogRef.current, "FFFFF");
         dialogRef.current?.close();
     };
 
@@ -146,6 +149,7 @@ export default function ({ products, categories, active_category }) {
                 </Link>
             </div>
             <div>
+                <ConfirmAlert ref={dialogRef}></ConfirmAlert>
                 <DataTable columns={columns} data={products.data} />
             </div>
         </>
