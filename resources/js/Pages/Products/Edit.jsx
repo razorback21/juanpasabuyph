@@ -9,6 +9,7 @@ import Textarea from "@/Components/Textarea";
 import NoImage from "@/Components/NoImage";
 import ImageUpload from "@/Components/ImageUpload";
 
+
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
 import { Switch } from "@/Components/ui/switch";
@@ -34,6 +35,32 @@ export default function EditProduct({ product, categories, from }) {
 
     const formInputHandler = (e) => {
         formDataRef.current[e.target.name] = e.target.value;
+    };
+
+    const uploadImageHandler = (e) => {
+        e.preventDefault();
+        const file = imageFileRef.current.files[0];
+        if(!file) {
+            alert('Please select an image');
+            return;
+        }
+        const formData = new FormData();
+        formData.append("featured_image", file);
+        //formData.append("enctype", "multipart/form-data");
+        
+        router.post('/productimages/upload-featured-image/'+product.id, formData, {
+            forceFormData: true,
+            onSuccess: () => {
+                alert('Image uploaded successfully!');
+                // Clear the file input
+                imageFileRef.current.value = '';
+                imageDesciptionRef.current.firstElementChild.innerHTML = '';
+            },
+            onError: (errors) => {
+                console.error('Upload failed:', errors);
+                alert('Failed to upload image. Please try again.');
+            }
+        });
     };
 
     return (
@@ -71,6 +98,7 @@ export default function EditProduct({ product, categories, from }) {
                                     onClick={() => imageFileRef.current.click()}
                                 />
                             )}
+
                             <input
                                 ref={imageFileRef}
                                 type="file"
@@ -88,7 +116,7 @@ export default function EditProduct({ product, categories, from }) {
                                 variant="outline"
                                 ref={imageDesciptionRef}
                                 className="text-center"
-                                onClick={() => imageFileRef.current.click()}
+                                onClick={uploadImageHandler}
                             >
                                 Upload Image : <span></span>
                             </Button>
@@ -149,8 +177,8 @@ export default function EditProduct({ product, categories, from }) {
                                     rows="8"
                                     name="description"
                                     onChange={formInputHandler}
+                                    defaultValue={product.description}
                                 >
-                                    {product.description}
                                 </Textarea>
                                 {props.errors?.description && (
                                     <p className="text-red-500 text-sm py-1">
