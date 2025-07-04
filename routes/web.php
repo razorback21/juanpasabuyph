@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function() {
     // Product 
     Route::resource('products', ProductController::class);
+    Route::resource('productimages', ProductController::class)->only(['store','destroy','update']);
 
     // Product category
     Route::resource('product-categories', ProductCategoryController::class);
