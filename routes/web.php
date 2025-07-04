@@ -5,6 +5,7 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,14 +28,14 @@ Route::middleware('auth')->group(function () {
     // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 // Pdoucts
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     // Product 
     Route::resource('products', ProductController::class);
-    Route::resource('productimages', ProductController::class)->only(['store','destroy','update']);
+    Route::post('/productimages/upload-featured-image/{id}', [ProductImageController::class, 'uploadFeaturedImage']);
 
     // Product category
     Route::resource('product-categories', ProductCategoryController::class);
@@ -47,4 +48,4 @@ Route::middleware('auth')->group(function() {
 });
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
