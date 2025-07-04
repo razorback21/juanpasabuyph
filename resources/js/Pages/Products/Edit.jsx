@@ -3,9 +3,11 @@ import { Head, usePage, router } from "@inertiajs/react";
 import TextInput from "@/Components/TextInput";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
+import { Button } from "@/Components/ui/button";
 import LinkButton from "@/Components/LinkButton";
 import Textarea from "@/Components/Textarea";
 import NoImage from "@/Components/NoImage";
+import ImageUpload from "@/Components/ImageUpload";
 
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
@@ -14,13 +16,17 @@ import { Label } from "@/Components/ui/label";
 
 export default function EditProduct({ product, categories, from }) {
     const props = usePage().props;
+    const imageDesciptionRef = useRef(null);
+    const imageRef = useRef(null);
+    const imageFileRef = useRef(null);
+
     const formDataRef = useRef({
         name: product.name,
         description: product.description,
         price: product.price,
         product_category_id: product.product_category_id,
     });
-    console.log(usePage());
+
     const submitHandler = (e) => {
         e.preventDefault();
         router.put(route("products.update", product), formDataRef.current);
@@ -50,17 +56,45 @@ export default function EditProduct({ product, categories, from }) {
                             Back
                         </LinkButton>
                     </div>
-                    <div className="flex justify-center pt-10 pb-5">
-                        {product.featured_image ? (
-                            <img
-                                src={product.featured_image}
-                                alt={product.name}
-                                className="h-[300px] object-cover rounded-md"
+                    <div className={`flex flex-col justify-center`}>
+                        <div className="flex justify-center pt-10 pb-5">
+                            {product.featured_image ? (
+                                <img
+                                    ref={imageRef}
+                                    src={product.featured_image}
+                                    alt={product.name}
+                                    className="h-[300px] object-cover rounded-md"
+                                    onClick={() => imageFileRef.current.click()}
+                                />
+                            ) : (
+                                <NoImage
+                                    onClick={() => imageFileRef.current.click()}
+                                />
+                            )}
+                            <input
+                                ref={imageFileRef}
+                                type="file"
+                                name="featured_image"
+                                className="hidden"
+                                accept=".jpg,.jpeg,.png,.webp"
+                                onChange={(e) => {
+                                    imageDesciptionRef.current.firstElementChild.innerHTML =
+                                        e.target.files[0].name;
+                                }}
                             />
-                        ) : (
-                            <NoImage />
-                        )}
+                        </div>
+                        <div className="text-center">
+                            <Button
+                                variant="outline"
+                                ref={imageDesciptionRef}
+                                className="text-center"
+                                onClick={() => imageFileRef.current.click()}
+                            >
+                                Upload Image : <span></span>
+                            </Button>
+                        </div>
                     </div>
+
                     <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg">
                         <form onSubmit={submitHandler}>
                             <div className="mb-4">
