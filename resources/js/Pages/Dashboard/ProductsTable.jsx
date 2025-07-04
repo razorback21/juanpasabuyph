@@ -6,7 +6,7 @@ import DataTable from "@/Components/DataTable";
 import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import AlertConfirm from "@/Components/AlertDialog";
+import AlertConfirm from "@/Components/AlertConfirm";
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();
