@@ -1,22 +1,19 @@
+import { useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import LinkButton from "@/Components/LinkButton";
 import DataTable from "@/Components/DataTable";
 import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
+import AlertConfirm from "@/Components/AlertConfirm";
 
 export default function ({ categories }) {
+    const dialogRef = useRef({});
     const columnHelper = createColumnHelper();
     const deleteHandler = (productCategory) => {
-        if (
-            confirm(
-                `Are you sure you want to to delete category "${productCategory.name}"?`
-            )
-        ) {
-            router.delete(
+        router.delete(
                 route("product-categories.destroy", productCategory) +
                     window.location.search
             );
-        }
     };
 
     const columns = [
@@ -40,7 +37,15 @@ export default function ({ categories }) {
                         Edit
                     </LinkButton>
                     <Button
-                        onClick={() => deleteHandler(row.row.original)}
+                        onClick={() => {
+                            dialogRef.current?.setDialogProps({
+                                title: `${row.row.original.name}`,
+                                description: `Are you sure you want to to delete category?`,
+                                onContinue: () =>
+                                    deleteHandler(row.row.original),
+                            });
+                            dialogRef.current?.open();
+                        }}
                         type="button"
                         className="bg-red-600 hover:bg-red-500"
                     >
@@ -60,6 +65,7 @@ export default function ({ categories }) {
                 </Link>
             </div>
             <div>
+                <AlertConfirm ref={dialogRef}></AlertConfirm>
                 <DataTable columns={columns} data={categories} />
             </div>
         </>
