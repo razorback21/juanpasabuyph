@@ -22,7 +22,7 @@ class Product extends Model
         'description',
         'price',
         'product_category_id',
-        'featured_image,',
+        'featured_image',
         'is_featured',
         'socialmedia_image',
         'disabled',
