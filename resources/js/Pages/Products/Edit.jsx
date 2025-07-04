@@ -125,18 +125,33 @@ export default function EditProduct({ product, categories, from }) {
                                 )}
                             </div>
                             <div className="mb-4">
-                                <div className="flex items-center space-x-2">
-                                    <Switch
-                                        name="is_featured"
-                                        defaultChecked={product.is_featured}
-                                        onCheckedChange={(checked) => {
-                                            formDataRef.current.is_featured =
-                                                checked;
-                                        }}
-                                    />{" "}
-                                    <Label htmlFor="is_featured">
-                                        Set as Featured Product
-                                    </Label>
+                                <div className="flex gap-4">
+                                    <div className="flex items-center space-x-2">
+                                        <Switch
+                                            name="is_featured"
+                                            defaultChecked={product.is_featured}
+                                            onCheckedChange={(checked) => {
+                                                formDataRef.current.is_featured =
+                                                    checked;
+                                            }}
+                                        />{" "}
+                                        <Label htmlFor="is_featured">
+                                            Set as Featured Product
+                                        </Label>
+                                    </div>
+                                    <div className="flex items-center space-x-2">
+                                        <Switch
+                                            name="disabled"
+                                            defaultChecked={product.disabled}
+                                            onCheckedChange={(checked) => {
+                                                formDataRef.current.disabled =
+                                                    checked;
+                                            }}
+                                        />{" "}
+                                        <Label htmlFor="disabled">
+                                            Disable Product
+                                        </Label>
+                                    </div>
                                 </div>
                             </div>
                             <div>
