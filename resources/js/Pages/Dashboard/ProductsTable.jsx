@@ -38,7 +38,14 @@ export default function ({ products, categories, active_category }) {
                     })}
                     className="hover:underline cursor-pointer"
                 >
-                    {product.getValue()}
+                    <div>
+                        {product.getValue()}
+                        <p className="mt-1">
+                            {product.row.original.disabled ? (
+                                <Badge variant="outline">Disabled</Badge>
+                            ) : null }
+                        </p>
+                    </div>
                 </Link>
             ),
             header: () => <span>Name</span>,
