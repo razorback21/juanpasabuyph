@@ -10,7 +10,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-const ConfirmAlert = forwardRef(({ buttonName = 'Continue' }, ref) => {
+const AlertDialog = forwardRef(({ buttonName = 'Continue' }, ref) => {
     const [open, setOpen] = useState(false);
     const [dialogProps, setDialogProps] = useState({
         title:'',
@@ -50,4 +50,4 @@ const ConfirmAlert = forwardRef(({ buttonName = 'Continue' }, ref) => {
     );
 })
 
-export default ConfirmAlert;
+export default AlertDialog;
