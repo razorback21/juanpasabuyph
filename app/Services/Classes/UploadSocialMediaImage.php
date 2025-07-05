@@ -5,8 +5,8 @@ namespace App\Services\Classes;
 use App\Models\Product;
 use App\Services\ConventToWebp;
 use App\Services\Interfaces\ProductImageUploadServiceInterface;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 
 class UploadSocialMediaImage implements ProductImageUploadServiceInterface
 {
@@ -16,7 +16,7 @@ class UploadSocialMediaImage implements ProductImageUploadServiceInterface
     {
         // Delete old image if exists
         if ($product->{$this->dbField}) {
-            Storage::disk('public')->delete($product->{$this->dbField});
+            Storage::disk('public')->delete($this->dbField);
         }
         
         return (new ConventToWebp())->convert($file,'products');
