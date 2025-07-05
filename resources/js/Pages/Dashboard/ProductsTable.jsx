@@ -13,7 +13,7 @@ export default function ({ products, categories, active_category }) {
     const dialogRef = useRef(null);
 
     const columns = [
-        columnHelper.accessor("featured_image", {
+        columnHelper.accessor("featured_image_url", {
             cell: (product) => (
                 <Link
                     href={route("products.show", {
