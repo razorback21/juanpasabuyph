@@ -78,12 +78,13 @@ export default function EditProduct({ product, categories, from }) {
                     toast.success("Image uploaded successfully!");
                 },
                 onError: (errors) => {
-                    console.error("Upload failed:", errors);
                     alertRef.current.open({
                         title: "Error",
                         description:
-                            "Failed to upload image. Please try again.",
+                            `Failed to upload image. ${props.errors.image}`,
                     });
+                    progressBarRef.current?.show(false);
+                    progressBarRef.current?.reset();
                 },
                 onStart: () => {
                     progressBarRef.current?.reset();
