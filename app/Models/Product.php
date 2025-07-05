@@ -103,7 +103,7 @@ class Product extends Model
 
     public function getFeaturedImageUrlAttribute()
     {
-        return Storage::disk('public')->url($this->attributes['featured_image']);
+        return str_contains( $this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
     }
 
 }
