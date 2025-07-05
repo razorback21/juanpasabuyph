@@ -84,14 +84,13 @@ export default function ({ products, categories, active_category }) {
                     </LinkButton>
                     <Button
                         onClick={() => {
-                            dialogRef.current?.setDialogProps({
+                            dialogRef.current?.open({
                                 title: `${product.row.original.name}`,
                                 description: `Are you sure you want to to delete product?`,
                                 product,
                                 onContinue: () =>
                                     deleteHandler(product.row.original),
                             });
-                            dialogRef.current?.open();
                         }}
                         variant="destructive"
                     >
