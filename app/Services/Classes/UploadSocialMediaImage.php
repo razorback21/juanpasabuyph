@@ -3,6 +3,7 @@
 namespace App\Services\Classes;
 
 use App\Models\Product;
+use App\Services\ConventToWebp;
 use App\Services\Interfaces\ProductImageUploadServiceInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -18,7 +19,7 @@ class UploadSocialMediaImage implements ProductImageUploadServiceInterface
             Storage::disk('public')->delete($product->{$this->dbField});
         }
         
-        return $file->store('products', 'public');
+        return (new ConventToWebp())->convert($file,'products');
     }
 
     public function getDbField(): string

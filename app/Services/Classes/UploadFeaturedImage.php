@@ -4,6 +4,7 @@ namespace App\Services\Classes;
 
 use App\Models\Product;
 use App\Services\Interfaces\ProductImageUploadServiceInterface;
+use App\Services\ConventToWebp;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,9 +19,9 @@ class UploadFeaturedImage implements ProductImageUploadServiceInterface
         if ($product->{$this->dbField}) {
             Storage::disk('public')->delete($product->{$this->dbField});
         }
-        
+
         // Store new image
-        return $file->store('products', 'public');
+       return (new ConventToWebp())->convert($file,'products');
     }
 
     public function getDbField(): string
