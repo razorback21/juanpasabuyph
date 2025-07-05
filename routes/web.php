@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 Route::get('/', function () {
@@ -47,5 +48,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('orders', OrderController::class);
 });
 
+
+Route::get('/test', function() {
+
+});
 
 require __DIR__ . '/auth.php';
