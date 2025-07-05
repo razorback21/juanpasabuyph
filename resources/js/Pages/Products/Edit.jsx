@@ -130,7 +130,10 @@ export default function EditProduct({ product, categories, from }) {
                                     onClick={handleImageClick}
                                 />
                             ) : (
-                                <NoImage onClick={handleImageClick} />
+                                <NoImage
+                                    hoverText="Click to Upload"
+                                    onClick={handleImageClick}
+                                />
                             )}
 
                             <input
