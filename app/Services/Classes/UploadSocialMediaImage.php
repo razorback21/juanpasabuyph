@@ -14,8 +14,8 @@ class UploadSocialMediaImage implements ProductImageUploadServiceInterface
     public function upload(Product $product, UploadedFile $file): string
     {
         // Delete old image if exists
-        if ($product->$this->dbField) {
-            Storage::disk('public')->delete($product->$this->dbField);
+        if ($product->{$this->dbField}) {
+            Storage::disk('public')->delete($product->{$this->dbField});
         }
         
         return $file->store('products', 'public');

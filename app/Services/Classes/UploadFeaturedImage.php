@@ -15,8 +15,8 @@ class UploadFeaturedImage implements ProductImageUploadServiceInterface
     {
         // Handle image processing, storage, and cleanup
         // Delete old image if exists
-        if ($product->$this->dbField) {
-            Storage::disk('public')->delete($product->$this->dbField);
+        if ($product->{$this->dbField}) {
+            Storage::disk('public')->delete($product->{$this->dbField});
         }
         
         // Store new image
