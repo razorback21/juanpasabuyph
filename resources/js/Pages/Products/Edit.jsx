@@ -126,7 +126,7 @@ export default function EditProduct({ product, categories, from }) {
                                     ref={imageRef}
                                     src={product.featured_image_url}
                                     alt={product.name}
-                                    className="h-[300px] object-cover rounded-md"
+                                    className="h-[300px] max-w-[300px] object-cover rounded-md"
                                     onClick={handleImageClick}
                                 />
                             ) : (
