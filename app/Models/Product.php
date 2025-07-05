@@ -39,7 +39,7 @@ class Product extends Model
     ];
 
     // append mutated attribute to arraay or json response
-    protected $appends = ['product_category'];
+    protected $appends = ['product_category','featured_image_url'];
 
     /**
      * Get the category that owns the product.
