@@ -11,15 +11,15 @@ use Illuminate\Http\UploadedFile;
 class UploadSocialMediaImage implements ProductImageUploadServiceInterface
 {
     protected $dbField = "socialmedia_image";
-    
+
     public function upload(Product $product, UploadedFile $file): string
     {
         // Delete old image if exists
         if ($product->{$this->dbField}) {
-            Storage::disk('public')->delete($this->dbField);
+            Storage::disk('public')->delete($product->{$this->dbField});
         }
-        
-        return (new ConventToWebp())->convert($file,'products');
+
+        return (new ConventToWebp())->convert($file, 'products');
     }
 
     public function getDbField(): string
