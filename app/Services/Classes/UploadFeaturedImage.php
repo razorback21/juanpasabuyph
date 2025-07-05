@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Services\ConventToWebp;
 use App\Services\Interfaces\ProductImageUploadServiceInterface;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class UploadFeaturedImage implements ProductImageUploadServiceInterface
@@ -18,7 +17,7 @@ class UploadFeaturedImage implements ProductImageUploadServiceInterface
         // Handle image processing, storage, and cleanup
         // Delete old image if exists
         if ($product->{$this->dbField}) {
-            Storage::disk('public')->delete(str_replace('/storage/','', $product->{$this->dbField}));
+            Storage::disk('public')->delete($this->dbField);
         }
 
         // Store new image
