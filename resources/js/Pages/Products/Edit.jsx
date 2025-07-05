@@ -7,8 +7,9 @@ import { Button } from "@/Components/ui/button";
 import LinkButton from "@/Components/LinkButton";
 import Textarea from "@/Components/Textarea";
 import NoImage from "@/Components/NoImage";
-import ImageUpload from "@/Components/ImageUpload";
-
+import AlertConfirm from "@/Components/AlertConfirm";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner"
 
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
@@ -20,6 +21,7 @@ export default function EditProduct({ product, categories, from }) {
     const imageDesciptionRef = useRef(null);
     const imageRef = useRef(null);
     const imageFileRef = useRef(null);
+    const alertRef = useRef(null);
 
     const formDataRef = useRef({
         name: product.name,
@@ -40,26 +42,37 @@ export default function EditProduct({ product, categories, from }) {
     const uploadImageHandler = (e) => {
         e.preventDefault();
         const file = imageFileRef.current.files[0];
-        if(!file) {
-            alert('Please select an image');
+        if (!file) {
+            alert("Please select an image");
             return;
         }
         const formData = new FormData();
-        formData.append("featured", file);
+        formData.append("image", file);
 
-        router.post('/productimages/upload/'+product.id+'/featured', formData, {
-            forceFormData: true,
-            onSuccess: () => {
-                alert('Image uploaded successfully!');
-                // Clear the file input
-                imageFileRef.current.value = '';
-                imageDesciptionRef.current.firstElementChild.innerHTML = '';
-            },
-            onError: (errors) => {
-                console.error('Upload failed:', errors);
-                alert('Failed to upload image. Please try again.');
+        router.post(
+            "/productimages/upload/" + product.id + "/featured",
+            formData,
+            {
+                forceFormData: true,
+                onSuccess: () => {
+                    // Clear the file input
+                    imageFileRef.current.value = "";
+                    imageDesciptionRef.current.firstElementChild.innerHTML = "";
+
+                    toast.success("Image uploaded successfully!");
+
+                    
+                },
+                onError: (errors) => {
+                    console.error("Upload failed:", errors);
+                    alertRef.current.open({
+                        title: "Error",
+                        description: "Failed to upload image. Please try again.",
+                        footer: false,
+                    });
+                },
             }
-        });
+        );
     };
 
     return (
@@ -71,7 +84,8 @@ export default function EditProduct({ product, categories, from }) {
             }
         >
             <Head title={`Edit - ${product.name}`} />
-
+            <AlertConfirm ref={alertRef} />
+            <Toaster />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                     <div className="text-right pt-4">
@@ -177,8 +191,7 @@ export default function EditProduct({ product, categories, from }) {
                                     name="description"
                                     onChange={formInputHandler}
                                     defaultValue={product.description}
-                                >
-                                </Textarea>
+                                ></Textarea>
                                 {props.errors?.description && (
                                     <p className="text-red-500 text-sm py-1">
                                         Description field is required
