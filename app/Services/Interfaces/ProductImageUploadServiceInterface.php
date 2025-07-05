@@ -8,4 +8,6 @@ use Illuminate\Http\UploadedFile;
 interface ProductImageUploadServiceInterface
 {
     public function upload(Product $product, UploadedFile $file): string;
+
+    public function getDbField(): string;
 }

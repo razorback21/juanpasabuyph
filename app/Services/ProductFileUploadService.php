@@ -7,9 +7,10 @@ use App\Services\Interfaces\ProductImageUploadServiceInterface;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Contracts\Container\Container;
 
-class FileUploadService
+class ProductFileUploadService
 {
     protected $container;
+    protected $dbField;
     
     public function __construct(Container $container) {
        $this->container = $container;
@@ -27,6 +28,7 @@ class FileUploadService
     {
         $serviceKey = "upload.{$type}";
         $uploadService = $this->container->make($serviceKey);
+        $this->dbField = $uploadService->getDbField();
         return $uploadService->upload($product, $file);
     }
     
@@ -39,6 +41,10 @@ class FileUploadService
     // Upload social media image
     public function uploadSocialImage(Product $product, UploadedFile $file): string
     {
-        return $this->uploadImageByType($product, $file, 'social');
+        return $this->uploadImageByType($product, $file, 'socialmedia');
+    }
+
+    public function getDbField(): string {
+        return $this->dbField ?? '';
     }
 }

@@ -9,13 +9,21 @@ use Illuminate\Support\Facades\Storage;
 
 class UploadSocialMediaImage implements ProductImageUploadServiceInterface
 {
+    protected $dbField = "socialmedia_image";
+    
     public function upload(Product $product, UploadedFile $file): string
     {
         // Delete old image if exists
-        if ($product->socialmedia_image) {
-            Storage::disk('public')->delete($product->socialmedia_image);
+        if ($product->$this->dbField) {
+            Storage::disk('public')->delete($product->$this->dbField);
         }
         
         return $file->store('products', 'public');
     }
+
+    public function getDbField(): string
+    {
+        return $this->dbField;
+    }
+
 }
