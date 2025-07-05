@@ -21,9 +21,8 @@ class ProductImageUploadRequest extends FormRequest
      */
     public function rules(): array
     {
-        $dbField = request()->route('dbfield');
         return [
-            $dbField => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
         ];
     }
 }
