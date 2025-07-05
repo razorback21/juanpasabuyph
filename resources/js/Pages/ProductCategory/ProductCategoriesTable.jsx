@@ -38,13 +38,12 @@ export default function ({ categories }) {
                     </LinkButton>
                     <Button
                         onClick={() => {
-                            dialogRef.current?.setDialogProps({
+                            dialogRef.current?.open({
                                 title: `${row.row.original.name}`,
                                 description: `Are you sure you want to to delete category?`,
                                 onContinue: () =>
                                     deleteHandler(row.row.original),
                             });
-                            dialogRef.current?.open();
                         }}
                         type="button"
                         className="bg-red-600 hover:bg-red-500"
