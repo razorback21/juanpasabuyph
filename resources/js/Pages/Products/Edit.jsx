@@ -45,10 +45,9 @@ export default function EditProduct({ product, categories, from }) {
             return;
         }
         const formData = new FormData();
-        formData.append("featured_image", file);
-        //formData.append("enctype", "multipart/form-data");
-        
-        router.post('/productimages/upload-featured-image/'+product.id, formData, {
+        formData.append("featured", file);
+
+        router.post('/productimages/upload/'+product.id+'/featured', formData, {
             forceFormData: true,
             onSuccess: () => {
                 alert('Image uploaded successfully!');
