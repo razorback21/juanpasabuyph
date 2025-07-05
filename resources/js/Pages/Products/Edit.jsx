@@ -9,8 +9,8 @@ import Textarea from "@/Components/Textarea";
 import NoImage from "@/Components/NoImage";
 import AlertConfirm from "@/Components/AlertConfirm";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner"
-
+import { Toaster } from "@/components/ui/sonner";
+import Progressbar from "@/Components/ProgressBar";
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";
 import { Switch } from "@/Components/ui/switch";
@@ -22,6 +22,7 @@ export default function EditProduct({ product, categories, from }) {
     const imageRef = useRef(null);
     const imageFileRef = useRef(null);
     const alertRef = useRef(null);
+    const progressBarRef = useRef(null);
 
     const formDataRef = useRef({
         name: product.name,
@@ -39,16 +40,28 @@ export default function EditProduct({ product, categories, from }) {
         formDataRef.current[e.target.name] = e.target.value;
     };
 
+    const handleImageClick = () => {
+        imageFileRef.current.click();
+    };
+
+    const handleImageChange = (e) => {
+        progressBarRef.current?.show(false);
+        imageDesciptionRef.current.firstElementChild.innerHTML =
+            e.target.files[0].name;
+    };
+
     const uploadImageHandler = (e) => {
         e.preventDefault();
+
         const file = imageFileRef.current.files[0];
         if (!file) {
-             alertRef.current.open({
-                        title: "Error",
-                        description: "Please select an image",
-                    });
+            alertRef.current.open({
+                title: "Error",
+                description: "Please select an image",
+            });
             return;
         }
+
         const formData = new FormData();
         formData.append("image", file);
 
@@ -63,15 +76,22 @@ export default function EditProduct({ product, categories, from }) {
                     imageDesciptionRef.current.firstElementChild.innerHTML = "";
 
                     toast.success("Image uploaded successfully!");
-
-                    
                 },
                 onError: (errors) => {
                     console.error("Upload failed:", errors);
                     alertRef.current.open({
                         title: "Error",
-                        description: "Failed to upload image. Please try again.",
+                        description:
+                            "Failed to upload image. Please try again.",
                     });
+                },
+                onStart: () => {
+                    progressBarRef.current?.reset();
+                },
+                onProgress: (event) => {
+                    console.log(event);
+                    progressBarRef.current?.show(true);
+                    progressBarRef.current?.setValue(event.percentage || 0);
                 },
             }
         );
@@ -106,12 +126,10 @@ export default function EditProduct({ product, categories, from }) {
                                     src={product.featured_image}
                                     alt={product.name}
                                     className="h-[300px] object-cover rounded-md"
-                                    onClick={() => imageFileRef.current.click()}
+                                    onClick={handleImageClick}
                                 />
                             ) : (
-                                <NoImage
-                                    onClick={() => imageFileRef.current.click()}
-                                />
+                                <NoImage onClick={handleImageClick} />
                             )}
 
                             <input
@@ -120,17 +138,15 @@ export default function EditProduct({ product, categories, from }) {
                                 name="featured_image"
                                 className="hidden"
                                 accept=".jpg,.jpeg,.png,.webp"
-                                onChange={(e) => {
-                                    imageDesciptionRef.current.firstElementChild.innerHTML =
-                                        e.target.files[0].name;
-                                }}
+                                onChange={handleImageChange}
                             />
                         </div>
-                        <div className="text-center">
+                        <div className="flex flex-col items-center">
+                            <Progressbar ref={progressBarRef} />
                             <Button
                                 variant="outline"
                                 ref={imageDesciptionRef}
-                                className="text-center"
+                                className="text-center mt-2"
                                 onClick={uploadImageHandler}
                             >
                                 Upload Image : <span></span>
