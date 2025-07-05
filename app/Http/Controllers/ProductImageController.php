@@ -9,30 +9,24 @@ use App\Services\ProductFileUploadService;
 
 class ProductImageController extends Controller
 {
-
-    public function __construct(protected ProductFileUploadService $fileUploadService)
-    {
-
-    }
-
-    public function upload(ProductImageUploadRequest $request, $id)
+    public function upload(ProductImageUploadRequest $request, $id, $type)
     {
         $validator = $request->validated();
-        if ($validator->fails()) {
+        if (!$validator) {
             return back()->withErrors($validator)->withInput();
         }
 
         $product = Product::findOrFail($id);
+        $fileUploadService = new ProductFileUploadService();
 
-        // Method 1: Using the specific featured image method
-        $type = $request->input('type');
-        $imagePath = $this->fileUploadService->uploadImageByType($product, $request->file($type), $type);
+        // Auto-resolve upload service based on type parameter
+        $imagePath = $fileUploadService->uploadImageByType($product, $request->file('image'), $type);
 
         // Update product with new image path
         $product->update([
-            $this->fileUploadService->getDBField() => '/storage/' . $imagePath
+            $fileUploadService->getDbField() => '/storage/' . $imagePath
         ]);
 
-        return back()->with('success', 'Product featured image updated successfully!');
+        return back()->with('success', 'Product image updated successfully!');
     }
 }
