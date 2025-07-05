@@ -34,9 +34,9 @@ export default function EditProduct({ product }) {
                     <div className="flex pt-10 pb-5 gap-10">
                         {product.featured_image ? (
                             <img
-                                src={product.featured_image}
+                                src={product.featured_image_url}
                                 alt={product.name}
-                                className="h-[300px] object-cover rounded-md"
+                                className="h-[300px] max-w-[300px] object-cover rounded-md"
                             />
                         ) : (
                             <NoImage height="300px" width="300px" />
