@@ -20,11 +20,11 @@ class ProductImageController extends Controller
         $fileUploadService = new ProductFileUploadService();
 
         // Auto-resolve upload service based on type parameter
-        $imagePath = $fileUploadService->uploadImageByType($product, $request->file('image'), $type);
+        $imagePath = $fileUploadService->uploadImageByType($product, $request->file('image'), );
 
         // Update product with new image path
         $product->update([
-            $fileUploadService->getDbField() => '/storage/' . $imagePath
+            $fileUploadService->getDbField() => $imagePath
         ]);
 
         return back()->with('success', 'Product image updated successfully!');
