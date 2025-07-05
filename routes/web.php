@@ -35,8 +35,8 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     // Product 
     Route::resource('products', ProductController::class);
-    Route::post('/productimages/upload-featured-image/{id}', [ProductImageController::class, 'uploadFeaturedImage']);
-
+    Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
+    
     // Product category
     Route::resource('product-categories', ProductCategoryController::class);
 
