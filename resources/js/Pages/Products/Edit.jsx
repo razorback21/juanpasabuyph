@@ -43,7 +43,10 @@ export default function EditProduct({ product, categories, from }) {
         e.preventDefault();
         const file = imageFileRef.current.files[0];
         if (!file) {
-            alert("Please select an image");
+             alertRef.current.open({
+                        title: "Error",
+                        description: "Please select an image",
+                    });
             return;
         }
         const formData = new FormData();
@@ -68,7 +71,6 @@ export default function EditProduct({ product, categories, from }) {
                     alertRef.current.open({
                         title: "Error",
                         description: "Failed to upload image. Please try again.",
-                        footer: false,
                     });
                 },
             }
