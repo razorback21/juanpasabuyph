@@ -9,42 +9,47 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 
 const AlertConfirm = forwardRef(({ buttonName = 'Continue' }, ref) => {
     const [open, setOpen] = useState(false);
     const [dialogProps, setDialogProps] = useState({
-        title:'',
+        title: 'Message',
         description:'',
         onContinue: () => {},
+        footer: true
     });
-    const { title, description, onContinue } = dialogProps;
+    const { title, description, onContinue, footer } = dialogProps;
 
     useImperativeHandle(ref, () => ({
-        open() {
-            setOpen(true)
+        open(props) {    
+            setDialogProps(props);
+            setOpen(true);
         },
         close() {
             setOpen(false);
-        },
-        setDialogProps(props) {
-            setDialogProps(props);
         }
     }));
     return (
-        <AlertDialog open={open} onOpenChange={() => setOpen(!open)}>
+        <AlertDialog open={open} onOpenChange={() => setOpen(!open)} onInteractOutside={(e) => setOpen(false)}>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>{title}</AlertDialogTitle>
                     <AlertDialogDescription>
                         {description}
                     </AlertDialogDescription>
+                    
                 </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={onContinue}>
-                        {buttonName}
-                    </AlertDialogAction>
-                </AlertDialogFooter>
+               
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>{ !onContinue? 'Close' : 'Cancel'}</AlertDialogCancel>
+                        { onContinue && (
+                            <AlertDialogAction onClick={onContinue}>
+                                {buttonName}
+                            </AlertDialogAction>
+                        )}
+                    </AlertDialogFooter>
+                
             </AlertDialogContent>
         </AlertDialog>
     );
