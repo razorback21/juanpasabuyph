@@ -16,7 +16,7 @@ class ProductCategoryController extends Controller
         return Inertia::render(
             'ProductCategory/Index',
             [
-                'categories' => ProductCategory::paginate(10),
+                'categories' => ProductCategory::query()->withCount(['products'])->paginate(10),
             ]
         );
     }

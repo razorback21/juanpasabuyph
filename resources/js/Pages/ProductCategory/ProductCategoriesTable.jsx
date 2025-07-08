@@ -5,6 +5,7 @@ import DataTable from "@/Components/DataTable";
 import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 import AlertConfirm from "@/Components/AlertConfirm";
+import { Badge } from "@/Components/ui/badge";
 
 export default function ({ categories }) {
     const dialogRef = useRef({});
@@ -18,8 +19,8 @@ export default function ({ categories }) {
 
     const columns = [
         columnHelper.accessor("name", {
-            cell: (row) => <span>{row.getValue()}</span>,
-            header: () => <span>Name</span>,
+            cell: (row) => <span>{row.getValue()} <Badge variant='secondary'>{row.row.original.products_count}</Badge></span>,
+            header: () => <span>Name </span>,
         }),
         columnHelper.accessor("description", {
             cell: (row) => <span>{row.getValue()}</span>,
