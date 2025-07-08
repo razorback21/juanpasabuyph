@@ -6,6 +6,7 @@ use App\Exceptions\CannotDeleteProductException;
 use App\Models\Product;
 use App\Services\ProductDeleteService;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ProductObserver
 {
@@ -41,7 +42,10 @@ class ProductObserver
      */
     public function deleted(Product $product): void
     {
-
+        // Delete product image
+        Storage::disk("public")->delete($product->featured_image);
+        // Delete social media image
+        //Storage::disk("public")->deleteDirectory($product->socialmedia_image);
     }
 
     /**
