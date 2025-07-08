@@ -39,7 +39,11 @@ class Product extends Model
     ];
 
     // append mutated attribute to arraay or json response
-    protected $appends = ['product_category','featured_image_url'];
+    protected $appends = [
+        'product_category',
+        'featured_image_url',
+        'current_stock',
+    ];
 
     /**
      * Get the category that owns the product.
@@ -74,7 +78,7 @@ class Product extends Model
     /**
      * Get the current stock quantity
      */
-    public function getCurrentStock(): int
+    public function getCurrentStockAttribute(): int
     {
         return $this->inventory()
             ->selectRaw('SUM(CASE 

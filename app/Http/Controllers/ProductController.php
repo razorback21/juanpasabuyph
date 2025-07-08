@@ -67,11 +67,8 @@ class ProductController extends Controller
             }
         ]);
 
-        $currentStock = $product->getCurrentStock();
-
         return Inertia::render('Products/Show', [
-            'product' => $product,
-            'currentStock' => $currentStock,
+            'product' => $product
         ]);
     }
 
