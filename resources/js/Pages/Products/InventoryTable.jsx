@@ -13,7 +13,7 @@ import {
 
 function InventoryTable({ inventory }) {
     return inventory.length === 0 ? (
-        <p>No inventory found.</p>
+        <p className="text-sm">No inventory found.</p>
     ) : (
         <Table>
             <TableHeader>
