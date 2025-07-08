@@ -80,7 +80,7 @@ class Product extends Model
      */
     public function getCurrentStockAttribute(): int
     {
-        return $this->inventory()
+        $stock = $this->inventory()
             ->selectRaw('SUM(CASE 
                 WHEN movement_type IN (?, ?) THEN quantity 
                 WHEN movement_type IN (?, ?, ?) THEN -quantity 
@@ -94,7 +94,9 @@ class Product extends Model
                 MovementTypeEnum::ADJUSTMENT,
                 MovementTypeEnum::RESERVED
             ])
-            ->value('stock') ?? 0;
+            ->value('stock');
+
+        return  $stock > 0 ? $stock : 0;
     }
 
     // Add this method to the Product model
