@@ -65,7 +65,13 @@ export default function EditProduct({ product }) {
                 <Separator />
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <h1 className="text-2xl font-bold my-5">Inventory</h1>
-                    <InventoryTable />
+                    { product.disabled ? (
+                        <p className="text-sm">
+                            This product is disabled. You cannot add inventory.
+                        </p>
+                    ) : (
+                        <InventoryTable inventory={product.inventory} />
+                    )}
                 </div>
             </div>
         </AuthenticatedLayout>
