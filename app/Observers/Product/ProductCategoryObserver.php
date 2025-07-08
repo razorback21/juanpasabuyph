@@ -3,6 +3,7 @@
 namespace App\Observers\Product;
 
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Log;
 
 class ProductCategoryObserver
 {
@@ -27,7 +28,6 @@ class ProductCategoryObserver
      */
     public function deleted(ProductCategory $productCategory): void
     {
-        //@todo: test this
         // Set products table product_category_id to null
         $productCategory->products()->update(['product_category_id' => null]);
     }
