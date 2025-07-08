@@ -1,14 +1,10 @@
+import { usePage } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, usePage } from "@inertiajs/react";
-import TextInput from "@/Components/TextInput";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
+import { Head } from "@inertiajs/react";
 import LinkButton from "@/Components/LinkButton";
-import Textarea from "@/Components/Textarea";
-
-// /import Dropdown from "@/Components/Dropdown";
-import { useRef } from "react";
 import NoImage from "@/Components/NoImage";
+import InventoryTable from "@/Pages/Products/InventoryTable";
+import { Separator } from "@/components/ui/separator";
 
 export default function EditProduct({ product }) {
     return (
@@ -22,7 +18,7 @@ export default function EditProduct({ product }) {
             <Head title={`Edit - ${product.name}`} />
 
             <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="text-right pt-4">
                         <LinkButton
                             href={route("dashboard")}
@@ -48,7 +44,9 @@ export default function EditProduct({ product }) {
                             </h1>
                             <p>Price: PHP {product.price}</p>
                             <p class="my-4">{product.description}</p>
-                            <p class="my-4">Stocks: {product.current_stock ??'0'} pcs.</p>
+                            <p class="my-4">
+                                Stocks: {product.current_stock ?? "0"} pcs.
+                            </p>
                             <p>
                                 <LinkButton
                                     href={
@@ -62,6 +60,12 @@ export default function EditProduct({ product }) {
                             </p>
                         </div>
                     </div>
+                </div>
+
+                <Separator />
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <h1 className="text-2xl font-bold my-5">Inventory</h1>
+                    <InventoryTable />
                 </div>
             </div>
         </AuthenticatedLayout>
