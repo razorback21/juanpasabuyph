@@ -1,3 +1,4 @@
+import { Badge } from "@/Components/ui/badge";
 import {
     Table,
     TableBody,
@@ -9,83 +10,38 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]
 
-function InventoryTable() {
-    return (
+function InventoryTable({ inventory }) {
+    return inventory.length === 0 ? (
+        <p>No inventory found.</p>
+    ) : (
         <Table>
-            <TableCaption>A list of your recent invoices.</TableCaption>
             <TableHeader>
                 <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead>Movement Type</TableHead>
+                    <TableHead>Quantity</TableHead>
+                    <TableHead>UoM</TableHead>
+                    <TableHead>Notes</TableHead>
+                    <TableHead>Order ID</TableHead>
+                    <TableHead>Date Added</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {invoices.map((invoice) => (
-                    <TableRow key={invoice.invoice}>
+                {inventory.map((data) => (
+                    <TableRow key={data.invoice}>
                         <TableCell className="font-medium">
-                            {invoice.invoice}
+                            <Badge variant='secondary'>{data.movement_type.toString().toUpperCase()}</Badge>
                         </TableCell>
-                        <TableCell>{invoice.paymentStatus}</TableCell>
-                        <TableCell>{invoice.paymentMethod}</TableCell>
-                        <TableCell className="text-right">
-                            {invoice.totalAmount}
+                        <TableCell>{data.quantity}</TableCell>
+                        <TableCell>{data.uom.toString().toUpperCase()}</TableCell>
+                        <TableCell>{data.notes}</TableCell>
+                        <TableCell>{data.order_id}</TableCell>
+                        <TableCell>
+                            {new Date(data.created_at).toLocaleDateString()}
                         </TableCell>
                     </TableRow>
                 ))}
             </TableBody>
-            <TableFooter>
-                <TableRow>
-                    <TableCell colSpan={3}>Total</TableCell>
-                    <TableCell className="text-right">$2,500.00</TableCell>
-                </TableRow>
-            </TableFooter>
         </Table>
     );
 }
