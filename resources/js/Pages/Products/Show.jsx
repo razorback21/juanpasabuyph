@@ -5,6 +5,7 @@ import LinkButton from "@/Components/LinkButton";
 import NoImage from "@/Components/NoImage";
 import InventoryTable from "@/Pages/Products/InventoryTable";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/Components/ui/button";
 
 export default function EditProduct({ product }) {
     return (
@@ -64,7 +65,10 @@ export default function EditProduct({ product }) {
 
                 <Separator />
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <h1 className="text-2xl font-bold my-5">Inventory</h1>
+                    <div className="flex justify-between items-center">
+                        <h1 className="text-2xl font-bold my-5">Inventory</h1>
+                        <Button>+ Add Inventory</Button>
+                    </div>
                     { product.disabled ? (
                         <p className="text-sm">
                             This product is disabled. You cannot add inventory.
