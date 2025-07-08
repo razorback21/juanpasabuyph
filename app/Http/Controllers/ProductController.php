@@ -19,18 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::query()
-            ->withCount([
-                'inventory as stock' => function ($query) {
-                    $query->selectRaw('COALESCE(SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END), 0)');
-                }
-            ])
-            ->latest()
-            ->paginate(10);
-
-        return Inertia::render('Products/Index', [
-            'products' => $products
-        ]);
+        
     }
 
     /**
