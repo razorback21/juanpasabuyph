@@ -67,7 +67,7 @@ export default function EditProduct({ product }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center">
                         <h1 className="text-2xl font-bold my-5">Inventory</h1>
-                        <Button>+ Add Inventory</Button>
+                        <Button disabled={product.disabled}>+ Add Inventory</Button>
                     </div>
                     { product.disabled ? (
                         <p className="text-sm">
