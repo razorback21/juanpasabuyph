@@ -14,6 +14,7 @@ class InventoryController extends Controller
      */
     public function index(Product $product)
     {
+        $product->load('inventory');
         return InventoryResource::collection($product->inventory);
     }
 
