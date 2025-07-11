@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\MovementTypeEnum;
 use App\Exceptions\CannotDeleteProductException;
 use App\Http\Requests\Product\ProductRequest;
 use App\Models\Product;
@@ -57,7 +58,8 @@ class ProductController extends Controller
         ]);
 
         return Inertia::render('Products/Show', [
-            'product' => $product
+            'product' => $product,
+            'movementTypes' => MovementTypeEnum::getOptions(),
         ]);
     }
 
