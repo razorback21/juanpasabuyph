@@ -17,7 +17,11 @@ enum MovementTypeEnum: string
             self::RETURNED->value => '[ + ] Returned',
             self::RESERVED->value => '[ - ] Reserved',
             self::OUTBOUND->value => '[ - ] Outbound',
-            self::ADJUSTMENT->value => '[ - ] Adjustment',
+            //self::ADJUSTMENT->value => '[ - ] Adjustment',
         ];
+    }
+
+    public static function getPipeOptions() : string {
+        return implode('|', array_keys(self::getOptions()));
     }
 }
