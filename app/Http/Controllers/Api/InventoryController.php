@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\InventoryRequest;
 use App\Http\Resources\InventoryResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -21,9 +22,14 @@ class InventoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(InventoryRequest $request)
     {
-        //
+        $validated = $request->validated();
+
+        $product = Product::find($validated['product_id']);
+        $product->inventory()->create($validated);
+
+        return InventoryResource::collection($product->inventory);
     }
 
     /**
