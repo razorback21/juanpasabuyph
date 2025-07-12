@@ -86,30 +86,30 @@ class Product extends Model
                 WHEN movement_type IN (?, ?, ?) THEN -quantity 
                 ELSE 0 
             END) as stock', [
-                // Plus
+                    // Plus
                 MovementTypeEnum::INBOUND,
                 MovementTypeEnum::RETURNED,
-                // Minus
+                    // Minus
                 MovementTypeEnum::OUTBOUND,
                 MovementTypeEnum::ADJUSTMENT,
                 MovementTypeEnum::RESERVED
             ])
             ->value('stock');
 
-        return  $stock > 0 ? $stock : 0;
+        return $stock > 0 ? $stock : 0;
     }
 
     // Add this method to the Product model
     public function productCategory(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->category ? ucwords($this->category->name) : null,
+            get: fn() => $this->category ? ucwords($this->category->name) : null,
         );
     }
 
     public function getFeaturedImageUrlAttribute()
     {
-        return str_contains( $this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
+        return str_contains($this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
     }
 
 }
