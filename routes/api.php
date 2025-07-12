@@ -10,5 +10,5 @@ Route::get('/user', function (Request $request) {
 
 
 Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
-    Route::get('products/{product}/inventory', [InventoryController::class, 'index'])->name('api.products.inventory');
+    Route::resource('api.inventory', InventoryController::class);
 });
