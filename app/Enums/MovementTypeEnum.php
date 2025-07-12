@@ -15,13 +15,14 @@ enum MovementTypeEnum: string
         return [
             self::INBOUND->value => '[ + ] Inbound',
             self::RETURNED->value => '[ + ] Returned',
-            self::RESERVED->value => '[ - ] Reserved',
+                //self::RESERVED->value => '[ - ] Reserved',
             self::OUTBOUND->value => '[ - ] Outbound',
             //self::ADJUSTMENT->value => '[ - ] Adjustment',
         ];
     }
 
-    public static function getCSVOptions() : string {
+    public static function getCSVOptions(): string
+    {
         return implode(',', array_keys(self::getOptions()));
     }
 }
