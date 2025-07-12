@@ -26,7 +26,7 @@ class InventoryController extends Controller
     public function store(InventoryRequest $request)
     {
         $product = Product::findOrFail(request()->input("product_id"));
-        $validated = $request->validated();
+        $validated = $request->validated()->exe;
         unset($validated['product_id']);
         $product->inventory()->create($validated);
 
