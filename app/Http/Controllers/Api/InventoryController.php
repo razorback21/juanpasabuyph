@@ -26,10 +26,11 @@ class InventoryController extends Controller
     {
         $validated = $request->validated();
 
-        $product = Product::find($validated['product_id']);
+        $product = Product::findOrFail($validated['product_id']);
         $product->inventory()->create($validated);
+        unset($validated['product_id']);
+        return redirect()->back()->with('message', 'Inventory updated!');
 
-        return InventoryResource::collection($product->inventory);
     }
 
     /**

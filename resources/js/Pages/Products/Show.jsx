@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
-import axios from "axios";
-import { usePage } from "@inertiajs/react";
+import { usePage, router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import LinkButton from "@/Components/LinkButton";
@@ -9,20 +8,47 @@ import InventoryTable from "@/Pages/Products/InventoryTable";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/Components/ui/button";
 import { GenericDialog as AddInventoryDialog } from "@/Components/GenericDialog";
-import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
+import SelectField from "@/Components/SelectField";
+import Textarea from "@/Components/Textarea";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function EditProduct({ product, movementTypes }) {
+    const props = usePage().props;
     const dialogRef = useRef(null);
+    const formRef = useRef(null);
+    const formDataRef = useRef({
+        movement_type: "",
+        uom: "pc",
+        quantity: 1,
+        notes: "",
+        product_id: product.id,
+    });
 
     useEffect(() => {
-        //handleGetInventories();
-        console.log(movementTypes);
+        console.log(document.getElementById("inventory-form"));
     }, []);
 
-    const handleGetInventories = () => {
-        axios.get(route("api.products.inventory", product)).then((res) => {
-            console.log(res.data);
-        });
+    const handleFormData = (e) => {
+        if (!e?.target) {
+            formDataRef.current["movement_type"] = e;
+        } else {
+            formDataRef.current[e.target.name] = e.target.value;
+        }
+    };
+
+    const handleStoreInventory = (e) => {
+        e.preventDefault();
+        router.post(
+            route("api.inventory.store", product),
+            formDataRef.current,
+            {
+                onSuccess: () => {
+                    dialogRef.current.close();
+                    toast.success(props.flash.message);
+                },
+            }
+        );
     };
 
     return (
@@ -34,29 +60,26 @@ export default function EditProduct({ product, movementTypes }) {
             }
         >
             <Head title={`Edit - ${product.name}`} />
+            <Toaster />
             <AddInventoryDialog ref={dialogRef}>
-                <form>
+                <form id="inventory-form" ref={formRef}>
                     <div className="flex flex-col gap-4">
                         <label htmlFor="quantity">Type</label>
-                        <Select
-                            name="type"
-                            id="type"
-                            required
-                            className="border border-gray-300 rounded-md p-2"
-                        >
-                            <SelectTrigger className="w-[280px]">
-                                <SelectValue placeholder="Select movement type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                {Object.entries(movementTypes).map(
-                                    ([key, value]) => (
-                                        <SelectItem value={key}>
-                                            {value}
-                                        </SelectItem>
-                                    )
-                                )}
-                            </SelectContent>
-                        </Select>
+                        <SelectField
+                            selectProps={{
+                                name: "type",
+                                id: "type",
+                                required: true,
+                                onValueChange: (e) => handleFormData(e),
+                            }}
+                            data={Object.entries(movementTypes)}
+                            placeholder="Select movement type"
+                        />
+                        {props?.errors.movement_type && (
+                            <p className="text-red-500 text-xs">
+                                {props.errors.movement_type}
+                            </p>
+                        )}
                         <label htmlFor="quantity">Quantity</label>
                         <input
                             type="number"
@@ -66,6 +89,20 @@ export default function EditProduct({ product, movementTypes }) {
                             min={1}
                             max={9000}
                             className="border border-gray-300 rounded-md p-2"
+                            onChange={handleFormData}
+                            defaultValue={1}
+                        />
+                        {props?.errors.quantity && (
+                            <p className="text-red-500 text-xs">
+                                {props.errors.quantity}
+                            </p>
+                        )}
+                        <label htmlFor="remarks">Notes</label>
+                        <Textarea
+                            name="notes"
+                            id="notes"
+                            required
+                            onChange={handleFormData}
                         />
                     </div>
                 </form>
@@ -122,14 +159,30 @@ export default function EditProduct({ product, movementTypes }) {
                         <h1 className="text-2xl font-bold my-5">Inventory</h1>
                         <Button
                             disabled={product.disabled}
-                            onClick={() =>
+                            onClick={() => {
+                                props.errors = {};
                                 dialogRef.current.open({
                                     title: "Update Inventory",
-                                    actionHandler: () => {
-                                        console.log("Save inventory");
-                                    },
-                                })
-                            }
+                                    description: (
+                                        <>
+                                            <p className="my-2">
+                                                Use the plus sign [ + ] to add
+                                                items to inventory (e.g.,
+                                                inbound, returns). Use the minus
+                                                sign [ - ] to remove items
+                                                (e.g., reserved, outbound). This
+                                                helps track all inventory
+                                                movements
+                                            </p>
+                                            <p className="text-red-500">
+                                                Once added you can no longer
+                                                delete the inventory.
+                                            </p>
+                                        </>
+                                    ),
+                                    actionHandler: handleStoreInventory,
+                                });
+                            }}
                         >
                             +/- Inventory
                         </Button>
