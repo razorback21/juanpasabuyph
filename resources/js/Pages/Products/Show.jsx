@@ -43,9 +43,9 @@ export default function EditProduct({ product, movementTypes }) {
             route("api.inventory.store", product),
             formDataRef.current,
             {
-                onSuccess: () => {
+                onSuccess: (response) => {
                     dialogRef.current.close();
-                    toast.success(props.flash.message);
+                    toast.success(response.props.flash.message);
                 },
             }
         );
