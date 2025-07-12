@@ -20,7 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
+
     }
 
     /**
@@ -53,7 +53,7 @@ class ProductController extends Controller
     {
         $product->load([
             'inventory' => function ($query) {
-                $query->latest();
+                $query->oldest();
             }
         ]);
 
