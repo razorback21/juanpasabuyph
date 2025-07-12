@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 class CartService
 {
+    // todo; Move this to .env
     private const CART_SESSION_KEY = 'cart';
 
     public function getCart(): array
