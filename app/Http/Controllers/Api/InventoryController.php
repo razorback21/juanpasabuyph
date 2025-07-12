@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\MovementTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InventoryRequest;
 use App\Http\Resources\InventoryResource;
@@ -24,13 +25,12 @@ class InventoryController extends Controller
      */
     public function store(InventoryRequest $request)
     {
+        $product = Product::findOrFail(request()->input("product_id"));
         $validated = $request->validated();
-
-        $product = Product::findOrFail($validated['product_id']);
-        $product->inventory()->create($validated);
         unset($validated['product_id']);
-        return redirect()->back()->with('message', 'Inventory updated!');
+        $product->inventory()->create($validated);
 
+        return redirect()->back()->with('message', 'Inventory updated!');
     }
 
     /**
