@@ -4,6 +4,9 @@ namespace App\Observers\Order;
 
 use App\Actions\Order\GenerateOrderNumberAction;
 use App\Models\Order;
+use App\Notifications\OrderCreatedAdminNotification;
+use App\Notifications\OrderCreatedNotification;
+use Illuminate\Support\Facades\Notification;
 
 class OrderObserver
 {
@@ -24,7 +27,9 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-        //
+        // send notification to customer and the site admin or the admin
+        Notification::send($order->customer, new OrderCreatedNotification($order));
+        Notification::send(null, new OrderCreatedAdminNotification($order));
     }
 
     /**
