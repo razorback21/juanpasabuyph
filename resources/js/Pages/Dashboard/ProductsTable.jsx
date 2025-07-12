@@ -43,12 +43,16 @@ export default function ({ products, categories, active_category }) {
                         <p className="mt-1">
                             {product.row.original.disabled ? (
                                 <Badge variant="outline">Disabled</Badge>
-                            ) : null }
+                            ) : null}
                         </p>
                     </div>
                 </Link>
             ),
             header: () => <span>Name</span>,
+        }),
+        columnHelper.accessor("current_stock", {
+            cell: (product) => product.getValue(),
+            header: () => <span>Stocks</span>,
         }),
         columnHelper.accessor("product_category", {
             cell: (product) => product.getValue(),
