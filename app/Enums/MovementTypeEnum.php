@@ -21,7 +21,7 @@ enum MovementTypeEnum: string
         ];
     }
 
-    public static function getPipeOptions() : string {
-        return implode('|', array_keys(self::getOptions()));
+    public static function getCSVOptions() : string {
+        return implode(',', array_keys(self::getOptions()));
     }
 }

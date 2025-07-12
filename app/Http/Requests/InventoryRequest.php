@@ -23,9 +23,9 @@ class InventoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "movement_type" => "required|in:" . MovementTypeEnum::getPipeOptions(),
+            "movement_type" => "required|in:" . MovementTypeEnum::getCSVOptions(),
             "uom" => "required|string",
-            "quantity" => "required|numeric",
+            "quantity" => "required|numeric|min:1|max:9000",
             "notes" => "nullable|string",
             "product_id" => "required|exists:products,id",
         ];
