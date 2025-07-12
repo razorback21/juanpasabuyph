@@ -2,17 +2,16 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\OrderStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
 
-class OrderRequest extends FormRequest
+class CheckouRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,10 +22,11 @@ class OrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'customer_id' => 'required|exists:customers,id',
-            'order_number' => 'required|unique:orders,order_number',
-            'status' => 'required|in:' . OrderStatusEnum::getCSVStatus(),
-            'notes' => 'nullable|string',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+            'address' => 'required|string',
         ];
     }
 }
