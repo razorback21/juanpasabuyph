@@ -18,12 +18,4 @@ class OrderController extends Controller
         ]);
     }
 
-    public function store(OrderRequest $request)
-    {
-        $validated = $request->validated();
-
-        $order = Order::create($validated);
-
-        return redirect()->route('orders.show', $order);
-    }
 }
