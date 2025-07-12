@@ -32,6 +32,7 @@ class OrderCreatedNotification extends Notification
 
     /**
      * Get the mail representation of the notification.
+     * @todo list order items
      */
     public function toMail(object $notifiable): MailMessage
     {
