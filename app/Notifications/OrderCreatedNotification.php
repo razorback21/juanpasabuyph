@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -37,8 +38,8 @@ class OrderCreatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->greeting('Hello ' . $notifiable->fullName)
-            ->line('Your order has been placed with order number: ' . $this->order->order_number)
+            ->greeting('Hello ' . $notifiable->fullname)
+            ->line('Your order has been placed with order #: ' . $this->order->order_number)
             ->line('Thank you for shopping at juanpasabuyph.com');
     }
 
