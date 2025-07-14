@@ -54,14 +54,6 @@ class OrderItem extends Model
     }
 
     /**
-     * Get the reservations for the order item.
-     */
-    public function reservations(): HasMany
-    {
-        return $this->hasMany(OrderItemReservation::class);
-    }
-
-    /**
      * Calculate the total price for this order item
      */
     public function getTotal(): float
