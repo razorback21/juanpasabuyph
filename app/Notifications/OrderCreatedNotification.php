@@ -8,17 +8,20 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\HtmlString;
 
 class OrderCreatedNotification extends Notification
 {
     use Queueable;
 
+    protected $order;
+
     /**
      * Create a new notification instance.
      */
-    public function __construct(public Order $order)
+    public function __construct(Order $order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -35,13 +38,55 @@ class OrderCreatedNotification extends Notification
      * Get the mail representation of the notification.
      * @todo list order items
      */
-    public function toMail(Customer $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Juanpasabuyph - Order Confirmation (' . $this->order->order_number . ')')
             ->greeting('Hello ' . $notifiable->fullname)
             ->line('Your order has been placed with order #: ' . $this->order->order_number)
+            ->line(new HtmlString($this->orderHTML($this->order)))
             ->line('Thank you for shopping at juanpasabuyph.com');
+    }
+
+    public function orderHTML($order)
+    {
+        $table = '<table style="width: 100%; border-collapse: collapse; margin: 15px 0;">';
+        $table .= '<tr style="background-color: #f8f9fa;">';
+        $table .= '<th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">Product</th>';
+        $table .= '<th style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">Quantity</th>';
+        $table .= '<th style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">Price</th>';
+        $table .= '<th style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">Total</th>';
+        $table .= '</tr>';
+
+        // Add order items
+        foreach ($order->items as $item) {
+            $table .= '<tr>';
+            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">' . $item->product->name . '</td>';
+            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">' . $item->quantity . '</td>';
+            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($item->price, 2) . '</td>';
+            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($item->total, 2) . '</td>';
+            $table .= '</tr>';
+        }
+
+        // Add order summary
+        // $table .= '<tr style="background-color: #f8f9fa;">';
+        // $table .= '<td colspan="3" style="padding: 12px; border: 1px solid #dee2e6; text-align: right;"><strong>Subtotal:</strong></td>';
+        // $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($order->subtotal, 2) . '</td>';
+        // $table .= '</tr>';
+
+        // if ($order->discount > 0) {
+        //     $table .= '<tr style="background-color: #f8f9fa;">';
+        //     $table .= '<td colspan="3" style="padding: 12px; border: 1px solid #dee2e6; text-align: right;"><strong>Discount:</strong></td>';
+        //     $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">-₱' . number_format($order->discount, 2) . '</td>';
+        //     $table .= '</tr>';
+        // }
+
+        $table .= '<tr style="background-color: #f8f9fa;">';
+        $table .= '<td colspan="3" style="padding: 12px; border: 1px solid #dee2e6; text-align: right;"><strong>Total:</strong></td>';
+        $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($order->total, 2) . '</td>';
+        $table .= '</tr>';
+        $table .= '</table>';
+        return $table;
     }
 
     /**
