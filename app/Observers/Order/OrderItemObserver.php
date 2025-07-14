@@ -14,12 +14,13 @@ class OrderItemObserver
      */
     public function created(OrderItem $orderItem): void
     {
-        // Insert a new record to inventories table and set movement type to reserved
         Inventory::create([
-            'product_id' => $orderItem->product_id,
-            'uom' => $orderItem->uom,
-            'movement_type' => MovementTypeEnum::RESERVED,
             'quantity' => $orderItem->quantity,
+            'product_id' => $orderItem->product_id,
+            'movement_type' => MovementTypeEnum::RESERVED,
+            'uom' => $orderItem->uom,
+            'notes' => "Reserved for ORDER # {$orderItem->order->order_number}",
+            'order_id' => $orderItem->order_id,
         ]);
     }
 
