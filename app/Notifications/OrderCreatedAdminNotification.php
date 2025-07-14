@@ -38,7 +38,8 @@ class OrderCreatedAdminNotification extends Notification
         return (new MailMessage)
             ->subject('Juanpasabuyph - New Order! - ' . $this->order->created_at->format('M d, Y h:i a'))
             ->greeting("Hey " . ucfirst($notifiable->name) . "!")
-            ->line('A new order has been placed. Order number: ' . $this->order->order_number)
+            ->line("A new order has been placed by {$this->order->customer->fullname}.")
+            ->line('Order number: ' . $this->order->order_number)
             ->action('View Order', url('/order/' . $this->order->id));
     }
 

@@ -31,10 +31,14 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-        // send notification to customer and the site admin or the admin
-        //Notification::send($order->customer, new OrderCreatedNotification($order));
-        // todo: mode email value to .env
-        Notification::send(User::where('email', '=', 'admin@example.com')->first(), new OrderCreatedAdminNotification($order));
+        // send notification to customer
+        $order->customer->notify(new OrderCreatedNotification($order));
+
+        // Send admin notification
+        $adminUser = User::where('email', config('app.admin_email'))->first();
+        if ($adminUser) {
+            $adminUser->notify(new OrderCreatedAdminNotification($order));
+        }
     }
 
     /**
