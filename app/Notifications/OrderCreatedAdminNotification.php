@@ -36,8 +36,8 @@ class OrderCreatedAdminNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject('New Order Placed')
-            ->greeting('Hey Don!')
+            ->subject('Juanpasabuyph - New Order! - ' . $this->order->created_at->format('M d, Y h:i a'))
+            ->greeting("Hey " . ucfirst($notifiable->name) . "!")
             ->line('A new order has been placed. Order number: ' . $this->order->order_number)
             ->action('View Order', url('/order/' . $this->order->id));
     }
