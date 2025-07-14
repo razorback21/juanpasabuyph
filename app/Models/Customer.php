@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 
 class Customer extends Model
 {
     /** @use HasFactory<\Database\Factories\CustomerFactory> */
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -26,13 +27,17 @@ class Customer extends Model
         'address',
     ];
 
+    protected $appends = [
+        'fullname',
+    ];
+
     /**
      * Get the customer's full name.
      */
-    public function fullName(): Attribute
+    public function fullname(): Attribute
     {
         return Attribute::make(
-            get: fn(mixed $value, array $attributes) => "{$attributes['firstname']} {$attributes['lastname']}"
+            get: fn(mixed $value, array $attributes) => ucfirst($attributes['firstname']) . ' ' . ucfirst($attributes['lastname'])
         );
     }
 
@@ -96,8 +101,4 @@ class Customer extends Model
         });
     }
 
-    public function getFullnameAttAttribute(): string
-    {
-        return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
-    }
 }
