@@ -38,6 +38,7 @@ class OrderCreatedNotification extends Notification
     public function toMail(Customer $notifiable): MailMessage
     {
         return (new MailMessage)
+            ->subject('Juanpasabuyph - Order Confirmation (' . $this->order->order_number . ')')
             ->greeting('Hello ' . $notifiable->fullname)
             ->line('Your order has been placed with order #: ' . $this->order->order_number)
             ->line('Thank you for shopping at juanpasabuyph.com');
