@@ -23,6 +23,7 @@ class Inventory extends Model
         'uom',
         'movement_type',
         'notes',
+        'order_id'
     ];
 
     /**
