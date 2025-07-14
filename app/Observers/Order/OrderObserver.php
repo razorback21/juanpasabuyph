@@ -35,10 +35,10 @@ class OrderObserver
         $order->customer->notify(new OrderCreatedNotification($order));
 
         // Send admin notification
-        $adminUser = User::where('email', config('app.admin_email'))->first();
-        if ($adminUser) {
-            $adminUser->notify(new OrderCreatedAdminNotification($order));
-        }
+        // $adminUser = User::where('email', config('app.admin_email'))->first();
+        // if ($adminUser) {
+        //     $adminUser->notify(new OrderCreatedAdminNotification($order));
+        // }
     }
 
     /**
