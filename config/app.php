@@ -124,4 +124,14 @@ return [
     ],
     'order_prefix' => env('ORDER_PREFIX', 'ORD'),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Email
+    |--------------------------------------------------------------------------
+    |
+    | This value is the email address of the system administrator who will
+    | receive notifications about new orders and other important system events.
+    |
+    */
+    'admin_email' => env('ADMIN_EMAIL', 'admin@example.com'),
 ];
