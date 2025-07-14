@@ -5,6 +5,7 @@ namespace App\Observers\Order;
 use App\Actions\Order\{GenerateOrderNumberAction, OrderStatusUpdateAction};
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
+use App\Models\User;
 use App\Notifications\OrderCreatedAdminNotification;
 use App\Notifications\OrderCreatedNotification;
 use Illuminate\Support\Facades\Notification;
@@ -31,8 +32,9 @@ class OrderObserver
     public function created(Order $order): void
     {
         // send notification to customer and the site admin or the admin
-        Notification::send($order->customer, new OrderCreatedNotification($order));
-        Notification::send(null, new OrderCreatedAdminNotification($order));
+        //Notification::send($order->customer, new OrderCreatedNotification($order));
+        // todo: mode email value to .env
+        Notification::send(User::where('email', '=', 'admin@example.com')->first(), new OrderCreatedAdminNotification($order));
     }
 
     /**
