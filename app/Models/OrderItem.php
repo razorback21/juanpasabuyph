@@ -23,6 +23,7 @@ class OrderItem extends Model
         'uom',
         'order_id',
         'product_id',
+        'totals'
     ];
 
     /**
@@ -63,20 +64,14 @@ class OrderItem extends Model
     /**
      * Calculate the total price for this order item
      */
-    public function getTotalPrice(): float
+    public function getTotal(): float
     {
-        return $this->price * $this->quantity;
+        return (float) number_format($this->price * $this->quantity, 2);
     }
 
-    /**
-     * Check if the order item has sufficient inventory
-     */
-    public function hasSufficientInventory(): bool
-    {
-        if (!$this->product) {
-            return false;
-        }
 
-        return $this->product->getCurrentStock() >= $this->quantity;
+    public function getTotalsAttribute(): float
+    {
+        return $this->getTotal();
     }
 }
