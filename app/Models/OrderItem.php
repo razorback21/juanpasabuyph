@@ -23,7 +23,7 @@ class OrderItem extends Model
         'uom',
         'order_id',
         'product_id',
-        'totals'
+        'total'
     ];
 
     /**
@@ -70,7 +70,7 @@ class OrderItem extends Model
     }
 
 
-    public function getTotalsAttribute(): float
+    public function getTotalAttribute(): float
     {
         return $this->getTotal();
     }
