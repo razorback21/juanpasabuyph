@@ -32,7 +32,7 @@ class Customer extends Model
     public function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn (mixed $value, array $attributes) => "{$attributes['firstname']} {$attributes['lastname']}"
+            get: fn(mixed $value, array $attributes) => "{$attributes['firstname']} {$attributes['lastname']}"
         );
     }
 
@@ -94,5 +94,10 @@ class Customer extends Model
                 OrderStatusEnum::PROCESSING
             ]);
         });
+    }
+
+    public function getFullnameAttAttribute(): string
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
     }
 }
