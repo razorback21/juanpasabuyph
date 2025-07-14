@@ -9,6 +9,14 @@ use App\Models\OrderItem;
 
 class OrderItemObserver
 {
+
+    public function creating(OrderItem $orderItem)
+    {
+        $orderItem->load("product");
+        if ($orderItem->product->current_stock >= $orderItem->quantity) {
+            abort(403, "Insufficient stock for product {$orderItem->product->name}");
+        }
+    }
     /**
      * Handle the OrderItem "created" event.
      */
