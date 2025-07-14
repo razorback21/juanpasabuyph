@@ -35,7 +35,6 @@ function InventoryTable({ inventory }) {
                     <TableHead>Quantity</TableHead>
                     <TableHead>UoM</TableHead>
                     <TableHead>Notes</TableHead>
-                    <TableHead>Order ID</TableHead>
                     <TableHead>Date Added</TableHead>
                 </TableRow>
             </TableHeader>
@@ -56,8 +55,18 @@ function InventoryTable({ inventory }) {
                         <TableCell>
                             {data.uom.toString().toUpperCase()}
                         </TableCell>
-                        <TableCell>{data.notes}</TableCell>
-                        <TableCell>{data.order_id}</TableCell>
+                        <TableCell>
+                            {data.notes?.includes("Reserved for ORDER #") ? (
+                                <a
+                                    href={route("orders.show", data.order_id)}
+                                    className="underline text-blue-600"
+                                >
+                                    {data.notes}
+                                </a>
+                            ) : (
+                                data.notes
+                            )}
+                        </TableCell>
                         <TableCell>
                             {new Date(data.created_at).toLocaleDateString()}
                         </TableCell>
