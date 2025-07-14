@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Testing\Fakes\Fake;
 
 class CreateOrder extends Command
@@ -14,7 +15,7 @@ class CreateOrder extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-order';
+    protected $signature = 'app:create-order  {--quantity1=2} {--quantity2=4}';
 
     /**
      * The console command description.
@@ -30,29 +31,32 @@ class CreateOrder extends Command
     {
         $this->info('create order');
 
-        $customer = Customer::create([
-            'firstname' => fake()->firstName(),
-            'lastname' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
-            'phone' => fake()->phoneNumber(),
-            'address' => fake()->address(),
-        ]);
-
-        // Order number and status are generated during creating lifecycle
-        $order = Order::create([
-            'customer_id' => $customer->id,
-            'notes' => fake()->sentence(),
-        ]);
-
-        $cartItems = [[22, 4, 100], [23, 5, 100]];
-        foreach ($cartItems as $cartItem) {
-            $order->items()->create([
-                'order_id' => $order->id,
-                'product_id' => $cartItem[0],
-                'quantity' => $cartItem[1],
-                'price' => $cartItem[2],
-                'uom' => 'pc'
+        DB::transaction(function () {
+            $customer = Customer::create([
+                'firstname' => fake()->firstName(),
+                'lastname' => fake()->lastName(),
+                'email' => fake()->unique()->safeEmail(),
+                'phone' => fake()->phoneNumber(),
+                'address' => fake()->address(),
             ]);
-        }
+
+            // Order number and status are generated during creating lifecycle
+            $order = Order::create([
+                'customer_id' => $customer->id,
+                'notes' => fake()->sentence(),
+            ]);
+
+            $cartItems = [[22, $this->option('quantity1'), 100], [23, $this->option('quantity2'), 100]];
+            foreach ($cartItems as $cartItem) {
+                $order->items()->create([
+                    'order_id' => $order->id,
+                    'product_id' => $cartItem[0],
+                    'quantity' => $cartItem[1],
+                    'price' => $cartItem[2],
+                    'uom' => 'pc'
+                ]);
+            }
+        });
+
     }
 }
