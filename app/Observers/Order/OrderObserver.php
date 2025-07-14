@@ -2,7 +2,8 @@
 
 namespace App\Observers\Order;
 
-use App\Actions\Order\GenerateOrderNumberAction;
+use App\Actions\Order\{GenerateOrderNumberAction, OrderStatusUpdateAction};
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Notifications\OrderCreatedAdminNotification;
 use App\Notifications\OrderCreatedNotification;
@@ -20,6 +21,8 @@ class OrderObserver
         if (empty($order->order_number)) {
             $order->order_number = GenerateOrderNumberAction::run();
         }
+        // set order status to pending
+        $order->status = OrderStatusEnum::PLACED;
     }
 
     /**
@@ -37,7 +40,8 @@ class OrderObserver
      */
     public function updated(Order $order): void
     {
-        //
+        // check if order status is updated and run business logic
+        // OrderStatusUpdateAction::run();
     }
 
     /**
