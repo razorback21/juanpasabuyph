@@ -23,7 +23,6 @@ class OrderItem extends Model
         'uom',
         'order_id',
         'product_id',
-        'total'
     ];
 
     /**
@@ -36,6 +35,8 @@ class OrderItem extends Model
         'price' => 'decimal:2',
         'net_price' => 'decimal:2',
     ];
+
+    protected $appends = ['total'];
 
     /**
      * Get the order that owns the order item.
