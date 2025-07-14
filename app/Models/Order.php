@@ -35,6 +35,10 @@ class Order extends Model
         'status' => OrderStatusEnum::class,
     ];
 
+    protected $appends = [
+        'total'
+    ];
+
     /**
      * Get the customer that owns the order.
      */
@@ -52,22 +56,13 @@ class Order extends Model
     }
 
     /**
-    * Get Inventory Order reservations
-    */
+     * Get Inventory Order reservations
+     */
     public function inventoryReservations(): HasMany
     {
         return $this->hasMany(Inventory::class);
     }
 
-    /**
-     * Calculate the total amount of the order
-     */
-    public function getTotalAmount(): float
-    {
-        return $this->items->sum(function ($item) {
-            return $item->price * $item->quantity;
-        });
-    }
 
     /**
      * Scope a query to only include orders with specific status.
@@ -96,5 +91,17 @@ class Order extends Model
 
         $this->status = OrderStatusEnum::CANCELLED;
         return $this->save();
+    }
+
+    public function total(): float
+    {
+        return $this->items->sum(function ($item) {
+            return $item->price * $item->quantity;
+        });
+    }
+
+    public function getTotalAttribute()
+    {
+        return $this->totals();
     }
 }
