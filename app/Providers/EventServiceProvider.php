@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Events\EventOrderCreatedAdmin;
 use App\Events\EventOrderCreatedCustomer;
-use App\Events\OrderCreated;
 use App\Listeners\OrderCreatedAdmin;
 use App\Listeners\OrderCreatedCustomer;
 use Illuminate\Support\Facades\Event;
@@ -12,6 +11,9 @@ use Illuminate\Support\ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
 {
+
+
+
     /**
      * Register services.
      */
@@ -25,14 +27,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Event::listen(
-            EventOrderCreatedCustomer::class,
-            [OrderCreatedCustomer::class, 'handle']
-        );
-
-        Event::listen(
-            EventOrderCreatedAdmin::class,
-            [OrderCreatedAdmin::class, 'handle']
-        );
+        // Events in laravel 12 are auto discovered in the app/Events folder
+        // Do not register it here it will trigger twice
     }
 }
