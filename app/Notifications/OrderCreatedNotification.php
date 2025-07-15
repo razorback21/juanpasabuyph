@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\HtmlString;
 
 class OrderCreatedNotification extends Notification
@@ -43,9 +44,10 @@ class OrderCreatedNotification extends Notification
         return (new MailMessage)
             ->subject('Juanpasabuyph - Order Confirmation (' . $this->order->order_number . ')')
             ->greeting('Hello ' . $notifiable->fullname)
-            ->line('Your order has been placed with order #: ' . $this->order->order_number)
+            ->line('Your order has been placed with order #: ' . $this->order->order_number . '. We will keep you posted of your order status.')
             ->line(new HtmlString($this->orderHTML($this->order)))
-            ->line('Thank you for shopping at juanpasabuyph.com');
+            ->line('Thank you for shopping at juanpasabuyph.com')
+            ->line(new HtmlString("For any questions. Please contact us in our facebook page or email directly to  <a href='mailto:" . config('app.admin_email') . "'>" . config('app.admin_email') . "</a>"));
     }
 
     public function orderHTML($order)
