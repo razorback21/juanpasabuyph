@@ -8,8 +8,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Process;
-use Illuminate\Support\Testing\Fakes\Fake;
+
 
 class CreateOrder extends Command
 {
@@ -65,7 +64,6 @@ class CreateOrder extends Command
 
 
             event(new EventOrderCreatedCustomer($order));
-            event(new EventOrderCreatedAdmin($order));
         });
 
     }
