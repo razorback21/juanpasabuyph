@@ -4,6 +4,7 @@ namespace App\Observers\Order;
 
 use App\Actions\Order\{GenerateOrderNumberAction, OrderStatusUpdateAction};
 use App\Enums\OrderStatusEnum;
+use App\Events\EventOrderCreatedAdmin;
 use App\Models\Order;
 use App\Models\User;
 use App\Notifications\OrderCreatedAdminNotification;
