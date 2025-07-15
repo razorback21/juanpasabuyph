@@ -2,10 +2,13 @@
 
 namespace App\Console\Commands;
 
+use App\Events\EventOrderCreatedAdmin;
+use App\Events\EventOrderCreatedCustomer;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Testing\Fakes\Fake;
 
 class CreateOrder extends Command
@@ -32,6 +35,7 @@ class CreateOrder extends Command
         $this->info('create order');
 
         DB::transaction(function () {
+            // Create customer
             $customer = Customer::create([
                 'firstname' => fake()->firstName(),
                 'lastname' => fake()->lastName(),
@@ -40,12 +44,14 @@ class CreateOrder extends Command
                 'address' => fake()->address(),
             ]);
 
+            // Create new order
             // Order number and status are generated during creating lifecycle
             $order = Order::create([
                 'customer_id' => $customer->id,
                 'notes' => fake()->sentence(),
             ]);
 
+            // Attached order items from cart
             $cartItems = [[22, $this->option('quantity1'), 100], [23, $this->option('quantity2'), 100]];
             foreach ($cartItems as $cartItem) {
                 $order->items()->create([
@@ -56,6 +62,10 @@ class CreateOrder extends Command
                     'uom' => 'pc'
                 ]);
             }
+
+
+            event(new EventOrderCreatedCustomer($order));
+            event(new EventOrderCreatedAdmin($order));
         });
 
     }
