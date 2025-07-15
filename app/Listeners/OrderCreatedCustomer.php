@@ -20,9 +20,8 @@ class OrderCreatedCustomer
     /**
      * Handle the event.
      */
-    public function handle(EventOrderCreatedCustomer $event): bool
+    public function handle(EventOrderCreatedCustomer $event)
     {
         $event->order->customer->notify(new OrderCreatedNotification($event->order));
-        return false;
     }
 }

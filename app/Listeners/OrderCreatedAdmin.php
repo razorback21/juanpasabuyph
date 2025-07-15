@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\EventOrderCreatedAdmin;
+use App\Events\EventOrderCreatedCustomer;
 use App\Models\User;
 use App\Notifications\OrderCreatedAdminNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -22,12 +22,11 @@ class OrderCreatedAdmin
     /**
      * Handle the event.
      */
-    public function handle(EventOrderCreatedAdmin $event): bool
+    public function handle(EventOrderCreatedCustomer $event)
     {
         $adminUser = User::where('email', config('app.admin_email'))->first();
         if ($adminUser) {
             $adminUser->notify(new OrderCreatedAdminNotification($event->order));
         }
-        return false;
     }
 }
