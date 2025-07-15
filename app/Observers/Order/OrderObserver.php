@@ -31,14 +31,7 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-        // send notification to customer
-        $order->customer->notify(new OrderCreatedNotification($order));
 
-        // Send admin notification
-        // $adminUser = User::where('email', config('app.admin_email'))->first();
-        // if ($adminUser) {
-        //     $adminUser->notify(new OrderCreatedAdminNotification($order));
-        // }
     }
 
     /**
