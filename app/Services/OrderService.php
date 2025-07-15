@@ -19,6 +19,8 @@ class OrderService extends Model
             }
             $this->createOrderItems($order, $cart_items);
             return $order;
+
+            // send order confirmation to customer and admin
         });
     }
 
