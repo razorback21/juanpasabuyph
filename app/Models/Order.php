@@ -102,6 +102,6 @@ class Order extends Model
 
     public function getTotalAttribute()
     {
-        return $this->totals();
+        return $this->total();
     }
 }
