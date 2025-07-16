@@ -10,12 +10,10 @@ use Inertia\Inertia;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::latest()->paginate(10);
-        return Inertia::render("Order/Index", [
-            'orders' => $orders,
-        ]);
+        $orders = Order::latest()->with('customer')->paginate(10);
+        return Inertia::render("Order/Index", compact('orders'));
     }
 
 }

@@ -1,16 +1,17 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import OrdersTable from "./OrdersTable";
+import Pagination from "@/Components/Pagination";
 
-export default function ({}) {
+export default function ({ orders }) {
     return (
-        <AuthenticatedLayout header='Orders'>
+        <AuthenticatedLayout header="Orders">
             <Head title="Orders" />
-            <div className="py-12">
-                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
-                    <div className="overflow-hidden px-6 py-12 bg-white shadow-sm sm:rounded-lg">
-                        <h1>Orders</h1>
-                    </div>
-                </div>
+            <div className="flex flex-col px-4 lg:px-6">
+                <OrdersTable orders={orders} />
+            </div>
+            <div className="text-gray-900 text-center">
+                <Pagination links={orders.links} />
             </div>
         </AuthenticatedLayout>
     );
