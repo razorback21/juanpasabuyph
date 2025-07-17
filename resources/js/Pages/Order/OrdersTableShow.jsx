@@ -83,6 +83,21 @@ export default function ({ order }) {
         );
     }
 
+    function deleteOrderItem(order_item) {
+        dialogRef.current.open({
+            title: `Delete #${order_item.product.name} (Qty. ${order_item.quantity}) `,
+            description: "Are you sure you want to delete this line item?",
+            buttonName: "Yes delete it.",
+            onContinue: () => {
+                router.delete(
+                    route("order-items.destroy", {
+                        order_item: order_item,
+                    })
+                );
+            },
+        });
+    }
+
     const columns = [
         columnHelper.accessor("product.name", {
             cell: (row) => <span>{row.getValue()}</span>,
@@ -103,12 +118,12 @@ export default function ({ order }) {
         columnHelper.accessor("action", {
             cell: (row) => {
                 return (
-                    <Link
-                        href={route("orders.destroy", row.row.original)}
-                        className="hover:underline font-bold text-red-500"
+                    <a
+                        className="hover:underline font-bold text-red-500 cursor-pointer"
+                        onClick={() => deleteOrderItem(row.row.original)}
                     >
                         Delete
-                    </Link>
+                    </a>
                 );
             },
             header: () => <span>Action</span>,
@@ -124,6 +139,13 @@ export default function ({ order }) {
                     <h2 className="text-2xl text-gray-500 font-extrabold">
                         Total: Php {order.total.toFixed(2)}
                     </h2>
+                </div>
+                <div className="p-3 bg-red-50 my-3">
+                    <p className="text-red-400 text-sm">
+                        <span className="font-bold">IMPORTANT: </span>Deleting
+                        all order items will also delete the order from the
+                        system.
+                    </p>
                 </div>
                 <div>
                     <Button
