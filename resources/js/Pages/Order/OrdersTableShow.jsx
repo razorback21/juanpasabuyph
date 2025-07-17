@@ -1,0 +1,151 @@
+import { useRef, useState } from "react";
+import { createColumnHelper } from "@tanstack/react-table";
+import DataTable from "@/Components/DataTable";
+import { Link, router } from "@inertiajs/react";
+import AlertConfirm from "@/Components/AlertConfirm";
+import { Badge } from "@/Components/ui/badge";
+import { Input } from "@/Components/ui/input";
+import { Button } from "@/Components/ui/button";
+
+export default function ({ order }) {
+    const dialogRef = useRef({});
+    const columnHelper = createColumnHelper();
+    const quantityHandler = (item, quantity) => {
+        router.put(
+            route("order-items.update", {
+                order_item: item,
+                quantity: quantity,
+            }),
+            {
+                onSuccess: () => {
+                    //setQuantity(e.target.value);
+                },
+            }
+        );
+    };
+
+    function QuantityField({ row }) {
+        const [isError, setIsError] = useState(false);
+        const [quantity, setQuantity] = useState(row.getValue());
+        const [message, setMessage] = useState("");
+        const inputRef = useRef(null);
+
+        const validateQuantity = (e) => {
+            let enteredQuantity = Number(e.target.value);
+
+            enteredQuantity;
+
+            if (!enteredQuantity) {
+                console.log("Min quantity is 1");
+                setMessage("Min quantity is 1");
+                setIsError(true);
+                return;
+            }
+            if (enteredQuantity > row.row.original.product.current_stock) {
+                console.log("Quantity exceeds stock");
+                setMessage("Quantity exceeds stock");
+                setIsError(true);
+                return;
+            }
+            setQuantity(enteredQuantity);
+            setIsError(false);
+            return;
+        };
+
+        return (
+            <>
+                <Input
+                    ref={inputRef}
+                    defaultValue={quantity}
+                    onChange={(e) => {
+                        validateQuantity(e);
+                        !isError &&
+                            Number(e.target.value) &&
+                            quantityHandler(row.row.original, e.target.value);
+                    }}
+                    onBlur={(e) => {
+                        validateQuantity(e);
+                        isError && inputRef.current.focus();
+                        !isError &&
+                            Number(e.target.value) > 0 &&
+                            quantityHandler(row.row.original, e.target.value);
+                    }}
+                    type="number"
+                    min={1}
+                    max={row.row.original.product.current_stock}
+                />
+                {isError && (
+                    <p className="my-1 text-red-500 text-center text-sm">
+                        {message}
+                    </p>
+                )}
+            </>
+        );
+    }
+
+    const columns = [
+        columnHelper.accessor("product.name", {
+            cell: (row) => <span>{row.getValue()}</span>,
+            header: () => <span>Item</span>,
+        }),
+        columnHelper.accessor("quantity", {
+            cell: (row) => <QuantityField row={row} />,
+            header: () => <span>Quantity</span>,
+        }),
+        columnHelper.accessor("price", {
+            cell: (row) => <span>{row.getValue()}</span>,
+            header: () => <span>Price</span>,
+        }),
+        columnHelper.accessor("total", {
+            cell: (row) => <span>{row.getValue().toFixed(2)}</span>,
+            header: () => <span>Total</span>,
+        }),
+        columnHelper.accessor("action", {
+            cell: (row) => {
+                return (
+                    <Link
+                        href={route("orders.destroy", row.row.original)}
+                        className="hover:underline font-bold text-red-500"
+                    >
+                        Delete
+                    </Link>
+                );
+            },
+            header: () => <span>Action</span>,
+        }),
+    ];
+
+    return (
+        <>
+            <div>
+                <AlertConfirm ref={dialogRef}></AlertConfirm>
+                <DataTable columns={columns} data={order.items} />
+                <div className="flex justify-end p-3">
+                    <h2 className="text-2xl text-gray-500 font-extrabold">
+                        Total: Php {order.total.toFixed(2)}
+                    </h2>
+                </div>
+                <div>
+                    <Button
+                        variant="destructive"
+                        onClick={() =>
+                            dialogRef.current.open({
+                                title: `Delete Order #${order.order_number}`,
+                                description:
+                                    "Are you sure you want to delete this order?",
+                                buttonName: "Yes delete it.",
+                                onContinue: () => {
+                                    router.delete(
+                                        route("orders.destroy", order)
+                                    );
+                                },
+                            })
+                        }
+                    >
+                        DELETE ORDER
+                    </Button>
+                </div>
+            </div>
+        </>
+    );
+}
