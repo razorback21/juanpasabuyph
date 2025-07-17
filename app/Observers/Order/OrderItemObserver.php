@@ -30,9 +30,10 @@ class OrderItemObserver
      */
     public function updated(OrderItem $orderItem): void
     {
-        $order = $orderItem->order();
+        $orderItem->load("order");
+        $order = $orderItem->order;
         // sync inventory record with new quantity
-        $order->inventoryReservations()->each(function (Inventory $inventory) use ($orderItem): void {
+        $order->inventoryReservations->each(function (Inventory $inventory) use ($orderItem): void {
             /**
              * Check if the order item's product matches the inventory product
              * If quantity is 0, delete the inventory record
@@ -42,6 +43,7 @@ class OrderItemObserver
                 switch ($orderItem->quantity) {
                     case 0:
                         $inventory->delete();
+                        $orderItem->delete();
                         break;
                     default:
                         $inventory->update([
