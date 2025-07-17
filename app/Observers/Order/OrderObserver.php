@@ -5,6 +5,7 @@ namespace App\Observers\Order;
 use App\Actions\Order\{GenerateOrderNumberAction, OrderStatusUpdateAction};
 use App\Enums\OrderStatusEnum;
 use App\Events\EventOrderCreatedAdmin;
+use App\Events\EventOrderStatusChanged;
 use App\Models\Order;
 use App\Models\User;
 use App\Notifications\OrderCreatedAdminNotification;
@@ -13,8 +14,6 @@ use Illuminate\Support\Facades\Notification;
 
 class OrderObserver
 {
-
-
     /**
      * Handle the Order "creating" event.
      */
@@ -23,8 +22,6 @@ class OrderObserver
         if (empty($order->order_number)) {
             $order->order_number = GenerateOrderNumberAction::run();
         }
-        // set order status to pending
-        $order->status = OrderStatusEnum::PLACED;
     }
 
     /**
@@ -32,7 +29,10 @@ class OrderObserver
      */
     public function created(Order $order): void
     {
-
+        $order->timeline()->create([
+            "status" => OrderStatusEnum::PLACED,
+            "status_at" => now(),
+        ]);
     }
 
     /**
