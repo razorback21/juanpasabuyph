@@ -36,7 +36,7 @@ class OrderItemObserver
         $order->inventoryReservations->each(function (Inventory $inventory) use ($orderItem): void {
             /**
              * Check if the order item's product matches the inventory product
-             * If quantity is 0, delete the inventory record
+             * If quantity is 0, delete the inventory record and order item
              * Otherwise update the inventory with new UOM and quantity
              */
             if ($orderItem->product_id == $inventory->product_id) {
