@@ -5,9 +5,9 @@ namespace App\Services;
 use App\Models\Inventory;
 use App\Models\OrderItem;
 
-class ReservedItem
+class ReservedItemService
 {
-    public function findReserved(OrderItem $orderItem): Inventory
+    public function findByOrderOrderItem(OrderItem $orderItem): Inventory
     {
         $order = $orderItem->order;
         return $order->inventoryReservations->first(function (Inventory $inventory) use ($orderItem): bool {
@@ -15,9 +15,9 @@ class ReservedItem
         });
     }
 
-    public function deleteReserved(OrderItem $orderItem): void
+    public function delete(OrderItem $orderItem): void
     {
-        $reserved = $this->findReserved($orderItem);
+        $reserved = $this->findByOrderOrderItem($orderItem);
         if ($reserved) {
             $reserved->delete();
         }
