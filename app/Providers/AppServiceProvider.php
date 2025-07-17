@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderStatusTimeline;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Observers\Order\OrderItemObserver;
@@ -33,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
         // Observers
         Order::observe(OrderObserver::class);
         OrderItem::observe(OrderItemObserver::class);
+        OrderStatusTimeline::observe(OrderStatusTimeline::class);
         Product::observe(ProductObserver::class);
         ProductCategory::observe(ProductCategoryObserver::class);
     }
