@@ -128,6 +128,7 @@ export default function ({ order }) {
                 <div>
                     <Button
                         variant="destructive"
+                        disabled={order.status === "shipped"}
                         onClick={() =>
                             dialogRef.current.open({
                                 title: `Delete Order #${order.order_number}`,
