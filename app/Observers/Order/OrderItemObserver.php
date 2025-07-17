@@ -4,8 +4,10 @@ namespace App\Observers\Order;
 
 use App\Enums\MovementTypeEnum;
 use App\Enums\OrderStatusEnum;
+use App\Events\OrderStatusChangedEvent;
 use App\Models\Inventory;
 use App\Models\OrderItem;
+use App\Services\ReservedItemService;
 
 class OrderItemObserver
 {
@@ -30,31 +32,26 @@ class OrderItemObserver
      */
     public function updated(OrderItem $orderItem): void
     {
-        $orderItem->load("order");
-        $order = $orderItem->order;
-        // sync inventory record with new quantity
-        $order->inventoryReservations->each(function (Inventory $inventory) use ($orderItem): void {
-            /**
-             * Check if the order item's product matches the inventory product
-             * If quantity is 0, delete the inventory record and order item
-             * Otherwise update the inventory with new UOM and quantity
-             */
-            if ($orderItem->product_id == $inventory->product_id) {
-                switch ($orderItem->quantity) {
-                    case 0:
-                        $inventory->delete();
-                        $orderItem->delete();
-                        break;
-                    default:
-                        $inventory->update([
-                            'uom' => $orderItem->uom,
-                            'quantity' => $orderItem->quantity,
-                        ]);
-                }
+        $reservedItem = (new ReservedItemService())->findByOrderOrderItem($orderItem);
+        /**
+         * Check if the order item's product matches the inventory product
+         * If quantity is 0, delete the inventory record and order item
+         * Otherwise update the inventory with new UOM and quantity
+         */
+        if ($orderItem->product_id == $reservedItem->product_id) {
+            switch ($orderItem->quantity) {
+                case 0:
+                    $orderItem->delete();
+                    $reservedItem->delete();
+                    break;
+                default:
+                    // sync inventory record with new quantity
+                    $reservedItem->update([
+                        'uom' => $orderItem->uom,
+                        'quantity' => $orderItem->quantity,
+                    ]);
             }
-
-        });
-
+        }
     }
 
     /**
@@ -62,9 +59,15 @@ class OrderItemObserver
      */
     public function deleted(OrderItem $orderItem): void
     {
-        // update order status to cancelled if all items were deleted
-        if ($orderItem->order->items()->count() === 0) {
-            $orderItem->order->update(['status' => OrderStatusEnum::CANCELLED]);
+        $orderItem->delete();
+        // Make sure to also delete the reserve item when order item is deleted
+        $reservedItem = (new ReservedItemService())->findByOrderOrderItem($orderItem);
+        $reservedItem->delete();
+
+        // Delete order if all items were deleted
+        $order = $orderItem->order;
+        if ($order->items()->count() === 0) {
+            $order->delete();
         }
     }
 
