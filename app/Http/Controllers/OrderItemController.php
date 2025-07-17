@@ -60,8 +60,10 @@ class OrderItemController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(OrderItem $orderItem)
     {
-        //
+        $orderItem->delete();
+        $route = $orderItem->order->items->count() > 0 ? 'orders.show' : 'orders.index';
+        return redirect()->route($route, $orderItem->order->id)->with('success', 'Order item deleted successfully');
     }
 }
