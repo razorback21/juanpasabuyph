@@ -36,13 +36,11 @@ export default function ({ order }) {
             enteredQuantity;
 
             if (!enteredQuantity) {
-                console.log("Min quantity is 1");
-                setMessage("Min quantity is 1");
+                setMessage("Minimum quantity is 1");
                 setIsError(true);
                 return;
             }
             if (enteredQuantity > row.row.original.product.current_stock) {
-                console.log("Quantity exceeds stock");
                 setMessage("Quantity exceeds stock");
                 setIsError(true);
                 return;
@@ -55,6 +53,7 @@ export default function ({ order }) {
         return (
             <>
                 <Input
+                    className="text-center"
                     ref={inputRef}
                     defaultValue={quantity}
                     onChange={(e) => {
@@ -140,8 +139,8 @@ export default function ({ order }) {
                         Total: Php {order.total.toFixed(2)}
                     </h2>
                 </div>
-                <div className="p-3 bg-red-50 my-3">
-                    <p className="text-red-400 text-sm">
+                <div className="p-3 bg-red-50 my-4 border border-red-200 rounded-sm">
+                    <p className="text-red-400 text-[12px]">
                         <span className="font-bold">IMPORTANT: </span>Deleting
                         all order items will also delete the order from the
                         system.
