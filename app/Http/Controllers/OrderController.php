@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\OrderStatusEnum;
-use App\Http\Requests\OrderRequest;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-use Ramsey\Uuid\Type\Integer;
+
 
 class OrderController extends Controller
 {
