@@ -30,7 +30,7 @@ class OrderObserver
     public function created(Order $order): void
     {
         $order->timeline()->create([
-            "status" => OrderStatusEnum::PLACED,
+            "status" => OrderStatusEnum::PLACED->value,
             "description" => "Order placed and is now pending for verification and approval.",
             "status_at" => now(),
         ]);
