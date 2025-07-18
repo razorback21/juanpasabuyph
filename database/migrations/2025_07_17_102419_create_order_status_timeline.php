@@ -26,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_status_timeline');
+        Schema::dropIfExists('order_status_timelines');
     }
 };
