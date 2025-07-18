@@ -11,9 +11,10 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('order_status_timeline', function (Blueprint $table) {
+        Schema::create('order_status_timelines', function (Blueprint $table) {
             $table->id();
             $table->string('status');
+            $table->string('description')->nullable();
             $table->dateTime('status_at');
             $table->foreignId('order_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
