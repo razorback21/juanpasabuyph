@@ -12,7 +12,11 @@ class OrderController extends Controller
 {
     public function index(Request $request)
     {
-        $orders = Order::latest()->with('customer')->paginate(10);
+        $orders = Order::select('*')
+            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY created_at DESC) as status_rank')
+            ->with('customer')
+            ->latest()
+            ->paginate(10);
         return Inertia::render("Order/Index", compact('orders'));
     }
 
