@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\DB;
 
 class OrderService extends Model
 {
-
-    public function __construct(protected Order $order)
-    {
-
-    }
-
     public function createOrder($validated)
     {
         return DB::transaction(function () use ($validated) {
