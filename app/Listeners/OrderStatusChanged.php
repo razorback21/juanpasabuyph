@@ -13,7 +13,7 @@ class OrderStatusChanged
     /**
      * Create the event listener.
      */
-    public function __construct(public Order $order, public OrderStatusEnum $orderStatus)
+    public function __construct()
     {
         //
     }
@@ -24,8 +24,8 @@ class OrderStatusChanged
     public function handle(EventOrderStatusChanged $event): void
     {
         // Sync timelime status to orders table
-        $this->order->update([
-            'status' => $this->orderStatus->value,
+        $event->order->update([
+            'status' => $event->orderStatusEnum,
         ]);
     }
 }
