@@ -19,7 +19,7 @@ class EventOrderStatusChanged
     /**
      * Create a new event instance.
      */
-    public function __construct(public Order $order, public OrderStatusEnum $status)
+    public function __construct(public Order $order, public OrderStatusEnum $orderStatusEnum)
     {
         //
     }
