@@ -21,7 +21,7 @@ class OrderStatusTimelineObserver
      */
     public function updated(OrderStatusTimeline $orderStatusTimeline): void
     {
-        event(new EventOrderStatusChanged($orderStatusTimeline->order, $orderStatusTimeline->status));
+
     }
 
     /**
