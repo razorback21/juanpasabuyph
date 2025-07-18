@@ -45,7 +45,18 @@ export default function ({ orders }) {
         }),
         columnHelper.accessor("status", {
             cell: (row) => (
-                <Badge variant={"destructive"}>{row.row.original.status}</Badge>
+                <Badge
+                    variant={"outline"}
+                    className={
+                        row.getValue() === "cancelled"
+                            ? "bg-red-600 text-white"
+                            : row.getValue() === "shipped"
+                            ? "bg-green-600 text-white"
+                            : "bg-blue-600 text-white"
+                    }
+                >
+                    {row.row.original.status}
+                </Badge>
             ),
             header: () => <span>Status</span>,
         }),
