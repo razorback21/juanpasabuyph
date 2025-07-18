@@ -6,6 +6,7 @@ import { Link, router } from "@inertiajs/react";
 import { Button } from "@/Components/ui/button";
 import AlertConfirm from "@/Components/AlertConfirm";
 import { Badge } from "@/Components/ui/badge";
+import { badgeStatusColor } from "@/lib/order";
 
 export default function ({ orders }) {
     const dialogRef = useRef({});
@@ -47,15 +48,9 @@ export default function ({ orders }) {
             cell: (row) => (
                 <Badge
                     variant={"outline"}
-                    className={
-                        row.getValue() === "cancelled"
-                            ? "bg-red-600 text-white"
-                            : row.getValue() === "shipped"
-                            ? "bg-green-600 text-white"
-                            : "bg-blue-600 text-white"
-                    }
+                    className={badgeStatusColor(row.getValue())}
                 >
-                    {row.row.original.status}
+                    {row.row.original.status.toString().toUpperCase()}
                 </Badge>
             ),
             header: () => <span>Status</span>,

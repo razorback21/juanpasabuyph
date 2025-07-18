@@ -9,6 +9,7 @@ import { GenericDialog } from "@/Components/GenericDialog";
 import Textarea from "@/Components/Textarea";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { badgeStatusColor } from "@/lib/order";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -117,13 +118,9 @@ export default function ({ order, statusOptions }) {
                                         actionHandler: handleUpdateStatus,
                                     });
                                 }}
-                                className={`font-semibold uppercase tracking-wide text-white cursor-pointer ${
-                                    order.status === "cancelled"
-                                        ? "bg-red-600"
-                                        : order.status === "shipped"
-                                        ? "bg-green-600"
-                                        : "bg-blue-600"
-                                }`}
+                                className={`font-semibold uppercase tracking-wide text-white cursor-pointer ${badgeStatusColor(
+                                    order.status
+                                )}`}
                             >
                                 {order.status}
                             </Badge>
