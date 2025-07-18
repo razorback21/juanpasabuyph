@@ -4,6 +4,8 @@ const badgeStatusColor = (status) => {
             return "bg-red-600 text-white";
         case "shipped":
             return "bg-green-600 text-white";
+        case "processing":
+            return "bg-yellow-600 text-white";
         default:
             return "bg-blue-600 text-white";
     }
