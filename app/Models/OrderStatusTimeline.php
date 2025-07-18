@@ -9,6 +9,7 @@ class OrderStatusTimeline extends Model
     protected $fillable = [
         'status',
         'status_at',
+        'description',
     ];
 
     protected $casts = [
