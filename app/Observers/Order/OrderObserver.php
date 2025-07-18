@@ -31,6 +31,7 @@ class OrderObserver
     {
         $order->timeline()->create([
             "status" => OrderStatusEnum::PLACED,
+            "description" => "Order placed and is now pending for verification and approval.",
             "status_at" => now(),
         ]);
     }
