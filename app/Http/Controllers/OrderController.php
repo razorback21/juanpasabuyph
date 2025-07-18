@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -18,7 +19,9 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load(['items.product', 'customer']);
-        return Inertia::render('Order/Show', compact('order'));
+        $statusOptions = (new OrderService())->orderStatusOptions($order);
+
+        return Inertia::render('Order/Show', compact('order', 'statusOptions'));
     }
 
     public function destroy(Order $order)
