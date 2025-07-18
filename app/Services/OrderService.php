@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class OrderService extends Model
 {
+
+    public function __construct(protected Order $order)
+    {
+
+    }
+
     public function createOrder($validated)
     {
         return DB::transaction(function () use ($validated) {
@@ -36,5 +43,13 @@ class OrderService extends Model
             ]);
 
         }
+    }
+
+    public function orderStatusOptions(Order $order)
+    {
+        $order->load('timeline');
+        $timelimeStatus = $order->timeline->pluck('status')->toArray();
+        $enumesStatus = OrderStatusEnum::getOptions();
+        return array_diff($enumesStatus, $timelimeStatus);
     }
 }
