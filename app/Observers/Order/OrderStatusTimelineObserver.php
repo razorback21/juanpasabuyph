@@ -5,6 +5,7 @@ namespace App\Observers\Order;
 use App\Enums\OrderStatusEnum;
 use App\Events\EventOrderStatusChanged;
 use App\Models\OrderStatusTimeline;
+use Illuminate\Validation\Rules\Enum;
 
 class OrderStatusTimelineObserver
 {
@@ -13,7 +14,8 @@ class OrderStatusTimelineObserver
      */
     public function created(OrderStatusTimeline $orderStatusTimeline): void
     {
-        event(new EventOrderStatusChanged($orderStatusTimeline->order, $orderStatusTimeline->status));
+        $orderStatus = OrderStatusEnum::from($orderStatusTimeline->status);
+        event(new EventOrderStatusChanged($orderStatusTimeline->order()->first(), $orderStatus));
     }
 
     /**
