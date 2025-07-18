@@ -15,4 +15,9 @@ class OrderStatusTimeline extends Model
     protected $casts = [
         'status_at' => 'datetime',
     ];
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
