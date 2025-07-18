@@ -14,4 +14,11 @@ enum OrderStatusEnum: string
         return implode(',', array_column(self::cases(), 'value'));
     }
 
+    public static function getOptions(): array
+    {
+        return array_map(function ($item) {
+            return $item->value;
+        }, self::cases());
+    }
+
 }
