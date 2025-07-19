@@ -23,9 +23,11 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load(['items.product', 'customer']);
-        $statusOptions = (new OrderService())->orderStatusOptions($order);
-        $statusCantBeDeleted = (new OrderService())->statusCantBeDeleted();
-        return Inertia::render('Order/Show', compact('order', 'statusOptions', 'statusCantBeDeleted'));
+        $orderService = new OrderService();
+        $statusOptions = $orderService->orderStatusOptions($order);
+        $statusCantBeDeleted = $orderService->statusCantBeDeleted();
+        $readOnlyStatus = $orderService->readOnlyStatus($order);
+        return Inertia::render('Order/Show', compact('order', 'statusOptions', 'statusCantBeDeleted', 'readOnlyStatus'));
     }
 
     public function destroy(Order $order)
