@@ -7,7 +7,7 @@ import { Badge } from "@/Components/ui/badge";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 
-export default function ({ order, statusCantBeDeleted }) {
+export default function ({ order, statusCantBeDeleted, readOnly = false }) {
     const dialogRef = useRef({});
     const columnHelper = createColumnHelper();
     const quantityHandler = (item, quantity) => {
@@ -72,6 +72,7 @@ export default function ({ order, statusCantBeDeleted }) {
                     type="number"
                     min={1}
                     max={row.row.original.product.current_stock}
+                    readOnly={readOnly}
                 />
                 {isError && (
                     <p className="my-1 text-red-500 text-center text-sm">
@@ -119,9 +120,11 @@ export default function ({ order, statusCantBeDeleted }) {
                 return (
                     <div className="text-center">
                         <Button
-                            disabled={statusCantBeDeleted.includes(
-                                order.status
-                            )}
+                            type="button"
+                            disabled={
+                                statusCantBeDeleted.includes(order.status) ||
+                                readOnly
+                            }
                             variant="destructive"
                             onClick={() => deleteOrderItem(row.row.original)}
                         >
