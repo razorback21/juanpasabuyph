@@ -24,8 +24,8 @@ class OrderController extends Controller
     {
         $order->load(['items.product', 'customer']);
         $statusOptions = (new OrderService())->orderStatusOptions($order);
-
-        return Inertia::render('Order/Show', compact('order', 'statusOptions'));
+        $statusCantBeDeleted = (new OrderService())->statusCantBeDeleted();
+        return Inertia::render('Order/Show', compact('order', 'statusOptions', 'statusCantBeDeleted'));
     }
 
     public function destroy(Order $order)
