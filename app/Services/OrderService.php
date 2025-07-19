@@ -49,6 +49,11 @@ class OrderService extends Model
 
     public function canBeDeleted(Order $order)
     {
-        return !in_array($order->status->value, [OrderStatusEnum::SHIPPED->value, OrderStatusEnum::PROCESSING->value]);
+        return !in_array($order->status->value, $this->statusCantBeDeleted());
+    }
+
+    public function statusCantBeDeleted()
+    {
+        return [OrderStatusEnum::SHIPPED->value, OrderStatusEnum::PROCESSING->value];
     }
 }
