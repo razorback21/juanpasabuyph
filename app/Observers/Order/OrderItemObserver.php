@@ -71,7 +71,9 @@ class OrderItemObserver
     {
         // Make sure to also delete the reserve item when order item is deleted
         $reservedItem = (new ReservedItemService())->findByOrderOrderItem($orderItem);
-        $reservedItem->delete();
+        if ($reservedItem) {
+            $reservedItem->delete();
+        }
 
         // Delete order if all items were deleted
         $order = $orderItem->order;
