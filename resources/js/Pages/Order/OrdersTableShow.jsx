@@ -117,12 +117,17 @@ export default function ({ order, statusCantBeDeleted }) {
         columnHelper.accessor("action", {
             cell: (row) => {
                 return (
-                    <a
-                        className="hover:underline font-bold text-red-500 cursor-pointer"
-                        onClick={() => deleteOrderItem(row.row.original)}
-                    >
-                        Delete
-                    </a>
+                    <div className="text-center">
+                        <Button
+                            disabled={statusCantBeDeleted.includes(
+                                order.status
+                            )}
+                            variant="destructive"
+                            onClick={() => deleteOrderItem(row.row.original)}
+                        >
+                            Delete
+                        </Button>
+                    </div>
                 );
             },
             header: () => <span>Action</span>,
