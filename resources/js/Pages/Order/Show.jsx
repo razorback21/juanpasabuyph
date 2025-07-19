@@ -17,7 +17,12 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-export default function ({ order, statusOptions, statusCantBeDeleted }) {
+export default function ({
+    order,
+    statusOptions,
+    statusCantBeDeleted,
+    readOnlyStatus,
+}) {
     const statusRef = useRef({
         order: order,
         status: order.status,
@@ -166,6 +171,7 @@ export default function ({ order, statusOptions, statusCantBeDeleted }) {
                         <OrdersTableShow
                             order={order}
                             statusCantBeDeleted={statusCantBeDeleted}
+                            readOnly={readOnlyStatus}
                         />
                     </div>
                 )}
