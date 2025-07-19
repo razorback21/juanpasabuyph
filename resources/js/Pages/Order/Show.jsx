@@ -91,7 +91,7 @@ export default function ({ order, statusOptions }) {
                 />
             </GenericDialog>
             <div className="flex flex-col px-2 lg:px-12">
-                <div className="flex flex-col gap-8 px-0 mx-auto">
+                <div className="flex flex-col gap-8 px-0">
                     <div className="flex flex-col gap-2 border-b pb-6">
                         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900">
                             Order #{order.order_number}
