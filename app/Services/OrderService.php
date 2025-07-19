@@ -46,4 +46,9 @@ class OrderService extends Model
         $enumesStatus = OrderStatusEnum::getOptions();
         return array_diff($enumesStatus, $timelimeStatus);
     }
+
+    public function canBeDeleted(Order $order)
+    {
+        return !in_array($order->status, [OrderStatusEnum::SHIPPED->value, OrderStatusEnum::PROCESSING->value]);
+    }
 }
