@@ -10,6 +10,11 @@ use Inertia\Inertia;
 
 class OrderController extends Controller
 {
+
+    public function __construct(public OrderService $orderService)
+    {
+    }
+
     public function index(Request $request)
     {
         $orders = Order::select('*')
@@ -23,7 +28,7 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load(['items.product', 'customer']);
-        $orderService = new OrderService();
+        $orderService = $this->orderService;
         $statusOptions = $orderService->orderStatusOptions($order);
         $statusCantBeDeleted = $orderService->statusCantBeDeleted();
         $readOnlyStatus = $orderService->readOnlyStatus($order);
