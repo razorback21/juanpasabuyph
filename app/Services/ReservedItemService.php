@@ -10,6 +10,10 @@ class ReservedItemService
     public function findByOrderOrderItem(OrderItem $orderItem): Inventory
     {
         $order = $orderItem->order;
+        if (!$order->inventoryReservations) {
+            return new Inventory();
+        }
+
         return $order->inventoryReservations->first(function (Inventory $inventory) use ($orderItem): bool {
             return $orderItem->product_id == $inventory->product_id;
         });
