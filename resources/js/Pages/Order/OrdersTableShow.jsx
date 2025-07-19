@@ -7,7 +7,7 @@ import { Badge } from "@/Components/ui/badge";
 import { Input } from "@/Components/ui/input";
 import { Button } from "@/Components/ui/button";
 
-export default function ({ order }) {
+export default function ({ order, statusCantBeDeleted }) {
     const dialogRef = useRef({});
     const columnHelper = createColumnHelper();
     const quantityHandler = (item, quantity) => {
@@ -149,7 +149,7 @@ export default function ({ order }) {
                 <div>
                     <Button
                         variant="destructive"
-                        disabled={order.status === "shipped"}
+                        disabled={statusCantBeDeleted.includes(order.status)}
                         onClick={() =>
                             dialogRef.current.open({
                                 title: `Delete Order #${order.order_number}`,
