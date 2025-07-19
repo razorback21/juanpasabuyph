@@ -34,7 +34,7 @@ class OrderController extends Controller
             return redirect()->route('orders.show', $order)->with('message', 'Order cannot be deleted');
         }
 
-        //$order->delete();
+        $order->delete();
         return redirect()->route('orders.index')->with('success', 'Order deleted successfully');
     }
 
