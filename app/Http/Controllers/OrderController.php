@@ -30,7 +30,11 @@ class OrderController extends Controller
 
     public function destroy(Order $order)
     {
-        $order->delete();
+        if (!(new OrderService())->canBeDeleted($order)) {
+            return redirect()->route('orders.show', $order)->with('message', 'Order cannot be deleted');
+        }
+
+        //$order->delete();
         return redirect()->route('orders.index')->with('success', 'Order deleted successfully');
     }
 
