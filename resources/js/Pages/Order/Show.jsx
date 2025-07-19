@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { usePage, router } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import { Toaster } from "@/components/ui/sonner";
@@ -14,13 +14,10 @@ import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 export default function ({ order, statusOptions }) {
-    const props = usePage().props;
     const statusRef = useRef({
         order: order,
         status: order.status,
@@ -28,17 +25,20 @@ export default function ({ order, statusOptions }) {
     });
 
     const genericDialogRef = useRef(null);
-    console.log("ORDER items", statusOptions);
 
     function handleUpdateStatus() {
-        router.post(route("order-status-timelines.store", statusRef.current), {
-            onSuccess: () => {
-                genericDialogRef.current.close();
-            },
-            onError: (error) => {
-                console.log(error);
-            },
-        });
+        router.post(
+            route("order-status-timelines.store", statusRef.current),
+            null,
+            {
+                onSuccess: () => {
+                    genericDialogRef.current?.close();
+                },
+                onError: (error) => {
+                    console.log(error);
+                },
+            }
+        );
     }
 
     function OrderStatus({ statusOptions }) {
