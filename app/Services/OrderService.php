@@ -56,4 +56,9 @@ class OrderService extends Model
     {
         return [OrderStatusEnum::SHIPPED->value, OrderStatusEnum::PROCESSING->value];
     }
+
+    public function readOnlyStatus(Order $order)
+    {
+        return in_array($order->status->value, [OrderStatusEnum::CANCELLED->value]);
+    }
 }
