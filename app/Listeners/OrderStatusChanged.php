@@ -30,6 +30,7 @@ class OrderStatusChanged
             'status' => $event->orderStatusEnum,
         ]);
 
+        // todo: Moved this two process to a separate listener. Observe listener single responsibility principle
         $this->handleReservedItems($event->order, $event->orderStatusEnum);
         $this->handleOrderStatusNotifications($event->order, $event->orderStatusEnum);
     }
