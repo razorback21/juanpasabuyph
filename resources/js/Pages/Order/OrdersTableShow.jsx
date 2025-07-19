@@ -153,7 +153,6 @@ export default function ({ order, statusCantBeDeleted }) {
                 </div>
                 <div>
                     <Button
-                        variant="destructive"
                         disabled={statusCantBeDeleted.includes(order.status)}
                         onClick={() =>
                             dialogRef.current.open({
