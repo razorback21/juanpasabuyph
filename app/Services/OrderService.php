@@ -52,11 +52,13 @@ class OrderService extends Model
         return !in_array($order->status->value, $this->statusCantBeDeleted());
     }
 
+    // Status that cannot be deleted
     public function statusCantBeDeleted()
     {
         return [OrderStatusEnum::SHIPPED->value, OrderStatusEnum::PROCESSING->value];
     }
 
+    // Status that cannot be updated. Also use to controll UI read only status
     public function readOnlyStatus(Order $order)
     {
         return in_array($order->status->value, [OrderStatusEnum::CANCELLED->value, OrderStatusEnum::SHIPPED->value]);
