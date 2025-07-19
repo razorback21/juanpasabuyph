@@ -7,6 +7,7 @@ use App\Enums\OrderStatusEnum;
 use App\Events\OrderStatusChangedEvent;
 use App\Models\Inventory;
 use App\Models\OrderItem;
+use App\Services\OrderService;
 use App\Services\ReservedItemService;
 
 class OrderItemObserver
@@ -54,12 +55,20 @@ class OrderItemObserver
         }
     }
 
+    public function deleting(OrderItem $orderItem): void
+    {
+        $order = $orderItem->order;
+        $orderService = new OrderService();
+        if (!$orderService->canBeDeleted($order)) {
+            abort(403, "Order cannot be deleted");
+        }
+    }
+
     /**
      * Handle the OrderItem "deleted" event.
      */
     public function deleted(OrderItem $orderItem): void
     {
-        $orderItem->delete();
         // Make sure to also delete the reserve item when order item is deleted
         $reservedItem = (new ReservedItemService())->findByOrderOrderItem($orderItem);
         $reservedItem->delete();
