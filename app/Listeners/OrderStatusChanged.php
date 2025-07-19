@@ -39,6 +39,11 @@ class OrderStatusChanged
     {
         if (OrderStatusEnum::CANCELLED->value == $status->value) {
             $order->inventoryReservations()->delete();
+        } elseif (OrderStatusEnum::SHIPPED->value == $status->value) {
+            $order->inventoryReservations()->update([
+                'movement_type' => 'outbound',
+                'notes' => 'Order #' . $order->order_number . ' has been shipped.',
+            ]);
         }
     }
 
