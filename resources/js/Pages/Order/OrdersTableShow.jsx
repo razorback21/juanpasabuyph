@@ -154,11 +154,31 @@ export default function ({ order }) {
                             dialogRef.current.open({
                                 title: `Delete Order #${order.order_number}`,
                                 description:
-                                    "Are you sure you want to delete this order?",
+                                    "Are you sure you want to delete this order",
                                 buttonName: "Yes delete it.",
                                 onContinue: () => {
                                     router.delete(
-                                        route("orders.destroy", order)
+                                        route("orders.destroy", order),
+                                        {
+                                            onSuccess: (page) => {
+                                                const props = page.props;
+                                                if (props.flash.message) {
+                                                    dialogRef.current.open({
+                                                        title: "Error",
+                                                        description:
+                                                            props.flash.message,
+                                                    });
+                                                }
+                                            },
+                                            onError: (error) => {
+                                                dialogRef.current.open({
+                                                    title: "Error",
+                                                    description:
+                                                        "Error deleting order.",
+                                                });
+                                                console.log(error);
+                                            },
+                                        }
                                     );
                                 },
                             })
