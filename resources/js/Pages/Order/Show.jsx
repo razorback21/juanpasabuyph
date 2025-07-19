@@ -83,7 +83,13 @@ export default function ({ order, statusOptions, statusCantBeDeleted }) {
             <GenericDialog ref={genericDialogRef}>
                 <label>Status</label>
                 <OrderStatus statusOptions={statusOptions} />
-                <label>Description</label>
+                <label>
+                    Message
+                    <div className="text-[10px] text-gray-500">
+                        Optional message to be sent to the customer, If leave
+                        blank, the default message will be sent.
+                    </div>
+                </label>
                 <Textarea
                     onChange={(e) => {
                         statusRef.current.description = e.target.value;
