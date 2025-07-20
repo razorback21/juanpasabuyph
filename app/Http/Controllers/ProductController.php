@@ -84,7 +84,7 @@ class ProductController extends Controller
 
         $product->update($validated);
 
-        return to_route('dashboard')
+        return to_route('products.show', $product)
             ->with('success', 'Product updated successfully.');
     }
 
