@@ -20,17 +20,18 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         $orders = DB::table('orders')
-            ->select('orders.*')
-            ->selectRaw("(customers.firstname || ' ' || customers.lastname) as fullname")
-            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY orders.created_at DESC) as status_rank')
-            ->selectRaw("CASE status
-                WHEN 'placed' THEN 1
-                WHEN 'processing' THEN 2
-                WHEN 'shipped' THEN 3
+            ->select(
+                'orders.*',
+                DB::raw("(customers.firstname || ' ' || customers.lastname) as fullname"),
+                DB::raw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY orders.created_at DESC) as status_rank'),
+                DB::raw("CASE status
+                    WHEN 'placed' THEN 1
+                    WHEN 'processing' THEN 2
+                    WHEN 'shipped' THEN 3
                 ELSE 4
-            END as status_order")
+            END as status_order"),
+            )
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
-
             ->whereAny([
                 'orders.order_number',
                 'orders.status',
