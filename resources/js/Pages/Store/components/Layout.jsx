@@ -8,7 +8,7 @@ export default function ({ title, children }) {
                 <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
                     <div className="flex items-center gap-3 sm:gap-10">
                         <div className="flex items-center gap-3 text-[#e92933]">
-                            <div className="size-6">
+                            {/* <div className="size-6">
                                 <svg
                                     fill="none"
                                     viewBox="0 0 48 48"
@@ -19,9 +19,14 @@ export default function ({ title, children }) {
                                         fill="currentColor"
                                     ></path>
                                 </svg>
-                            </div>
+                            </div> */}
                             <h2 className="text-[#111827] text-xl font-extrabold leading-tight tracking-[-0.015em]">
-                                JUANPSABUY
+                                <span className="bg-[#e92933] text-white px-3 py-2 rounded-tl-xl inline-block">
+                                    JUAN
+                                </span>
+                                <span className="bg-[#2c29e9] text-white p-3 py-2 rounded-br-xl inline-block">
+                                    PASABUY
+                                </span>
                             </h2>
                         </div>
                         <nav className="hidden lg:flex items-center gap-6">
