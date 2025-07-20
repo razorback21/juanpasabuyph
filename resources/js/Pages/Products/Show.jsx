@@ -133,7 +133,7 @@ export default function EditProduct({ product, movementTypes }) {
                         <div>
                             <h1 className="text-2xl font-bold">
                                 {product.name}{" "}
-                                {product.disabled && (
+                                {product.disabled === true && (
                                     <Badge variant="secondary">Disabled</Badge>
                                 )}
                             </h1>
