@@ -21,6 +21,7 @@ class OrderController extends Controller
     {
         $orders = DB::table('orders')
             ->select('orders.*')
+            ->selectRaw("(customers.firstname || ' ' || customers.lastname) as fullname")
             ->selectRaw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY orders.created_at DESC) as status_rank')
             ->selectRaw("CASE status
                 WHEN 'placed' THEN 1
@@ -37,7 +38,7 @@ class OrderController extends Controller
                 DB::raw("(customers.firstname || ' ' || customers.lastname)"),
             ], 'like', '%' . $request->query('query') . '%')
             ->orderBy('status_order', 'asc')
-            ->paginate(10);
+            ->paginate(10)->withQueryString();
 
         return Inertia::render("Order/Index", compact('orders'));
     }

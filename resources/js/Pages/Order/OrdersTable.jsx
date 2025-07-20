@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import LinkButton from "@/Components/LinkButton";
 import DataTable from "@/Components/DataTable";
@@ -7,9 +7,12 @@ import { Button } from "@/Components/ui/button";
 import AlertConfirm from "@/Components/AlertConfirm";
 import { Badge } from "@/Components/ui/badge";
 import { badgeStatusColor } from "@/lib/order";
+import { Input } from "@/Components/ui/input";
 
 export default function ({ orders }) {
     const dialogRef = useRef({});
+    const inputQueryRef = useRef({});
+    const queryRef = useRef({});
     const columnHelper = createColumnHelper();
     const deleteHandler = (productCategory) => {
         router.delete(
@@ -17,7 +20,11 @@ export default function ({ orders }) {
                 window.location.search
         );
     };
-    console.log("ORDERS TABLE", orders);
+
+    useEffect(() => {
+        inputQueryRef.current.focus();
+    }, []);
+
     const columns = [
         columnHelper.accessor("order_number", {
             cell: (row) => {
@@ -40,7 +47,7 @@ export default function ({ orders }) {
             },
             header: () => <span>Date</span>,
         }),
-        columnHelper.accessor("customer.fullname", {
+        columnHelper.accessor("fullname", {
             cell: (row) => <span>{row.getValue()}</span>,
             header: () => <span>Customer</span>,
         }),
@@ -65,6 +72,24 @@ export default function ({ orders }) {
         <>
             <div>
                 <AlertConfirm ref={dialogRef}></AlertConfirm>
+                <div className="my-2">
+                    <Input
+                        ref={inputQueryRef}
+                        placeholder="Search orders..."
+                        className="w-full text-bold"
+                        onKeyDown={(e) => {
+                            if (e.key === "Enter") {
+                                queryRef.current.value = e.target.value;
+                                console.log(e.target.value);
+                                router.get(
+                                    route("orders.index") +
+                                        "?query=" +
+                                        e.target.value
+                                );
+                            }
+                        }}
+                    />
+                </div>
                 <DataTable columns={columns} data={orders.data} />
             </div>
         </>
