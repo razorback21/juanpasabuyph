@@ -9,7 +9,7 @@ import { Badge } from "@/Components/ui/badge";
 import { badgeStatusColor } from "@/lib/order";
 import { Input } from "@/Components/ui/input";
 
-export default function ({ orders, query }) {
+export default function ({ orders }) {
     const dialogRef = useRef({});
     const inputQueryRef = useRef({});
     const queryRef = useRef({});
@@ -73,7 +73,7 @@ export default function ({ orders, query }) {
                             window.location.search
                         ).get("query")}
                         placeholder="Search orders..."
-                        className="w-full text-bold"
+                        className="w-full font-bold"
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
                                 queryRef.current.value = e.target.value;
