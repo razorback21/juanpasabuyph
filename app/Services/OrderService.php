@@ -6,7 +6,9 @@ use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class OrderService extends Model
 {
@@ -63,4 +65,31 @@ class OrderService extends Model
     {
         return in_array($order->status->value, [OrderStatusEnum::CANCELLED->value, OrderStatusEnum::SHIPPED->value]);
     }
+
+    public function paginatedOrdersQuery(Request $request)
+    {
+        return DB::table('orders')
+            ->select(
+                'orders.*',
+                DB::raw("(customers.firstname || ' ' || customers.lastname) as fullname"),
+                DB::raw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY orders.created_at DESC) as status_rank'),
+                DB::raw("CASE status
+                    WHEN 'placed' THEN 1
+                    WHEN 'processing' THEN 2
+                    WHEN 'shipped' THEN 3
+                ELSE 4
+            END as status_order"),
+            )
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+            ->whereAny([
+                'orders.order_number',
+                'orders.status',
+                'orders.notes',
+                DB::raw("(customers.firstname || ' ' || customers.lastname)"),
+                DB::raw("strftime('%m/%d/%Y', orders.created_at)"),
+            ], 'like', '%' . $request->query('query') . '%')
+            ->orderBy('status_order', 'asc')
+            ->paginate(10)->withQueryString();
+    }
+
 }
