@@ -9,17 +9,11 @@ import { Badge } from "@/Components/ui/badge";
 import { badgeStatusColor } from "@/lib/order";
 import { Input } from "@/Components/ui/input";
 
-export default function ({ orders }) {
+export default function ({ orders, query }) {
     const dialogRef = useRef({});
     const inputQueryRef = useRef({});
     const queryRef = useRef({});
     const columnHelper = createColumnHelper();
-    const deleteHandler = (productCategory) => {
-        router.delete(
-            route("product-categories.destroy", productCategory) +
-                window.location.search
-        );
-    };
 
     useEffect(() => {
         inputQueryRef.current.focus();
@@ -75,6 +69,9 @@ export default function ({ orders }) {
                 <div className="my-2">
                     <Input
                         ref={inputQueryRef}
+                        defaultValue={new URLSearchParams(
+                            window.location.search
+                        ).get("query")}
                         placeholder="Search orders..."
                         className="w-full text-bold"
                         onKeyDown={(e) => {
