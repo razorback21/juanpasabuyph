@@ -1,4 +1,5 @@
 import { Head } from "@inertiajs/react";
+import Footer from "./Footer";
 export default function ({ title, children }) {
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
@@ -145,6 +146,7 @@ export default function ({ title, children }) {
                         </div>
                     </div>
                 </main>
+                <Footer />
             </div>
         </div>
     );
