@@ -12,6 +12,7 @@ import SelectField from "@/Components/SelectField";
 import Textarea from "@/Components/Textarea";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
+import { Badge } from "@/Components/ui/badge";
 
 export default function EditProduct({ product, movementTypes }) {
     const props = usePage().props;
@@ -131,7 +132,10 @@ export default function EditProduct({ product, movementTypes }) {
 
                         <div>
                             <h1 className="text-2xl font-bold">
-                                {product.name}
+                                {product.name}{" "}
+                                {product.disabled && (
+                                    <Badge variant="secondary">Disabled</Badge>
+                                )}
                             </h1>
                             <p>Price: PHP {product.price}</p>
                             <p class="my-4">{product.description}</p>
@@ -158,7 +162,7 @@ export default function EditProduct({ product, movementTypes }) {
                     <div className="flex justify-between items-center">
                         <h1 className="text-2xl font-bold my-5">Inventory</h1>
                         <Button
-                            disabled={product.disabled}
+                            //disabled={product.disabled}
                             onClick={() => {
                                 props.errors = {};
                                 dialogRef.current.open({
@@ -187,13 +191,7 @@ export default function EditProduct({ product, movementTypes }) {
                             +/- Inventory
                         </Button>
                     </div>
-                    {product.disabled ? (
-                        <p className="text-sm">
-                            This product is disabled. You cannot add inventory.
-                        </p>
-                    ) : (
-                        <InventoryTable inventory={product.inventory} />
-                    )}
+                    <InventoryTable inventory={product.inventory} />
                 </div>
             </div>
         </AuthenticatedLayout>
