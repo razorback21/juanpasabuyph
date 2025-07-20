@@ -1,13 +1,13 @@
+import Logo from "./Logo";
+
 export default function Footer() {
     return (
         <footer className="bg-gray-800 text-gray-300">
             <div className="max-w-screen-xl mx-auto px-5 py-12 @container">
                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                     <div className="col-span-2">
-                        <h3 className="text-white text-lg font-semibold mb-4">
-                            JUAN PASABUY
-                        </h3>
-                        <p className="text-sm wrap-break-word">
+                        <Logo />
+                        <p className="text-sm wrap-break-word mt-4">
                             Your one-stop shop for finding the best products
                             from various malls in Dubai, all in one place.
                         </p>

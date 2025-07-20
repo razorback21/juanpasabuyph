@@ -1,5 +1,6 @@
 import { Head } from "@inertiajs/react";
 import Footer from "./Footer";
+import Logo from "./Logo";
 export default function ({ title, children }) {
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
@@ -8,26 +9,7 @@ export default function ({ title, children }) {
                 <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
                     <div className="flex items-center gap-3 sm:gap-10">
                         <div className="flex items-center gap-3 text-[#e92933]">
-                            {/* <div className="size-6">
-                                <svg
-                                    fill="none"
-                                    viewBox="0 0 48 48"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z"
-                                        fill="currentColor"
-                                    ></path>
-                                </svg>
-                            </div> */}
-                            <h2 className="text-[#111827] text-xl font-extrabold leading-tight tracking-[-0.015em]">
-                                <span className="bg-[#e92933] text-white px-3 py-2 rounded-tl-xl inline-block">
-                                    JUAN
-                                </span>
-                                <span className="bg-[#2c29e9] text-white p-3 py-2 rounded-br-xl inline-block">
-                                    PASABUY
-                                </span>
-                            </h2>
+                            <Logo />
                         </div>
                         <nav className="hidden lg:flex items-center gap-6">
                             <a
