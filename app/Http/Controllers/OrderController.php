@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Order;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 
@@ -17,11 +19,26 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $orders = Order::select('*')
-            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY created_at DESC) as status_rank')
-            ->with('customer')
-            ->latest()
+        $orders = DB::table('orders')
+            ->select('orders.*')
+            ->selectRaw('ROW_NUMBER() OVER (PARTITION BY status ORDER BY orders.created_at DESC) as status_rank')
+            ->selectRaw("CASE status
+                WHEN 'placed' THEN 1
+                WHEN 'processing' THEN 2
+                WHEN 'shipped' THEN 3
+                ELSE 4
+            END as status_order")
+            ->join('customers', 'customers.id', '=', 'orders.customer_id')
+
+            ->whereAny([
+                'orders.order_number',
+                'orders.status',
+                'orders.notes',
+                DB::raw("(customers.firstname || ' ' || customers.lastname)"),
+            ], 'like', '%' . $request->query('query') . '%')
+            ->orderBy('status_order', 'asc')
             ->paginate(10);
+
         return Inertia::render("Order/Index", compact('orders'));
     }
 
