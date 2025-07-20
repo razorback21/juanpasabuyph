@@ -18,8 +18,8 @@ export default function ({ title }) {
                         </h2>
                         <p className="text-gray-200 mt-4 text-lg sm:text-xl max-w-xl">
                             Experience luxury shopping made affordable! We
-                            curate and deliver premium Dubai products to your
-                            Philippine doorstep, offering exclusive deals on
+                            curate and deliver premium Dubai products to
+                            Philippines doorstep, offering exclusive deals on
                             world-renowned brands at prices you won't believe.
                         </p>
                         <button className="mt-8 px-8 py-3 bg-red-600 hover:bg-red-700 text-white text-lg font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
