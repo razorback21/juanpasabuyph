@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -20,6 +21,7 @@ class Product extends Model
      */
     protected $fillable = [
         'name',
+        'slug',
         'description',
         'price',
         'product_category_id',
@@ -69,12 +71,6 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-
-    protected static function boot()
-    {
-        parent::boot();
-    }
-
     /**
      * Get the current stock quantity
      */
@@ -110,6 +106,22 @@ class Product extends Model
     public function getFeaturedImageUrlAttribute()
     {
         return str_contains($this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
+    }
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Retrieve the model for a bound value.
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return $this->where('slug', $value)->firstOrFail();
     }
 
 }

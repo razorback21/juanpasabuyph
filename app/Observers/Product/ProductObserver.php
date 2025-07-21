@@ -2,6 +2,7 @@
 
 namespace App\Observers\Product;
 
+use App\Actions\GenarateSlug;
 use App\Exceptions\CannotDeleteProductException;
 use App\Models\Product;
 use App\Services\ProductDeleteService;
@@ -10,12 +11,26 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductObserver
 {
+
+    public function creating(Product $product)
+    {
+        $product->slug = GenarateSlug::run($product, config('constants.PRODUCT_SLUG_SOURCE_FIELD'));
+    }
+
     /**
      * Handle the Product "created" event.
      */
     public function created(Product $product): void
     {
         //
+    }
+
+
+    public function updating(Product $product): void
+    {
+        if ($product->isDirty('name') && empty($product->slug)) {
+            $product->slug = GenarateSlug::run($product, config('constants.PRODUCT_SLUG_SOURCE_FIELD'));
+        }
     }
 
     /**
