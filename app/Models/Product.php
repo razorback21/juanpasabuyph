@@ -90,7 +90,7 @@ class Product extends Model
                 MovementTypeEnum::ADJUSTMENT,
                 MovementTypeEnum::RESERVED
             ])
-            ->value('stock');
+            ->scalar('stock');
 
         return $stock > 0 ? $stock : 0;
     }
