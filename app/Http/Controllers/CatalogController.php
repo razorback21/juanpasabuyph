@@ -17,4 +17,14 @@ class CatalogController extends Controller
             'products' => $products
         ]);
     }
+
+    public function item(Request $request, $category, $slug)
+    {
+        $product = Product::where('slug', $slug)->first();
+
+        return Inertia::render("Store/Catalog/Item", [
+            'title' => $product->name,
+            'product' => $product
+        ]);
+    }
 }
