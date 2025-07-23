@@ -1,7 +1,9 @@
-export default function ({ title, product }) {
+import Layout from "@/Pages/Store/components/Layout";
+
+export default function ({ title, product, category }) {
     return (
-        <div>
+        <Layout title={title} category={category}>
             <h1>{product.name}</h1>
-        </div>
+        </Layout>
     );
 }
