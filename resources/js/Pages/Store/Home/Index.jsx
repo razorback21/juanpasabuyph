@@ -1,6 +1,6 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
-import HomeProducts from "./components/HomeProducts";
-import Reviews from "./components/Reviews";
+import HomeProducts from "../components/HomeProducts";
+import Reviews from "../components/Reviews";
 
 export default function ({ title }) {
     const featuredProducts = [
