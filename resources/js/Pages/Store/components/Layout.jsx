@@ -1,7 +1,39 @@
 import { Head } from "@inertiajs/react";
 import Footer from "./Footer";
 import Logo from "./Logo";
+import { Link } from "@inertiajs/react";
+
 export default function ({ title, children }) {
+    const LinksData = [
+        {
+            name: "Home",
+            href: "/",
+        },
+        {
+            name: "Catalog",
+            href: "/catalog",
+        },
+        {
+            name: "Faqs",
+            href: "/faqs",
+        },
+        {
+            name: "Contact",
+            href: "/contact",
+        },
+    ];
+
+    function HeadLink({ link }) {
+        return (
+            <Link
+                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
+                href={link.href}
+            >
+                {link.name}
+            </Link>
+        );
+    }
+
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
             <div className="layout-container flex h-full grow flex-col">
@@ -12,30 +44,9 @@ export default function ({ title, children }) {
                             <Logo />
                         </div>
                         <nav className="hidden lg:flex items-center gap-6">
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
-                                href="#"
-                            >
-                                Home
-                            </a>
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
-                                href="#"
-                            >
-                                Products
-                            </a>
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
-                                href="#"
-                            >
-                                Faqs
-                            </a>
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
-                                href="#"
-                            >
-                                Contact
-                            </a>
+                            {LinksData.map((link) => (
+                                <HeadLink key={link.href} link={link} />
+                            ))}
                         </nav>
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
