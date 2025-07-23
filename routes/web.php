@@ -33,6 +33,7 @@ use Inertia\Inertia;
 
 Route::get("/", [HomeController::class, 'index']);
 Route::get("/catalog", [CatalogController::class, 'index']);
+Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item']);
 Route::get("/faqs", [FaqsController::class, 'index']);
 Route::get("/contact", [ContactController::class, 'index']);
 Route::get("/cart", [CartController::class, 'index']);
