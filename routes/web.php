@@ -31,12 +31,12 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get("/", [HomeController::class, 'index']);
-Route::get("/catalog", [CatalogController::class, 'index']);
-Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item']);
-Route::get("/faqs", [FaqsController::class, 'index']);
-Route::get("/contact", [ContactController::class, 'index']);
-Route::get("/cart", [CartController::class, 'index']);
+Route::get("/", [HomeController::class, 'index'])->name('home');
+Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
+Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item'])->name('catalog.item');
+Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
+Route::get("/contact", [ContactController::class, 'index'])->name('contact');
+Route::get("/cart", [CartController::class, 'index'])->name('cart');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
