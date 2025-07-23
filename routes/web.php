@@ -1,7 +1,12 @@
 <?php
 
 use App\Enums\OrderStatusEnum;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
@@ -10,11 +15,7 @@ use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StoreController;
-use App\Models\Order;
-use App\Models\OrderItem;
-use App\Services\OrderService;
-use App\Services\ReservedItem;
+use App\Models\Customer;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,11 @@ use Inertia\Inertia;
 //     ]);
 // });
 
-Route::get("/", [StoreController::class, 'index']);
+Route::get("/", [HomeController::class, 'index']);
+Route::get("/catalog", [CatalogController::class, 'index']);
+Route::get("/faqs", [FaqsController::class, 'index']);
+Route::get("/contact", [ContactController::class, 'index']);
+Route::get("/cart", [CartController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -72,10 +77,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/test', function () {
-    $timelimeStatus = Order::find(130);
-    $orderStatus = OrderStatusEnum::from('processing');
-    dd($orderStatus);
 
+    $user = Customer::orderBy()->get();
+    dd($user->toArray());
 });
 
 require __DIR__ . '/auth.php';
