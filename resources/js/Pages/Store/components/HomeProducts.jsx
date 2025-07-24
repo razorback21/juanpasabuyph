@@ -1,9 +1,11 @@
 import { Link } from "@inertiajs/react";
 
-export default function ({ products, title }) {
+export default function ({ products, title, titleTextSize = "text-3xl" }) {
     return (
         <section className="mb-12">
-            <h2 className="text-gray-900 text-3xl font-bold leading-tight tracking-tight px-4 pb-6">
+            <h2
+                className={`text-gray-900 ${titleTextSize} font-bold leading-tight tracking-tight px-4 pb-6`}
+            >
                 {title}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
@@ -16,7 +18,7 @@ export default function ({ products, title }) {
                             <div
                                 className="w-full bg-center bg-no-repeat aspect-square bg-cover transition-transform duration-500 group-hover:scale-110"
                                 style={{
-                                    backgroundImage: `url("${product.image}")`,
+                                    backgroundImage: `url("${product.featured_image_url}")`,
                                 }}
                             ></div>
                             {/* Overlay gradient */}
@@ -30,7 +32,7 @@ export default function ({ products, title }) {
                                 ₱{product.price.toLocaleString()}
                             </p>
                             <p className="text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
-                                {product.description}
+                                {product.description.slice(0, 80) + "..."}
                             </p>
                         </div>
                         {/* Enhanced Buy Now Overlay */}
