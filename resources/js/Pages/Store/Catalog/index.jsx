@@ -1,5 +1,4 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
-import { Label } from "@/components/ui/label";
 import Products from "../components/Products";
 import {
     useState,
