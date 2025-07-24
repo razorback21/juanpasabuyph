@@ -15,10 +15,11 @@ class CatalogController extends Controller
         $products->load('category');
         $categories = ProductCategory::all();
 
+
         return Inertia::render("Store/Catalog/Index", [
             'title' => "Catalog",
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
         ]);
     }
 
@@ -26,11 +27,16 @@ class CatalogController extends Controller
     {
         $product = Product::where('slug', $slug)->first();
         $product->load('category');
+        $relatedProducts = Product::get()
+            ->where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->random(4);
 
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
             'product' => $product,
-            'category' => $product->category->name
+            'category' => $product->category->name,
+            'relatedProducts' => $relatedProducts
         ]);
     }
 }
