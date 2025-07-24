@@ -9,8 +9,9 @@ import {
     useImperativeHandle,
 } from "react";
 
-export default function ({ title, products }) {
+export default function ({ title, products, categories }) {
     const catalogRef = useRef(null);
+    const titleRef = useRef("All Categories");
 
     function CategoryDropdown() {
         const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -36,10 +37,12 @@ export default function ({ title, products }) {
             <div className="relative" ref={dropdownRef}>
                 <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                    className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors"
+                    className="flex h-10 items-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors"
                 >
                     <div className="text-gray-500">Category :</div>
-                    <div className="text-sm font-medium">All</div>
+                    <div className="text-sm font-medium">
+                        {titleRef.current}
+                    </div>
                     {/* <div className="text-xs text-gray-500 font-bold">
                             ({products.length})
                         </div> */}
@@ -71,42 +74,29 @@ export default function ({ title, products }) {
                                 href="#"
                                 onClick={() => {
                                     catalogRef.current.filter("all");
+                                    titleRef.current = "All Categories";
                                     setIsDropdownOpen(false);
                                 }}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
                             >
                                 All Categories
                             </a>
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    catalogRef.current.filter("Electronics");
-                                    setIsDropdownOpen(false);
-                                }}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
-                            >
-                                Electronics
-                            </a>
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    catalogRef.current.filter("fashion");
-                                    setIsDropdownOpen(false);
-                                }}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
-                            >
-                                Fashion
-                            </a>
-                            <a
-                                href="#"
-                                onClick={() => {
-                                    catalogRef.current.filter("Other");
-                                    setIsDropdownOpen(false);
-                                }}
-                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
-                            >
-                                Other
-                            </a>
+                            {categories.map((category) => (
+                                <a
+                                    key={category.id}
+                                    href="#"
+                                    onClick={() => {
+                                        catalogRef.current.filter(
+                                            category.name
+                                        );
+                                        titleRef.current = category.name;
+                                        setIsDropdownOpen(false);
+                                    }}
+                                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
+                                >
+                                    {category.name}
+                                </a>
+                            ))}
                         </div>
                     </div>
                 )}
@@ -133,6 +123,9 @@ export default function ({ title, products }) {
         }));
         return (
             <div>
+                <div className="py-2 text-sm px-4 text-gray-600">
+                    {filteredProducts.length} items found in this category
+                </div>
                 <Products products={filteredProducts} />
             </div>
         );

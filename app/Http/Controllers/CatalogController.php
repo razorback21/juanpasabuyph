@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,10 +13,12 @@ class CatalogController extends Controller
     {
         $products = Product::all();
         $products->load('category');
+        $categories = ProductCategory::all();
 
         return Inertia::render("Store/Catalog/Index", [
             'title' => "Catalog",
-            'products' => $products
+            'products' => $products,
+            'categories' => $categories
         ]);
     }
 
