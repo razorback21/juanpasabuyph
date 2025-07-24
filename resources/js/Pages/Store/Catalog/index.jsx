@@ -10,7 +10,11 @@ import {
 
 export default function ({ title, products, categories }) {
     const catalogRef = useRef(null);
-    const titleRef = useRef("All Categories");
+    const urlQuery = new URLSearchParams(window.location.search);
+    const categoryQuery = urlQuery.get("category") ?? "All";
+    const titleRef = useRef(
+        categoryQuery == "All" ? "All Categories" : categoryQuery
+    );
 
     function CategoryDropdown() {
         const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -23,6 +27,25 @@ export default function ({ title, products, categories }) {
             ) {
                 setIsDropdownOpen(false);
             }
+        }
+
+        function handleCategoryChange(category) {
+            const categoryName =
+                typeof category === "string" ? category : category.name;
+            catalogRef.current.filter(categoryName);
+            titleRef.current =
+                categoryName === "All" ? "All Categories" : categoryName;
+            setIsDropdownOpen(false);
+
+            // Update URL with the selected category
+            const currentUrl = new URL(window.location);
+            if (categoryName === "All" || categoryName === "all") {
+                currentUrl.searchParams.delete("category");
+            } else {
+                currentUrl.searchParams.set("category", categoryName);
+            }
+
+            window.history.pushState({}, "", currentUrl.toString());
         }
 
         useEffect(() => {
@@ -71,10 +94,9 @@ export default function ({ title, products, categories }) {
                         <div className="py-1">
                             <a
                                 href="#"
-                                onClick={() => {
-                                    catalogRef.current.filter("all");
-                                    titleRef.current = "All Categories";
-                                    setIsDropdownOpen(false);
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleCategoryChange("All");
                                 }}
                                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
                             >
@@ -84,12 +106,9 @@ export default function ({ title, products, categories }) {
                                 <a
                                     key={category.id}
                                     href="#"
-                                    onClick={() => {
-                                        catalogRef.current.filter(
-                                            category.name
-                                        );
-                                        titleRef.current = category.name;
-                                        setIsDropdownOpen(false);
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleCategoryChange(category);
                                     }}
                                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-red-100 hover:text-red-600 transition-colors"
                                 >
@@ -105,11 +124,18 @@ export default function ({ title, products, categories }) {
 
     const ProductCatalog = forwardRef((props, ref) => {
         const [filteredProducts, setFilteredProducts] = useState(
-            props.products
+            urlQuery.get("category") == "All" || !urlQuery.get("category")
+                ? props.products
+                : props.products.filter(
+                      (product) =>
+                          product.category.name == urlQuery.get("category")
+                  )
         );
+
         useImperativeHandle(ref, () => ({
             filter: (category) => {
-                if (category === "all") {
+                console.log(category, "AAAAAAAAA");
+                if (category == "All") {
                     setFilteredProducts(props.products);
                 } else {
                     setFilteredProducts(
@@ -120,6 +146,7 @@ export default function ({ title, products, categories }) {
                 }
             },
         }));
+
         return (
             <div>
                 <div className="py-2 text-sm px-4 text-gray-600">
@@ -140,44 +167,6 @@ export default function ({ title, products, categories }) {
 
             <div className="flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
                 <CategoryDropdown />
-                {/* <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors">
-                    <p className="text-sm font-medium">Price Range</p>
-                    <div
-                        className="text-gray-500 hover:text-red-600"
-                        data-icon="CaretDown"
-                        data-size="20px"
-                        data-weight="regular"
-                    >
-                        <svg
-                            fill="currentColor"
-                            height="18px"
-                            viewBox="0 0 256 256"
-                            width="18px"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
-                        </svg>
-                    </div>
-                </button>
-                <button className="flex h-10 shrink-0 items-center justify-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors">
-                    <p className="text-sm font-medium">Stores</p>
-                    <div
-                        className="text-gray-500 hover:text-red-600"
-                        data-icon="CaretDown"
-                        data-size="20px"
-                        data-weight="regular"
-                    >
-                        <svg
-                            fill="currentColor"
-                            height="18px"
-                            viewBox="0 0 256 256"
-                            width="18px"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
-                        </svg>
-                    </div>
-                </button> */}
             </div>
 
             <ProductCatalog products={products} ref={catalogRef} />
