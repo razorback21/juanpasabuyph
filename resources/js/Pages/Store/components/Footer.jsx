@@ -7,8 +7,8 @@ export default function Footer() {
                 <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
                     <div className="col-span-2">
                         <Logo />
-                        <p className="text-sm wrap-break-word mt-4">
-                            Your one-stop shop for finding the best products
+                        <p className="text-sm wrap-break-word mt-4 text-justify max-w-md">
+                            Your one-stop shop for finding the best products{" "}
                             from various malls in Dubai, all in one place.
                         </p>
                     </div>
