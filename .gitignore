@@ -27,3 +27,9 @@ Thumbs.db
 yarn-error.log
 .mcp-download.lock
 test.*
+.cursor/rules/design.mdc
+.superdesign/design_iterations/default_ui_darkmode.css
+.superdesign/moodboard/1753443191584_juanpasabuyph.loc_HOME.png
+CLAUDE.md
+.gitignore
+.windsurfrules
