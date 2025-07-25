@@ -11,4 +11,9 @@ class FaqsController extends Controller
     {
         return Inertia::render('Store/Faqs/Index');
     }
+
+    public function about()
+    {
+        return Inertia::render('Store/Faqs/About');
+    }
 }
