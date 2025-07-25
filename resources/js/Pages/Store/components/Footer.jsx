@@ -145,7 +145,14 @@ export default function Footer() {
                 </div>
                 <div className="border-t border-gray-700 pt-8 text-center">
                     <p className="text-sm">
-                        © 2024 ShopSmart. All rights reserved.
+                        © 2025 JuanPasabuy PH. All rights reserved. Designed and
+                        developed by{" "}
+                        <a
+                            href="https://www.donnygapulao.site"
+                            className="text-red-500"
+                        >
+                            Donny Gapulao
+                        </a>
                     </p>
                 </div>
             </div>
