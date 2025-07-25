@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\OrderStatusEnum;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ContactController;
@@ -35,7 +36,7 @@ Route::get("/", [HomeController::class, 'index'])->name('home');
 Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
 Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item'])->name('catalog.item');
 Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
-Route::get("/about", [FaqsController::class, 'about'])->name('about');
+Route::get("/about", [AboutController::class, 'index'])->name('about');
 Route::get("/contact", [ContactController::class, 'index'])->name('contact');
 Route::get("/cart", [CartController::class, 'index'])->name('cart');
 
