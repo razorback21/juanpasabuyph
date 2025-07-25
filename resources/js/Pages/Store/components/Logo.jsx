@@ -24,7 +24,7 @@ export default function () {
                     <span className="ml-2">JUAN</span>
                 </span>
                 <span className="bg-[#2c29e9] text-white px-3 py-2 rounded-br-xl inline-block">
-                    PASABUY
+                    PASABUY<span className="text-[#e3dd64]">PH</span>
                 </span>
             </h2>
         </div>
