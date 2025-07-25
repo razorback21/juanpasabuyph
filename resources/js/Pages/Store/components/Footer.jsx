@@ -2,6 +2,25 @@ import { Link } from "@inertiajs/react";
 import Logo from "./Logo";
 
 export default function Footer() {
+    const links = [
+        {
+            name: "About Us",
+            href: "/about",
+        },
+        {
+            name: "Contact Us",
+            href: "/contact",
+        },
+        {
+            name: "Privacy Policy",
+            href: "/privacy-policy",
+        },
+        {
+            name: "Terms of Service",
+            href: "/terms-of-service",
+        },
+    ];
+
     return (
         <footer className="bg-gray-800 text-gray-300">
             <div className="max-w-screen-xl mx-auto px-5 py-12 @container">
@@ -57,38 +76,18 @@ export default function Footer() {
                             Information
                         </h4>
                         <ul className="space-y-2">
-                            <li>
-                                <Link
-                                    className="hover:text-red-500 transition-colors text-sm"
-                                    href="/about"
-                                >
-                                    About Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    className="hover:text-red-500 transition-colors text-sm"
-                                    href="/contact"
-                                >
-                                    Contact Us
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    className="hover:text-red-500 transition-colors text-sm"
-                                    href="#"
-                                >
-                                    Privacy Policy
-                                </Link>
-                            </li>
-                            <li>
-                                <Link
-                                    className="hover:text-red-500 transition-colors text-sm"
-                                    href="#"
-                                >
-                                    Terms of Service
-                                </Link>
-                            </li>
+                            {links.map((link) => {
+                                return (
+                                    <li>
+                                        <Link
+                                            className="hover:text-red-500 transition-colors text-sm"
+                                            href={link.href}
+                                        >
+                                            {link.name}
+                                        </Link>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                     <div>
