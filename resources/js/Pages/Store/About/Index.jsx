@@ -7,8 +7,13 @@ export default function () {
                 <div className="container mx-auto">
                     <div className="flex flex-wrap justify-between items-center gap-4 p-4">
                         <div className="w-full">
-                            <h2 className="text-4xl font-bold">About Us</h2>
-                            <p className="mt-4">
+                            <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
+                                <h2 className="tracking-tight text-3xl sm:text-4xl font-bold leading-tight min-w-72">
+                                    About Us
+                                </h2>
+                            </div>
+
+                            <p className="mt-4 text-gray-500">
                                 Welcome to JuanPasabuy PH, your trusted partner
                                 in bringing premium Dubai products right to your
                                 doorstep! We take pride in personally
