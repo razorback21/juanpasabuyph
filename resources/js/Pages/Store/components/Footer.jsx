@@ -1,3 +1,4 @@
+import { Link } from "@inertiajs/react";
 import Logo from "./Logo";
 
 export default function Footer() {
@@ -57,36 +58,36 @@ export default function Footer() {
                         </h4>
                         <ul className="space-y-2">
                             <li>
-                                <a
+                                <Link
                                     className="hover:text-red-500 transition-colors text-sm"
-                                    href="#"
+                                    href="/about"
                                 >
                                     About Us
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
+                                <Link
                                     className="hover:text-red-500 transition-colors text-sm"
                                     href="#"
                                 >
                                     Contact Us
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
+                                <Link
                                     className="hover:text-red-500 transition-colors text-sm"
                                     href="#"
                                 >
                                     Privacy Policy
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a
+                                <Link
                                     className="hover:text-red-500 transition-colors text-sm"
                                     href="#"
                                 >
                                     Terms of Service
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>
