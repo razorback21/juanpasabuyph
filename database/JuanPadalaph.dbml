@@ -8,12 +8,15 @@ Table products {
 	is_featured boolean [ not null, default: 0 ]
 	socialmedia_image text(65535) [ not null ]
 	disabled boolean [ not null, default: 0 ]
+	is_best_seller boolean [ not null ]
+	slug varchar(255) [ not null ]
 }
 
 Table ProductCategory {
 	id integer [ pk, increment, not null, unique ]
 	name varchar(255) [ not null ]
 	description 
+	slug varchar(255) [ not null ]
 }
 
 Table inventory {
@@ -43,7 +46,6 @@ Table order_items {
 	product_id integer [ not null ]
 	quantity integer [ not null ]
 	price real [ not null ]
-	net_price real [ not null ]
 	uom varchar(255) [ not null ]
 	order_id integer [ not null ]
 }
