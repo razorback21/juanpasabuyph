@@ -10,10 +10,10 @@ export default function ({ title, featuredProducts, bestProducts }) {
             {/* Hero */}
             <section className="w-full @container mb-12">
                 <div
-                    className="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
+                    className="bg-contain bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
                     style={{
                         backgroundImage:
-                            'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCQg5pGmCR-wlLQ-Pwbh8WLr58lK6LBXvQfF8qvPfo5XrUbCSVD-NIFrz70s9noN94FcYb8dIxxwvrIuJ_-XMCmyqmnaR_kgAiHtpuvtunFo84mYSyaWtxZxYnHXx-19RwqAQbytVOeTCEhWo5fjo0yoWJr2xPhziAtjL9IOD04ilo0qEfJ_i-2BxSdB1D8EmATWRwKcYidvSxnxQKhGGDmiybqM0hFpcrpXa56RFAFQVDEwh0Fglx1srivZHJF_FxLgAEAybHDK0U7")',
+                            'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("/storage/assets/pdala_hero_bg.png")',
                     }}
                 >
                     <div className="p-8 sm:p-12">
