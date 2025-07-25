@@ -13,7 +13,7 @@ export default function () {
                                 </h2>
                             </div>
 
-                            <p className="mt-4 text-gray-500">
+                            <p className="mt-4 text-gray-500 text-lg">
                                 Welcome to JuanPasabuy PH, your trusted partner
                                 in bringing premium Dubai products right to your
                                 doorstep! We take pride in personally
