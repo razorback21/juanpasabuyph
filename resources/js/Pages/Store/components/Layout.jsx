@@ -10,8 +10,12 @@ export default function ({ title, children }) {
             href: "/",
         },
         {
-            name: "Catalog",
+            name: "Products",
             href: "/catalog",
+        },
+        {
+            name: "About",
+            href: "/about",
         },
         {
             name: "Faqs",
