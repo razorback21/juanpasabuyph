@@ -22,7 +22,7 @@ export default function Checkout() {
                                         className="ext-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                         placeholder="Enter your firstname"
                                         type="text"
-                                        value=""
+                                        defaultValue=""
                                     />
                                 </div>
                                 <div>
@@ -33,7 +33,7 @@ export default function Checkout() {
                                         className="ext-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                         placeholder="Enter your lastname"
                                         type="text"
-                                        value=""
+                                        defaultValue=""
                                     />
                                 </div>
                             </div>
@@ -45,7 +45,7 @@ export default function Checkout() {
                                     className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                     placeholder="Enter your street address"
                                     type="text"
-                                    value=""
+                                    defaultValue=""
                                 />
                             </div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
@@ -57,7 +57,7 @@ export default function Checkout() {
                                         className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                         placeholder="Enter your city"
                                         type="text"
-                                        value=""
+                                        defaultValue=""
                                     />
                                 </div>
                                 <div className="block">
@@ -68,7 +68,7 @@ export default function Checkout() {
                                         className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                         placeholder="Enter state or province"
                                         type="text"
-                                        value=""
+                                        defaultValue=""
                                     />
                                 </div>
                             </div>
@@ -81,7 +81,7 @@ export default function Checkout() {
                                         className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                         placeholder="Enter zip or postal code"
                                         type="text"
-                                        value=""
+                                        defaultValue=""
                                     />
                                 </div>
                                 <div className="block">
@@ -92,11 +92,10 @@ export default function Checkout() {
                                         className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                                         placeholder="Enter your phone number"
                                         type="tel"
-                                        value=""
+                                        defaultValue=""
                                     />
                                 </div>
                             </div>
-
                             <div className="flex justify-end mt-16">
                                 <button
                                     className="flex w-full md:w-auto min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-sm h-12 px-6 bg-red-600 hover:bg-red-700 text-white text-base font-semibold leading-normal tracking-[0.015em] transition-colors shadow-sm hover:shadow-md"
