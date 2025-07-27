@@ -79,6 +79,11 @@ class CartService
         })->values()->toArray();
     }
 
+    public function getCartCount(): int
+    {
+        return count($this->getCart());
+    }
+
     public function getTotalItems(): int
     {
         return collect($this->getCart())->sum('quantity');
