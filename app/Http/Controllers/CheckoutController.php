@@ -7,9 +7,17 @@ use App\Http\Requests\CheckouRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CheckoutController extends Controller
 {
+
+
+    public function index()
+    {
+        return Inertia::render('Store/Checkout/Index');
+    }
+
     public function store(CheckouRequest $request)
     {
         $validated = $request->validated();
