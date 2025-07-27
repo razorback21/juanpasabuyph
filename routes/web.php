@@ -51,7 +51,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Products
 Route::middleware('auth')->group(function () {
     // Product 
     Route::resource('products', ProductController::class);
@@ -62,20 +61,14 @@ Route::middleware('auth')->group(function () {
 
     // Inventory
     Route::resource('inventory', InventoryController::class);
-});
 
-// Orders
-Route::middleware('auth')->group(function () {
+    // Orders
     Route::resource('orders', OrderController::class);
-});
 
-// Order Item
-Route::middleware('auth')->group(function () {
+    // Order Item
     Route::resource('order-items', OrderItemController::class);
-});
 
-// Order Status Timeline
-Route::middleware('auth')->group(function () {
+    // Order Status Timeline
     Route::resource('order-status-timelines', OrderStatusTimelineController::class);
 });
 
