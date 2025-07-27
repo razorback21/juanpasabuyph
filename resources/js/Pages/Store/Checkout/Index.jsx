@@ -2,7 +2,7 @@ import Layout from "@/Pages/Store/components/Layout.jsx";
 
 export default function Checkout() {
     return (
-        <Layout>
+        <Layout title="Checkout">
             <section className="grid grid-cols-1 md:grid-cols-12 md:gap-10">
                 <div className="md:col-span-7">
                     <h1 className="text-4xl font-bold leading-tight tracking-tight mb-10">

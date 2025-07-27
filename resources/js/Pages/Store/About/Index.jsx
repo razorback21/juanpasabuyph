@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 export default function () {
     return (
         <>
-            <Layout>
+            <Layout title="About Us">
                 <div className="container mx-auto">
                     <div className="flex flex-wrap justify-between items-center gap-4 p-4">
                         <div className="w-full">
