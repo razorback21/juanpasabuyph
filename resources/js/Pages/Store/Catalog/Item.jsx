@@ -8,9 +8,9 @@ import { toast } from "sonner";
 import { useRef } from "react";
 
 export default function ({ title, product, category, relatedProducts }) {
-    const props = usePage().props;
+    const page = usePage();
     const quantityInputRef = useRef(null);
-    console.log(props);
+    console.log(page.props);
     const handlerAddToCart = (e) => {
         e.preventDefault();
         const quantity = quantityInputRef.current.getQuantity();
@@ -22,11 +22,7 @@ export default function ({ title, product, category, relatedProducts }) {
             },
             {
                 onSuccess: (response) => {
-                    if (props.flash.message) {
-                        toast.success(props.flash.message);
-                    } else {
-                        toast.success("Item added to cart 121");
-                    }
+                    toast.success(page.props.flash.message);
                 },
             }
         );
@@ -95,8 +91,10 @@ export default function ({ title, product, category, relatedProducts }) {
                     <div className="mb-6">
                         <QuantityInput ref={quantityInputRef} />
                     </div>
-                    {props.errors.quantity && (
-                        <p className="text-sm my-2">{props.errors.quantity}</p>
+                    {page.props.errors.quantity && (
+                        <p className="text-sm my-2">
+                            {page.props.errors.quantity}
+                        </p>
                     )}
                     <button
                         onClick={handlerAddToCart}
