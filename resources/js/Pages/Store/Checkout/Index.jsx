@@ -9,10 +9,10 @@ export default function Checkout() {
                 </h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 mt-5">
                     <section className="mt-6">
-                        <h2 className="text-2xl font-bold">
+                        <h2 className="text-[1.3rem] font-bold">
                             Shipping Information
                         </h2>
-                        <div className="mt-5">
+                        <div className="mt-8">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label className="block text-sm leading-normal pb-1.5">
