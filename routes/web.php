@@ -17,6 +17,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Customer;
+use App\Services\CartService;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -72,10 +73,14 @@ Route::middleware('auth')->group(function () {
     Route::resource('order-status-timelines', OrderStatusTimelineController::class);
 });
 
-Route::get('/test', function () {
+Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::put('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+Route::get('/cart/get', [CartController::class, 'get'])->name('cart.get');
 
-    $user = Customer::orderBy()->get();
-    dd($user->toArray());
+Route::get('/test', function () {
+    $cart = app(CartService::class);
+    dd($cart->getCart());
 });
 
 require __DIR__ . '/auth.php';
