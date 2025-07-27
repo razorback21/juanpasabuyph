@@ -4,6 +4,7 @@ use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FaqsController;
@@ -39,7 +40,7 @@ Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item'])->n
 Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
 Route::get("/about", [AboutController::class, 'index'])->name('about');
 Route::get("/contact", [ContactController::class, 'index'])->name('contact');
-Route::get("/cart", [CartController::class, 'index'])->name('cart');
+Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
