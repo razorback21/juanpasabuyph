@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Session;
 class CartService
 {
     // todo; Move this to .env
-    private const CART_SESSION_KEY = 'cart';
+    private $cartSessionKey;
+    public function __construct()
+    {
+        $this->cartSessionKey = config('constants.CART_SESSION_KEY');
+    }
 
     public function getCart(): array
     {
-        return Session::get(self::CART_SESSION_KEY, []);
+        return Session::get($this->cartSessionKey, []);
     }
 
     public function addItem(int $productId, int $quantity = 1): void
@@ -28,7 +32,7 @@ class CartService
             ];
         }
 
-        Session::put(self::CART_SESSION_KEY, $cart);
+        Session::put($this->cartSessionKey, $cart);
     }
 
     public function updateQuantity(int $productId, int $quantity): void
@@ -41,19 +45,19 @@ class CartService
             $cart[$productId]['quantity'] = $quantity;
         }
 
-        Session::put(self::CART_SESSION_KEY, $cart);
+        Session::put($this->cartSessionKey, $cart);
     }
 
     public function removeItem(int $productId): void
     {
         $cart = $this->getCart();
         unset($cart[$productId]);
-        Session::put(self::CART_SESSION_KEY, $cart);
+        Session::put($this->cartSessionKey, $cart);
     }
 
     public function clear(): void
     {
-        Session::forget(self::CART_SESSION_KEY);
+        Session::forget($this->cartSessionKey);
     }
 
     public function getCartWithProducts(): array

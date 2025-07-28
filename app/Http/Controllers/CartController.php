@@ -9,11 +9,14 @@ use App\Rules\ProductStock;
 use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
+    private $cartSessionKey;
     public function __construct(public CartService $cartService)
     {
+        $this->cartSessionKey = config('constants.CART_SESSION_KEY');
     }
 
     public function update(CartRequest $request)
@@ -27,9 +30,9 @@ class CartController extends Controller
 
     public function destroy(Request $request, $id)
     {
-        $order = $request->session()->get('order', []);
-        unset($order[$id]);
-        $request->session()->put('order', $order);
+        $cart = $request->session()->get($this->cartSessionKey, []);
+        unset($cart[$id]);
+        $request->session()->put($this->cartSessionKey, $cart);
 
         return redirect()->route('cart.checkout')->with('message', 'Item removed from cart');
     }
@@ -56,5 +59,13 @@ class CartController extends Controller
         $this->cartService->updateQuantity($validated['product_id'], $validated['quantity']);
 
         return redirect()->back()->with('message', 'Item quantity decremented');
+    }
+
+    public function remove(Request $request, $product_id)
+    {
+        $cart = $request->session()->get($this->cartSessionKey, []);
+        unset($cart[$product_id]);
+        $request->session()->put($this->cartSessionKey, $cart);
+        return redirect()->back()->with('message', 'Item removed from cart');
     }
 }
