@@ -6,16 +6,25 @@ use App\Enums\OrderStatusEnum;
 use App\Http\Requests\CheckouRequest;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CheckoutController extends Controller
 {
 
+    public function __construct(public CartService $cartService)
+    {
+
+    }
 
     public function index()
     {
-        return Inertia::render('Store/Checkout/Index');
+        $cartItems = $this->cartService->getCartWithProducts();
+        return Inertia::render('Store/Checkout/Index', [
+            'cartItems' => $cartItems,
+            'cartTotal' => collect($cartItems)->sum('subtotal')
+        ]);
     }
 
     public function store(CheckouRequest $request)
