@@ -75,7 +75,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::put('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
 Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');

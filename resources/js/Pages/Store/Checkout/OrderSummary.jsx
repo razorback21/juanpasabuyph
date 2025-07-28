@@ -21,6 +21,14 @@ export default function OrderSummary({ cartItems, cartTotal }) {
             });
         }
 
+        function remove(item) {
+            router.delete(
+                route("cart.remove", {
+                    product_id: item.product.id,
+                })
+            );
+        }
+
         return (
             <>
                 <div className="flex gap-4 items-start" key={item.product.id}>
@@ -74,7 +82,10 @@ export default function OrderSummary({ cartItems, cartTotal }) {
                             </button>
                         </div>
                     </div>
-                    <button className="hover:text-red-600 transition-colors text-xs font-medium">
+                    <button
+                        onClick={() => remove(item)}
+                        className="hover:text-red-600 transition-colors text-xs font-medium"
+                    >
                         Remove
                     </button>
                 </div>
