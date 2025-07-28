@@ -22,13 +22,13 @@ class CheckoutFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
             'email' => 'required|email',
-            'phone' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'province' => 'required',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'city' => 'required|string',
+            'province' => 'required|string',
             'postal_code' => 'required|numeric',
         ];
     }
