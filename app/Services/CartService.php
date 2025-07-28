@@ -99,4 +99,10 @@ class CartService
     {
         return empty($this->getCart());
     }
+
+    public function getCartItem(int $productId): null|array
+    {
+        $cart = $this->getCart();
+        return $cart[$productId] ?? null;
+    }
 }
