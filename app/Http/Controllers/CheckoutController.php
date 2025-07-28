@@ -40,6 +40,6 @@ class CheckoutController extends Controller
         ]);
         $order->save();
 
-        return redirect()->route('orders.show', $order);
+        return redirect(201)->back()->with('message', 'success');
     }
 }

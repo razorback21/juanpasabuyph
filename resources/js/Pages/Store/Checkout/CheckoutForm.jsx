@@ -1,6 +1,9 @@
 import { useRef } from "react";
-
+import { usePage, router } from "@inertiajs/react";
 export default function CheckOutForm() {
+    const props = usePage().props;
+    console.log(props);
+    const { flash, errors } = props;
     const formData = useRef({
         firstname: "",
         lastname: "",
@@ -20,6 +23,7 @@ export default function CheckOutForm() {
 
     function placeOrder() {
         console.log(formData.current);
+        router.post(route("checkout.store"), formData.current);
     }
 
     return (
@@ -42,6 +46,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.firstname}
                             onChange={formChangeHandler}
                         />
+                        {errors?.firstname && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.firstname}
+                            </div>
+                        )}
                     </div>
                     <div>
                         <label className="block text-sm leading-normal pb-1.5">
@@ -55,6 +64,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.lastname}
                             onChange={formChangeHandler}
                         />
+                        {errors?.lastname && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.lastname}
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="mt-6">
@@ -69,6 +83,11 @@ export default function CheckOutForm() {
                         defaultValue={formData.current.address}
                         onChange={formChangeHandler}
                     />
+                    {errors?.address && (
+                        <div className="text-[12px] text-red-500 mt-1">
+                            {errors.address}
+                        </div>
+                    )}
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                     <div>
@@ -83,6 +102,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.city}
                             onChange={formChangeHandler}
                         />
+                        {errors?.city && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.city}
+                            </div>
+                        )}
                     </div>
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
@@ -96,6 +120,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.province}
                             onChange={formChangeHandler}
                         />
+                        {errors?.province && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.province}
+                            </div>
+                        )}
                     </div>
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
@@ -109,6 +138,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.postal_code}
                             onChange={formChangeHandler}
                         />
+                        {errors?.postal_code && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.postal_code}
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
@@ -124,6 +158,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.email}
                             onChange={formChangeHandler}
                         />
+                        {errors?.email && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.email}
+                            </div>
+                        )}
                     </div>
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
@@ -137,6 +176,11 @@ export default function CheckOutForm() {
                             defaultValue={formData.current.phone}
                             onChange={formChangeHandler}
                         />
+                        {errors?.phone && (
+                            <div className="text-[12px] text-red-500 mt-1">
+                                {errors.phone}
+                            </div>
+                        )}
                     </div>
                 </div>
                 <h2 className="text-[1.3rem] font-bold mt-10">
@@ -148,7 +192,6 @@ export default function CheckOutForm() {
                     </label>
                     <textarea
                         className="text-gray-600  form-input flex w-full min-h-[100px] min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
-                        placeholder="Enter your additional information"
                         type="text"
                         rows="4"
                         name="notes"
