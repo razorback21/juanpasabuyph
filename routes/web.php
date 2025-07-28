@@ -77,7 +77,8 @@ Route::middleware('auth')->group(function () {
 Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::put('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
 Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::get('/cart/get', [CartController::class, 'get'])->name('cart.get');
+Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
+Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
 
 Route::get('/test', function () {
     $cart = app(CartService::class);
