@@ -24,7 +24,10 @@ export default function ({ products }) {
                             {product.name}
                         </h3>
                         <p className="text-red-600 text-lg font-bold leading-normal mb-2 transition-colors duration-300 group-hover:text-red-700">
-                            ${product.price}
+                            ₱
+                            {parseFloat(product.price).toLocaleString("en-US", {
+                                minimumFractionDigits: 2,
+                            })}
                         </p>
                         <p className="text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
                             {product.description.slice(0, 50)}

@@ -82,7 +82,10 @@ export default function ({ title, product, category, relatedProducts }) {
                             Price:
                         </h3>
                         <p className="text-3xl font-bold text-[#e92933]">
-                            ₱{product.price}
+                            ₱
+                            {parseFloat(product.price).toLocaleString("en-US", {
+                                minimumFractionDigits: 2,
+                            })}
                         </p>
                     </div>
                     <div className="mb-6">
