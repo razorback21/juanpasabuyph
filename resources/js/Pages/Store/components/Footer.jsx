@@ -149,7 +149,7 @@ export default function Footer() {
                         developed by{" "}
                         <a
                             href="https://www.donnygapulao.site"
-                            className="text-red-500"
+                            className="text-red-500 hover:underline"
                         >
                             Donny Gapulao
                         </a>
