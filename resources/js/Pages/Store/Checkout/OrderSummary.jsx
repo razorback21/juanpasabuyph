@@ -62,21 +62,21 @@ export default function OrderSummary({ cartItems, cartTotal }) {
                 </div>
             </div>
             <div className="border-t border-gray-300 mt-6 pt-6 space-y-2">
-                <div className="flex justify-between items-center">
+                {/* <div className="flex justify-between items-center">
                     <p className="text-[var(--text-secondary)] text-sm font-normal leading-normal">
                         Subtotal
                     </p>
                     <p className="text-[var(--nav-text-color)] text-sm font-medium leading-normal">
                         ₱{cartTotal}
                     </p>
-                </div>
+                </div> */}
                 {/* <div className="flex justify-between items-center">
                     <p className="text-sm font-normal leading-normal">
                         Shipping
                     </p>
                     <p className="text-sm font-medium leading-normal">$5.99</p>
                 </div> */}
-                <div className="flex justify-between items-center pt-2 border-t border-gray-300 mt-2">
+                <div className="flex justify-between items-center ">
                     <p className="text-lg font-bold leading-normal">Total</p>
                     <p className="text-lg font-bold leading-normal">
                         ₱{cartTotal}
