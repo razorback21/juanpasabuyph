@@ -12,6 +12,7 @@ export default function ({ title, product, category, relatedProducts }) {
     const page = usePage();
     const quantityInputRef = useRef(null);
     console.log(page.props);
+
     const handlerAddToCart = (e) => {
         e.preventDefault();
         const quantity = quantityInputRef.current.getQuantity();
@@ -23,7 +24,7 @@ export default function ({ title, product, category, relatedProducts }) {
             },
             {
                 onSuccess: (response) => {
-                    toast.success(page.props.flash.message);
+                    toast.success("Item added to cart");
                 },
             }
         );
