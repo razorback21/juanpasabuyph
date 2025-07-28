@@ -41,6 +41,7 @@ Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
 Route::get("/about", [AboutController::class, 'index'])->name('about');
 Route::get("/contact", [ContactController::class, 'index'])->name('contact');
 Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
+Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
