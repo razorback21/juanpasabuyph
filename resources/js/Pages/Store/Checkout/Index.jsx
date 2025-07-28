@@ -1,9 +1,19 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
 import CheckOutForm from "@/Pages/Store/Checkout/CheckOutForm.jsx";
 import OrderSummary from "@/Pages/Store/Checkout/OrderSummary.jsx";
+import EmptyCart from "@/Pages/Store/Checkout/EmptyCart.jsx";
 
 export default function Checkout({ cartItems, cartTotal }) {
     console.log(cartItems);
+
+    if (cartItems.length === 0) {
+        return (
+            <Layout title="Checkout">
+                <EmptyCart />
+            </Layout>
+        );
+    }
+
     return (
         <Layout title="Checkout">
             <section className="grid grid-cols-1 md:grid-cols-12 md:gap-10">
