@@ -9,7 +9,7 @@ export default function CheckOutForm() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm leading-normal pb-1.5">
-                            Firstname
+                            Firstname *
                         </label>
                         <input
                             className="ext-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
@@ -20,7 +20,7 @@ export default function CheckOutForm() {
                     </div>
                     <div>
                         <label className="block text-sm leading-normal pb-1.5">
-                            Lastname
+                            Lastname *
                         </label>
                         <input
                             className="ext-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
@@ -32,7 +32,7 @@ export default function CheckOutForm() {
                 </div>
                 <div className="mt-6">
                     <label className="block text-sm leading-normal pb-1.5">
-                        Address
+                        Address *
                     </label>
                     <input
                         className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
@@ -44,7 +44,7 @@ export default function CheckOutForm() {
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                     <div>
                         <label className="block text-sm leading-normal pb-1.5">
-                            City
+                            City *
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
@@ -55,7 +55,7 @@ export default function CheckOutForm() {
                     </div>
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
-                            State / Province
+                            State / Province *
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
@@ -66,7 +66,7 @@ export default function CheckOutForm() {
                     </div>
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
-                            Postal Code
+                            Postal Code *
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
@@ -79,7 +79,7 @@ export default function CheckOutForm() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
-                            Email Address
+                            Email Address *
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
