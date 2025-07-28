@@ -30,7 +30,7 @@ export default function () {
                             className="flex md:w-auto min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-sm h-12 px-6 bg-red-600 hover:bg-red-700 text-white text-base font-semibold leading-normal tracking-[0.015em] transition-colors shadow-sm hover:shadow-md"
                             type="submit"
                         >
-                            <span className="truncate">Continue shopping</span>
+                            <span className="truncate">Continue Shopping</span>
                         </button>
                     </Link>
                 </div>
