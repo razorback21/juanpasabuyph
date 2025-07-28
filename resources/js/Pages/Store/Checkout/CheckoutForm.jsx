@@ -41,7 +41,7 @@ export default function CheckOutForm() {
                         defaultValue=""
                     />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
                     <div>
                         <label className="block text-sm leading-normal pb-1.5">
                             City
@@ -64,8 +64,6 @@ export default function CheckOutForm() {
                             defaultValue=""
                         />
                     </div>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
                     <div className="block">
                         <label className="block text-sm leading-normal pb-1.5">
                             Postal Code
@@ -73,6 +71,19 @@ export default function CheckOutForm() {
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
                             placeholder="Enter zip or postal code"
+                            type="text"
+                            defaultValue=""
+                        />
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                    <div className="block">
+                        <label className="block text-sm leading-normal pb-1.5">
+                            Email Address
+                        </label>
+                        <input
+                            className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
+                            placeholder="Enter your email address"
                             type="text"
                             defaultValue=""
                         />
