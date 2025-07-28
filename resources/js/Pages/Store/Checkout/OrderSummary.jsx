@@ -1,5 +1,26 @@
+import { useState, useReducer } from "react";
+import { router } from "@inertiajs/react";
+
 export default function OrderSummary({ cartItems, cartTotal }) {
     function CartItem({ item }) {
+        const [quantity, setQuantity] = useState(item.quantity);
+
+        function increment() {
+            setQuantity((prevQuantity) => prevQuantity + 1);
+            router.put(route("cart.increment"), {
+                product_id: item.product.id,
+                quantity: quantity + 1,
+            });
+        }
+
+        function decrement() {
+            setQuantity((prevQuantity) => prevQuantity - 1);
+            router.put(route("cart.decrement"), {
+                product_id: item.product.id,
+                quantity: quantity - 1,
+            });
+        }
+
         return (
             <>
                 <div className="flex gap-4 items-start" key={item.product.id}>
@@ -19,7 +40,11 @@ export default function OrderSummary({ cartItems, cartTotal }) {
                             </span>
                         </p>
                         <div className="flex items-center gap-2 mt-2">
-                            <button className="size-6 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-slate-200 transition-colors">
+                            <button
+                                onClick={decrement}
+                                disabled={item.quantity === 1}
+                                className="size-6 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-slate-200 transition-colors"
+                            >
                                 <svg
                                     fill="currentColor"
                                     height="16"
@@ -31,9 +56,12 @@ export default function OrderSummary({ cartItems, cartTotal }) {
                                 </svg>
                             </button>
                             <span className="text-[var(--nav-text-color)] text-sm font-medium w-4 text-center">
-                                {item.quantity}
+                                {quantity}
                             </span>
-                            <button className="size-6 rounded-full border border- flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-slate-200 transition-colors">
+                            <button
+                                onClick={increment}
+                                className="size-6 rounded-full border border- flex items-center justify-center text-gray-500 hover:text-gray-900 hover:bg-slate-200 transition-colors"
+                            >
                                 <svg
                                     fill="currentColor"
                                     height="16"
