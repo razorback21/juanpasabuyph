@@ -23,7 +23,7 @@ class CheckoutController extends Controller
         $cartItems = $this->cartService->getCartWithProducts();
         return Inertia::render('Store/Checkout/Index', [
             'cartItems' => $cartItems,
-            'cartTotal' => collect($cartItems)->sum('subtotal')
+            'cartTotal' => number_format(collect($cartItems)->sum('subtotal'), 2, '.')
         ]);
     }
 
