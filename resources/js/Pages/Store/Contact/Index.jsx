@@ -11,7 +11,7 @@ export default function () {
                                 <h2 className="tracking-tight text-5xl font-black leading-tight min-w-72">
                                     Get in Touch
                                 </h2>
-                                <p class="text-gray-500 text-lg font-normal leading-relaxed">
+                                <p className="text-gray-500 text-lg font-normal leading-relaxed">
                                     Have questions or feedback? We'd love to
                                     hear from you. Fill out the form, and we'll
                                     get back to you as soon as possible.
@@ -98,7 +98,6 @@ export default function () {
                                     <div className="mt-4 space-y-3">
                                         <p className="flex items-center gap-3 text-base font-normal leading-normal">
                                             <svg
-                                                class="text-[var(--primary-color)]"
                                                 fill="currentColor"
                                                 height="20"
                                                 viewBox="0 0 256 256"
@@ -113,7 +112,6 @@ export default function () {
                                         </p>
                                         <p className="flex items-center gap-3 text-base font-normal leading-normal">
                                             <svg
-                                                class="text-[var(--primary-color)]"
                                                 fill="currentColor"
                                                 height="20"
                                                 viewBox="0 0 256 256"

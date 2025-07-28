@@ -71,25 +71,25 @@ export default function Index({ title }) {
                         Frequently Asked Questions
                     </h1>
                 </div>
-                <div class="space-y-10">
+                <div className="space-y-10">
                     {faqs.map((faq) => (
                         <section key={faq.section}>
                             <h2 className="text-2xl font-bold leading-tight tracking-tight px-4 pb-4 pt-2 border-b border-gray-200 mb-6">
                                 {faq.section}
                             </h2>
-                            <div class="flex flex-col gap-4">
+                            <div className="flex flex-col gap-4">
                                 {faq.questions.map((question) => (
                                     <details
                                         key={question.title}
-                                        class="group rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 ease-in-out"
+                                        className="group rounded-xl border border-gray-200 bg-white shadow-sm transition-all duration-300 ease-in-out"
                                     >
-                                        <summary class="flex list-none cursor-pointer items-center justify-between gap-4 p-4">
-                                            <p class="text-[var(--text-primary)] text-base font-medium leading-normal">
+                                        <summary className="flex list-none cursor-pointer items-center justify-between gap-4 p-4">
+                                            <p className="text-[var(--text-primary)] text-base font-medium leading-normal">
                                                 {question.title}
                                             </p>
                                         </summary>
-                                        <div class="px-4 pb-4">
-                                            <p class="text-gray-400 text-sm font-normal leading-relaxed">
+                                        <div className="px-4 pb-4">
+                                            <p className="text-gray-400 text-sm font-normal leading-relaxed">
                                                 {question.content}
                                             </p>
                                         </div>

@@ -138,8 +138,8 @@ export default function EditProduct({ product, movementTypes }) {
                                 )}
                             </h1>
                             <p>Price: PHP {product.price}</p>
-                            <p class="my-4">{product.description}</p>
-                            <p class="my-4">
+                            <p className="my-4">{product.description}</p>
+                            <p className="my-4">
                                 Stocks: {product.current_stock ?? "0"} pcs.
                             </p>
                             <p>

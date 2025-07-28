@@ -41,8 +41,8 @@ export default function ({ title, product, category, relatedProducts }) {
                 <a className="hover:text-[#e92933] transition-colors" href="#">
                     {category}
                 </a>
-                {/* <span class="mx-1">/</span>
-                <span class="text-[#1f2937] font-medium">{product.name}</span> */}
+                {/* <span className="mx-1">/</span>
+                <span className="text-[#1f2937] font-medium">{product.name}</span> */}
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
