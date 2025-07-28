@@ -10,6 +10,7 @@ export default function CheckOutForm() {
         city: "",
         province: "",
         postal_code: "",
+        notes: "",
     });
 
     function formChangeHandler(e) {
@@ -137,6 +138,23 @@ export default function CheckOutForm() {
                             onChange={formChangeHandler}
                         />
                     </div>
+                </div>
+                <h2 className="text-[1.3rem] font-bold mt-10">
+                    Additional Information
+                </h2>
+                <div className="mt-8">
+                    <label className="block text-sm leading-normal pb-1.5">
+                        Message to the seller
+                    </label>
+                    <textarea
+                        className="text-gray-600  form-input flex w-full min-h-[100px] min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
+                        placeholder="Enter your additional information"
+                        type="text"
+                        rows="4"
+                        name="notes"
+                        defaultValue={formData.current.notes}
+                        onChange={formChangeHandler}
+                    />
                 </div>
                 <div className="flex justify-end mt-16">
                     <button

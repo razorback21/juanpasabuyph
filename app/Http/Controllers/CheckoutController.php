@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
-use App\Http\Requests\CheckouRequest;
+use App\Http\Requests\CheckoutFormRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Services\CartService;
@@ -27,7 +27,7 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function store(CheckouRequest $request)
+    public function store(CheckoutFormRequest $request)
     {
         $validated = $request->validated();
         // 1. create customer
