@@ -44,7 +44,7 @@ class Product extends Model
     protected $appends = [
         'product_category',
         'featured_image_url',
-        'current_stock',
+        'available_stock',
     ];
 
     /**
@@ -74,7 +74,7 @@ class Product extends Model
     /**
      * Get the current stock quantity
      */
-    public function getCurrentStockAttribute(): int
+    public function getAvailableStockAttribute(): int
     {
         $stock = $this->inventory()
             ->selectRaw('SUM(CASE 
