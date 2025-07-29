@@ -16,9 +16,9 @@ function InventoryTable({ inventory }) {
             case "inbound":
                 return "bg-green-400 text-white";
             case "outbound":
+            case "adjustment_down":
+            case "damage":
                 return "bg-red-400 text-white";
-            case "reserved":
-                return "bg-orange-400 text-white";
             case "returned":
                 return "bg-blue-400 text-white";
             default:
