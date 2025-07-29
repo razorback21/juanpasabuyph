@@ -52,9 +52,12 @@ class OrderObserver
     {
         // Delete related order items
         $order->items()->delete();
-
-        // delete related inventory reservations
+        // delete stock reservations
         $order->stockReservations()->delete();
+        // delete timeline
+        $order->timeline()->delete();
+        // delete customer
+        $order->customer()->delete();
     }
 
     /**
