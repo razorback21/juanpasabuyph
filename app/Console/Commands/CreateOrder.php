@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\StockReservationStatusEnum;
+use App\Enums\StockReservationTypeEnum;
 use App\Events\EventOrderCreatedAdmin;
 use App\Events\EventOrderCreatedCustomer;
 use App\Models\Customer;
@@ -41,6 +43,9 @@ class CreateOrder extends Command
                 'email' => fake()->unique()->safeEmail(),
                 'phone' => fake()->phoneNumber(),
                 'address' => fake()->address(),
+                'city' => fake()->city(),
+                'postal_code' => fake()->postcode(),
+                'province' => fake()->state(),
             ]);
 
             // Create new order
@@ -61,6 +66,19 @@ class CreateOrder extends Command
                     'uom' => 'pc'
                 ]);
             }
+
+            // reserve stock
+            $order->items()->each(function ($orderItem) use ($order) {
+                $orderItem->product->stockReservations()->create([
+                    'order_id' => $order->id,
+                    'product_id' => $orderItem->product_id,
+                    'quantity' => $orderItem->quantity,
+                    'reservation_status' => StockReservationStatusEnum::CONFIRMED->value,
+                    'reservation_type' => StockReservationTypeEnum::ORDER->value,
+                    'uom' => $orderItem->uom,
+                    'notes' => 'Reservation for order #' . $order->order_number,
+                ]);
+            });
 
 
             event(new EventOrderCreatedCustomer($order));
