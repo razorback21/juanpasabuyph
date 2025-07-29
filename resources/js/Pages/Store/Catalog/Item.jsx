@@ -12,7 +12,6 @@ import { Link } from "@inertiajs/react";
 export default function ({ title, product, category, relatedProducts }) {
     const page = usePage();
     const quantityInputRef = useRef(null);
-    console.log(page.props);
 
     const handlerAddToCart = (e) => {
         e.preventDefault();
