@@ -3,6 +3,7 @@
 namespace App\Listeners;
 
 use App\Enums\OrderStatusEnum;
+use App\Enums\StockReservationStatusEnum;
 use App\Events\EventOrderStatusChanged;
 use App\Models\Order;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -28,13 +29,14 @@ class OrderStatusChangeReservedItems
 
     protected function handleReservedItems(Order $order, OrderStatusEnum $status)
     {
-        if (OrderStatusEnum::CANCELLED->value == $status->value) {
-            $order->inventoryReservations()->delete();
-        } elseif (OrderStatusEnum::SHIPPED->value == $status->value) {
-            $order->inventoryReservations()->update([
-                'movement_type' => 'outbound',
-                'notes' => 'Order #' . $order->order_number . ' has been shipped.',
+        $updateReservationStatus = [OrderStatusEnum::CANCELLED->value, OrderStatusEnum::SHIPPED->value];
+
+        if (in_array($status->value, $updateReservationStatus)) {
+
+            $order->stockReservations()->update([
+                'reservation_status' => $status->value == 'shipped' ? StockReservationStatusEnum::RELEASED->value : StockReservationStatusEnum::CANCELLED->value,
             ]);
         }
+
     }
 }
