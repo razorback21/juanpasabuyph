@@ -5,6 +5,7 @@ namespace App\Actions\Order;
 use App\Enums\OrderStatusEnum;
 use App\Enums\StockReservationStatusEnum;
 use App\Enums\StockReservationTypeEnum;
+use App\Events\EventOrderCreatedCustomer;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Services\CartService;
@@ -57,6 +58,8 @@ class CreateOrder
                     'notes' => 'Reservation for order #' . $order->order_number,
                 ]);
             });
+
+            event(new EventOrderCreatedCustomer($order));
         });
     }
 }
