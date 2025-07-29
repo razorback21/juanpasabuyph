@@ -9,6 +9,8 @@ use App\Http\Resources\InventoryResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+// This controller is responsible for managing the inventory of products.
+// todo: moved this into web routes
 class InventoryController extends Controller
 {
     /**
