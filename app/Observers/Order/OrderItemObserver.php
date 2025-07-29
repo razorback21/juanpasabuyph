@@ -34,11 +34,11 @@ class OrderItemObserver
     public function updated(OrderItem $orderItem): void
     {
         $reservedItem = (new ReservedItemService())->findByOrderOrderItem($orderItem);
-        /**
-         * Check if the order item's product matches the inventory product
-         * If quantity is 0, delete the inventory record and order item
-         * Otherwise update the inventory with new UOM and quantity
-         */
+
+        // Check if the order item's product matches the inventory product
+        //  If quantity is 0, delete the inventory record and order item
+        //  Otherwise update the inventory with new UOM and quantity
+
         if ($orderItem->product_id == $reservedItem->product_id) {
             switch ($orderItem->quantity) {
                 case 0:
@@ -53,6 +53,7 @@ class OrderItemObserver
                     ]);
             }
         }
+
     }
 
     public function deleting(OrderItem $orderItem): void
@@ -62,6 +63,7 @@ class OrderItemObserver
         if (!$orderService->canBeDeleted($order)) {
             abort(403, "Order cannot be deleted");
         }
+
     }
 
     /**
@@ -69,6 +71,7 @@ class OrderItemObserver
      */
     public function deleted(OrderItem $orderItem): void
     {
+        /* OLD CODE
         // Make sure to also delete the reserve item when order item is deleted
         (new ReservedItemService())->delete($orderItem);
 
@@ -77,6 +80,7 @@ class OrderItemObserver
         if ($order->items()->count() === 0) {
             $order->delete();
         }
+        */
     }
 
     /**

@@ -4,18 +4,19 @@ namespace App\Services;
 
 use App\Models\Inventory;
 use App\Models\OrderItem;
+use App\Models\StockReservation;
 
 class ReservedItemService
 {
-    public function findByOrderOrderItem(OrderItem $orderItem): Inventory
+    public function findByOrderOrderItem(OrderItem $orderItem): StockReservation
     {
         $order = $orderItem->order;
-        if (!$order->inventoryReservations) {
-            return new Inventory();
+        if (!$order->stockReservations) {
+            return new StockReservation();
         }
 
-        return $order->inventoryReservations->first(function (Inventory $inventory) use ($orderItem): bool {
-            return $orderItem->product_id == $inventory->product_id;
+        return $order->stockReservations->first(function (StockReservation $stockReservation) use ($orderItem): bool {
+            return $orderItem->product_id == $stockReservation->product_id;
         });
     }
 
