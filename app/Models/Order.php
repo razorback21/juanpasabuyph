@@ -62,13 +62,12 @@ class Order extends Model
     }
 
     /**
-     * Get Stock Order reservations
+     * Get all Stock Order reservations records
      */
     public function stockReservations(): HasMany
     {
         return $this->hasMany(StockReservation::class);
     }
-
 
     /**
      * Scope a query to only include orders with specific status.
