@@ -21,10 +21,8 @@ class CheckoutController extends Controller
     public function index()
     {
         $cartItems = $this->cartService->getCartWithProducts();
-        return Inertia::render('Store/Checkout/Index', [
-            'cartItems' => $cartItems,
-            'cartTotal' => number_format(collect($cartItems)->sum('subtotal'), 2, '.')
-        ]);
+        $cartTotal = number_format($this->cartService->getGrandTotal(), 2, '.');
+        return Inertia::render('Store/Checkout/Index', compact('cartItems', 'cartTotal'));
     }
 
     public function store(CheckoutFormRequest $request)

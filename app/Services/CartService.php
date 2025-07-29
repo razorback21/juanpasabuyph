@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 class CartService
 {
-    // todo; Move this to .env
+    private $cartWithtotalsResult = [];
     private $cartSessionKey;
     public function __construct()
     {
@@ -71,7 +71,7 @@ class CartService
 
         $products = Product::whereIn('id', $productIds)->get()->keyBy('id');
 
-        return collect($cart)->map(function ($item) use ($products) {
+        $cartWithtotalsResult = collect($cart)->map(function ($item) use ($products) {
             $product = $products[$item['product_id']] ?? null;
 
             return [
@@ -81,6 +81,9 @@ class CartService
                 'subtotal' => $product ? $product->price * $item['quantity'] : 0,
             ];
         })->values()->toArray();
+
+        $this->cartWithtotalsResult = $cartWithtotalsResult;
+        return $cartWithtotalsResult;
     }
 
     public function getCartCount(): int
@@ -95,8 +98,10 @@ class CartService
 
     public function getSubtotal(): float
     {
-        $cartItems = $this->getCartWithProducts();
-        return collect($cartItems)->sum('subtotal');
+        $cartItems = count($this->cartWithtotalsResult) ? $this->cartWithtotalsResult : $this->getCartWithProducts();
+        $result = collect($cartItems)->sum('subtotal');
+
+        return floatval($result);
     }
 
     public function isEmpty(): bool
@@ -108,5 +113,11 @@ class CartService
     {
         $cart = $this->getCart();
         return $cart[$productId] ?? null;
+    }
+
+    public function getGrandTotal(): float
+    {
+        $subTotal = $this->getSubtotal();
+        return floatval($subTotal);
     }
 }
