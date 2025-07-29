@@ -25,6 +25,9 @@ class Customer extends Model
         'email',
         'phone',
         'address',
+        'city',
+        'province',
+        'postal_code',
     ];
 
     protected $appends = [
