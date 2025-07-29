@@ -31,7 +31,7 @@ export default function ({ title, product, category, relatedProducts }) {
     };
 
     function disabledItem() {
-        return product.current_stock === 0 || product.disabled;
+        return product.available_stock === 0 || product.disabled;
     }
 
     return (
@@ -92,7 +92,7 @@ export default function ({ title, product, category, relatedProducts }) {
                         <h3 className="text-sm text-[#1f2937] mb-1">
                             Sold per PC.
                         </h3>
-                        {!product.current_stock && (
+                        {!product.available_stock && (
                             <Badge variant="destructive">Out of Stock</Badge>
                         )}
                     </div>

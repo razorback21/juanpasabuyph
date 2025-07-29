@@ -140,7 +140,7 @@ export default function EditProduct({ product, movementTypes }) {
                             <p>Price: PHP {product.price}</p>
                             <p className="my-4">{product.description}</p>
                             <p className="my-4">
-                                Stocks: {product.current_stock ?? "0"} pcs.
+                                Stocks: {product.available_stock ?? "0"} pcs.
                             </p>
                             <p>
                                 <LinkButton

@@ -23,13 +23,13 @@ class ProductStock implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         // check if product is out of stock and return false
-        if ($this->product->current_stock == 0) {
+        if ($this->product->available_stock == 0) {
             $fail('Product is out of stock.');
             return;
         }
 
         // check if entered quantity is more than available stock and return false
-        if ($value > $this->product->current_stock) {
+        if ($value > $this->product->available_stock) {
             $fail('Entered quantity is more than available stock.');
             return;
         }

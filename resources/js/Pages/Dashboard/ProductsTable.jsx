@@ -50,7 +50,7 @@ export default function ({ products, categories, active_category }) {
             ),
             header: () => <span>Name</span>,
         }),
-        columnHelper.accessor("current_stock", {
+        columnHelper.accessor("available_stock", {
             cell: (product) => product.getValue(),
             header: () => <span>Stocks</span>,
         }),

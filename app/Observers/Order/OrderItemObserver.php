@@ -16,7 +16,7 @@ class OrderItemObserver
     public function creating(OrderItem $orderItem)
     {
         $orderItem->load("product");
-        if ($orderItem->product->current_stock < $orderItem->quantity) {
+        if ($orderItem->product->available_stock < $orderItem->quantity) {
             abort(403, "Insufficient stock for product {$orderItem->product->name}");
         }
     }

@@ -40,7 +40,7 @@ export default function ({ order, statusCantBeDeleted, readOnly = false }) {
                 setIsError(true);
                 return;
             }
-            if (enteredQuantity > row.row.original.product.current_stock) {
+            if (enteredQuantity > row.row.original.product.available_stock) {
                 setMessage("Quantity exceeds stock");
                 setIsError(true);
                 return;
@@ -71,7 +71,7 @@ export default function ({ order, statusCantBeDeleted, readOnly = false }) {
                     }}
                     type="number"
                     min={1}
-                    max={row.row.original.product.current_stock}
+                    max={row.row.original.product.available_stock}
                     readOnly={readOnly}
                 />
                 {isError && (

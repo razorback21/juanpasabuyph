@@ -45,7 +45,7 @@ class InventoryRequest extends FormRequest
         $quantity = $this->input('quantity');
 
         if ($movementType === MovementTypeEnum::OUTBOUND->value) {
-            $stock = $product->current_stock;
+            $stock = $product->available_stock;
 
             return $quantity <= $stock;
         }
