@@ -157,6 +157,16 @@ export default function ({
                         <div>
                             <Label>Address: {order.customer.address}</Label>
                             <br />
+                            <Label>City: {order.customer.city}</Label>
+                            <br />
+                            <Label>
+                                Province: {order.customer.province}
+                            </Label>{" "}
+                            <br />
+                            <Label>
+                                Postal Code: {order.customer.postal_code}
+                            </Label>
+                            <br />
                         </div>
                     </div>
                 </div>
