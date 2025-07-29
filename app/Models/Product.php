@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\MovementTypeEnum;
 use App\Enums\StockReservationStatusEnum;
+use App\Enums\StockReservationTypeEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -41,12 +42,14 @@ class Product extends Model
         'price' => 'decimal:2',
     ];
 
-    // append mutated attribute to arraay or json response
+    // append mutated attribute to array or json response
     protected $appends = [
         'product_category',
         'featured_image_url',
         'available_stock',
         'current_stock',
+        'stock_reservation_for_order_quantity',
+        'stock_reservation_for_completed_order_quantity',
     ];
 
     /**
@@ -110,6 +113,37 @@ class Product extends Model
             StockReservationStatusEnum::CONFIRMED->value,
             StockReservationStatusEnum::RELEASED->value
         ])->sum('quantity');
+    }
+
+    public function stockReservationsForOrder(): HasMany
+    {
+        return $this->stockReservations()->where(
+            'reservation_type',
+            StockReservationTypeEnum::ORDER->value,
+        )->whereIn('reservation_status', [
+                    StockReservationStatusEnum::CONFIRMED->value,
+                ]);
+    }
+
+    public function stockReservationsForCompletedOrder(): HasMany
+    {
+        return $this->stockReservations()->where(
+            'reservation_type',
+            StockReservationTypeEnum::ORDER->value,
+        )->whereIn('reservation_status', [
+                    StockReservationStatusEnum::RELEASED->value,
+                ]);
+    }
+
+
+    public function getStockReservationForOrderQuantityAttribute()
+    {
+        return $this->stockReservationsForOrder()->sum('quantity');
+    }
+
+    public function getStockReservationForCompletedOrderQuantityAttribute()
+    {
+        return $this->stockReservationsForCompletedOrder()->sum('quantity');
     }
 
     // Add this method to the Product model
