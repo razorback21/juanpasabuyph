@@ -124,4 +124,15 @@ class Product extends Model
         return $this->where('slug', $value)->firstOrFail();
     }
 
+    public function scopeFeaturedProduct($query)
+    {
+        return $query->where('is_featured', true);
+    }
+
+    public function scopeBestSeller($query)
+    {
+        return $query->withCount('orderItems')
+            ->orderBy('order_items_count', 'desc');
+    }
+
 }

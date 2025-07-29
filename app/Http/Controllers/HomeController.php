@@ -10,14 +10,11 @@ class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $featuredProducts = Product::where('is_featured', true)->get()->random(4);
+        $title = "Juanpasabuy Store";
+        $featuredProducts = Product::featuredProduct()->get()->random(4);
         // todo: replace with best products
-        $bestProducts = Product::where('is_featured', true)->get()->random(4);
+        $bestProducts = Product::bestSeller()->get()->random(4);
 
-        return Inertia::render("Store/Home/Index", [
-            'title' => "Juanpasabuy Store",
-            'featuredProducts' => $featuredProducts,
-            'bestProducts' => $bestProducts,
-        ]);
+        return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'bestProducts'));
     }
 }
