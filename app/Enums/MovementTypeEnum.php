@@ -16,10 +16,10 @@ enum MovementTypeEnum: string
         return [
             self::INBOUND->value => '[ + ] Inbound',
             self::RETURNED->value => '[ + ] Returned',
-            self::OUTBOUND->value => '[ - ] Outbound',
-            self::DAMAGE->value => '[ - ] Damage',
             self::ADJUSTMENT_UP->value => '[ + ] Adjustment Up',
             self::ADJUSTMENT_DOWN->value => '[ - ] Adjustment Down',
+            self::OUTBOUND->value => '[ - ] Outbound',
+            self::DAMAGE->value => '[ - ] Damage',
         ];
     }
 
