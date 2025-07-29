@@ -171,20 +171,22 @@ export default function ({
                     </div>
                 </div>
 
-                {order.notes.trim() && (
+                {order.notes && (
                     <div className="my-4">
                         <div className="flex flex-col gap-2 my-4">
                             <Label>
-                                <strong>Notes:</strong> {order.notes}
+                                <strong>Notes:</strong> {order.notes?.trim()}
                             </Label>
                         </div>
-                        <OrdersTableShow
-                            order={order}
-                            statusCantBeDeleted={statusCantBeDeleted}
-                            readOnly={readOnlyStatus}
-                        />
                     </div>
                 )}
+                <div className="mt-4">
+                    <OrdersTableShow
+                        order={order}
+                        statusCantBeDeleted={statusCantBeDeleted}
+                        readOnly={readOnlyStatus}
+                    />
+                </div>
             </div>
         </AuthenticatedLayout>
     );
