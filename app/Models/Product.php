@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Enums\MovementTypeEnum;
+use App\Enums\StockReservationStatusEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -45,6 +46,7 @@ class Product extends Model
         'product_category',
         'featured_image_url',
         'available_stock',
+        'current_stock',
     ];
 
     /**
@@ -71,28 +73,43 @@ class Product extends Model
         return $this->hasMany(OrderItem::class);
     }
 
-    /**
-     * Get the current stock quantity
-     */
-    public function getAvailableStockAttribute(): int
+    public function stockReservations(): HasMany
+    {
+        return $this->hasMany(StockReservation::class);
+    }
+
+    public function getCurrentStockAttribute()
     {
         $stock = $this->inventory()
             ->selectRaw('SUM(CASE 
-                WHEN movement_type IN (?, ?) THEN quantity 
+                WHEN movement_type IN (?, ?, ?) THEN quantity 
                 WHEN movement_type IN (?, ?, ?) THEN -quantity 
                 ELSE 0 
             END) as stock', [
                     // Plus
                 MovementTypeEnum::INBOUND,
                 MovementTypeEnum::RETURNED,
+                MovementTypeEnum::ADJUSTMENT_UP,
                     // Minus
                 MovementTypeEnum::OUTBOUND,
-                MovementTypeEnum::ADJUSTMENT,
-                MovementTypeEnum::RESERVED
+                MovementTypeEnum::DAMAGE,
+                MovementTypeEnum::ADJUSTMENT_DOWN
             ])
             ->value('stock');
 
         return $stock > 0 ? $stock : 0;
+    }
+
+    /**
+     * Get inventory available stock
+     */
+    public function getAvailableStockAttribute(): int
+    {
+        // available stock is current stock minus reserved stock
+        return $this->current_stock - $this->stockReservations()->whereIn('status', [
+            StockReservationStatusEnum::CONFIRMED->value,
+            StockReservationStatusEnum::RELEASED->value
+        ])->sum('quantity');
     }
 
     // Add this method to the Product model
