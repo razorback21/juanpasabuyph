@@ -4,20 +4,22 @@ namespace App\Enums;
 
 enum MovementTypeEnum: string
 {
-    case RESERVED = 'reserved';
     case INBOUND = 'inbound';
     case OUTBOUND = 'outbound'; // Use this for sales/shipped items
     case RETURNED = 'returned';
-    case ADJUSTMENT = 'adjustment';
+    case DAMAGE = 'damage';
+    case ADJUSTMENT_UP = 'adjustment_up';
+    case ADJUSTMENT_DOWN = 'adjustment_down';
 
     public static function getOptions(): array
     {
         return [
             self::INBOUND->value => '[ + ] Inbound',
             self::RETURNED->value => '[ + ] Returned',
-                //self::RESERVED->value => '[ - ] Reserved',
             self::OUTBOUND->value => '[ - ] Outbound',
-            //self::ADJUSTMENT->value => '[ - ] Adjustment',
+            self::DAMAGE->value => '[ - ] Damage',
+            self::ADJUSTMENT_UP->value => '[ + ] Adjustment Up',
+            self::ADJUSTMENT_DOWN->value => '[ - ] Adjustment Down',
         ];
     }
 
