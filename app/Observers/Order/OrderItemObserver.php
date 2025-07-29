@@ -71,7 +71,6 @@ class OrderItemObserver
      */
     public function deleted(OrderItem $orderItem): void
     {
-        /* OLD CODE
         // Make sure to also delete the reserve item when order item is deleted
         (new ReservedItemService())->delete($orderItem);
 
@@ -80,7 +79,6 @@ class OrderItemObserver
         if ($order->items()->count() === 0) {
             $order->delete();
         }
-        */
     }
 
     /**
