@@ -106,7 +106,7 @@ class Product extends Model
     public function getAvailableStockAttribute(): int
     {
         // available stock is current stock minus reserved stock
-        return $this->current_stock - $this->stockReservations()->whereIn('status', [
+        return $this->current_stock - $this->stockReservations()->whereIn('reservation_status', [
             StockReservationStatusEnum::CONFIRMED->value,
             StockReservationStatusEnum::RELEASED->value
         ])->sum('quantity');
