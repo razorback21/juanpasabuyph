@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum ReservationTypeEnum: string
+enum StockReservationTypeEnum: string
 {
     case ORDER = 'order';
     case ADMIN_HOLD = 'admin_hold';
