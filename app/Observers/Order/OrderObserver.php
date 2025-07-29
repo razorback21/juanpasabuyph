@@ -54,7 +54,7 @@ class OrderObserver
         $order->items()->delete();
 
         // delete related inventory reservations
-        $order->inventoryReservations()->delete();
+        $order->stockReservations()->delete();
     }
 
     /**
