@@ -62,11 +62,11 @@ class Order extends Model
     }
 
     /**
-     * Get Inventory Order reservations
+     * Get Stock Order reservations
      */
-    public function inventoryReservations(): HasMany
+    public function stockReservations(): HasMany
     {
-        return $this->hasMany(Inventory::class);
+        return $this->hasMany(StockReservation::class);
     }
 
 
