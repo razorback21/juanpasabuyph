@@ -137,7 +137,13 @@ export default function EditProduct({ product, movementTypes }) {
                                     <Badge variant="secondary">Disabled</Badge>
                                 )}
                             </h1>
-                            <p>Price: PHP {product.price}</p>
+                            <p>
+                                Price: ₱
+                                {Number(product.price).toLocaleString("en-US", {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                })}
+                            </p>
                             <p className="my-4">{product.description}</p>
                             <div className="border-b border-gray-200 mb-4"></div>
                             <p>
