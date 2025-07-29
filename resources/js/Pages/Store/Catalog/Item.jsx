@@ -7,6 +7,7 @@ import { Toaster } from "@/Components/ui/sonner";
 import { toast } from "sonner";
 import { useRef } from "react";
 import { Button } from "@/components/ui/Button";
+import { Link } from "@inertiajs/react";
 
 export default function ({ title, product, category, relatedProducts }) {
     const page = usePage();
@@ -38,9 +39,13 @@ export default function ({ title, product, category, relatedProducts }) {
         <Layout title={title} category={category}>
             <Toaster />
             <div className="mb-6 text-sm text-[#6b7280]">
-                <a className="hover:text-[#e92933] transition-colors" href="#">
+                Category /{" "}
+                <Link
+                    href={`/catalog?category=${category}`}
+                    className="hover:text-[#e92933] transition-colors"
+                >
                     {category}
-                </a>
+                </Link>
                 {/* <span className="mx-1">/</span>
                 <span className="text-[#1f2937] font-medium">{product.name}</span> */}
             </div>
