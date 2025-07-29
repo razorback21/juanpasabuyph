@@ -139,8 +139,32 @@ export default function EditProduct({ product, movementTypes }) {
                             </h1>
                             <p>Price: PHP {product.price}</p>
                             <p className="my-4">{product.description}</p>
-                            <p className="my-4">
-                                Stocks: {product.available_stock ?? "0"} pcs.
+                            <div className="border-b border-gray-200 mb-4"></div>
+                            <p>
+                                Current Stocks:{" "}
+                                <Badge variant="outline">
+                                    {product.current_stock ?? "0"}
+                                </Badge>
+                            </p>
+                            <p>
+                                Available Stocks:{" "}
+                                <Badge variant="outline">
+                                    {product.available_stock ?? "0"}
+                                </Badge>
+                            </p>
+                            <p>
+                                Reserved for Orders:{" "}
+                                <Badge variant="outline">
+                                    {product.stock_reservation_for_order_quantity ??
+                                        "0"}
+                                </Badge>
+                            </p>
+                            <p className="mb-4">
+                                Released:{" "}
+                                <Badge variant="outline">
+                                    {product.stock_reservation_for_completed_order_quantity ??
+                                        "0"}
+                                </Badge>
                             </p>
                             <p>
                                 <LinkButton
