@@ -14,6 +14,7 @@ Tech Stack
 - Add to cart and checkout functionality
 - SEO-friendly URLs
 - Meta tags and opengraph tags for common pages and Product pages
+- Order Tracking
 
 ### Features Admin
 - Inventory system with reservation,
@@ -54,6 +55,8 @@ Permission
 ### ROADMAP
 
 Phase 2
+- Customer Management
+- Faceboook and Google Authentication
 - Payment integration with GCASH
 - QR code scanning
 - Product image gallery
