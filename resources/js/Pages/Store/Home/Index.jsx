@@ -35,16 +35,25 @@ export default function ({ title, featuredProducts, bestProducts }) {
             </section>
 
             {/* Featured Products */}
-            <HomeProducts
-                products={featuredProducts}
-                title="Featured Products"
-            />
+            <section>
+                <HomeProducts
+                    products={featuredProducts}
+                    title="Featured Products"
+                />
+            </section>
 
             {/* New Arrivals */}
-            <HomeProducts products={bestProducts} title="Popular Products" />
+            <section>
+                <HomeProducts
+                    products={bestProducts}
+                    title="Popular Products"
+                />
+            </section>
 
             {/* Customer Reviews */}
-            <Reviews />
+            <section>
+                <Reviews />
+            </section>
         </Layout>
     );
 }
