@@ -86,11 +86,11 @@ Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.
 // Sitemap route
 Route::get('/sitemap.xml', function () {
     $sitemapPath = public_path('sitemap.xml');
-    
+
     if (!file_exists($sitemapPath)) {
-        abort(404, 'Sitemap not found. Please generate it using: php artisan app:generate-sitemap');
+        abort(404, 'Sitemap not found.');
     }
-    
+
     return response()->file($sitemapPath, [
         'Content-Type' => 'application/xml'
     ]);
