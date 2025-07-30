@@ -8,6 +8,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FaqsController;
+use App\Http\Controllers\FeaturedProductController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
@@ -75,6 +76,9 @@ Route::middleware('auth')->group(function () {
     // Order Status Timeline
     Route::resource('order-status-timelines', OrderStatusTimelineController::class);
 
+    // Featured Product
+    Route::get('/featured-products', [FeaturedProductController::class, 'index'])->name('featured-products.index');
+    Route::put('/featured-products/{product}', [FeaturedProductController::class, 'update'])->name('featured-products.update');
 });
 
 Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
