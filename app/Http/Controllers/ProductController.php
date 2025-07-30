@@ -8,9 +8,11 @@ use App\Http\Requests\Product\ProductRequest;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Services\ProductDeleteService;
+use App\Services\ProductFilterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class ProductController extends Controller
@@ -18,9 +20,26 @@ class ProductController extends Controller
     /**
      * Display a listing of the products.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $filter = new ProductFilterService($request);
 
+        $products = $filter->getQuery()->paginate(10)
+            ->withQueryString()
+            ->through(function ($product) {
+                return [
+                    ...$product->toArray(),
+                    'description' => Str::limit($product->description, 100),
+                ];
+            });
+
+        $categories = ProductCategory::all();
+
+        return Inertia::render('Products/Index', [
+            'products' => $products,
+            'categories' => $categories,
+            'active_category' => $request->query('active_category') ?? 'All',
+        ]);
     }
 
     /**
