@@ -15,8 +15,7 @@ class HomeController extends Controller
     {
         $title = 'Home';
         $featuredProducts = Product::featuredProduct()->get()->random(4);
-        // todo: replace with best products
-        $bestProducts = Product::bestSeller()->get()->random(4);
+        $popularProducts = Product::popular()->get()->random(4);
 
         return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'bestProducts'));
     }

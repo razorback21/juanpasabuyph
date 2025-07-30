@@ -177,10 +177,10 @@ class Product extends Model
 
     public function scopeFeaturedProduct($query)
     {
-        return $query->where('is_featured', true);
+        return $query->where(['is_featured' => true, 'disabled' => false]);
     }
 
-    public function scopeBestSeller($query)
+    public function scopePopular($query)
     {
         return $query->withCount('orderItems')
             ->orderBy('order_items_count', 'desc');
