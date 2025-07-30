@@ -46,7 +46,9 @@ export default function ({ title, children }) {
                 <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
                     <div className="flex items-center gap-3 sm:gap-10">
                         <div className="flex items-center gap-3 text-[#e92933]">
-                            <Logo />
+                            <Link href="/">
+                                <Logo />
+                            </Link>
                         </div>
                         <nav className="hidden lg:flex items-center gap-6">
                             {LinksData.map((link) => (
