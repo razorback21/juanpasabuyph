@@ -79,7 +79,7 @@ export default function ({ products }) {
                                     }
                                 );
 
-                                toast.success(response.data.message);
+                                toast.success(response.message);
                             } catch (err) {
                                 dialogRef.current.open({
                                     title: "Error",
