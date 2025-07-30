@@ -25,7 +25,7 @@ export default function () {
                             </div>
                         </div>
                     </section>
-                    <div className="flex flex-wrap justify-between items-center gap-4 p-4">
+                    <section className="flex flex-wrap justify-between items-center gap-4 p-4">
                         <div className="w-full">
                             <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
                                 <h2 className="tracking-tight text-3xl sm:text-4xl font-bold leading-tight min-w-72">
@@ -66,7 +66,7 @@ export default function () {
                                 experience closer to home.
                             </p>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </Layout>
         </>
