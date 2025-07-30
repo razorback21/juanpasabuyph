@@ -113,7 +113,7 @@ export default function EditProduct({ product, movementTypes }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="text-right pt-4">
                         <LinkButton
-                            href={route("dashboard")}
+                            href={route("admin.inventory.products")}
                             className="mr-2 bg-red-500 text-white"
                         >
                             Back
