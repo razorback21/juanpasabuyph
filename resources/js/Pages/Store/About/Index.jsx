@@ -5,6 +5,26 @@ export default function () {
         <>
             <Layout title="About Us">
                 <div className="container mx-auto">
+                    <section className="w-full @container mb-12">
+                        <div
+                            className="bg-contain bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
+                            style={{
+                                backgroundImage:
+                                    'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("/storage/assets/about.jpg")',
+                            }}
+                        >
+                            <div className="p-8 sm:p-12">
+                                {/* <h2 className="text-white text-3xl sm:text-5xl font-bold leading-tight tracking-tight max-w-2xl">
+                                    Discover the best deals from Dubai
+                                </h2> */}
+                                <p className="text-gray-200 mt-4 text-lg sm:text-xl max-w-xl">
+                                    JuanPasabuy PH, your trusted partner in
+                                    bringing premium Dubai products right to
+                                    your doorstep!
+                                </p>
+                            </div>
+                        </div>
+                    </section>
                     <div className="flex flex-wrap justify-between items-center gap-4 p-4">
                         <div className="w-full">
                             <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
