@@ -140,9 +140,9 @@ const data = {
         {
             name: "Featured Products",
             url: "#",
-            route: "product-categories.index",
+            route: "featured-products.index",
             icon: FoldersIcon,
-            activeKey: "product-categories",
+            activeKey: "featured-products",
         },
         // {
         //     name: "Data Library",
