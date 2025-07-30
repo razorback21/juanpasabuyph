@@ -3,7 +3,7 @@ import HomeProducts from "../components/HomeProducts";
 import Reviews from "../components/Reviews";
 import { Link } from "@inertiajs/react";
 
-export default function ({ title, featuredProducts, bestProducts }) {
+export default function ({ title, featuredProducts, popularProducts }) {
     return (
         <Layout title={title}>
             {/* Hero */}
@@ -43,7 +43,7 @@ export default function ({ title, featuredProducts, bestProducts }) {
             {/* New Arrivals */}
             <section>
                 <HomeProducts
-                    products={bestProducts}
+                    products={popularProducts}
                     title="Popular Products"
                 />
             </section>

@@ -17,6 +17,6 @@ class HomeController extends Controller
         $featuredProducts = Product::featuredProduct()->get()->random(4);
         $popularProducts = Product::popular()->get()->random(4);
 
-        return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'bestProducts'));
+        return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'popularProducts'));
     }
 }
