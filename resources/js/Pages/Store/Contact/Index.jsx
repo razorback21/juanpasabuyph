@@ -7,7 +7,7 @@ export default function () {
                 <div className="container mx-auto">
                     <div className="flex flex-wrap justify-between items-center gap-4 p-4">
                         <div className="w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-                            <div className="flex flex-wrap justify-between items-center gap-4 mb-8">
+                            <section className="flex flex-wrap justify-between items-center gap-4 mb-8">
                                 <h2 className="tracking-tight text-5xl font-black leading-tight min-w-72">
                                     Get in Touch
                                 </h2>
@@ -89,8 +89,8 @@ export default function () {
                                         </button>
                                     </div>
                                 </form>
-                            </div>
-                            <div>
+                            </section>
+                            <section>
                                 <div className="mb-7">
                                     <h3 className="text-2xl font-bold leading-tight tracking-[-0.015em]">
                                         Contact Information
@@ -140,7 +140,7 @@ export default function () {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </section>
                         </div>
                     </div>
                 </div>
