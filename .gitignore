@@ -33,3 +33,4 @@ test.*
 CLAUDE.md
 .gitignore
 .windsurfrules
+/public/sitemap.xml
