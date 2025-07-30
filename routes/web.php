@@ -83,6 +83,19 @@ Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear
 Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
 Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
 
+// Sitemap route
+Route::get('/sitemap.xml', function () {
+    $sitemapPath = public_path('sitemap.xml');
+    
+    if (!file_exists($sitemapPath)) {
+        abort(404, 'Sitemap not found. Please generate it using: php artisan app:generate-sitemap');
+    }
+    
+    return response()->file($sitemapPath, [
+        'Content-Type' => 'application/xml'
+    ]);
+})->name('sitemap');
+
 Route::get('/test', function () {
     $cart = app(CartService::class);
     dd($cart->getCart());
