@@ -4,8 +4,6 @@ import Reviews from "../components/Reviews";
 import { Link } from "@inertiajs/react";
 
 export default function ({ title, featuredProducts, bestProducts }) {
-    console.log(featuredProducts);
-
     return (
         <Layout title={title}>
             {/* Hero */}
