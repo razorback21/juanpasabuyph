@@ -1,5 +1,6 @@
 Juan Padala Phase 1 - Laravel E-commerce site 
 
+### WEB Version
 Tech Stack
 - Laravel 12
 - Ineria React JS
@@ -7,13 +8,17 @@ Tech Stack
 - Shadcn
 - Tailwind
 
-Features
-- Storefront with add to cart and check out functionality.
-- Inventory system with cart reservation,
+### Features Store Front
+- Common pages (Home, About, FAQs, Contact)
+- Product catalog with categories and product details
+- Add to cart and checkout functionality
+
+### Features Admin
+- Inventory system with reservation,
 - Manage Products,  
-- Manage product categories, 
+- Manage Product Categories, 
 - Manage orders ( Status, notifications, timeline)
-- SEO-friendly sitemap generation for categories and products
+- Reports (Inventory, Sales, Product Status)
 
 ## Sitemap Generation
 
@@ -46,7 +51,7 @@ Permission
 
 ### ROADMAP
 
-Next phase
+Phase 2
 - Payment integration with GCASH
 - QR code scanning
 - Product image gallery
@@ -56,7 +61,7 @@ Next phase
 - Chatbot
 ----------------------------------------------------
 
-MOBILE version
+### MOBILE Version
 
 Tech Stack
 - React Native
