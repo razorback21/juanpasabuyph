@@ -44,6 +44,7 @@ This command will:
 Permission
 - No user role for phase 1. The user has full access to the admin section
 
+### ROADMAP
 
 Next phase
 - Payment integration with GCASH
@@ -55,10 +56,12 @@ Next phase
 - Chatbot
 ----------------------------------------------------
 
-MOBILE versiobn
+MOBILE version
 
 Tech Stack
 - React Native
 - GraphQL
 - Dexie JS
+- laravel 12 Lighthouse for graphql
+
  
