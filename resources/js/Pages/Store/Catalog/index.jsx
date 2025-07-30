@@ -168,8 +168,9 @@ export default function ({ title, products, categories }) {
             <div className="flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
                 <CategoryDropdown />
             </div>
-
-            <ProductCatalog products={products} ref={catalogRef} />
+            <section>
+                <ProductCatalog products={products} ref={catalogRef} />
+            </section>
         </Layout>
     );
 }
