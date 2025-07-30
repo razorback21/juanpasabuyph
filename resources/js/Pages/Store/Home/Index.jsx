@@ -1,6 +1,7 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
 import HomeProducts from "../components/HomeProducts";
 import Reviews from "../components/Reviews";
+import { Link } from "@inertiajs/react";
 
 export default function ({ title, featuredProducts, bestProducts }) {
     console.log(featuredProducts);
@@ -24,9 +25,11 @@ export default function ({ title, featuredProducts, bestProducts }) {
                             JuanPasabuy PH, your trusted partner in bringing
                             premium Dubai products right to your doorstep!
                         </p>
-                        <button className="mt-8 px-8 py-3 bg-red-600 hover:bg-red-700 text-white text-lg font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-                            Shop Now
-                        </button>
+                        <Link href={route("catalog")}>
+                            <button className="mt-8 px-8 py-3 bg-red-600 hover:bg-red-700 text-white text-lg font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
+                                Shop Now
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </section>
