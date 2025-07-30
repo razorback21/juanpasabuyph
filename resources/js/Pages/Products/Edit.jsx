@@ -80,8 +80,7 @@ export default function EditProduct({ product, categories, from }) {
                 onError: (errors) => {
                     alertRef.current.open({
                         title: "Error",
-                        description:
-                            `Failed to upload image. ${props.errors.image}`,
+                        description: `Failed to upload image. ${props.errors.image}`,
                     });
                     progressBarRef.current?.show(false);
                     progressBarRef.current?.reset();
@@ -113,7 +112,7 @@ export default function EditProduct({ product, categories, from }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 bg-white">
                     <div className="text-right pt-4">
                         <LinkButton
-                            href={from ?? route("dashboard")}
+                            href={from ?? route("admin.inventory.products")}
                             className="mr-2 bg-red-500 text-white"
                         >
                             Back
@@ -268,7 +267,7 @@ export default function EditProduct({ product, categories, from }) {
                         </form>
                         <div className="mt-4">
                             <LinkButton
-                                href={from ?? route("dashboard")}
+                                href={from ?? route("admin.inventory.products")}
                                 className="mr-2 bg-red-500 text-white"
                             >
                                 Back
