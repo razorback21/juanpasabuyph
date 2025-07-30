@@ -41,7 +41,7 @@ export default function ({ title, featuredProducts, bestProducts }) {
             />
 
             {/* New Arrivals */}
-            <HomeProducts products={bestProducts} title="Best Sellers" />
+            <HomeProducts products={bestProducts} title="Popular Products" />
 
             {/* Customer Reviews */}
             <Reviews />
