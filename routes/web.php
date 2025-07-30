@@ -34,6 +34,7 @@ use Inertia\Inertia;
 //     ]);
 // });
 
+// Store Front
 Route::get("/", [HomeController::class, 'index'])->name('home');
 Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
 Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item'])->name('catalog.item');
@@ -73,6 +74,7 @@ Route::middleware('auth')->group(function () {
 
     // Order Status Timeline
     Route::resource('order-status-timelines', OrderStatusTimelineController::class);
+
 });
 
 Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
