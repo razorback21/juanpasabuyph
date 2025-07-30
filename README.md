@@ -12,6 +12,8 @@ Tech Stack
 - Common pages (Home, About, FAQs, Contact)
 - Product catalog with categories and product details
 - Add to cart and checkout functionality
+- SEO-friendly URLs
+- Meta tags and opengraph tags for common pages and Product pages
 
 ### Features Admin
 - Inventory system with reservation,
