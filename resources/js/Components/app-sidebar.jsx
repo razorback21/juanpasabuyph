@@ -126,9 +126,9 @@ const data = {
         {
             name: "Products",
             url: "#",
-            route: "dashboard",
+            route: "products.index",
             icon: Rows2Icon,
-            activeKey: "dashboard",
+            activeKey: "products",
         },
         {
             name: "Categories",
