@@ -186,4 +186,9 @@ class Product extends Model
             ->orderBy('order_items_count', 'desc');
     }
 
+    public function scopeDisabledProducts($query)
+    {
+        return $query->where(['disabled' => true]);
+    }
+
 }
