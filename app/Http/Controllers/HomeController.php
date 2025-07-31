@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Traits\Traits\HasDefaultSeo;
+use App\Traits\HasDefaultSeo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
