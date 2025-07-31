@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Services\ProductFilterService;
+use App\Services\StockService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
-use App\Services\ProductFilterService;
 
 class DashboardController extends Controller
 {
+
+    public function __construct(private StockService $stockService)
+    {
+
+    }
+
     public function index(Request $request)
     {
-        
+
         // Apply category filter
         $filter = new ProductFilterService($request);
-        
+
         $products = $filter->getQuery()->paginate(10)
             ->withQueryString()
             ->through(function ($product) {
@@ -34,6 +41,7 @@ class DashboardController extends Controller
             'products' => $products,
             'categories' => $categories,
             'active_category' => $request->query('active_category') ?? 'All',
+            'outOfStock' => $this->stockService->getOutOfStockProducts()->count(),
         ]);
     }
 }
