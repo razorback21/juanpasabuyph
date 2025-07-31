@@ -11,7 +11,7 @@ import { useRef } from "react";
 import { Switch } from "@/Components/ui/switch";
 import { Label } from "@/Components/ui/label";
 
-export default function EditProduct({ categories }) {
+export default function EditProduct({ categories, uoms }) {
     const props = usePage().props;
     const formDataRef = useRef({
         name: "",
@@ -112,6 +112,22 @@ export default function EditProduct({ categories }) {
                                         Description field is required
                                     </p>
                                 )}
+                            </div>
+                            <div className="mb-4">
+                                <select
+                                    name="sale_uom"
+                                    onChange={formInputHandler}
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                >
+                                    <option value="">
+                                        -- Select Sale UoM --
+                                    </option>
+                                    {Object.entries(uoms).map(([key, uom]) => (
+                                        <option key={key} value={key}>
+                                            {uom}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <div className="flex items-center space-x-2">

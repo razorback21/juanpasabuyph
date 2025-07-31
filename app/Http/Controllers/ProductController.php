@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\MovementTypeEnum;
+use App\Enums\ProductUOMEnum;
 use App\Exceptions\CannotDeleteProductException;
 use App\Http\Requests\Product\ProductRequest;
 use App\Models\Product;
@@ -49,6 +50,7 @@ class ProductController extends Controller
     {
         return Inertia::render('Products/Create', [
             'categories' => ProductCategory::all()->toArray(),
+            'uoms' => ProductUOMEnum::getOptions(),
         ]);
     }
 
@@ -91,6 +93,7 @@ class ProductController extends Controller
             'categories' => ProductCategory::all()->toArray(),
             'product' => $product,
             'from' => request()->query('from'),
+            'uoms' => ProductUOMEnum::getOptions(),
         ]);
     }
 

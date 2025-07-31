@@ -16,7 +16,7 @@ import { useRef } from "react";
 import { Switch } from "@/Components/ui/switch";
 import { Label } from "@/Components/ui/label";
 
-export default function EditProduct({ product, categories, from }) {
+export default function EditProduct({ product, categories, from, uoms }) {
     const props = usePage().props;
     const imageDesciptionRef = useRef(null);
     const imageRef = useRef(null);
@@ -218,6 +218,26 @@ export default function EditProduct({ product, categories, from }) {
                                         Description field is required
                                     </p>
                                 )}
+                            </div>
+                            <div className="mb-4">
+                                <select
+                                    name="sale_uom"
+                                    onChange={formInputHandler}
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                >
+                                    <option value="">
+                                        -- Select Sale UoM --
+                                    </option>
+                                    {Object.entries(uoms).map(([key, uom]) => (
+                                        <option
+                                            key={key}
+                                            value={key}
+                                            selected={key === product.sale_uom}
+                                        >
+                                            {uom}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="mb-4">
                                 <div className="flex gap-4">
