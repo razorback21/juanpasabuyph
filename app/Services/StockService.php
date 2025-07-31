@@ -20,7 +20,7 @@ class StockService
         $result = Product::all()->where('available_stock', 0);
         $productCount = $result->count();
         if (!$productCount) {
-            return null;
+            return collect([]);
         }
         $noStockIds = $result->pluck('id')->toArray();
         return $outOfStockProducts = Product::whereIn('id', $noStockIds);
