@@ -24,7 +24,7 @@ class VisitorRequest
     public function terminate(Request $request, Response $response)
     {
         $date = date('Y-m-d');
-        $visitor = Visitor::firstOrNew(['date' => date('Y-m-d')]);
+        $visitor = Visitor::firstOrNew(['date' => $date]);
 
         $agent = new Agent();
 
@@ -34,12 +34,17 @@ class VisitorRequest
             $visitor->mobile++;
         }
 
-        info($agent->isDesktop());
-        if (!session()->has('visitor_date') || session()->get('visitor_date') != $date) {
-            $visitor->save();
-            $request->session()->put('visitor_date', $date);
+        $agentAllowed = false;
+        if ($agent->isDesktop() || $agent->isMobile()) {
+            $agentAllowed = true;
         }
 
-        info('VisitorRequest::terminate');
+        if ($agentAllowed) {
+            if (!session()->has('visitor_date')) {
+                $visitor->save();
+                session()->put('visitor_date', $date);
+                session()->save(); // Force save the session immediately
+            }
+        }
     }
 }
