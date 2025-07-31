@@ -143,8 +143,12 @@ export default function ({ order, statusCantBeDeleted, readOnly = false }) {
                 <AlertConfirm ref={dialogRef}></AlertConfirm>
                 <DataTable columns={columns} data={order.items} />
                 <div className="flex justify-end p-3">
-                    <h2 className="text-2xl text-gray-500 font-extrabold">
-                        Total: Php {order.total.toFixed(2)}
+                    <h2 className="text-2xl text-gray-500">
+                        Total:{" "}
+                        {order.total.toLocaleString("en-PH", {
+                            style: "currency",
+                            currency: "PHP",
+                        })}
                     </h2>
                 </div>
                 <div className="p-3 bg-red-50 my-4 border border-red-200 rounded-sm">
