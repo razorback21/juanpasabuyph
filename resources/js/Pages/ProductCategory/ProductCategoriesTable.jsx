@@ -12,14 +12,21 @@ export default function ({ categories }) {
     const columnHelper = createColumnHelper();
     const deleteHandler = (productCategory) => {
         router.delete(
-                route("product-categories.destroy", productCategory) +
-                    window.location.search
-            );
+            route("product-categories.destroy", productCategory) +
+                window.location.search
+        );
     };
 
     const columns = [
         columnHelper.accessor("name", {
-            cell: (row) => <span>{row.getValue()} <Badge variant='secondary'>{row.row.original.products_count}</Badge></span>,
+            cell: (row) => (
+                <span>
+                    {row.getValue()}{" "}
+                    <Badge variant="secondary">
+                        {row.row.original.products_count}
+                    </Badge>
+                </span>
+            ),
             header: () => <span>Name </span>,
         }),
         columnHelper.accessor("description", {
@@ -41,7 +48,7 @@ export default function ({ categories }) {
                         onClick={() => {
                             dialogRef.current?.open({
                                 title: `${row.row.original.name}`,
-                                description: `Are you sure you want to to delete category?`,
+                                description: `Are you sure you want to delete this product category?`,
                                 onContinue: () =>
                                     deleteHandler(row.row.original),
                             });
