@@ -94,7 +94,7 @@ export default function ({ title, product, category, relatedProducts }) {
                     </div>
                     <div className="mb-6">
                         <h3 className="text-sm text-[#1f2937] mb-1">
-                            Sold per PC.
+                            Sold per {product.sale_uom}
                         </h3>
                         {!product.available_stock && (
                             <Badge variant="destructive">Out of Stock</Badge>
