@@ -52,20 +52,4 @@ class Inventory extends Model
     {
         return $this->belongsTo(Order::class);
     }
-
-    /**
-     * Scope a query to only include stock in movements.
-     */
-    public function scopeStockIn($query)
-    {
-        return $query->where('movement_type', 'in');
-    }
-
-    /**
-     * Scope a query to only include stock out movements.
-     */
-    public function scopeStockOut($query)
-    {
-        return $query->where('movement_type', 'out');
-    }
 }
