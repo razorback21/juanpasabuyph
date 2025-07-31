@@ -90,8 +90,9 @@ export default function ({ products, categories, active_category }) {
                         onClick={() => {
                             dialogRef.current?.open({
                                 title: `${product.row.original.name}`,
-                                description: `Are you sure you want to to delete product?`,
+                                description: `Are you sure you want to delete this product?`,
                                 product,
+                                buttonName: "Yes delete it.",
                                 onContinue: () =>
                                     deleteHandler(product.row.original),
                             });
