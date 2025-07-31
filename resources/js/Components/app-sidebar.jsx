@@ -1,9 +1,14 @@
 import * as React from "react";
 import { usePage, Link } from "@inertiajs/react";
 import {
+    ArrowBigDownIcon,
     ArrowUpCircleIcon,
     BarChartIcon,
+    Box,
+    Boxes,
+    BoxSelect,
     CameraIcon,
+    Check,
     ClipboardListIcon,
     CodesandboxIcon,
     CodeSquare,
@@ -13,9 +18,11 @@ import {
     FileTextIcon,
     FolderIcon,
     FoldersIcon,
+    Gauge,
     HelpCircleIcon,
     LayoutDashboardIcon,
     ListIcon,
+    LockKeyholeIcon,
     Package2Icon,
     Rows2Icon,
     SearchIcon,
@@ -48,7 +55,7 @@ const data = {
             title: "Dashboard",
             url: "#",
             route: "dashboard",
-            icon: LayoutDashboardIcon,
+            icon: Gauge,
             activeKey: "dashboard",
         },
         // {
@@ -127,7 +134,7 @@ const data = {
             name: "Products",
             url: "#",
             route: "products.index",
-            icon: Rows2Icon,
+            icon: Boxes,
             activeKey: "products",
         },
         {
@@ -141,8 +148,22 @@ const data = {
             name: "Featured Products",
             url: "#",
             route: "featured-products.index",
-            icon: FoldersIcon,
+            icon: Check,
             activeKey: "featured-products",
+        },
+        {
+            name: "Out of Stock",
+            url: "#",
+            route: "orders.index",
+            icon: ArrowBigDownIcon,
+            activeKey: "order",
+        },
+        {
+            name: "Disabled Products",
+            url: "#",
+            route: "orders.index",
+            icon: LockKeyholeIcon,
+            activeKey: "order",
         },
         // {
         //     name: "Data Library",
@@ -165,21 +186,7 @@ const data = {
             name: "Orders",
             url: "#",
             route: "orders.index",
-            icon: Package2Icon,
-            activeKey: "order",
-        },
-        {
-            name: "Out of Stock",
-            url: "#",
-            route: "orders.index",
-            icon: Package2Icon,
-            activeKey: "order",
-        },
-        {
-            name: "Disabled Products",
-            url: "#",
-            route: "orders.index",
-            icon: Package2Icon,
+            icon: Box,
             activeKey: "order",
         },
     ],
@@ -209,8 +216,11 @@ export function AppSidebar({ ...props }) {
             </SidebarHeader>
             <SidebarContent>
                 <NavMain items={data.navMain} />
-                <NavDocuments items={data.inventory} menuName="Inventory" />
-                <NavDocuments items={data.reports} menuName="Reports" />
+                <NavDocuments
+                    items={data.inventory}
+                    menuName="Inventory & Products"
+                />
+                <NavDocuments items={data.reports} menuName="Orders" />
                 {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
             </SidebarContent>
             <SidebarFooter>
