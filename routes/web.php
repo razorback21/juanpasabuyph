@@ -51,22 +51,25 @@ Route::middleware('auth')->group(function () {
 });
 
 // Store Front
-Route::get("/", [HomeController::class, 'index'])->name('home');
-Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
-Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item'])->name('catalog.item');
-Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
-Route::get("/about", [AboutController::class, 'index'])->name('about');
-Route::get("/contact", [ContactController::class, 'index'])->name('contact');
-Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
-Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
-// Cart
-Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
-Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
-Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
-Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+Route::middleware('visitor.request')->group(function () {
+    Route::get("/", [HomeController::class, 'index'])->name('home');
+    Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
+    Route::get("/catalog/{category}/{slug}/", [CatalogController::class, 'item'])->name('catalog.item');
+    Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
+    Route::get("/about", [AboutController::class, 'index'])->name('about');
+    Route::get("/contact", [ContactController::class, 'index'])->name('contact');
+    Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
+    Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
+    // Cart
+    Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
+    Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
+    Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
+    Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+
+});
 // Admin
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     // Product 
     Route::resource('products', ProductController::class);
     Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
