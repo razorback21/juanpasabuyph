@@ -131,7 +131,7 @@ export default function ({ products, categories, active_category }) {
                             <Dropdown.Link
                                 key={category.id}
                                 href={
-                                    route("dashboard") +
+                                    route("products.index") +
                                     "?category=" +
                                     category.id +
                                     "&active_category=" +
