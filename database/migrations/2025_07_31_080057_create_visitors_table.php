@@ -12,12 +12,9 @@ return new class extends Migration {
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
-            $table->ipAddress('ip_address');
-            $table->string('user_agent');
-            $table->string('referrer');
-            $table->string('desktop');
-            $table->string('mobile');
-            $table->timestamps();
+            $table->integer('desktop')->default(0)->nullable();
+            $table->integer('mobile')->default(0)->nullable();
+            $table->date('date')->unique();
         });
     }
 
