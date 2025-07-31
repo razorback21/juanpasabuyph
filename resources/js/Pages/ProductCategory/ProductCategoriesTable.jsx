@@ -49,6 +49,7 @@ export default function ({ categories }) {
                             dialogRef.current?.open({
                                 title: `${row.row.original.name}`,
                                 description: `Are you sure you want to delete this product category?`,
+                                buttonName: "Yes delete it.",
                                 onContinue: () =>
                                     deleteHandler(row.row.original),
                             });
