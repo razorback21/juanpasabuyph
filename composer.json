@@ -13,6 +13,7 @@
         "archtechx/laravel-seo": "^0.10.3",
         "buglinjo/laravel-webp": "^3.1",
         "inertiajs/inertia-laravel": "^2.0",
+        "jenssegers/agent": "^2.6",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/telescope": "^5.9",
