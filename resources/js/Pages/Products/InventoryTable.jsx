@@ -33,7 +33,7 @@ function InventoryTable({ inventory }) {
                 <TableRow>
                     <TableHead>Movement Type</TableHead>
                     <TableHead>Quantity</TableHead>
-                    <TableHead>UoM</TableHead>
+                    {/* <TableHead>UoM</TableHead> */}
                     <TableHead>Notes</TableHead>
                     <TableHead>Date Added</TableHead>
                 </TableRow>
@@ -52,9 +52,9 @@ function InventoryTable({ inventory }) {
                             </Badge>
                         </TableCell>
                         <TableCell>{data.quantity}</TableCell>
-                        <TableCell>
+                        {/* <TableCell>
                             {data.uom.toString().toUpperCase()}
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell>
                             {data.notes?.includes("Reserved for ORDER #") ? (
                                 <a
