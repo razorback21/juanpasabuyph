@@ -56,7 +56,7 @@ const data = {
             url: "#",
             route: "dashboard",
             icon: Gauge,
-            activeKey: "dashboard",
+            activeKey: "Dashboard/Index",
         },
         // {
         //   title: "Customers",
@@ -135,35 +135,35 @@ const data = {
             url: "#",
             route: "products.index",
             icon: Boxes,
-            activeKey: "products",
+            activeKey: "Products/Index",
         },
         {
             name: "Categories",
             url: "#",
             route: "product-categories.index",
             icon: FoldersIcon,
-            activeKey: "product-categories",
+            activeKey: "ProductCategory/Index",
         },
         {
             name: "Featured Products",
             url: "#",
             route: "featured-products.index",
             icon: Check,
-            activeKey: "featured-products",
+            activeKey: "FeaturedProduct/Index",
         },
         {
             name: "Out of Stock",
             url: "#",
             route: "orders.index",
             icon: ArrowBigDownIcon,
-            activeKey: "order",
+            activeKey: "OutofStock/Index",
         },
         {
             name: "Disabled Products",
             url: "#",
             route: "orders.index",
             icon: LockKeyholeIcon,
-            activeKey: "order",
+            activeKey: "DisabledProduct/Index",
         },
         // {
         //     name: "Data Library",
@@ -187,12 +187,14 @@ const data = {
             url: "#",
             route: "orders.index",
             icon: Box,
-            activeKey: "order",
+            activeKey: "Order/Index",
         },
     ],
 };
 
 export function AppSidebar({ ...props }) {
+    const page = usePage();
+    console.log(page);
     const inertiaProps = usePage().props;
     console.log(inertiaProps);
     return (

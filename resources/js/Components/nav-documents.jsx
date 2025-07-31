@@ -1,6 +1,6 @@
 "use client";
 
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { FolderIcon, MoreHorizontalIcon, ShareIcon } from "lucide-react";
 
 import {
@@ -21,14 +21,17 @@ import {
 
 export function NavDocuments({ items, menuName = "Documents" }) {
     const { isMobile } = useSidebar();
-
+    const page = usePage();
     return (
         <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupLabel>{menuName}</SidebarGroupLabel>
             <SidebarMenu>
                 {items.map((item) => (
                     <SidebarMenuItem key={item.name}>
-                        <SidebarMenuButton asChild>
+                        <SidebarMenuButton
+                            asChild
+                            isActive={item.activeKey === page.component}
+                        >
                             <Link href={route(item.route)}>
                                 <item.icon />
                                 <span>{item.name}</span>

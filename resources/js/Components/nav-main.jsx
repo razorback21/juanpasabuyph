@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/sidebar";
 
 export function NavMain({ items }) {
-    const ziggy = usePage().props.ziggy;
-    console.log(ziggy.location.includes('dashboard'));
+    const page = usePage();
+
     return (
         <SidebarGroup>
             <SidebarGroupContent className="flex flex-col gap-2">
@@ -37,7 +37,7 @@ export function NavMain({ items }) {
                             <Link href={route(item.route)}>
                                 <SidebarMenuButton
                                     tooltip={item.title}
-                                    isActive={ziggy.location.includes(item.activeKey)}
+                                    isActive={item.activeKey === page.component}
                                 >
                                     {item.icon && <item.icon />}
                                     <span>{item.title}</span>
