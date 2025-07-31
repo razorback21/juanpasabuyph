@@ -161,7 +161,7 @@ const data = {
         {
             name: "Disabled Products",
             url: "#",
-            route: "orders.index",
+            route: "disabled-products.index",
             icon: LockKeyholeIcon,
             activeKey: "DisabledProduct/Index",
         },
