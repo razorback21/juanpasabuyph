@@ -154,7 +154,7 @@ const data = {
         {
             name: "Out of Stock",
             url: "#",
-            route: "orders.index",
+            route: "out-of-stock.index",
             icon: ArrowBigDownIcon,
             activeKey: "OutofStock/Index",
         },

@@ -1,0 +1,76 @@
+import { useState, useRef } from "react";
+import { createColumnHelper } from "@tanstack/react-table";
+import DataTable from "@/Components/DataTable";
+import { Link, router, usePage } from "@inertiajs/react";
+import { Badge } from "@/components/ui/badge";
+import AlertConfirm from "@/Components/AlertConfirm";
+import { Switch } from "@/Components/ui/switch";
+import Axios from "@/lib/axios";
+import { toast } from "sonner";
+import { Toaster } from "@/Components/ui/sonner";
+import { Description } from "@headlessui/react";
+
+export default function ({ products }) {
+    const columnHelper = createColumnHelper();
+    const dialogRef = useRef(null);
+
+    const columns = [
+        columnHelper.accessor("featured_image_url", {
+            cell: (product) => (
+                <Link
+                    href={route("products.show", {
+                        product: product.row.original,
+                    })}
+                    className="hover:underline cursor-pointer"
+                >
+                    <img
+                        src={product.getValue()}
+                        alt={product.getValue()}
+                        className="w-12 h-12 rounded-[10px]"
+                    />
+                </Link>
+            ),
+            header: () => <span>Image</span>,
+        }),
+        columnHelper.accessor("name", {
+            cell: (product) => (
+                <Link
+                    href={route("products.show", {
+                        product: product.row.original,
+                    })}
+                    className="hover:underline cursor-pointer"
+                >
+                    <div>{product.getValue()}</div>
+                </Link>
+            ),
+            header: () => <span>Name</span>,
+        }),
+        columnHelper.accessor("available_stock", {
+            cell: (product) => product.getValue(),
+            header: () => <span>Stocks</span>,
+        }),
+        columnHelper.accessor("product_category", {
+            cell: (product) => product.row.original.category.name,
+            header: () => <span>Category</span>,
+        }),
+        columnHelper.accessor("description", {
+            cell: (product) => product.getValue(),
+            header: () => <div>Description</div>,
+            size: 270,
+        }),
+        columnHelper.accessor("price", {
+            cell: (product) => product.getValue(),
+            header: () => <span>Price</span>,
+        }),
+    ];
+
+    return (
+        <>
+            <div>
+                <Toaster />
+                <AlertConfirm ref={dialogRef}></AlertConfirm>
+                <DataTable columns={columns} data={products} />
+            </div>
+        </>
+    );
+}
