@@ -15,9 +15,10 @@ class OutOfStockController extends Controller
     {
         //todo: refactor query. This not a performant query, best only few rows of products
         $result = Product::all()->where('available_stock', 0);
+        $productCount = $result->count();
         $noStockIds = $result->pluck('id')->toArray();
         $outOfStockProducts = Product::whereIn('id', $noStockIds)->paginate(10);
 
-        return Inertia::render('OutOfStock/Index', compact('outOfStockProducts'));
+        return Inertia::render('OutOfStock/Index', compact('outOfStockProducts', 'productCount'));
     }
 }
