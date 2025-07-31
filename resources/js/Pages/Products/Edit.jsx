@@ -220,6 +220,8 @@ export default function EditProduct({ product, categories, from, uoms }) {
                                 )}
                             </div>
                             <div className="mb-4">
+                                <Label htmlFor="sale_uom">Sold per</Label>
+                                <br />
                                 <select
                                     name="sale_uom"
                                     onChange={formInputHandler}
