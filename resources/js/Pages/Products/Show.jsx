@@ -144,6 +144,9 @@ export default function EditProduct({ product, movementTypes }) {
                                     maximumFractionDigits: 2,
                                 })}
                             </p>
+                            <p className="text-sm text-gray-500 mt-2">
+                                Sold per {product.sale_uom}
+                            </p>
                             <p className="my-4">{product.description}</p>
                             <div className="border-b border-gray-200 mb-4"></div>
                             <p>
