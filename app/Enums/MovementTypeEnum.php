@@ -2,8 +2,13 @@
 
 namespace App\Enums;
 
+use App\Traits\Enum\HasEnumOptions;
+
 enum MovementTypeEnum: string
 {
+
+    use HasEnumOptions;
+
     case INBOUND = 'inbound';
     case OUTBOUND = 'outbound'; // Use this for sales/shipped items
     case RETURNED = 'returned';
@@ -13,18 +18,23 @@ enum MovementTypeEnum: string
 
     public static function getOptions(): array
     {
-        return [
-            self::INBOUND->value => '[ + ] Inbound',
-            self::RETURNED->value => '[ + ] Returned',
-            self::ADJUSTMENT_UP->value => '[ + ] Adjustment Up',
-            self::ADJUSTMENT_DOWN->value => '[ - ] Adjustment Down',
-            self::OUTBOUND->value => '[ - ] Outbound',
-            self::DAMAGE->value => '[ - ] Damage',
-        ];
-    }
+        $up = ['inbound', 'adjustment_up', 'returned'];
+        $options = [];
 
-    public static function getCSVOptions(): string
-    {
-        return implode(',', array_keys(self::getOptions()));
+        foreach (self::cases() as $case) {
+            if (in_array($case->value, $up)) {
+                $label = ucwords(str_replace('_', ' ', $case->value));
+                $options[$case->value] = "[ + ] $label";
+            }
+        }
+
+        foreach (self::cases() as $case) {
+            if (!in_array($case->value, $up)) {
+                $label = ucwords(str_replace('_', ' ', $case->value));
+                $options[$case->value] = "[ - ] $label";
+            }
+        }
+
+        return $options;
     }
 }
