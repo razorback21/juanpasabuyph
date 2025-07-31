@@ -2,10 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Visitor;
+use App\Actions\LogVisitor;
 use Closure;
 use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
 use Symfony\Component\HttpFoundation\Response;
 
 class VisitorRequest
@@ -21,30 +20,9 @@ class VisitorRequest
     }
 
     // run only after the response is sent
+    // we can moved this into a service class
     public function terminate(Request $request, Response $response)
     {
-        $date = date('Y-m-d');
-        $visitor = Visitor::firstOrNew(['date' => $date]);
-
-        $agent = new Agent();
-
-        if ($agent->isDesktop()) {
-            $visitor->desktop++;
-        } else if ($agent->isMobile()) {
-            $visitor->mobile++;
-        }
-
-        $agentAllowed = false;
-        if ($agent->isDesktop() || $agent->isMobile()) {
-            $agentAllowed = true;
-        }
-
-        if ($agentAllowed) {
-            if (!session()->has('visitor_date')) {
-                $visitor->save();
-                session()->put('visitor_date', $date);
-                session()->save(); // Force save the session immediately
-            }
-        }
+        LogVisitor::run();
     }
 }
