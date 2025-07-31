@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\OrderStatusEnum;
+use App\Enums\ProductUOMEnum;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
@@ -15,11 +16,15 @@ use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrderStatusTimelineController;
+use App\Http\Controllers\OutOfStockController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SiteMapController;
 use App\Models\Customer;
+use App\Models\Inventory;
+use App\Models\Product;
 use App\Services\CartService;
 use GuzzleHttp\Middleware;
 use Illuminate\Foundation\Application;
@@ -36,6 +41,15 @@ use Inertia\Inertia;
 //     ]);
 // });
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+// profile
+Route::middleware('auth')->group(function () {
+    // Profile routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
 // Store Front
 Route::get("/", [HomeController::class, 'index'])->name('home');
 Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
@@ -45,69 +59,43 @@ Route::get("/about", [AboutController::class, 'index'])->name('about');
 Route::get("/contact", [ContactController::class, 'index'])->name('contact');
 Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
 Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-
-
-// profile
-Route::middleware('auth')->group(function () {
-    // Profile routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::middleware('auth')->group(function () {
-    // Product 
-    Route::resource('products', ProductController::class);
-    Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
-
-    // Product category
-    Route::resource('product-categories', ProductCategoryController::class);
-
-    // Inventory
-    Route::resource('inventory', InventoryController::class);
-
-    // Orders
-    Route::resource('orders', OrderController::class);
-
-    // Order Item
-    Route::resource('order-items', OrderItemController::class);
-
-    // Order Status Timeline
-    Route::resource('order-status-timelines', OrderStatusTimelineController::class);
-
-    // Featured Product
-    Route::get('/featured-products', [FeaturedProductController::class, 'index'])->name('featured-products.index');
-    Route::put('/featured-products/{product}', [FeaturedProductController::class, 'update'])->name('featured-products.update');
-
-    // Disabled Product
-    Route::get('/disabled-products', [DisabledProductController::class, 'index'])->name('disabled-products.index');
-    Route::put('/disabled-products/{product}', [DisabledProductController::class, 'update'])->name('disabled-products.update');
-});
-
+// Cart
 Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
 Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
 Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
-
+// Admin
+Route::middleware('auth')->group(function () {
+    // Product 
+    Route::resource('products', ProductController::class);
+    Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
+    // Product category
+    Route::resource('product-categories', ProductCategoryController::class);
+    // Inventory
+    Route::resource('inventory', InventoryController::class);
+    // Orders
+    Route::resource('orders', OrderController::class);
+    // Order Item
+    Route::resource('order-items', OrderItemController::class);
+    // Order Status Timeline
+    Route::resource('order-status-timelines', OrderStatusTimelineController::class);
+    // Featured Product
+    Route::get('/featured-products', [FeaturedProductController::class, 'index'])->name('featured-products.index');
+    Route::put('/featured-products/{product}', [FeaturedProductController::class, 'update'])->name('featured-products.update');
+    // Disabled Product
+    Route::get('/disabled-products', [DisabledProductController::class, 'index'])->name('disabled-products.index');
+    Route::put('/disabled-products/{product}', [DisabledProductController::class, 'update'])->name('disabled-products.update');
+    // Out of Stock
+    Route::get('/out-of-stock', [OutOfStockController::class, 'index'])->name('out-of-stock.index');
+});
 // Sitemap route
-Route::get('/sitemap.xml', function () {
-    $sitemapPath = public_path('sitemap.xml');
+Route::get('/sitemap.xml', SiteMapController::class)->name('sitemap');
 
-    if (!file_exists($sitemapPath)) {
-        abort(404, 'Sitemap not found.');
-    }
-
-    return response()->file($sitemapPath, [
-        'Content-Type' => 'application/xml'
-    ]);
-})->name('sitemap');
-
+// test
 Route::get('/test', function () {
-    $cart = app(CartService::class);
-    dd($cart->getCart());
+    $options = ProductUOMEnum::getOptions();
+    dd($options);
 });
 
 require __DIR__ . '/auth.php';
