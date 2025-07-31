@@ -9,4 +9,12 @@ class Visitor extends Model
 {
     /** @use HasFactory<\Database\Factories\VisitorFactory> */
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'date',
+        'desktop',
+        'mobile',
+    ];
 }
