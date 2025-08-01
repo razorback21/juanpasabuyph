@@ -33,14 +33,17 @@ const Captcha = forwardRef((props, ref) => {
         <>
             {captcha ? (
                 <div
-                    className="flex items-center w-1/2 pt-7 hover:cursor-pointer"
+                    className="flex flex-col items-center justify-center cursor-pointer"
                     onClick={getCaptcha}
                 >
                     <img src={captcha} alt="Captcha" />
+                    <p className="text-gray-500 mt-1 text-[10px]">
+                        Click on the captcha to refresh
+                    </p>
                     <input type="hidden" name="key" value={key} />
                 </div>
             ) : (
-                <div className="flex items-center w-1/2 pt-7">
+                <div className="flex items-center w-1/2">
                     <div className="flex items-center gap-2">
                         <svg
                             className="animate-spin h-5 w-5 text-gray-500"
@@ -173,7 +176,7 @@ export default function ContactForm() {
                         </p>
                     )}
                 </div>
-                <div className="flex flex-wrap justify-between items-center gap-4">
+                <div className="flex flex-wrap gap-4 items-center">
                     <div>
                         <label
                             className="block text-sm font-medium leading-normal pb-1.5"
@@ -195,7 +198,9 @@ export default function ContactForm() {
                             </p>
                         )}
                     </div>
-                    <Captcha ref={captchaRef} />
+                    <div className="mb-[-2rem]">
+                        <Captcha ref={captchaRef} />
+                    </div>
                 </div>
                 <div>
                     <label

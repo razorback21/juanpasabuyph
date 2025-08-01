@@ -8,5 +8,7 @@ return [
         'math' => false, //Enable Math Captcha
         'expire' => 60 * 5, //Captcha expiration
         'lines' => 5,
+        'bgImage' => true,
+        'bgColor' => '#f5f5f5',
     ]
 ];
