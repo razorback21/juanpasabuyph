@@ -25,6 +25,7 @@ class ProductRequest extends FormRequest
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
+            'cost_price' => 'required|numeric|min:0',
             'product_category_id' => 'required',
             'is_featured' => 'nullable|boolean',
             'disabled' => 'nullable|boolean',
