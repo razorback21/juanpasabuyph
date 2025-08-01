@@ -69,6 +69,7 @@ Route::middleware('visitor.request')->group(function () {
     Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
     // Contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/thank-you', [ContactController::class, 'thankYou'])->name('contact.thank-you')->middleware('throttle:10,1');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:10,1');
     Route::get('/captcha/api/math', [ContactController::class, 'captcha'])->name('captcha.api');
     Route::post('/contact/validate', [ContactController::class, 'validate'])->name('contact.validate');
