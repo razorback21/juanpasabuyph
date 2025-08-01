@@ -41,8 +41,9 @@ class CreateOrder
                     'order_id' => $order->id,
                     'product_id' => $cartItem['product_id'],
                     'quantity' => $cartItem['quantity'],
-                    'price' => $cartItem['subtotal'],
-                    'uom' => 'pc',
+                    'cost_price' => $cartItem['product']['cost_price'],
+                    'price' => $cartItem['product']['price'],
+                    'uom' => $cartItem['product']['uom'],
                 ]);
             }
 
