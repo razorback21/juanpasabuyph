@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Services\ProductFilterService;
@@ -44,6 +45,7 @@ class DashboardController extends Controller
             'active_category' => $request->query('active_category') ?? 'All',
             'outOfStock' => $this->stockService->getOutOfStockProducts()->count(),
             'profitThisMonth' => $this->saleService->getSaleProfitThisMonth(),
+            'customers' => Customer::count(),
         ]);
     }
 }

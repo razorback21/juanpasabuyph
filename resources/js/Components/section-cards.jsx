@@ -9,7 +9,11 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
-export function SectionCards({ outOfStock = 0, profitThisMonth = 0 }) {
+export function SectionCards({
+    outOfStock = 0,
+    profitThisMonth = 0,
+    customers = 0,
+}) {
     return (
         <div className="*:data-[slot=card]:shadow-xs mdmain:grid-cols-2 lg:grid-cols-3 grid grid-cols-1 gap-4 px-4 *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card dark:*:data-[slot=card]:bg-card lg:px-6">
             <Card className="@container/card">
@@ -43,9 +47,13 @@ export function SectionCards({ outOfStock = 0, profitThisMonth = 0 }) {
             </Card>
             <Card className="@container/card">
                 <CardHeader className="relative">
-                    <CardDescription>New Customers</CardDescription>
+                    <CardDescription>Customers</CardDescription>
                     <CardTitle className="@[250px]/card:text-3xl text-2xl font-semibold tabular-nums">
-                        1,234
+                        {customers.toString().toLocaleString("en-US", {
+                            style: "number",
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0,
+                        })}
                     </CardTitle>
                     {/* <div className="absolute right-4 top-4">
                         <Badge
