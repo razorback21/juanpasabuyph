@@ -19,6 +19,7 @@
         "laravel/telescope": "^5.9",
         "laravel/tinker": "^2.10.1",
         "lorisleiva/laravel-actions": "^2.9",
+        "mews/captcha": "^3.4",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
