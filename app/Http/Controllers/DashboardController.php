@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Models\Visitor;
 use App\Services\ProductFilterService;
 use App\Services\SaleService;
 use App\Services\StockService;
@@ -24,28 +25,13 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-
-        // Apply category filter
-        $filter = new ProductFilterService($request);
-
-        $products = $filter->getQuery()->paginate(10)
-            ->withQueryString()
-            ->through(function ($product) {
-                return [
-                    ...$product->toArray(),
-                    'description' => Str::limit($product->description, 100),
-                ];
-            });
-
         $categories = ProductCategory::all();
+        $activeCategory = $request->query('active_category') ?? 'All';
+        $outOfStock = $this->stockService->getOutOfStockProducts()->count();
+        $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
+        $customers = Customer::count();
+        $chartData = Visitor::where('created_at', '>=', now()->subDays(90))->get();
 
-        return Inertia::render('Dashboard/Index', [
-            'products' => $products,
-            'categories' => $categories,
-            'active_category' => $request->query('active_category') ?? 'All',
-            'outOfStock' => $this->stockService->getOutOfStockProducts()->count(),
-            'profitThisMonth' => $this->saleService->getSaleProfitThisMonth(),
-            'customers' => Customer::count(),
-        ]);
+        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'customers', 'chartData'));
     }
 }
