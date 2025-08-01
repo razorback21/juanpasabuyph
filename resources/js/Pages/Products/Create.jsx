@@ -1,3 +1,4 @@
+import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage, router } from "@inertiajs/react";
 import TextInput from "@/Components/TextInput";
@@ -29,6 +30,52 @@ export default function EditProduct({ categories, uoms }) {
     const formInputHandler = (e) => {
         formDataRef.current[e.target.name] = e.target.value;
     };
+
+    function ItemPrice() {
+        const [costPrice, setCostPrice] = useState(0.0);
+        const [salePrice, setSalePrice] = useState(0.0);
+        return (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <InputLabel value="Cost Price" htmlFor="cost_price" />
+                    <TextInput
+                        className="w-full mt-1"
+                        type="number"
+                        name="cost_price"
+                        onChange={(e) => {
+                            setSalePrice(e.target.value); // Auto-update sale price
+                            formInputHandler(e);
+                            formDataRef.current.price = e.target.value;
+                        }}
+                        defaultValue={costPrice}
+                    />
+                    {props.errors?.cost_price && (
+                        <p className="text-red-500 text-sm py-1">
+                            Cost Price field is required
+                        </p>
+                    )}
+                </div>
+                <div>
+                    <InputLabel value="Sale Price" htmlFor="price" />
+                    <TextInput
+                        className="w-full mt-1"
+                        type="number"
+                        name="price"
+                        onChange={(e) => {
+                            setSalePrice(e.target.value); // Allow custom input
+                            formInputHandler(e);
+                        }}
+                        value={salePrice}
+                    />
+                    {props.errors?.price && (
+                        <p className="text-red-500 text-sm py-1">
+                            Sale Price field is required
+                        </p>
+                    )}
+                </div>
+            </div>
+        );
+    }
 
     return (
         <AuthenticatedLayout
@@ -146,20 +193,7 @@ export default function EditProduct({ categories, uoms }) {
                                     </Label>
                                 </div>
                             </div>
-                            <div>
-                                <InputLabel value="Price" htmlFor="price" />
-                                <TextInput
-                                    className="w-full mt-1"
-                                    type="number"
-                                    name="price"
-                                    onChange={formInputHandler}
-                                />
-                                {props.errors?.price && (
-                                    <p className="text-red-500 text-sm py-1">
-                                        Price field is required
-                                    </p>
-                                )}
-                            </div>
+                            <ItemPrice />
                         </form>
                         <div className="mt-4">
                             <LinkButton
