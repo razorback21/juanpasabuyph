@@ -68,8 +68,9 @@ Route::middleware('visitor.request')->group(function () {
     Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
     Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
     // Contact
+    Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:10,1');
-    Route::get('/contact/captcha', [ContactController::class, 'captcha'])->name('contact.captcha');
+    Route::get('/captcha/api/math', [ContactController::class, 'captcha'])->name('captcha.api');
     Route::post('/contact/validate', [ContactController::class, 'validate'])->name('contact.validate');
 });
 // Admin
