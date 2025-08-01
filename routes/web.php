@@ -24,6 +24,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteMapController;
 use App\Models\Customer;
 use App\Models\Inventory;
+use App\Models\Order;
 use App\Models\Product;
 use App\Services\CartService;
 use GuzzleHttp\Middleware;
@@ -66,7 +67,10 @@ Route::middleware('visitor.request')->group(function () {
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
     Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
-
+    // Contact
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store')->middleware('throttle:10,1');
+    Route::get('/contact/captcha', [ContactController::class, 'captcha'])->name('contact.captcha');
+    Route::post('/contact/validate', [ContactController::class, 'validate'])->name('contact.validate');
 });
 // Admin
 Route::middleware(['auth'])->group(function () {
@@ -97,8 +101,12 @@ Route::get('/sitemap.xml', SiteMapController::class)->name('sitemap');
 
 // test
 Route::get('/test', function () {
-    $options = ProductUOMEnum::getOptions();
-    dd($options);
+    $orders = Order::whereMonth('updated_at', now()->month)->where('status', OrderStatusEnum::SHIPPED->value)->get();
+    $orderItems = DB::table('order_items')
+        ->select(DB::raw('SUM((price - cost_price) * quantity) as profit'))
+        ->whereIn('order_id', $orders->pluck('id')->toArray())
+        ->groupBy('order_id');
+    dd($orderItems->first()->profit);
 });
 
 require __DIR__ . '/auth.php';
