@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class SaleService
 {
-    /**
-     * Create a new class instance.
-     */
-    public function __construct()
-    {
-        //
-    }
-
     public function getSaleProfitThisMonth(): float
     {
         $orders = Order::whereMonth('updated_at', now()->month)->where('status', OrderStatusEnum::SHIPPED->value)->get();
