@@ -16,13 +16,9 @@ class OrderItem extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'quantity',
-        'price',
-        'net_price',
-        'uom',
-        'order_id',
-        'product_id',
+    protected $guarded = [
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -33,7 +29,7 @@ class OrderItem extends Model
     protected $casts = [
         'quantity' => 'integer',
         'price' => 'decimal:2',
-        'net_price' => 'decimal:2',
+        'cost_price' => 'decimal:2',
     ];
 
     protected $appends = ['total'];
