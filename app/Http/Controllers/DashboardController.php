@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Services\ProductFilterService;
+use App\Services\SaleService;
 use App\Services\StockService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ use Inertia\Inertia;
 class DashboardController extends Controller
 {
 
-    public function __construct(private StockService $stockService)
+    public function __construct(private StockService $stockService, private SaleService $saleService)
     {
 
     }
@@ -42,6 +43,7 @@ class DashboardController extends Controller
             'categories' => $categories,
             'active_category' => $request->query('active_category') ?? 'All',
             'outOfStock' => $this->stockService->getOutOfStockProducts()->count(),
+            'profitThisMonth' => $this->saleService->getSaleProfitThisMonth(),
         ]);
     }
 }

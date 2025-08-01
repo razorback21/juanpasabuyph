@@ -4,11 +4,14 @@ import { SectionCards } from "@/Components/section-cards";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
-export default function ({ outOfStock }) {
+export default function ({ outOfStock, profitThisMonth }) {
     return (
         <AuthenticatedLayout header="Dashboard">
             <Head title="Dashboard" />
-            <SectionCards outOfStock={outOfStock} />
+            <SectionCards
+                outOfStock={outOfStock}
+                profitThisMonth={profitThisMonth}
+            />
             <div className="grid grid-cols-1 mx-6">
                 <ChartAreaInteractive />
             </div>
