@@ -20,6 +20,8 @@ class LogVisitor
         $agentAllowed = false;
         if ($agent->isDesktop() || $agent->isMobile()) {
             $agentAllowed = true;
+        } else {
+            return;
         }
 
         if ($agentAllowed && !session()->has('visitor_date')) {
