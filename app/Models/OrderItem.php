@@ -32,7 +32,7 @@ class OrderItem extends Model
         'cost_price' => 'decimal:2',
     ];
 
-    protected $appends = ['total'];
+    protected $appends = ['total', 'net_profit'];
 
     /**
      * Get the order that owns the order item.
@@ -62,5 +62,13 @@ class OrderItem extends Model
     public function getTotalAttribute(): float
     {
         return $this->getTotal();
+    }
+
+    /**
+     * Calculate the net profit for this order item
+     */
+    public function getNetProfitAttribute(): float
+    {
+        return (float) number_format(($this->price - $this->cost_price) * $this->quantity, 2);
     }
 }
