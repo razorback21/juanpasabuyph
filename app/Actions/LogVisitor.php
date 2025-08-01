@@ -17,23 +17,20 @@ class LogVisitor
 
         $agent = new Agent();
 
-        if ($agent->isDesktop()) {
-            $visitor->desktop++;
-        } else if ($agent->isMobile()) {
-            $visitor->mobile++;
-        }
-
         $agentAllowed = false;
         if ($agent->isDesktop() || $agent->isMobile()) {
             $agentAllowed = true;
         }
 
-        if ($agentAllowed) {
-            if (!session()->has('visitor_date')) {
-                $visitor->save();
-                session()->put('visitor_date', $date);
-                session()->save(); // Force save the session immediately
+        if ($agentAllowed && !session()->has('visitor_date')) {
+            if ($agent->isDesktop()) {
+                $visitor->desktop++;
+            } else if ($agent->isMobile()) {
+                $visitor->mobile++;
             }
+            $visitor->save();
+            session()->put('visitor_date', $date);
+            session()->save(); // Force save the session immediately
         }
     }
 }
