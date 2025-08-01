@@ -43,7 +43,7 @@ class CreateOrder
                     'quantity' => $cartItem['quantity'],
                     'cost_price' => $cartItem['product']['cost_price'],
                     'price' => $cartItem['product']['price'],
-                    'uom' => $cartItem['product']['uom'],
+                    'uom' => $cartItem['product']['sale_uom'],
                 ]);
             }
 
