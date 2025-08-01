@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\IsSameURLPath;
 use App\Http\Requests\ContactFormRequest;
 use App\Notifications\ContactFormNotification;
+use function Illuminate\Support\defer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Inertia\Inertia;
-use function Illuminate\Support\defer;
 
 class ContactController extends Controller
 {
@@ -28,7 +29,7 @@ class ContactController extends Controller
 
     public function thankYou()
     {
-        if (url()->previousPath() !== parse_url(route('contact.index'), PHP_URL_PATH)) {
+        if (!IsSameURLPath::run('contact.index')) {
             return redirect()->route('catalog');
         }
         return Inertia::render('Store/Contact/ThankYou');
