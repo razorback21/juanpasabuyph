@@ -142,7 +142,19 @@ export default function EditProduct({ product, movementTypes }) {
                                 {Number(product.price).toLocaleString("en-US", {
                                     minimumFractionDigits: 2,
                                     maximumFractionDigits: 2,
-                                })}
+                                })}{" "}
+                                <br />
+                                <span className="text-[12px] text-gray-500">
+                                    (Cost Price: ₱
+                                    {Number(product.cost_price).toLocaleString(
+                                        "en-US",
+                                        {
+                                            minimumFractionDigits: 2,
+                                            maximumFractionDigits: 2,
+                                        }
+                                    )}
+                                    )
+                                </span>
                             </p>
                             <p className="text-sm text-gray-500 mt-2">
                                 Sold per {product.sale_uom}
