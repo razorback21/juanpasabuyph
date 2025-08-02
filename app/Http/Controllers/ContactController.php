@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\IsSameURLPath;
 use App\Http\Requests\ContactFormRequest;
+use App\Http\Requests\ThankYouRequest;
 use App\Notifications\ContactFormNotification;
 use function Illuminate\Support\defer;
 use Illuminate\Http\Request;
@@ -27,11 +28,9 @@ class ContactController extends Controller
         return to_route('contact.thank-you')->with('success', 'Your message has been sent.');
     }
 
-    public function thankYou()
+    public function thankYou(ThankYouRequest $request)
     {
-        if (!IsSameURLPath::run('contact.index')) {
-            return redirect()->route('catalog');
-        }
+        $request->authorize('contact.index');
         return Inertia::render('Store/Contact/ThankYou');
     }
 }
