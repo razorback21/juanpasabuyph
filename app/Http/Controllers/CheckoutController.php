@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\IsSameURLPath;
 use App\Actions\Order\CreateOrder;
 use App\Http\Requests\CheckoutFormRequest;
+use App\Models\Order;
 use App\Services\CartService;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class CheckoutController extends Controller
@@ -25,7 +28,16 @@ class CheckoutController extends Controller
     public function store(CheckoutFormRequest $request)
     {
         $validated = $request->validated();
-        CreateOrder::run($validated, $request);
-        return back()->with('message', 'success');
+        $order = CreateOrder::run($validated, $request);
+        // clear cart items
+        $this->cartService->clear();
+        return redirect()->route('checkout.thank-you', ['order_id' => $order->id]);
+    }
+
+    public function thankYou(Request $request, $order_id)
+    {
+        IsSameURLPath::run('checkout');
+        $order = Order::with(['items.product'])->find($order_id);
+        return Inertia::render('Store/Checkout/ThankYou', compact('order'));
     }
 }
