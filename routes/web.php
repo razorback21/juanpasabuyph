@@ -67,6 +67,7 @@ Route::middleware('visitor.request')->group(function () {
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
     Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
+    Route::get('/cart/thank-you/{id}', [CartController::class, 'thankYou'])->name('cart.thank-you');
     // Contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contact/thank-you', [ContactController::class, 'thankYou'])->name('contact.thank-you')->middleware('throttle:10,1');

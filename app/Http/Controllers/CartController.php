@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\IsSameURLPath;
 use App\Http\Requests\CartRequest;
 use App\Models\Customer;
 use App\Models\Order;
@@ -10,6 +11,7 @@ use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Inertia\Inertia;
 
 class CartController extends Controller
 {
@@ -67,5 +69,14 @@ class CartController extends Controller
         unset($cart[$product_id]);
         $request->session()->put($this->cartSessionKey, $cart);
         return redirect()->back()->with('message', 'Item removed from cart');
+    }
+
+    public function thankYou(Request $request, $id)
+    {
+        if (!IsSameURLPath::run('checkout')) {
+            return redirect()->route('home');
+        }
+        $order = Order::with(['items.product'])->find($id);
+        return Inertia::render('Store/Checkout/ThankYou', compact('order'));
     }
 }

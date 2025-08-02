@@ -97,7 +97,7 @@ class Order extends Model
     }
 
     public function total(): float
-    {
+    {   // TODO: this query is slow since its calculating based on items in the memory using collection
         return $this->items->sum(function ($item) {
             return $item->price * $item->quantity;
         });
