@@ -44,9 +44,10 @@ export default function ({ title, children }) {
 
     function handleOrderTracking(e) {
         e.preventDefault();
+
         if (e.key === "Enter") {
             const orderNumber = e.target.value;
-            router.get(route("order.track", { orderNumber }));
+            router.get(route("track", { order_id: orderNumber }));
         }
     }
 
@@ -70,11 +71,7 @@ export default function ({ title, children }) {
                                 className="sm:hidden md:inline-block h-10 w-[280px] rounded-lg border border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase placeholder:lowercase"
                                 placeholder="Track your order..."
                                 defaultValue=""
-                                onKeyUp={(e) => {
-                                    if (e.key === "Enter") {
-                                        window.location.href = `/order/track/${e.target.value}`;
-                                    }
-                                }}
+                                onKeyUp={handleOrderTracking}
                             />
                             <Link href={route("checkout")}>
                                 <button className="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
