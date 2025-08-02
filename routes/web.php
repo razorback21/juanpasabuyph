@@ -59,15 +59,16 @@ Route::middleware('visitor.request')->group(function () {
     Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
     Route::get("/about", [AboutController::class, 'index'])->name('about');
     Route::get("/contact", [ContactController::class, 'index'])->name('contact');
+    // Checkout
     Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
     Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::get('/checkout/thank-you/{id}', [CheckoutController::class, 'thankYou'])->name('cart.thank-you');
     // Cart
     Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
     Route::delete('/cart/clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::put('/cart/increment', [CartController::class, 'increment'])->name('cart.increment');
     Route::put('/cart/decrement', [CartController::class, 'decrement'])->name('cart.decrement');
-    Route::get('/cart/thank-you/{id}', [CartController::class, 'thankYou'])->name('cart.thank-you');
     // Contact
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contact/thank-you', [ContactController::class, 'thankYou'])->name('contact.thank-you')->middleware('throttle:10,1');
