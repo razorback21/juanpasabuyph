@@ -13,7 +13,7 @@ export default function ({ linksData, onLinkClick }) {
                 </a>
             ))}
             {/* Order Search Form */}
-            <div className="mt-6 p-5 bg-white/60 backdrop-blur-sm rounded-2xl border border-gray-100/50 shadow-sm">
+            <div className="mt-6 p-5 bg-white/60 backdrop-blur-sm rounded-mdl border border-gray-100/50 shadow-sm">
                 <h4 className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide">
                     Track Your Order
                 </h4>
@@ -35,7 +35,7 @@ export default function ({ linksData, onLinkClick }) {
                         </div>
                         <input
                             type="text"
-                            className="w-full h-11 pl-10 pr-4 text-sm bg-gray-50/50 border border-gray-200/60 rounded-xl focus:outline-none focus:ring-1 focus:ring-[#e92933]/30 focus:border-[#e92933]/30 focus:bg-white placeholder:text-gray-400 transition-all duration-300"
+                            className="w-full h-11 pl-10 pr-4 text-sm bg-gray-50/50 border border-gray-200/60 rounded-sm focus:outline-none focus:ring-1 focus:ring-[#e92933]/30 focus:border-[#e92933]/30 focus:bg-white placeholder:text-gray-400 transition-all duration-300"
                             placeholder="Enter order number"
                             defaultValue=""
                         />
