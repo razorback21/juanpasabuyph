@@ -84,16 +84,27 @@ export default function ({ order }) {
                                         } else {
                                             return (
                                                 <div className="timeline-item relative flex items-start">
-                                                    <div className="timeline-icon flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center z-10">
-                                                        <div className="timeline-icon-inner w-5 h-5 rounded-full bg-gray-200"></div>
+                                                    <div className="timeline-icon flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-green-500 flex items-center justify-center z-10">
+                                                        <div className="timeline-icon-inner w-5 h-5 rounded-full bg-green-500"></div>
                                                     </div>
                                                     <div className="ml-6">
                                                         <h3 className="timeline-title text-lg font-semibold text-gray-500">
-                                                            Delivered
+                                                            {timelineLabel(
+                                                                item.status
+                                                            )}
                                                         </h3>
                                                         <p className="timeline-description text-gray-500 text-sm">
-                                                            Awaiting delivery
+                                                            {dateFormatFriendly(
+                                                                item.created_at
+                                                            )}
                                                         </p>
+                                                        {item.description && (
+                                                            <p className="timeline-description text-gray-500 text-[12px]">
+                                                                {
+                                                                    item.description
+                                                                }
+                                                            </p>
+                                                        )}
                                                     </div>
                                                 </div>
                                             );
