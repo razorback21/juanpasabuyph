@@ -16,6 +16,8 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Calendar } from "@/components/ui/calendar";
+import { CalendarIcon } from "lucide-react";
 
 export default function ({
     order,
@@ -108,33 +110,50 @@ export default function ({
                             Order #{order.order_number}
                         </h1>
                         <div className="flex items-center gap-4 text-gray-500 text-sm">
-                            <span>
-                                Placed on{" "}
-                                {new Date(
-                                    order.created_at
-                                ).toLocaleDateString()}
-                            </span>
-                            <span className="h-1 w-1 bg-gray-300 rounded-full"></span>
-                            <Badge
-                                variant="outline"
-                                onClick={() => {
-                                    if (
-                                        order.status === "cancelled" ||
-                                        order.status === "shipped"
-                                    ) {
-                                        return;
-                                    }
-                                    genericDialogRef.current.open({
-                                        title: "Update Order Status",
-                                        actionHandler: handleUpdateStatus,
-                                    });
-                                }}
-                                className={`font-semibold uppercase tracking-wide text-white cursor-pointer ${badgeStatusColor(
-                                    order.status
-                                )}`}
-                            >
-                                {order.status}
-                            </Badge>
+                            <div>
+                                <span>
+                                    Placed on{" "}
+                                    {new Date(
+                                        order.created_at
+                                    ).toLocaleDateString()}
+                                </span>
+                                <span className="h-1 w-1 bg-gray-300 rounded-full"></span>{" "}
+                                <Badge
+                                    variant="outline"
+                                    onClick={() => {
+                                        if (
+                                            order.status === "cancelled" ||
+                                            order.status === "shipped"
+                                        ) {
+                                            return;
+                                        }
+                                        genericDialogRef.current.open({
+                                            title: "Update Order Status",
+                                            actionHandler: handleUpdateStatus,
+                                        });
+                                    }}
+                                    className={`font-semibold uppercase tracking-wide text-white cursor-pointer ${badgeStatusColor(
+                                        order.status
+                                    )}`}
+                                >
+                                    {order.status}
+                                </Badge>
+                            </div>
+                            <div className="w-[300px]">
+                                <div>
+                                    Estimated delivery date:{" "}
+                                    <a href="#" className="underline">
+                                        {order.estimated_delivery ?? "N/A"}
+                                        <span className="inline-block pl-2">
+                                            <CalendarIcon
+                                                size={20}
+                                                title="Set Estimated delivery date"
+                                                className="text-blue-600 mb-[-4px] hover:text-red-500"
+                                            />
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap2 my-4">
