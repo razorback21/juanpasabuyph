@@ -1,4 +1,3 @@
-import Logo from "./Logo";
 export default function ({ linksData, onLinkClick }) {
     return (
         <nav className="flex flex-col gap-4">
