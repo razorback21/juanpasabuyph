@@ -6,21 +6,6 @@ export default function ({ order }) {
     const orderNumberRef = useRef(null);
     const inputRef = useRef(null);
 
-    function timelineLabel(status) {
-        switch (status) {
-            case "placed":
-                return "Order Placed";
-            case "processing":
-                return "Processing";
-            case "shipped":
-                return "Shipped";
-            case "delivered":
-                return "Delivered";
-            default:
-                return "pending";
-        }
-    }
-
     function handleOrderTracking(e) {
         if (inputRef.current.value === "") {
             inputRef.current.focus();
