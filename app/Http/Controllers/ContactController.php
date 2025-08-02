@@ -28,9 +28,9 @@ class ContactController extends Controller
         return to_route('contact.thank-you')->with('success', 'Your message has been sent.');
     }
 
-    public function thankYou(ThankYouRequest $request)
+    public function thankYou()
     {
-        $request->authorize('contact.index');
+        IsSameURLPath::run('contact.index');
         return Inertia::render('Store/Contact/ThankYou');
     }
 }

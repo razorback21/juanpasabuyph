@@ -8,8 +8,9 @@ class IsSameURLPath
 {
     use AsAction;
 
-    public function handle($route)
+    public function handle(string $routeName)
     {
-        return url()->previousPath() === parse_url(route($route), PHP_URL_PATH);
+        $bool = url()->previousPath() === parse_url(route($routeName), PHP_URL_PATH);
+        return !$bool ? abort(403) : true;
     }
 }
