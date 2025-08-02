@@ -10,6 +10,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Services\CartService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Context;
 use Illuminate\Support\Facades\DB;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -24,7 +25,7 @@ class CreateOrder
 
     public function handle(array $validated, Request $request)
     {
-        DB::transaction(function () use ($validated, $request) {
+        return DB::transaction(function () use ($validated, $request) {
             // 1. create customer
             $customer = Customer::create($validated);
             // 2. create order
@@ -60,7 +61,11 @@ class CreateOrder
                 ]);
             });
 
+            // 4. store order id to context
+            Context::add('order_id', $order->id);
+
             event(new EventOrderCreatedCustomer($order));
+            return $order;
         });
     }
 }
