@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\IsSameURLPath;
 use App\Http\Requests\CartRequest;
+use App\Http\Requests\ThankYouRequest;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Rules\ProductStock;
@@ -71,11 +71,9 @@ class CartController extends Controller
         return redirect()->back()->with('message', 'Item removed from cart');
     }
 
-    public function thankYou(Request $request, $id)
+    public function thankYou(ThankYouRequest $request, $id)
     {
-        if (!IsSameURLPath::run('checkout')) {
-            return redirect()->route('home');
-        }
+        $request->authorize('checkout');
         $order = Order::with(['items.product'])->find($id);
         return Inertia::render('Store/Checkout/ThankYou', compact('order'));
     }
