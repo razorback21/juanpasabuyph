@@ -16,10 +16,10 @@ export default function () {
                         <path d="M216,48H40a16,16,0,0,0-16,16V176H232V64A16,16,0,0,0,216,48ZM40,64H216v16H40ZM216,96v64H40V96ZM24,192a8,8,0,0,0-8,8,16,16,0,0,0,16,16H224a16,16,0,0,0,16-16,8,8,0,0,0-16,0H40a8,8,0,0,0,0-16Z"></path>
                     </svg>
                 </div>
-                <h1 className="text-[var(--text-primary)] tracking-tight text-4xl md:text-5xl font-bold leading-tight">
+                <h1 className="tracking-tight text-4xl md:text-5xl font-bold leading-tight">
                     Your Cart is Empty
                 </h1>
-                <p className="text-[var(--text-secondary)] text-lg font-normal leading-relaxed max-w-md mx-auto">
+                <p className="text-gray-600 text-text-lg font-normal leading-relaxed max-w-md mx-auto">
                     Looks like you haven't added anything to your cart yet.
                     Start exploring our catalog and find something you love!
                 </p>
