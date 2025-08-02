@@ -36,13 +36,12 @@ export default function ({ order }) {
                     <div className="mb-8 text-center">
                         <div className="inline-block p-5 bg-gray-200 rounded-full">
                             <svg
-                                className="text-red-500"
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="64"
                                 height="64"
                                 viewBox="0 0 24 24"
                                 fill="none"
-                                stroke="currentColor"
+                                stroke="#ef4444"
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
@@ -65,7 +64,7 @@ export default function ({ order }) {
                         <div class="flex justify-center mb-4">
                             <input
                                 ref={inputRef}
-                                class="w-full max-w-sm px-4 py-3 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--primary-color)]"
+                                class="w-full max-w-sm px-4 py-3 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 font-bold focus:ring-[var(--primary-color)] placeholder:font-normal placeholder:capitalize uppercase placeholder:text-gray-400"
                                 placeholder="Enter your order number"
                                 type="text"
                                 onChange={(e) => {
