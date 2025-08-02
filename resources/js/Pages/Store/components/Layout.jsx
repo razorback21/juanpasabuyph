@@ -2,42 +2,10 @@ import { Head } from "@inertiajs/react";
 import Footer from "./Footer";
 import Logo from "./Logo";
 import { Link, usePage } from "@inertiajs/react";
+import NavLink from "../components/NavLinks";
 
 export default function ({ title, children }) {
     const props = usePage().props;
-    const LinksData = [
-        {
-            name: "Home",
-            href: "/",
-        },
-        {
-            name: "Products",
-            href: "/catalog",
-        },
-        {
-            name: "About",
-            href: "/about",
-        },
-        {
-            name: "Faqs",
-            href: "/faqs",
-        },
-        {
-            name: "Contact",
-            href: "/contact",
-        },
-    ];
-
-    function HeadLink({ link }) {
-        return (
-            <Link
-                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors"
-                href={link.href}
-            >
-                {link.name}
-            </Link>
-        );
-    }
 
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
@@ -50,11 +18,7 @@ export default function ({ title, children }) {
                                 <Logo />
                             </Link>
                         </div>
-                        <nav className="hidden lg:flex items-center gap-6">
-                            {LinksData.map((link) => (
-                                <HeadLink key={link.href} link={link} />
-                            ))}
-                        </nav>
+                        <NavLink />
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
                         <div className="flex gap-2">
