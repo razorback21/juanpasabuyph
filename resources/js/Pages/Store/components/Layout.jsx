@@ -1,7 +1,7 @@
 import { Head } from "@inertiajs/react";
 import Footer from "./Footer";
 import Logo from "./Logo";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, usePage, router } from "@inertiajs/react";
 import NavLink from "../components/NavLinks";
 import MobileMenu from "../components/MobileMenu";
 import { useState } from "react";
@@ -42,6 +42,14 @@ export default function ({ title, children }) {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
+    function handleOrderTracking(e) {
+        e.preventDefault();
+        if (e.key === "Enter") {
+            const orderNumber = e.target.value;
+            router.get(route("order.track", { orderNumber }));
+        }
+    }
+
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
             <div className="layout-container flex h-full grow flex-col">
@@ -57,6 +65,17 @@ export default function ({ title, children }) {
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
                         <div className="flex gap-2">
+                            <input
+                                type="text"
+                                className="sm:hidden md:inline-block h-10 w-[280px] rounded-lg border border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase placeholder:lowercase"
+                                placeholder="Track your order..."
+                                defaultValue=""
+                                onKeyUp={(e) => {
+                                    if (e.key === "Enter") {
+                                        window.location.href = `/order/track/${e.target.value}`;
+                                    }
+                                }}
+                            />
                             <Link href={route("checkout")}>
                                 <button className="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
                                     <svg
