@@ -62,7 +62,7 @@ Route::middleware('visitor.request')->group(function () {
     // Checkout
     Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
     Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
-    Route::get('/checkout/thank-you/{id}', [CheckoutController::class, 'thankYou'])->name('cart.thank-you');
+    Route::get('/checkout/thank-you/{order_id}', [CheckoutController::class, 'thankYou'])->name('checkout.thank-you');
     // Cart
     Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
