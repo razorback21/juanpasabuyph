@@ -77,7 +77,7 @@ Route::middleware('visitor.request')->group(function () {
     Route::get('/captcha/api/math', [ContactController::class, 'captcha'])->name('captcha.api');
     Route::post('/contact/validate', [ContactController::class, 'validate'])->name('contact.validate');
     // Order
-    Route::get('/track/{order_id}', [TrackController::class, 'track'])->name('order.track')->middleware('throttle:20,1');
+    Route::get('/track/{order_id}', [TrackController::class, 'track'])->name('track')->middleware('throttle:20,1');
 });
 // Admin
 Route::middleware(['auth'])->group(function () {
