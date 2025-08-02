@@ -4,6 +4,7 @@ import Logo from "./Logo";
 import { Link, usePage } from "@inertiajs/react";
 import NavLink from "../components/NavLinks";
 import MobileMenu from "../components/MobileMenu";
+import { useState } from "react";
 
 const LinksData = [
     {
@@ -35,6 +36,11 @@ const LinksData = [
 
 export default function ({ title, children }) {
     const props = usePage().props;
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    const toggleMobileMenu = () => {
+        setIsMobileMenuOpen(!isMobileMenuOpen);
+    };
 
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
@@ -71,6 +77,7 @@ export default function ({ title, children }) {
                         <button
                             className="lg:hidden flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]"
                             id="menu-button"
+                            onClick={toggleMobileMenu}
                         >
                             <svg
                                 className="h-6 w-6"
@@ -88,11 +95,117 @@ export default function ({ title, children }) {
                             </svg>
                         </button>
                     </div>
+                    {/* Mobile Menu Overlay */}
+                    {isMobileMenuOpen && (
+                        <div
+                            className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+                            onClick={toggleMobileMenu}
+                        />
+                    )}
+
+                    {/* Mobile Menu Sidebar */}
                     <div
-                        className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 p-4"
+                        className={`lg:hidden fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+                            isMobileMenuOpen
+                                ? "translate-x-0"
+                                : "-translate-x-full"
+                        }`}
                         id="mobile-menu"
                     >
-                        <MobileMenu linksData={LinksData} />
+                        <div className="p-4 border-b border-gray-200">
+                            <div className="flex items-center justify-between mb-4">
+                                <Logo />
+                                <button
+                                    onClick={toggleMobileMenu}
+                                    className="flex items-center justify-center rounded-lg h-8 w-8 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
+                                >
+                                    <svg
+                                        className="h-5 w-5"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth={2}
+                                            d="M6 18L18 6M6 6l12 12"
+                                        />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="py-4 px-6">
+                            <MobileMenu
+                                linksData={LinksData}
+                                onLinkClick={toggleMobileMenu}
+                            />
+                            {/* <div className="my-8 border-t border-gray-200"></div> */}
+                            {/* <div className="mb-4">
+                                <h3 className="text-sm font-medium text-gray-700 mb-3">
+                                    Follow Us
+                                </h3>
+                                <div className="flex gap-3">
+                                    <a
+                                        href="https://facebook.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                                    >
+                                        <svg
+                                            className="w-5 h-5"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                                        </svg>
+                                    </a>
+                                    <a
+                                        href="https://instagram.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-all"
+                                    >
+                                        <svg
+                                            className="w-5 h-5"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323C5.902 8.198 7.053 7.708 8.35 7.708s2.448.49 3.323 1.297c.876.876 1.366 2.027 1.366 3.324s-.49 2.448-1.366 3.323c-.875.876-2.026 1.366-3.323 1.366zm7.718 0c-1.297 0-2.448-.49-3.323-1.297-.876-.875-1.366-2.026-1.366-3.323s.49-2.448 1.366-3.323c.875-.876 2.026-1.366 3.323-1.366s2.448.49 3.323 1.366c.876.875 1.366 2.026 1.366 3.323s-.49 2.448-1.366 3.323c-.875.876-2.026 1.366-3.323 1.366z" />
+                                        </svg>
+                                    </a>
+                                    <a
+                                        href="https://twitter.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-black hover:bg-gray-800 text-white transition-colors"
+                                    >
+                                        <svg
+                                            className="w-5 h-5"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg>
+                                    </a>
+                                    <a
+                                        href="https://youtube.com"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 hover:bg-red-700 text-white transition-colors"
+                                    >
+                                        <svg
+                                            className="w-5 h-5"
+                                            fill="currentColor"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div> */}
+                        </div>
                     </div>
                 </header>
 
