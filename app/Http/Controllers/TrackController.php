@@ -10,7 +10,9 @@ class TrackController extends Controller
 {
     public function track(Request $request, $order_id)
     {
-        $order = Order::with('customer', 'items.product', 'timeline')->find($order_id);
+        $order = Order::with('customer', 'items.product', 'timeline')
+            ->whereLike('order_number', "%{$order_id}%")
+            ->first();
         if (!$order) {
             return Inertia::render('Store/Track/NotFound');
         }
