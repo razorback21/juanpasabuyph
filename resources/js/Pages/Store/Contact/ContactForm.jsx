@@ -118,7 +118,7 @@ export default function ContactForm() {
                         className="block text-sm font-medium leading-normal pb-1.5"
                         for="name"
                     >
-                        Full Name
+                        Full Name *
                     </label>
                     <input
                         className="text-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white focus:border-[var(--primary-color)] h-12 placeholder:text-[var(--text-secondary)] px-4 text-base font-normal leading-normal transition-colors"
@@ -139,7 +139,7 @@ export default function ContactForm() {
                         className="block text-sm font-medium leading-normal pb-1.5"
                         for="email"
                     >
-                        Email Address
+                        Email Address *
                     </label>
                     <input
                         className="text-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white focus:border-gray-500 h-12 placeholder:text-[var(--text-secondary)] px-4 text-base font-normal leading-normal transition-colors"
@@ -160,7 +160,7 @@ export default function ContactForm() {
                         className="block text-sm font-medium leading-normal pb-1.5"
                         for="subject"
                     >
-                        Subject
+                        Subject *
                     </label>
                     <input
                         className="text-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#e3d4d5] bg-white focus:border-gray-500 h-12 placeholder:text-[var(--text-secondary)] px-4 text-base font-normal leading-normal transition-colors"
@@ -182,7 +182,7 @@ export default function ContactForm() {
                             className="block text-sm font-medium leading-normal pb-1.5"
                             for="captcha"
                         >
-                            Captcha
+                            Captcha *
                         </label>
                         <input
                             className="text-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#e3d4d5] bg-white focus:border-[var(--primary-color)] h-12 placeholder:text-[var(--text-secondary)] px-4 text-base font-normal leading-normal transition-colors"
@@ -207,7 +207,7 @@ export default function ContactForm() {
                         className="block text-sm font-medium leading-normal pb-1.5"
                         for="message"
                     >
-                        Message
+                        Message *
                     </label>
                     <textarea
                         className="text-gray-500 form-textarea flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#e3d4d5] bg-white focus:border-[var(--primary-color)] min-h-32 placeholder:text-[var(--text-secondary)] p-4 text-base font-normal leading-normal transition-colors"
