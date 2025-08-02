@@ -43,7 +43,9 @@ export default function ({ order }) {
                         <p className="text-gray-500 mt-1">
                             Estimated Delivery:{" "}
                             <span className="text-[var(--text-primary)] font-semibold">
-                                {order.estimated_delivery ?? "N/A"}
+                                {dateFormatFriendly(
+                                    order.estimated_delivery_date
+                                ) ?? "N/A"}
                             </span>
                         </p>
                     </div>
