@@ -32,6 +32,7 @@ class Order extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
         'status' => OrderStatusEnum::class,
+        'estimated_delivery_date' => 'date',
     ];
 
     protected $appends = [

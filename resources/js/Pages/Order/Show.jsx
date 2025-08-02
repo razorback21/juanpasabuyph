@@ -17,8 +17,13 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Calendar } from "@/components/ui/calendar";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
-
+import { dateFormatFriendly } from "@/lib/date";
 export default function ({
     order,
     statusOptions,
@@ -77,6 +82,78 @@ export default function ({
         );
     }
 
+    function PopoverCalendar() {
+        const [popoverOpen, setPopoverOpen] = useState(false);
+        const [date, setDate] = useState(new Date());
+        const [month, setMonth] = useState(new Date().toLocaleDateString());
+
+        return (
+            <span className="inline-block pl-2">
+                <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>
+                    <PopoverTrigger asChild>
+                        <CalendarIcon
+                            size={20}
+                            title="Set Estimated delivery date"
+                            className="text-blue-600 mb-[-4px] hover:text-red-500"
+                        />
+                    </PopoverTrigger>
+                    <PopoverContent>
+                        <Calendar
+                            mode="single"
+                            selected={date}
+                            month={month}
+                            onMonthChange={(newMonth) => {
+                                const currentDate = new Date();
+                                const currentMonthStart = new Date(
+                                    currentDate.getFullYear(),
+                                    currentDate.getMonth(),
+                                    1
+                                );
+                                const newMonthStart = new Date(
+                                    newMonth.getFullYear(),
+                                    newMonth.getMonth(),
+                                    1
+                                );
+
+                                if (newMonthStart >= currentMonthStart) {
+                                    setMonth(newMonth);
+                                }
+                            }}
+                            fromDate={new Date()} // Disable dates before today
+                            disabled={(date) => date < new Date()} // Additional check to disable past dates
+                            onSelect={(date) => {
+                                setDate(date);
+                                console.log(date);
+                                router.put(
+                                    route(
+                                        "orders.update-estimated-delivery-date",
+                                        {
+                                            order: order,
+                                            date: dateFormatFriendly(date),
+                                        }
+                                    ),
+                                    null,
+                                    {
+                                        onSuccess: () => {
+                                            setPopoverOpen(false);
+                                        },
+                                        onError: (error) => {
+                                            console.log(error);
+                                        },
+                                    }
+                                );
+                            }}
+                        />
+                    </PopoverContent>
+                </Popover>
+            </span>
+        );
+    }
+
+    function disabledActionbyStatus(order) {
+        return order.status === "cancelled" || order.status === "shipped";
+    }
+
     return (
         <AuthenticatedLayout
             header={
@@ -121,10 +198,7 @@ export default function ({
                                 <Badge
                                     variant="outline"
                                     onClick={() => {
-                                        if (
-                                            order.status === "cancelled" ||
-                                            order.status === "shipped"
-                                        ) {
+                                        if (disabledActionbyStatus(order)) {
                                             return;
                                         }
                                         genericDialogRef.current.open({
@@ -139,18 +213,18 @@ export default function ({
                                     {order.status}
                                 </Badge>
                             </div>
-                            <div className="w-[300px]">
+                            <div className="w-[400px]">
                                 <div>
                                     Estimated delivery date:{" "}
-                                    <a href="#" className="underline">
-                                        {order.estimated_delivery ?? "N/A"}
-                                        <span className="inline-block pl-2">
-                                            <CalendarIcon
-                                                size={20}
-                                                title="Set Estimated delivery date"
-                                                className="text-blue-600 mb-[-4px] hover:text-red-500"
-                                            />
-                                        </span>
+                                    <a href="#">
+                                        {dateFormatFriendly(
+                                            order.estimated_delivery_date
+                                        ) ?? "N/A"}
+                                        {disabledActionbyStatus(
+                                            order
+                                        ) ? null : (
+                                            <PopoverCalendar />
+                                        )}
                                     </a>
                                 </div>
                             </div>

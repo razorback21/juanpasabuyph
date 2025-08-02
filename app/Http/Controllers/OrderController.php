@@ -44,4 +44,17 @@ class OrderController extends Controller
         return redirect()->route('orders.index')->with('success', 'Order deleted successfully');
     }
 
+    public function updateEstimatedDeliveryDate(Request $request, Order $order)
+    {
+        $validated = $request->validate([
+            'date' => 'required',
+        ]);
+
+        $order->update([
+            'estimated_delivery_date' => $validated['date'],
+        ]);
+
+        return back()->with('success', 'Estimated delivery date updated successfully');
+    }
+
 }

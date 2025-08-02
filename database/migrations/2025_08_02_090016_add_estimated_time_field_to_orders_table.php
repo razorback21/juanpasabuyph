@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->date('est_delivery_time')->nullable();
+            $table->date('estimated_delivery_date')->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('est_delivery_time');
+            $table->dropColumn('estimated_delivery_date');
         });
     }
 };

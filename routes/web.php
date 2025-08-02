@@ -90,6 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('inventory', InventoryController::class);
     // Orders
     Route::resource('orders', OrderController::class);
+    Route::put('/orders/{order}/update-estimated-delivery-date', [OrderController::class, 'updateEstimatedDeliveryDate'])->name('orders.update-estimated-delivery-date');
     // Order Item
     Route::resource('order-items', OrderItemController::class);
     // Order Status Timeline
