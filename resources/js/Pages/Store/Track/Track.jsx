@@ -52,23 +52,54 @@ export default function ({ order }) {
                         <div className="relative">
                             <div className="absolute left-5 top-0 h-full w-0.5 bg-red-200"></div>
                             <div className="space-y-12">
-                                {order.timeline.map((item) => (
-                                    <div className="timeline-item relative flex items-start active">
-                                        <div className="timeline-icon flex-shrink-0 w-10 h-10 rounded-full border-2 bg-white border-red-500 flex items-center justify-center z-10">
-                                            <div className="timeline-icon-inner w-5 h-5 rounded-full bg-red-500"></div>
-                                        </div>
-                                        <div className="ml-6">
-                                            <h3 className="timeline-title text-lg font-semibold text-gray-900">
-                                                {timelineLabel(item.status)}
-                                            </h3>
-                                            <p className="timeline-description text-gray-500 text-sm">
-                                                {dateFormatFriendly(
-                                                    order.created_at
-                                                )}
-                                            </p>
-                                        </div>
-                                    </div>
-                                ))}
+                                {order.timeline.map((item) => {
+                                    {
+                                        if (item.status != "shipped") {
+                                            return (
+                                                <div className="timeline-item relative flex items-start active">
+                                                    <div className="timeline-icon flex-shrink-0 w-10 h-10 rounded-full border-2 bg-white border-red-500 flex items-center justify-center z-10">
+                                                        <div className="timeline-icon-inner w-5 h-5 rounded-full bg-red-500"></div>
+                                                    </div>
+                                                    <div className="ml-6">
+                                                        <h3 className="timeline-title text-lg font-semibold text-gray-900">
+                                                            {timelineLabel(
+                                                                item.status
+                                                            )}
+                                                        </h3>
+                                                        <p className="timeline-description text-gray-500 text-sm">
+                                                            {dateFormatFriendly(
+                                                                order.created_at
+                                                            )}
+                                                        </p>
+                                                        {item.description && (
+                                                            <p className="timeline-description text-gray-500 text-[12px]">
+                                                                {
+                                                                    item.description
+                                                                }
+                                                            </p>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            );
+                                        } else {
+                                            return (
+                                                <div className="timeline-item relative flex items-start">
+                                                    <div className="timeline-icon flex-shrink-0 w-10 h-10 rounded-full bg-white border-2 border-gray-200 flex items-center justify-center z-10">
+                                                        <div className="timeline-icon-inner w-5 h-5 rounded-full bg-gray-200"></div>
+                                                    </div>
+                                                    <div className="ml-6">
+                                                        <h3 className="timeline-title text-lg font-semibold text-gray-500">
+                                                            Delivered
+                                                        </h3>
+                                                        <p className="timeline-description text-gray-500 text-sm">
+                                                            Awaiting delivery
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+                                    }
+                                })}
                                 {/* <div className="timeline-item relative flex items-start active">
                                     <div className="timeline-icon flex-shrink-0 w-10 h-10 rounded-full border-2 bg-white border-red-500 flex items-center justify-center z-10">
                                         <div className="timeline-icon-inner w-5 h-5 rounded-full bg-red-500"></div>
