@@ -4,6 +4,34 @@ import Logo from "./Logo";
 import { Link, usePage } from "@inertiajs/react";
 import NavLink from "../components/NavLinks";
 
+const LinksData = [
+    {
+        name: "Home",
+        href: "/",
+        component: "Store/Home/Index",
+    },
+    {
+        name: "Products",
+        href: "/catalog",
+        component: "Store/Catalog/Index",
+    },
+    {
+        name: "About",
+        href: "/about",
+        component: "Store/About/Index",
+    },
+    {
+        name: "Faqs",
+        href: "/faqs",
+        component: "Store/Faqs/Index",
+    },
+    {
+        name: "Contact",
+        href: "/contact",
+        component: "Store/Contact/Index",
+    },
+];
+
 export default function ({ title, children }) {
     const props = usePage().props;
 
@@ -18,7 +46,7 @@ export default function ({ title, children }) {
                                 <Logo />
                             </Link>
                         </div>
-                        <NavLink />
+                        <NavLink LinksData={LinksData} />
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
                         <div className="flex gap-2">
@@ -60,35 +88,19 @@ export default function ({ title, children }) {
                         </button>
                     </div>
                     <div
-                        className="hidden lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 p-4"
+                        className="lg:hidden absolute top-16 left-0 right-0 bg-white shadow-lg z-50 p-4"
                         id="mobile-menu"
                     >
                         <nav className="flex flex-col gap-4">
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
-                                href="#"
-                            >
-                                Home
-                            </a>
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
-                                href="#"
-                            >
-                                Stores
-                            </a>
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
-                                href="#"
-                            >
-                                Categories
-                            </a>
-                            <a
-                                className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
-                                href="#"
-                            >
-                                Deals
-                            </a>
-                            <label className="relative flex-col min-w-0 !h-10 max-w-xs mt-2 md:hidden">
+                            {LinksData.map((link) => (
+                                <a
+                                    className="text-[#4b5563] hover:text-[#e92933] text-sm font-medium leading-normal transition-colors py-2"
+                                    href={link.href}
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                            <label className="relative flex-col min-w-0 !h-10 max-w-xs mt-2 lg:hidden">
                                 <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-[#6b7280]">
                                     <svg
                                         fill="currentColor"
@@ -102,7 +114,7 @@ export default function ({ title, children }) {
                                 </div>
                                 <input
                                     className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-[#1f2937] focus:outline-none focus:ring-2 focus:ring-[#e92933] border border-[#d1d5db] bg-white h-full placeholder:text-[#9ca3af] pl-10 pr-4 text-sm font-normal leading-normal"
-                                    placeholder="Search products..."
+                                    placeholder="Track Order"
                                     defaultValue=""
                                 />
                             </label>
