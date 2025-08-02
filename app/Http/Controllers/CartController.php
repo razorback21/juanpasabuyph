@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Http\Requests\CartRequest;
-use App\Http\Requests\ThankYouRequest;
-use App\Models\Customer;
-use App\Models\Order;
-use App\Rules\ProductStock;
 use App\Services\CartService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Inertia\Inertia;
 
 class CartController extends Controller
 {
@@ -69,12 +65,5 @@ class CartController extends Controller
         unset($cart[$product_id]);
         $request->session()->put($this->cartSessionKey, $cart);
         return redirect()->back()->with('message', 'Item removed from cart');
-    }
-
-    public function thankYou(ThankYouRequest $request, $id)
-    {
-        $request->authorize('checkout');
-        $order = Order::with(['items.product'])->find($id);
-        return Inertia::render('Store/Checkout/ThankYou', compact('order'));
     }
 }
