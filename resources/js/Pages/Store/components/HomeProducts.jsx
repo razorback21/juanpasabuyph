@@ -1,13 +1,25 @@
 import { Link } from "@inertiajs/react";
 
-export default function ({ products, title, titleTextSize = "text-3xl" }) {
+export default function ({
+    products,
+    title,
+    description = "",
+    titleTextSize = "text-3xl",
+}) {
     return (
         <section className="mb-12">
-            <h2
-                className={`text-gray-900 ${titleTextSize} font-bold leading-tight tracking-tight px-4 pb-6`}
-            >
-                {title}
-            </h2>
+            <header>
+                <h2
+                    className={`text-gray-900 ${titleTextSize} font-bold leading-tight tracking-tight px-4 `}
+                >
+                    {title}
+                </h2>
+                <p className={`text-gray-500 px-4 pb-6 pt-2`}>
+                    {description}
+                    {/* Handpicked premium products from Dubai's top retailers. Each
+                item is personally sourced and verified for authenticity. */}
+                </p>
+            </header>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
                 {products.map((product) => (
                     <div
