@@ -1,2 +1,26 @@
+# JuanPasabuy PH - Robots.txt
+# Dubai Products to Philippines Online Store
+
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /dashboard/
+Disallow: /profile/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /api/
+Disallow: /storage/private/
+Disallow: /vendor/
+Disallow: /*.json$
+Disallow: /*?*
+Allow: /catalog
+Allow: /about
+Allow: /contact
+Allow: /faqs
+Allow: /track
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://juanpasabuyph.com/sitemap.xml
