@@ -12,13 +12,13 @@ trait HasDefaultSeo
             ->description('Discover authentic Dubai products at JuanPasabuy PH. Shop premium electronics, fashion, cosmetics & more from Dubai with secure delivery to Philippines. Trusted online shopping since 2022.')
             ->keywords('Dubai products Philippines, online shopping Dubai, JuanPasabuy, Dubai to Philippines delivery, premium products, authentic Dubai shopping, electronics Dubai, fashion Dubai, cosmetics Dubai, online shopping, dubai to philippines, affordable dubai shopping')
             ->image(url('/storage/assets/share.png'))
-            ->url(url(url()->current()))
+            ->url(url()->current())
             ->type('website')
             ->locale('en_US')
             ->siteName('JuanPasabuy PH')
             ->twitterCard('summary_large_image')
             ->twitterSite('@juanpasabuyph')
-            ->canonical(url('/'))
+            ->canonical(url()->current())
             ->robots('index,follow')
             ->jsonLd(json_encode([
                 '@context' => 'https://schema.org',
