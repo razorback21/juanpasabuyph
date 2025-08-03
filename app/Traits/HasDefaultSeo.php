@@ -9,8 +9,8 @@ trait HasDefaultSeo
         // Default SEO optimization for home page
         seo()
             ->title('JuanPasabuy PH - Premium Dubai Products Delivered to Philippines | Online Shopping')
-            ->description('Discover authentic Dubai products at JuanPasabuy PH. Shop premium electronics, fashion, cosmetics & more from Dubai with secure delivery to Philippines. Trusted online shopping since 2024.')
-            ->keywords('Dubai products Philippines, online shopping Dubai, JuanPasabuy, Dubai to Philippines delivery, premium products, authentic Dubai shopping, electronics Dubai, fashion Dubai, cosmetics Dubai')
+            ->description('Discover authentic Dubai products at JuanPasabuy PH. Shop premium electronics, fashion, cosmetics & more from Dubai with secure delivery to Philippines. Trusted online shopping since 2022.')
+            ->keywords('Dubai products Philippines, online shopping Dubai, JuanPasabuy, Dubai to Philippines delivery, premium products, authentic Dubai shopping, electronics Dubai, fashion Dubai, cosmetics Dubai, online shopping, dubai to philippines, affordable dubai shopping')
             ->image(url('/storage/assets/share.png'))
             ->url(url(url()->current()))
             ->type('website')
