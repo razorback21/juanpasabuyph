@@ -90,17 +90,30 @@ export default function ({ title, children }) {
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
                         <div className="flex gap-2">
-                            {page.component === "Store/Home/Index" && (
+                            {page.component !== "Store/Track/NotFound" && (
                                 <>
                                     <div className="hidden md:flex">
                                         <div className="relative flex">
                                             <input
                                                 type="text"
-                                                className="h-10 w-[280px] rounded-lg border-1 border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors pr-[80px]"
-                                                placeholder="Enter your tracking number"
+                                                className="h-10 w-[280px] rounded-lg border-1 border-[#d1d5db] bg-white pl-10 pr-[80px] text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors"
+                                                placeholder="Enter tracking number"
                                                 defaultValue=""
                                                 ref={trackRef}
                                             />
+                                            <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="16"
+                                                    height="16"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 16 16"
+                                                >
+                                                    <path d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+                                                    <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+                                                    <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+                                                </svg>
+                                            </div>
                                             <button
                                                 onClick={handleOrderTracking}
                                                 className="absolute right-1 top-1/2 -translate-y-1/2 h-8 px-4 rounded-lg border border-[#e92933] bg-[#e92933] hover:bg-[#d41e27] text-white transition-colors flex items-center justify-center"

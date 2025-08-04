@@ -60,13 +60,39 @@ export default function ({ title, featuredProducts, popularProducts }) {
                         Track Your Order
                     </h4>
                     <form className="flex flex-col sm:flex-row gap-4">
-                        <input
-                            type="text"
-                            className="flex-1 text-center py-3 rounded-lg border border-[#d1d5db] bg-white px-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors text:uppercase"
-                            placeholder="Enter your order number."
-                            defaultValue=""
-                            ref={trackRef}
-                        />
+                        <div className="flex-1 relative">
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-5 w-5 text-gray-400"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path d="M2 6h4" />
+                                    <path d="M2 10h4" />
+                                    <path d="M2 14h4" />
+                                    <path d="M2 18h4" />
+                                    <rect
+                                        width="16"
+                                        height="20"
+                                        x="4"
+                                        y="2"
+                                        rx="2"
+                                    />
+                                    <path d="M9.5 8h5" />
+                                    <path d="M9.5 12H16" />
+                                    <path d="M9.5 16H14" />
+                                </svg>
+                            </div>
+                            <input
+                                type="text"
+                                className="w-full text-center py-3 rounded-lg border border-[#d1d5db] bg-white pl-10 pr-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors text:uppercase"
+                                placeholder="Enter your order number."
+                                defaultValue=""
+                                ref={trackRef}
+                            />
+                        </div>
                         <button
                             onClick={handleOrderTracking}
                             type="button"
