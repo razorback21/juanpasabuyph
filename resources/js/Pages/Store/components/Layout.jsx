@@ -159,19 +159,19 @@ export default function ({ title, children }) {
 
                     {/* Mobile Menu Sidebar */}
                     <div
-                        className={`lg:hidden fixed top-0 left-0 h-full w-80 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+                        className={`lg:hidden fixed top-0 left-0 h-full w-80shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-[#c9e3fd] ${
                             isMobileMenuOpen
                                 ? "translate-x-0"
                                 : "-translate-x-full"
                         }`}
                         id="mobile-menu"
                     >
-                        <div className="p-4 border-b border-gray-200">
+                        <div className="p-4 border-b border-gray-200 bg-[#c9e3fd]">
                             <div className="flex items-center justify-between mb-4">
                                 <Logo />
                                 <button
                                     onClick={toggleMobileMenu}
-                                    className="flex items-center justify-center rounded-lg h-8 w-8 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
+                                    className="flex items-center justify-center rounded-lg h-7w-7 ml-1 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
                                 >
                                     <svg
                                         className="h-5 w-5"
@@ -190,17 +190,17 @@ export default function ({ title, children }) {
                                 </button>
                             </div>
                         </div>
-                        <div className="py-4 px-6">
+                        <div className="py-4 px-6 bg-[#c9e3fd]">
                             <MobileMenu
                                 linksData={LinksData}
                                 onLinkClick={toggleMobileMenu}
                             />
-                            {/* <div className="my-8 border-t border-gray-200"></div> */}
-                            {/* <div className="mb-4">
-                                <h3 className="text-sm font-medium text-gray-700 mb-3">
+                            <div className="my-12 border-t border-gray-200"></div>
+                            <div className="mb-4">
+                                <h3 className="text-sm font-medium text-gray-700 mb-3 text-center">
                                     Follow Us
                                 </h3>
-                                <div className="flex gap-3">
+                                <div className="flex gap-3 justify-center">
                                     <a
                                         href="https://facebook.com"
                                         target="_blank"
@@ -215,7 +215,7 @@ export default function ({ title, children }) {
                                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                                         </svg>
                                     </a>
-                                    <a
+                                    {/* <a
                                         href="https://instagram.com"
                                         target="_blank"
                                         rel="noopener noreferrer"
@@ -256,9 +256,9 @@ export default function ({ title, children }) {
                                         >
                                             <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                                         </svg>
-                                    </a>
+                                    </a> */}
                                 </div>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
                 </header>

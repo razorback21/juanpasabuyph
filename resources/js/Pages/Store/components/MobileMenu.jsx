@@ -4,7 +4,7 @@ export default function ({ linksData, onLinkClick }) {
     const page = usePage();
     function highlightActiveLink(component) {
         if (page.component === component) {
-            return "text-[#e92933] shadow-md bg-gray-100";
+            return "shadow-md bg-[#2c29e9] text-white";
         } else {
             return "text-[#4b5563]";
         }
@@ -17,7 +17,7 @@ export default function ({ linksData, onLinkClick }) {
                     key={index}
                     className={`${highlightActiveLink(
                         link.component
-                    )} hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-gray-100 text-center block transform hover:scale-105 hover:shadow-sm border border-gray-200`}
+                    )} hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-blue-200 text-center block transform hover:scale-105 hover:shadow-sm border border-blue-300`}
                     href={link.href}
                     onClick={onLinkClick}
                 >
