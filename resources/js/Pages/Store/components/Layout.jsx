@@ -55,14 +55,24 @@ export default function ({ title, children }) {
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
             <div className="layout-container flex h-full grow flex-col">
                 <Head title={title}>
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0"
+                    />
                     <meta name="theme-color" content="#e92933" />
                     <meta name="apple-mobile-web-app-capable" content="yes" />
-                    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+                    <meta
+                        name="apple-mobile-web-app-status-bar-style"
+                        content="default"
+                    />
                     <meta name="format-detection" content="telephone=no" />
                     <link rel="preconnect" href="https://fonts.bunny.net" />
                     <link rel="dns-prefetch" href="https://fonts.bunny.net" />
-                    <link rel="preload" href="/storage/assets/pdala_hero_bg.png" as="image" />
+                    <link
+                        rel="preload"
+                        href="/storage/assets/pdala_hero_bg.png"
+                        as="image"
+                    />
                 </Head>
                 <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e0e0e0] px-4 sm:px-10 py-4 shadow-sm bg-white">
                     <div className="flex items-center gap-3 sm:gap-10">
@@ -77,7 +87,7 @@ export default function ({ title, children }) {
                         <div className="flex gap-2">
                             <input
                                 type="text"
-                                className="sm:hidden md:inline-block h-10 w-[280px] rounded-lg border border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase placeholder:lowercase"
+                                className="hidden sm:hidden md:inline-block h-10 w-[280px] rounded-lg border border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase placeholder:lowercase"
                                 placeholder="Track your order..."
                                 defaultValue=""
                                 onKeyUp={handleOrderTracking}
