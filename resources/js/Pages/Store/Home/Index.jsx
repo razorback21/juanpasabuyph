@@ -29,9 +29,9 @@ export default function ({ title, featuredProducts, popularProducts }) {
                         <p className="text-gray-200 mt-4 text-lg sm:text-xl max-w-xl">
                             JuanPasabuy PH is your trusted partner in bringing
                             premium Dubai electronics, fashion, cosmetics, and
-                            luxury items right to your doorstep in the
-                            Philippines. Shop with confidence and authenticity
-                            guaranteed.
+                            luxury items and many more right to your doorstep in
+                            the Philippines. Shop with confidence and
+                            authenticity guaranteed.
                         </p>
                         <div className="mt-8 flex flex-col sm:flex-row gap-4">
                             <Link href={route("catalog")}>
