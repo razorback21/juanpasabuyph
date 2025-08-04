@@ -15,7 +15,7 @@ export default function ({ title, featuredProducts, popularProducts }) {
             {/* Hero Section - Main Value Proposition */}
             <section className="w-full @container mb-12" role="banner">
                 <div
-                    className="bg-contain bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
+                    className="bg-cover bg-no-repeat bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg "
                     style={{
                         backgroundImage:
                             'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("/storage/assets/pdala_hero_bg.png")',
