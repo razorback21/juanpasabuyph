@@ -7,7 +7,7 @@ export default function () {
                 </h2>
                 <p className={`text-gray-500 px-4 pb-6 pt-2`}>
                     Read testimonials from satisfied customers who trust
-                    JuanPasabuy PH for their Dubai shopping needs.
+                    JuanPasabuyPH for their Dubai shopping needs.
                 </p>
             </header>
 
