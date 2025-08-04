@@ -10,7 +10,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "archtechx/laravel-seo": "^0.10.3",
         "buglinjo/laravel-webp": "^3.1",
         "inertiajs/inertia-laravel": "^2.0",
         "jenssegers/agent": "^2.6",

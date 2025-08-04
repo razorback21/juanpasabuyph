@@ -10,7 +10,6 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    use HasDefaultSeo;
 
     public function __construct(private ProductService $productService)
     {
@@ -19,7 +18,6 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $this->defaultSeo();
         $title = 'Home';
         $featuredProducts = Product::featuredProduct()->get()->random(4);
         $popularProducts = $this->productService->getPopularProducts()->get()->shuffle()->take(4);
