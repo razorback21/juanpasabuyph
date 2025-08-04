@@ -23,7 +23,7 @@ export default function ({ title, featuredProducts, popularProducts }) {
                 >
                     <div className="p-8 sm:p-12">
                         <h1 className="text-white text-3xl sm:text-5xl font-bold leading-tight tracking-tight max-w-2xl">
-                            Discover Authentic Dubai Products - Delivered to
+                            Discover Authentic Dubai Products delivered to
                             Philippines
                         </h1>
                         <p className="text-gray-200 mt-4 text-lg sm:text-xl max-w-xl">
