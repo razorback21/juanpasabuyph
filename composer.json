@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "buglinjo/laravel-webp": "^3.1",
+        "honeystone/laravel-seo": "^2.0",
         "inertiajs/inertia-laravel": "^2.0",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^12.0",
