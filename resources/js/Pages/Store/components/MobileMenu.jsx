@@ -1,10 +1,23 @@
+import { usePage } from "@inertiajs/react";
+
 export default function ({ linksData, onLinkClick }) {
+    const page = usePage();
+    function highlightActiveLink(component) {
+        if (page.component === component) {
+            return "hover:text-[#e92933] shadow-sm bg-gray-100 text-[#e92933]";
+        } else {
+            return "text-[#4b5563]";
+        }
+    }
+
     return (
         <nav className="flex flex-col gap-4">
             {linksData.map((link, index) => (
                 <a
                     key={index}
-                    className="text-[#4b5563] hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-gray-100 text-center block transform hover:scale-105 hover:shadow-sm"
+                    className={`${highlightActiveLink(
+                        link.component
+                    )} hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-gray-100 text-center block transform hover:scale-105 hover:shadow-sm`}
                     href={link.href}
                     onClick={onLinkClick}
                 >
