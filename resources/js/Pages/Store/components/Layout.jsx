@@ -176,7 +176,6 @@ export default function ({ title, children }) {
                             <MobileMenu
                                 linksData={LinksData}
                                 onLinkClick={toggleMobileMenu}
-                                onOrderTracking={handleOrderTracking}
                             />
                             {/* <div className="my-8 border-t border-gray-200"></div> */}
                             {/* <div className="mb-4">
