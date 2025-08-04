@@ -35,7 +35,7 @@ export default function ({ title, product, category, relatedProducts }) {
     }
 
     return (
-        <Layout title={title} category={category}>
+        <Layout title={product.name} category={category}>
             <Toaster />
             <div className="mb-6 text-sm text-[#6b7280]">
                 Category /{" "}
