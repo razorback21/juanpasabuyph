@@ -85,13 +85,13 @@ export default function ({ title, children }) {
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
                         <div className="flex gap-2">
-                            <input
+                            {/* <input
                                 type="text"
                                 className="hidden sm:hidden md:inline-block h-10 w-[280px] rounded-lg border border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase placeholder:lowercase"
                                 placeholder="Track your order..."
                                 defaultValue=""
                                 onKeyUp={handleOrderTracking}
-                            />
+                            /> */}
                             <Link href={route("checkout")}>
                                 <button className="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
                                     <svg
