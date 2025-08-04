@@ -6,7 +6,6 @@ import { Link, router } from "@inertiajs/react";
 
 export default function ({ title, featuredProducts, popularProducts }) {
     function handleOrderTracking(e) {
-        e.preventDefault();
         const orderNumber = e.target.value;
         router.get(route("track", { order_id: orderNumber }));
     }
@@ -53,7 +52,7 @@ export default function ({ title, featuredProducts, popularProducts }) {
                 </div>
             </section>
             {/* Mobile Tracking */}
-            <section className="mb-12 flex justify-center">
+            <section className="sm:hidden mb-12 flex justify-center">
                 <div className="p-4 sm:p-6 bg-blue-950 text-white rounded-lg shadow-lg max-w-2xl w-full">
                     <h4 className="text-xs font-medium text-gray-200 mb-4 uppercase tracking-wide text-center">
                         Track Your Order
