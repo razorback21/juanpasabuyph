@@ -2,16 +2,13 @@ import Layout from "@/Pages/Store/components/Layout.jsx";
 import HomeProducts from "../components/HomeProducts";
 import Reviews from "../components/Reviews";
 import WhyChoose from "./WhyChoose";
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 
 export default function ({ title, featuredProducts, popularProducts }) {
     function handleOrderTracking(e) {
         e.preventDefault();
-
-        if (e.key === "Enter") {
-            const orderNumber = e.target.value;
-            router.get(route("track", { order_id: orderNumber }));
-        }
+        const orderNumber = e.target.value;
+        router.get(route("track", { order_id: orderNumber }));
     }
 
     return (
@@ -56,15 +53,12 @@ export default function ({ title, featuredProducts, popularProducts }) {
                 </div>
             </section>
             {/* Mobile Tracking */}
-            <section className="mb-10">
-                <div className="p-4 sm:p-6 bg-blue-950 text-white rounded-lg shadow-lg">
-                    <h4 className="text-xs font-medium text-gray-200 mb-4 uppercase tracking-wide">
+            <section className="mb-12 flex justify-center">
+                <div className="p-4 sm:p-6 bg-blue-950 text-white rounded-lg shadow-lg max-w-2xl w-full">
+                    <h4 className="text-xs font-medium text-gray-200 mb-4 uppercase tracking-wide text-center">
                         Track Your Order
                     </h4>
-                    <form
-                        className="flex flex-col sm:flex-row gap-4"
-                        onSubmit={handleOrderTracking}
-                    >
+                    <form className="flex flex-col sm:flex-row gap-4">
                         <input
                             type="text"
                             className="flex-1 text-center py-3 rounded-lg border border-[#d1d5db] bg-white px-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors text:uppercase"
@@ -73,10 +67,11 @@ export default function ({ title, featuredProducts, popularProducts }) {
                             onKeyUp={handleOrderTracking}
                         />
                         <button
+                            type="submit"
                             className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white text-lg font-semibold rounded-lg shadow-md transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
                             aria-label="Submit"
                         >
-                            Track Order
+                            Track
                         </button>
                     </form>
                 </div>

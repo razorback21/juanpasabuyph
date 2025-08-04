@@ -42,14 +42,15 @@ export default function ({ title, children }) {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    function handleOrderTracking(e) {
-        e.preventDefault();
-
-        if (e.key === "Enter") {
-            const orderNumber = e.target.value;
-            router.get(route("track", { order_id: orderNumber }));
-        }
-    }
+    // function handleOrderTracking(e) {
+    //     e.preventDefault();
+    //     const orderNumber = e.target.value;
+    //     if (e.key === "Enter") {
+    //         router.get(route("track", { order_id: orderNumber }));
+    //     } else {
+    //         router.get(route("track", { order_id: orderNumber }));
+    //     }
+    // }
 
     return (
         <div className="relative flex size-full min-h-screen flex-col bg-white group/design-root overflow-x-hidden">
