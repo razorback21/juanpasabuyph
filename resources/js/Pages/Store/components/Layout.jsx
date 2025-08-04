@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { Head } from "@inertiajs/react";
 import Footer from "./Footer";
 import Logo from "./Logo";
@@ -36,18 +37,21 @@ const LinksData = [
 
 export default function ({ title, children }) {
     const props = usePage().props;
+    const trackRef = useRef(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    useEffect(() => {
+        if (trackRef.current) {
+            trackRef.current.focus();
+        }
+    }, []);
 
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen(!isMobileMenuOpen);
     };
 
     function handleOrderTracking(e) {
-        e.preventDefault();
-        const orderNumber = e.target.value;
-        if (e.key === "Enter") {
-            router.get(route("track", { order_id: orderNumber }));
-        }
+        router.get(route("track", { order_id: trackRef.current.value }));
     }
 
     return (
@@ -84,13 +88,23 @@ export default function ({ title, children }) {
                     </div>
                     <div className="flex flex-1 justify-end items-center gap-2 sm:gap-4">
                         <div className="flex gap-2">
-                            <input
-                                type="text"
-                                className="hidden sm:hidden md:inline-block h-10 w-[280px] rounded-lg border border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase placeholder:lowercase"
-                                placeholder="Track your order..."
-                                defaultValue=""
-                                onKeyUp={handleOrderTracking}
-                            />
+                            <div className="hidden md:flex">
+                                <div className="relative flex">
+                                    <input
+                                        type="text"
+                                        className="h-10 w-[280px] rounded-lg border-1 border-[#d1d5db] bg-white px-4 text-sm text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors pr-[80px]"
+                                        placeholder="Enter your tracking number"
+                                        defaultValue=""
+                                        ref={trackRef}
+                                    />
+                                    <button
+                                        onClick={handleOrderTracking}
+                                        className="absolute right-1 top-1/2 -translate-y-1/2 h-8 px-4 rounded-lg border border-[#e92933] bg-[#e92933] hover:bg-[#d41e27] text-white transition-colors flex items-center justify-center"
+                                    >
+                                        Track
+                                    </button>
+                                </div>
+                            </div>
                             <Link href={route("checkout")}>
                                 <button className="relative flex items-center justify-center rounded-lg h-10 w-10 bg-white hover:bg-[#f3f4f6] text-[#4b5563] hover:text-[#e92933] transition-colors border border-[#d1d5db]">
                                     <svg
