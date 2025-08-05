@@ -38,7 +38,8 @@ export default function ({ order }) {
                                 <path d="m21 21-4.3-4.3" />
                             </svg>
                         </div>
-                        <h1 class="text-4xl font-bold  mb-4">
+                        <h1 className="text-4xl font-bold  mb-4">
+                            {" "}
                             Order Not Found
                         </h1>
                         <p class="text-lg text-gray-500 mb-8">
@@ -46,7 +47,8 @@ export default function ({ order }) {
                             information. Please double-check your order details
                             or try searching again.
                         </p>
-                        <div class="flex justify-center mb-4">
+                        <div className="flex justify-center mb-4">
+                            {" "}
                             <input
                                 ref={inputRef}
                                 class="w-full max-w-sm px-4 py-3 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 font-bold focus:ring-[var(--primary-color)] placeholder:font-normal placeholder:capitalize uppercase placeholder:text-gray-400"
