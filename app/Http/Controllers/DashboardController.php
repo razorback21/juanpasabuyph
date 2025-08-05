@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Visitor;
@@ -29,9 +30,9 @@ class DashboardController extends Controller
         $activeCategory = $request->query('active_category') ?? 'All';
         $outOfStock = $this->stockService->getOutOfStockProducts()->count();
         $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
-        $customers = Customer::count();
+        $OrderCount = Order::where('status', '=', 'placed')->count();
         $chartData = Visitor::where('created_at', '>=', now()->subDays(90))->get();
 
-        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'customers', 'chartData'));
+        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'OrderCount', 'chartData'));
     }
 }

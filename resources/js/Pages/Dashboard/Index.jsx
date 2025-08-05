@@ -7,7 +7,7 @@ import { Head } from "@inertiajs/react";
 export default function ({
     outOfStock,
     profitThisMonth,
-    customers,
+    orderCount,
     chartData,
 }) {
     return (
@@ -16,7 +16,7 @@ export default function ({
             <SectionCards
                 outOfStock={outOfStock}
                 profitThisMonth={profitThisMonth}
-                customers={customers}
+                orderCount={orderCount}
             />
             <div className="grid grid-cols-1 mx-6">
                 <ChartAreaInteractive chartData={chartData} />
