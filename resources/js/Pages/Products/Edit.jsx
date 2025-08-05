@@ -15,6 +15,7 @@ import Progressbar from "@/Components/ProgressBar";
 import { useRef } from "react";
 import { Switch } from "@/Components/ui/switch";
 import { Label } from "@/Components/ui/label";
+import ItemPrice from "./ItemPrice";
 
 export default function EditProduct({ product, categories, from, uoms }) {
     const props = usePage().props;
@@ -29,6 +30,8 @@ export default function EditProduct({ product, categories, from, uoms }) {
         description: product.description,
         price: product.price,
         product_category_id: product.product_category_id,
+        cost_price: product.cost_price,
+        sale_uom: product.sale_uom,
     });
 
     const submitHandler = (e) => {
@@ -271,21 +274,11 @@ export default function EditProduct({ product, categories, from, uoms }) {
                                     </div>
                                 </div>
                             </div>
-                            <div>
-                                <InputLabel value="Price" htmlFor="price" />
-                                <TextInput
-                                    className="w-full mt-1"
-                                    type="number"
-                                    defaultValue={product.price}
-                                    name="price"
-                                    onChange={formInputHandler}
-                                />
-                                {props.errors?.price && (
-                                    <p className="text-red-500 text-sm py-1">
-                                        Price field is required
-                                    </p>
-                                )}
-                            </div>
+                            <ItemPrice
+                                ref={formDataRef}
+                                cost={product.cost_price}
+                                price={product.price}
+                            />
                         </form>
                         <div className="mt-4">
                             <LinkButton
