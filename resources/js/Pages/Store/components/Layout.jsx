@@ -184,7 +184,7 @@ export default function ({ title, children }) {
                                 <Logo />
                                 <button
                                     onClick={toggleMobileMenu}
-                                    className="flex items-center justify-center rounded-lg h-7w-7 ml-1 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
+                                    className="flex items-center justify-center rounded-lg h-7 w-7 ml-1 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
                                 >
                                     <svg
                                         className="h-5 w-5"
