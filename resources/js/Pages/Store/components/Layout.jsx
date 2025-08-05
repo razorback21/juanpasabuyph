@@ -1,11 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Head } from "@inertiajs/react";
 import Footer from "./Footer";
 import Logo from "./Logo";
 import { Link, usePage, router } from "@inertiajs/react";
 import NavLink from "../components/NavLinks";
 import MobileMenu from "../components/MobileMenu";
-import { useState } from "react";
 
 const LinksData = [
     {
@@ -37,7 +36,6 @@ const LinksData = [
 
 export default function ({ title, children }) {
     const page = usePage();
-    console.log(page);
     const props = usePage().props;
     const trackRef = useRef(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -172,7 +170,7 @@ export default function ({ title, children }) {
 
                     {/* Mobile Menu Sidebar */}
                     <div
-                        className={`lg:hidden fixed top-0 left-0 h-full w-80shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-[#c9e3fd] ${
+                        className={`lg:hidden fixed top-0 left-0 h-full w-80 shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-[#c9e3fd] ${
                             isMobileMenuOpen
                                 ? "translate-x-0"
                                 : "-translate-x-full"
