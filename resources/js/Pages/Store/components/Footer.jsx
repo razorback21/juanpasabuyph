@@ -29,9 +29,9 @@ export default function Footer() {
                         <Logo />
                         <p className="text-sm wrap-break-word mt-4 text-justify max-w-md">
                             Your one-stop shop for finding the best products{" "}
-                            from various malls and retailers in Dubai, all in
+                            from various malls and retailers in Dubai, all in{" "}
                             one place.
-                        </p>
+                        </p>{" "}
                     </div>
                     {/* <div>
                         <h4 className="text-white text-base font-semibold mb-4">
