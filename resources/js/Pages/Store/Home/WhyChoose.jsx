@@ -26,7 +26,7 @@ export default function () {
                     <h3 className="font-bold text-xl mb-2">
                         Direct from Dubai
                     </h3>
-                    <p className="text-gray-500 text-base leading-relaxed;">
+                    <p className="text-gray-500 text-base leading-relaxed">
                         Products sourced directly from Dubai's premium shopping
                         destinations.
                     </p>

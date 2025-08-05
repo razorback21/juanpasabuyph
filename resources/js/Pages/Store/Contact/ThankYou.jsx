@@ -27,7 +27,7 @@ export default function () {
                     <h1 className="tracking-tight text-4xl md:text-5xl font-bold leading-tight">
                         Thank you for your message!
                     </h1>
-                    <p className="tetext-lg font-normal leading-relaxed max-w-md mx-auto">
+                    <p className="text-lg text-gray-500 font-normal leading-relaxed max-w-md mx-auto">
                         We have received your message and will get back to you
                         as soon as possible.
                     </p>
