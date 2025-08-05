@@ -37,7 +37,7 @@ class ContactFormNotification extends Notification
         return (new MailMessage)
             ->greeting('Hey Don!')
             ->line('You have a new message from the contact form.')
-            ->from($this->validated['email'], $this->validated['name'])
+            ->replyTo($this->validated['email'], $this->validated['name'])
             ->subject('Juan Pasabuy - Contact Form Notification- ' . date('Y-m-d'))
             ->line('Subject: ' . $this->validated['subject'])
             ->line('Message: ' . $this->validated['message']);
