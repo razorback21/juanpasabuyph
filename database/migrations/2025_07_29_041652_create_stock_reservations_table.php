@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('stock_reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('product_id')->constrained()->onDelete('cascade');
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->foreignId('product_id')->constrained()->onDelete('cascade');
             $table->integer('quantity');
             $table->string('uom');
             $table->string('reservation_type');
