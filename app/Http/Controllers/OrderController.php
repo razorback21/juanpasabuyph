@@ -47,7 +47,7 @@ class OrderController extends Controller
     public function updateEstimatedDeliveryDate(Request $request, Order $order)
     {
         $validated = $request->validate([
-            'date' => 'required',
+            'date' => 'required|date|after:now',
         ]);
 
         $order->update([
