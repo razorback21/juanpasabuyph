@@ -6,6 +6,7 @@ use App\Actions\IsSameURLPath;
 use App\Http\Requests\ContactFormRequest;
 use App\Http\Requests\ThankYouRequest;
 use App\Notifications\ContactFormNotification;
+use App\Traits\HasDefaultSeo;
 use function Illuminate\Support\defer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -13,8 +14,10 @@ use Inertia\Inertia;
 
 class ContactController extends Controller
 {
+    use HasDefaultSeo;
     public function index()
     {
+        $this->defaultSeo();
         return Inertia::render('Store/Contact/Index');
     }
 
