@@ -43,7 +43,7 @@ export default function ({ order }) {
                             {" "}
                             Order Not Found
                         </h1>
-                        <p class="text-lg text-gray-500 mb-8">
+                        <p className="text-lg text-gray-500 mb-8">
                             We couldn't find an order matching the provided
                             information. Please double-check your order details
                             or try searching again.
@@ -52,7 +52,7 @@ export default function ({ order }) {
                             {" "}
                             <input
                                 ref={inputRef}
-                                class="w-full max-w-sm px-4 py-3 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 font-bold focus:ring-[var(--primary-color)] placeholder:font-normal placeholder:capitalize uppercase placeholder:text-gray-400"
+                                className="w-full max-w-sm px-4 py-3 rounded-l-full border border-gray-300 focus:outline-none focus:ring-2 font-bold focus:ring-[var(--primary-color)] placeholder:font-normal placeholder:capitalize uppercase placeholder:text-gray-400"
                                 placeholder="Enter your order number"
                                 type="text"
                                 onChange={(e) => {
