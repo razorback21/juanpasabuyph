@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $title = 'Home';
-        $featuredProducts = Product::featuredProduct()->get()->random(4);
+        $featuredProducts = Product::featuredProduct()->get()->shuffle()->take(4);
         $popularProducts = $this->productService->getPopularProducts()->get()->shuffle()->take(4);
 
         return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'popularProducts'));

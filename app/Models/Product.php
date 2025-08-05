@@ -165,7 +165,7 @@ class Product extends Model
 
     public function scopeFeaturedProduct($query)
     {
-        return $query->where(['is_featured' => true]);
+        return $query->where(['is_featured' => true, 'disabled' => false]);
     }
 
     public function scopePopular($query)
