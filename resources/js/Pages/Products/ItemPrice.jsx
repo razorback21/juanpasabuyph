@@ -37,7 +37,7 @@ const ItemPrice = forwardRef(({ cost = 0, price = 0 }, ref) => {
                     name="price"
                     onChange={(e) => {
                         setSalePrice(e.target.value); // Allow custom input
-                        ref.current.formData.price = e.target.value;
+                        ref.current.price = e.target.value;
                     }}
                     value={salePrice}
                 />
