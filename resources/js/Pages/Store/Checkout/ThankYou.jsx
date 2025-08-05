@@ -40,8 +40,11 @@ export default function ({ order }) {
                                     #{order.order_number}
                                 </span>
                             </div>
-                            {order.items.map((item) => (
-                                <div className="flex justify-between items-center py-3 border-b border-gray-200 last:border-none">
+                            {order.items.map((item, index) => (
+                                <div
+                                    key={item.id || index}
+                                    className="flex justify-between items-center py-3 border-b border-gray-200 last:border-none"
+                                >
                                     <span className="text-gray-600">
                                         {item.product.name}
                                     </span>
@@ -56,7 +59,7 @@ export default function ({ order }) {
                                         x {item.quantity}
                                     </span>
                                 </div>
-                            ))}
+                            ))}{" "}
                             <div className="flex justify-between items-center py-3 border-b border-gray-200 last:border-none">
                                 <span className="text-gray-600">
                                     Items Purchased
