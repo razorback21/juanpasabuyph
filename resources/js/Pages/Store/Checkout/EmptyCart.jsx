@@ -19,10 +19,10 @@ export default function () {
                 <h1 className="tracking-tight text-4xl md:text-5xl font-bold leading-tight">
                     Your Cart is Empty
                 </h1>
-                <p className="text-gray-600 text-text-lg font-normal leading-relaxed max-w-md mx-auto">
+                <p className="text-gray-600 text-lg font-normal leading-relaxed max-w-md mx-auto">
                     Looks like you haven't added anything to your cart yet.
                     Start exploring our catalog and find something you love!
-                </p>
+                </p>{" "}
                 <div className="flex justify-center">
                     <Link href={route("catalog")}>
                         <button
