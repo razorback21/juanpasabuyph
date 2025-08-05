@@ -30,9 +30,9 @@ class DashboardController extends Controller
         $activeCategory = $request->query('active_category') ?? 'All';
         $outOfStock = $this->stockService->getOutOfStockProducts()->count();
         $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
-        $OrderCount = Order::where('status', '=', 'placed')->count();
+        $orderCount = Order::where('status', '=', 'placed')->count();
         $chartData = Visitor::where('created_at', '>=', now()->subDays(90))->get();
 
-        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'OrderCount', 'chartData'));
+        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'orderCount', 'chartData'));
     }
 }

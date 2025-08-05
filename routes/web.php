@@ -109,12 +109,8 @@ Route::get('/sitemap.xml', SiteMapController::class)->name('sitemap');
 
 // test
 Route::get('/test', function () {
-    $orders = Order::whereMonth('updated_at', now()->month)->where('status', OrderStatusEnum::SHIPPED->value)->get();
-    $orderItems = DB::table('order_items')
-        ->select(DB::raw('SUM((price - cost_price) * quantity) as profit'))
-        ->whereIn('order_id', $orders->pluck('id')->toArray())
-        ->groupBy('order_id');
-    dd($orderItems->first()->profit);
+    $OrderCount = Order::where('status', '=', 'placed')->count();
+    dd($OrderCount);
 });
 
 require __DIR__ . '/auth.php';
