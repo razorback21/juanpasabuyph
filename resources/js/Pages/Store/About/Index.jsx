@@ -7,7 +7,7 @@ export default function () {
                 <div className="container mx-auto">
                     <section className="w-full @container mb-12">
                         <div
-                            className="bg-contain bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
+                            className="bg-cover bg-no-repeat bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
                             style={{
                                 backgroundImage:
                                     'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("/storage/assets/about.jpg")',
