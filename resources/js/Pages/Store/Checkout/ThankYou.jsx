@@ -5,7 +5,7 @@ export default function ({ order }) {
     return (
         <Layout title="Thank You">
             <div className="flex items-center justify-between px-10 py-4">
-                <div class="w-full max-w-2xl text mx-auto">
+                <div className="w-full max-w-2xl text mx-auto">
                     <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
                         <div className="text-center">
                             <div className="flex justify-center thank_you_icon">
@@ -23,7 +23,7 @@ export default function ({ order }) {
                             <h1 className="text-3xl font-bold mb-2">
                                 Thank you for your order!
                             </h1>
-                            <p class="text-lg text-gray-600">
+                            <p className="text-lg text-gray-600">
                                 Your order has been successfully placed. We will
                                 contact you shortly to verify your details.
                             </p>
@@ -80,7 +80,7 @@ export default function ({ order }) {
                                 </span>
                             </div>
                         </div>
-                        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+                        <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                             <button className="w-full sm:w-auto flex-grow text-white bg-red-500 rounded-sm">
                                 Order Details
                             </button>
