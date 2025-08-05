@@ -126,7 +126,9 @@ export default function ({ products, categories, active_category }) {
                 </Dropdown.Trigger>
 
                 <Dropdown.Content>
-                    <Dropdown.Link href={route("dashboard")}>All</Dropdown.Link>
+                    <Dropdown.Link href={route("products.index")}>
+                        All
+                    </Dropdown.Link>
                     {categories.map((category) => {
                         return (
                             <Dropdown.Link
