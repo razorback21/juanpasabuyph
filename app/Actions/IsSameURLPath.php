@@ -10,7 +10,24 @@ class IsSameURLPath
 
     public function handle(string $routeName)
     {
-        $bool = url()->previousPath() === parse_url(route($routeName), PHP_URL_PATH);
-        return !$bool ? abort(403) : true;
+        try {
+            $routeUrl = route($routeName);
+        } catch (\Exception $e) {
+            abort(404, 'Route not found');
+        }
+
+        $routePath = parse_url($routeUrl, PHP_URL_PATH);
+
+        if ($routePath === false || $routePath === null) {
+            abort(500, 'Invalid route URL');
+        }
+
+        $previousPath = url()->previousPath();
+
+        if ($previousPath !== $routePath) {
+            abort(403);
+        }
+
+        return true;
     }
 }
