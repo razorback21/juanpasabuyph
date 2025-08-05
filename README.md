@@ -17,6 +17,7 @@ Tech Stack
 - Order Tracking
 
 ### Features Admin
+- Basic Dashboard (Montly Net Profit, Out Of Stock,  New Order Count)
 - Inventory system with reservation,
 - Manage Products,  
 - Manage Product Categories, 
