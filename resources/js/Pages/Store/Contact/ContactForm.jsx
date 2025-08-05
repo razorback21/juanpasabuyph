@@ -116,7 +116,7 @@ export default function ContactForm() {
                 <div>
                     <label
                         className="block text-sm font-medium leading-normal pb-1.5"
-                        for="name"
+                        htmlFor="name"
                     >
                         Full Name *
                     </label>
@@ -137,7 +137,7 @@ export default function ContactForm() {
                 <div>
                     <label
                         className="block text-sm font-medium leading-normal pb-1.5"
-                        for="email"
+                        htmlFor="email"
                     >
                         Email Address *
                     </label>
@@ -158,7 +158,7 @@ export default function ContactForm() {
                 <div>
                     <label
                         className="block text-sm font-medium leading-normal pb-1.5"
-                        for="subject"
+                        htmlFor="subject"
                     >
                         Subject *
                     </label>
@@ -180,7 +180,7 @@ export default function ContactForm() {
                     <div>
                         <label
                             className="block text-sm font-medium leading-normal pb-1.5"
-                            for="captcha"
+                            htmlFor="captcha"
                         >
                             Captcha *
                         </label>
@@ -205,7 +205,7 @@ export default function ContactForm() {
                 <div>
                     <label
                         className="block text-sm font-medium leading-normal pb-1.5"
-                        for="message"
+                        htmlFor="message"
                     >
                         Message *
                     </label>
