@@ -1,7 +1,6 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
 import { Link } from "@inertiajs/react";
 export default function ({ order }) {
-    console.log(order);
     return (
         <Layout title="Thank You">
             <div className="flex items-center justify-between px-10 py-4">

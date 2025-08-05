@@ -38,6 +38,9 @@ class CheckoutController extends Controller
     {
         IsSameURLPath::run('checkout');
         $order = Order::with(['items.product'])->find($order_id);
+        if (!$order) {
+            return abort(404, 'Order not found');
+        }
         return Inertia::render('Store/Checkout/ThankYou', compact('order'));
     }
 }
