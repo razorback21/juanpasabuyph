@@ -85,7 +85,7 @@ export default function ({
     function PopoverCalendar() {
         const [popoverOpen, setPopoverOpen] = useState(false);
         const [date, setDate] = useState(new Date());
-        const [month, setMonth] = useState(new Date().toLocaleDateString());
+        const [month, setMonth] = useState(new Date());
 
         return (
             <span className="inline-block pl-2">
