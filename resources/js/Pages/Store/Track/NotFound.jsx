@@ -7,11 +7,12 @@ export default function ({ order }) {
     const inputRef = useRef(null);
 
     function handleOrderTracking(e) {
-        if (inputRef.current.value === "") {
+        const orderNumber = inputRef.current.value.trim();
+        if (orderNumber === "") {
             inputRef.current.focus();
             return;
         }
-        router.get(route("track", { order_id: orderNumberRef.current }));
+        router.get(route("track", { order_id: orderNumber }));
     }
 
     return (
@@ -30,7 +31,7 @@ export default function ({ order }) {
                                 stroke-width="2"
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
-                                class="lucide lucide-search-x-icon lucide-search-x"
+                                className="lucide lucide-search-x-icon lucide-search-x"
                             >
                                 <path d="m13.5 8.5-5 5" />
                                 <path d="m8.5 8.5 5 5" />
