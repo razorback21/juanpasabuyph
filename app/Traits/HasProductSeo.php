@@ -2,11 +2,14 @@
 
 namespace App\Traits;
 
+use App\Models\Product;
+
 trait HasProductSeo
 {
-    public function __construct()
+    public function productSeo(Product $product)
     {
-        seo()->description($this->description)
+        seo()->title($product->title)
+            ->description($product->description)
             ->images(
                 url('/storage/assets/pdala_hero_bg.png'),
             );

@@ -10,10 +10,11 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    use HasDefaultSeo;
 
     public function __construct(private ProductService $productService)
     {
-
+        $this->defaultSeo();
     }
 
     public function index(Request $request)
