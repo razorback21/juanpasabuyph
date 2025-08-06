@@ -1,12 +1,12 @@
 import Layout from "@/Pages/Store/components/Layout";
-import { Badge } from "@/components/ui/Badge";
+import { Badge } from "@/components/ui/badge";
 import HomeProducts from "../components/HomeProducts";
 import QuantityInput from "../components/QuantityInput";
 import { router, usePage } from "@inertiajs/react";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/Components/ui/sonner";
 import { toast } from "sonner";
 import { useRef } from "react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Link } from "@inertiajs/react";
 
 export default function ({ title, product, category, relatedProducts }) {
