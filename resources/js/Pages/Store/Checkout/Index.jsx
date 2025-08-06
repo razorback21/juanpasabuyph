@@ -1,5 +1,5 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
-import CheckOutForm from "@/Pages/Store/Checkout/CheckOutForm.jsx";
+import CheckOutForm from "@/Pages/Store/Checkout/CheckoutForm.jsx";
 import OrderSummary from "@/Pages/Store/Checkout/OrderSummary.jsx";
 import EmptyCart from "@/Pages/Store/Checkout/EmptyCart.jsx";
 
