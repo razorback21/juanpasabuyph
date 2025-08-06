@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import ProductsTable from "./ProductsTable";
-import Pagination from "@/components/pagination";
+import Pagination from "@/components/Pagination";
 
 export default function ({ outOfStockProducts, productCount }) {
     return (
