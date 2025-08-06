@@ -44,7 +44,7 @@ class OrderCreatedNotification extends Notification
         return (new MailMessage)
             ->subject('Juanpasabuyph - Order Confirmation (' . $this->order->order_number . ')')
             ->greeting('Hello ' . $notifiable->fullname)
-            ->line('Your order has been placed with order #: ' . $this->order->order_number . '. We will keep you posted of your order status.')
+            ->line('Your order has been placed with order #' . $this->order->order_number . '. We will keep you posted of your order status.')
             ->line(new HtmlString($this->orderHTML($this->order)))
             ->line('Thank you for shopping at juanpasabuyph.com')
             ->line(new HtmlString("For any questions. Please contact us in our facebook page or email directly to  <a href='mailto:" . config('app.admin_email') . "'>" . config('app.admin_email') . "</a>"));
@@ -66,7 +66,7 @@ class OrderCreatedNotification extends Notification
             $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">' . $item->product->name . '</td>';
             $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">' . $item->quantity . '</td>';
             $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($item->price, 2) . '</td>';
-            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($item->total, 2) . '</td>';
+            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . $item->total . '</td>';
             $table .= '</tr>';
         }
 
