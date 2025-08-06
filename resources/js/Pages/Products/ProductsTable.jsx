@@ -1,12 +1,12 @@
 import { useState, useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import LinkButton from "@/Components/LinkButton";
-import Dropdown from "@/Components/Dropdown";
-import DataTable from "@/Components/DataTable";
+import LinkButton from "@/components/LinkButton";
+import Dropdown from "@/components/Dropdown";
+import DataTable from "@/components/DataTable";
 import { Link, router } from "@inertiajs/react";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import AlertConfirm from "@/Components/AlertConfirm";
+import AlertConfirm from "@/components/AlertConfirm";
 
 export default function ({ products, categories, active_category }) {
     const columnHelper = createColumnHelper();

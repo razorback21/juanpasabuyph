@@ -1,9 +1,9 @@
 import { useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import DataTable from "@/Components/DataTable";
+import DataTable from "@/components/DataTable";
 import { Link } from "@inertiajs/react";
-import AlertConfirm from "@/Components/AlertConfirm";
-import { Toaster } from "@/Components/ui/sonner";
+import AlertConfirm from "@/components/AlertConfirm";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function ({ products }) {
     const columnHelper = createColumnHelper();

@@ -8,9 +8,9 @@ import {
     DialogFooter,
     DialogClose,
 } from "@/components/ui/dialog";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/components/ui/button";
 
-const GenericDialog = forwardRef(({children}, ref) => {
+const GenericDialog = forwardRef(({ children }, ref) => {
     const [open, setOpen] = useState(false);
     const [dialogProps, setDialogProps] = useState({
         title: "Message",
@@ -22,7 +22,7 @@ const GenericDialog = forwardRef(({children}, ref) => {
         title,
         description,
         actionHandler,
-        actionButtonText = "Submit"
+        actionButtonText = "Submit",
     } = dialogProps;
 
     useImperativeHandle(ref, () => ({

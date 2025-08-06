@@ -1,6 +1,6 @@
 //import { DataTable } from "@/components/data-table"
-import { ChartAreaInteractive } from "@/Components/chart-area-interactive";
-import { SectionCards } from "@/Components/section-cards";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { SectionCards } from "@/components/section-cards";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 

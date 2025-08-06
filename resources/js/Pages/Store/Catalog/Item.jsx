@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/Badge";
 import HomeProducts from "../components/HomeProducts";
 import QuantityInput from "../components/QuantityInput";
 import { router, usePage } from "@inertiajs/react";
-import { Toaster } from "@/Components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { useRef } from "react";
 import { Button } from "@/components/ui/Button";

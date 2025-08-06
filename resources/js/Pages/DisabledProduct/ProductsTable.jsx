@@ -1,12 +1,12 @@
 import { useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import DataTable from "@/Components/DataTable";
+import DataTable from "@/components/DataTable";
 import { Link } from "@inertiajs/react";
-import AlertConfirm from "@/Components/AlertConfirm";
-import { Switch } from "@/Components/ui/switch";
+import AlertConfirm from "@/components/AlertConfirm";
+import { Switch } from "@/components/ui/switch";
 import Axios from "@/lib/axios";
 import { toast } from "sonner";
-import { Toaster } from "@/Components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function ({ products }) {
     const columnHelper = createColumnHelper();

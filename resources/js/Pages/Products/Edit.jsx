@@ -1,20 +1,20 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage, router } from "@inertiajs/react";
-import TextInput from "@/Components/TextInput";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import { Button } from "@/Components/ui/button";
-import LinkButton from "@/Components/LinkButton";
-import Textarea from "@/Components/Textarea";
-import NoImage from "@/Components/NoImage";
-import AlertConfirm from "@/Components/AlertConfirm";
+import TextInput from "@/components/TextInput";
+import InputLabel from "@/components/InputLabel";
+import PrimaryButton from "@/components/PrimaryButton";
+import { Button } from "@/components/ui/button";
+import LinkButton from "@/components/LinkButton";
+import Textarea from "@/components/Textarea";
+import NoImage from "@/components/NoImage";
+import AlertConfirm from "@/components/AlertConfirm";
 import { toast } from "sonner";
-import { Toaster } from "@/Components/ui/sonner";
-import Progressbar from "@/Components/ProgressBar";
-// /import Dropdown from "@/Components/Dropdown";
+import { Toaster } from "@/components/ui/sonner";
+import Progressbar from "@/components/ProgressBar";
+// /import Dropdown from "@/components/Dropdown";
 import { useRef } from "react";
-import { Switch } from "@/Components/ui/switch";
-import { Label } from "@/Components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import ItemPrice from "./ItemPrice";
 
 export default function EditProduct({ product, categories, from, uoms }) {

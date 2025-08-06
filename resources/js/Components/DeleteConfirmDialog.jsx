@@ -9,25 +9,24 @@ import {
     DialogClose,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { Button } from "@/Components/ui/button";
+import { Button } from "@/components/ui/button";
 
 const DeleteConfirmDialog = forwardRef((props, ref) => {
     const { title, description, confirmhandler, children } = props;
     const [open, setOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
-        open: () => { 
-            setOpen(true)
+        open: () => {
+            setOpen(true);
         },
         close: () => {
-            setOpen(false)
+            setOpen(false);
             console.log("close dialog");
         },
     }));
 
     return (
         <Dialog open={open} onOpenChange={() => setOpen(!open)}>
-
             {children ? (
                 children
             ) : (

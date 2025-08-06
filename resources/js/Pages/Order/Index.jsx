@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import OrdersTable from "./OrdersTable";
-import Pagination from "@/Components/Pagination";
+import Pagination from "@/components/Pagination";
 
 export default function ({ orders }) {
     return (

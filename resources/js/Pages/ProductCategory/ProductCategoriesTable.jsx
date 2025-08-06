@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import LinkButton from "@/Components/LinkButton";
-import DataTable from "@/Components/DataTable";
+import LinkButton from "@/components/LinkButton";
+import DataTable from "@/components/DataTable";
 import { Link, router } from "@inertiajs/react";
-import { Button } from "@/Components/ui/button";
-import AlertConfirm from "@/Components/AlertConfirm";
-import { Badge } from "@/Components/ui/badge";
+import { Button } from "@/components/ui/button";
+import AlertConfirm from "@/components/AlertConfirm";
+import { Badge } from "@/components/ui/badge";
 
 export default function ({ categories }) {
     const dialogRef = useRef({});

@@ -1,6 +1,6 @@
 import { useState, useRef, forwardRef } from "react";
-import TextInput from "@/Components/TextInput";
-import InputLabel from "@/Components/InputLabel";
+import TextInput from "@/components/TextInput";
+import InputLabel from "@/components/InputLabel";
 import { usePage } from "@inertiajs/react";
 
 const ItemPrice = forwardRef(({ cost = 0, price = 0 }, ref) => {

@@ -1,16 +1,16 @@
 import { useState } from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage, router } from "@inertiajs/react";
-import TextInput from "@/Components/TextInput";
-import InputLabel from "@/Components/InputLabel";
-import PrimaryButton from "@/Components/PrimaryButton";
-import LinkButton from "@/Components/LinkButton";
-import Textarea from "@/Components/Textarea";
+import TextInput from "@/components/TextInput";
+import InputLabel from "@/components/InputLabel";
+import PrimaryButton from "@/components/PrimaryButton";
+import LinkButton from "@/components/LinkButton";
+import Textarea from "@/components/Textarea";
 import ItemPrice from "./ItemPrice";
-// /import Dropdown from "@/Components/Dropdown";
+// /import Dropdown from "@/components/Dropdown";
 import { useRef } from "react";
-import { Switch } from "@/Components/ui/switch";
-import { Label } from "@/Components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 export default function EditProduct({ categories, uoms }) {
     const props = usePage().props;

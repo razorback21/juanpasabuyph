@@ -2,17 +2,17 @@ import { useEffect, useRef } from "react";
 import { usePage, router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import LinkButton from "@/Components/LinkButton";
-import NoImage from "@/Components/NoImage";
+import LinkButton from "@/components/LinkButton";
+import NoImage from "@/components/NoImage";
 import InventoryTable from "@/Pages/Products/InventoryTable";
 import { Separator } from "@/components/ui/separator";
-import { Button } from "@/Components/ui/button";
-import { GenericDialog as AddInventoryDialog } from "@/Components/GenericDialog";
-import SelectField from "@/Components/SelectField";
-import Textarea from "@/Components/Textarea";
+import { Button } from "@/components/ui/button";
+import { GenericDialog as AddInventoryDialog } from "@/components/GenericDialog";
+import SelectField from "@/components/SelectField";
+import Textarea from "@/components/Textarea";
 import { toast } from "sonner";
-import { Toaster } from "@/Components/ui/sonner";
-import { Badge } from "@/Components/ui/badge";
+import { Toaster } from "@/components/ui/sonner";
+import { Badge } from "@/components/ui/badge";
 
 export default function EditProduct({ product, movementTypes }) {
     const props = usePage().props;

@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import DataTable from "@/Components/DataTable";
+import DataTable from "@/components/DataTable";
 import { Link, router } from "@inertiajs/react";
-import AlertConfirm from "@/Components/AlertConfirm";
-import { Badge } from "@/Components/ui/badge";
-import { Input } from "@/Components/ui/input";
-import { Button } from "@/Components/ui/button";
+import AlertConfirm from "@/components/AlertConfirm";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function ({ order, statusCantBeDeleted, readOnly = false }) {
     const dialogRef = useRef({});

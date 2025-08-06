@@ -1,13 +1,13 @@
 import { useRef, useEffect } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import LinkButton from "@/Components/LinkButton";
-import DataTable from "@/Components/DataTable";
+import LinkButton from "@/components/LinkButton";
+import DataTable from "@/components/DataTable";
 import { Link, router } from "@inertiajs/react";
-import { Button } from "@/Components/ui/button";
-import AlertConfirm from "@/Components/AlertConfirm";
-import { Badge } from "@/Components/ui/badge";
+import { Button } from "@/components/ui/button";
+import AlertConfirm from "@/components/AlertConfirm";
+import { Badge } from "@/components/ui/badge";
 import { badgeStatusColor } from "@/lib/order";
-import { Input } from "@/Components/ui/input";
+import { Input } from "@/components/ui/input";
 
 export default function ({ orders }) {
     const dialogRef = useRef({});
