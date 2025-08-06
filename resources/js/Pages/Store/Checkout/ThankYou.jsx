@@ -82,7 +82,7 @@ export default function ({ order }) {
                         </div>
                         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
                             <button className="w-full sm:w-auto flex-grow text-white bg-red-500 rounded-sm">
-                                Order Details
+                                Order Summary
                             </button>
 
                             <Link href={route("catalog")}>
