@@ -6,7 +6,7 @@ import AlertConfirm from "@/components/AlertConfirm";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
+import { currencyFormat } from "@/lib/number";
 export default function ({ order, statusCantBeDeleted, readOnly = false }) {
     const dialogRef = useRef({});
     const columnHelper = createColumnHelper();
@@ -108,11 +108,11 @@ export default function ({ order, statusCantBeDeleted, readOnly = false }) {
             header: () => <span>Quantity</span>,
         }),
         columnHelper.accessor("price", {
-            cell: (row) => <span>{row.getValue()}</span>,
+            cell: (row) => <span>{currencyFormat(row.getValue())}</span>,
             header: () => <span>Price</span>,
         }),
         columnHelper.accessor("total", {
-            cell: (row) => <span>{row.getValue().toFixed(2)}</span>,
+            cell: (row) => <span>{currencyFormat(row.getValue())}</span>,
             header: () => <span>Total</span>,
         }),
         columnHelper.accessor("action", {

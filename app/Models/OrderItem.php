@@ -28,11 +28,9 @@ class OrderItem extends Model
      */
     protected $casts = [
         'quantity' => 'integer',
-        'price' => 'decimal:2',
-        'cost_price' => 'decimal:2',
     ];
 
-    protected $appends = ['total', 'net_profit'];
+    protected $appends = ['total'];
 
     /**
      * Get the order that owns the order item.
@@ -55,7 +53,7 @@ class OrderItem extends Model
      */
     public function getTotal()
     {
-        return number_format($this->price * $this->quantity, 2);
+        return $this->price * $this->quantity;
     }
 
 
