@@ -44,15 +44,11 @@ use Inertia\Inertia;
 // });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-// profile
-Route::middleware('auth')->group(function () {
-    // Profile routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Checkout
+Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
+Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/thank-you/{order_id}', [CheckoutController::class, 'thankYou'])->name('checkout.thank-you');
 
-// Store Front
 Route::middleware('visitor.request')->group(function () {
     Route::get("/", [HomeController::class, 'index'])->name('home');
     Route::get("/catalog", [CatalogController::class, 'index'])->name('catalog');
@@ -60,10 +56,6 @@ Route::middleware('visitor.request')->group(function () {
     Route::get("/faqs", [FaqsController::class, 'index'])->name('faqs');
     Route::get("/about", [AboutController::class, 'index'])->name('about');
     Route::get("/contact", [ContactController::class, 'index'])->name('contact');
-    // Checkout
-    Route::get("/checkout", [CheckoutController::class, 'index'])->name('checkout');
-    Route::post("/checkout", [CheckoutController::class, 'store'])->name('checkout.store');
-    Route::get('/checkout/thank-you/{order_id}', [CheckoutController::class, 'thankYou'])->name('checkout.thank-you');
     // Cart
     Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{product_id}', [CartController::class, 'remove'])->name('cart.remove');
@@ -81,6 +73,10 @@ Route::middleware('visitor.request')->group(function () {
 });
 // Admin
 Route::middleware(['auth'])->group(function () {
+    // Profile routes
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Product 
     Route::resource('products', ProductController::class);
     Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
