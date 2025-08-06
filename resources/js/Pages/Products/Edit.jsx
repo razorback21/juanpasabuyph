@@ -9,7 +9,7 @@ import Textarea from "@/Components/Textarea";
 import NoImage from "@/Components/NoImage";
 import AlertConfirm from "@/Components/AlertConfirm";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/Components/ui/sonner";
 import Progressbar from "@/Components/ProgressBar";
 // /import Dropdown from "@/Components/Dropdown";
 import { useRef } from "react";

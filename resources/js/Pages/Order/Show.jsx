@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { router } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/Components/ui/sonner";
 import OrdersTableShow from "./OrdersTableShow";
 import { Label } from "@/components/ui/label";
 import { GenericDialog } from "@/Components/GenericDialog";

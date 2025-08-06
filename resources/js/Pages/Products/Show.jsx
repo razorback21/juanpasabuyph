@@ -11,7 +11,7 @@ import { GenericDialog as AddInventoryDialog } from "@/Components/GenericDialog"
 import SelectField from "@/Components/SelectField";
 import Textarea from "@/Components/Textarea";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/Components/ui/sonner";
 import { Badge } from "@/Components/ui/badge";
 
 export default function EditProduct({ product, movementTypes }) {
