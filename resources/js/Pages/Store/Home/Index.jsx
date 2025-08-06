@@ -87,7 +87,7 @@ export default function ({ title, featuredProducts, popularProducts }) {
                             </div>
                             <input
                                 type="text"
-                                className="w-full text-center py-3 rounded-lg border border-[#d1d5db] bg-white pl-10 pr-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors text:uppercase"
+                                className="w-full text-center py-3 rounded-lg border border-[#d1d5db] bg-white pl-10 pr-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase"
                                 placeholder="Enter your order number."
                                 defaultValue=""
                                 ref={trackRef}

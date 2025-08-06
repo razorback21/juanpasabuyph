@@ -4,7 +4,8 @@ export default function ({ order }) {
     return (
         <Layout title="Thank You">
             <div className="flex items-center justify-between px-10 py-4">
-                <div className="w-full max-w-2xl text mx-auto">
+                <div className="w-full max-w-2xl mx-auto">
+                    {" "}
                     <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
                         <div className="text-center">
                             <div className="flex justify-center thank_you_icon">
