@@ -53,13 +53,13 @@ class OrderItem extends Model
     /**
      * Calculate the total price for this order item
      */
-    public function getTotal(): float
+    public function getTotal()
     {
-        return (float) number_format($this->price * $this->quantity, 2);
+        return number_format($this->price * $this->quantity, 2);
     }
 
 
-    public function getTotalAttribute(): float
+    public function getTotalAttribute()
     {
         return $this->getTotal();
     }
