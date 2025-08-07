@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pages;
 
+use App\Actions\HeroImage;
 use App\Http\Controllers\Controller;
 use App\Models\Pages\PageAsset;
 use Illuminate\Http\Request;
@@ -13,13 +14,7 @@ class AboutAssetController extends Controller
 
     public function index()
     {
-        $heroImage = '';
-        $assets = PageAsset::where(['code' => 'about', 'section' => 'hero'])->get()->first();
-        if ($assets) {
-            $heroImage = $assets->getMedia('about_hero')->last()->getUrl('webp');
-            $heroImage = $heroImage ? $heroImage : '';
-        }
-
+        $heroImage = $heroImage = HeroImage::run('about');
         return Inertia::render("PageContent/AboutPage", compact('heroImage'));
     }
 
