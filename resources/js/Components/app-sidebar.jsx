@@ -20,10 +20,12 @@ import {
     FoldersIcon,
     Gauge,
     HelpCircleIcon,
+    HomeIcon,
     LayoutDashboardIcon,
     ListIcon,
     LockKeyholeIcon,
     Package2Icon,
+    PhoneCallIcon,
     Rows2Icon,
     SearchIcon,
     SettingsIcon,
@@ -112,21 +114,27 @@ const data = {
             ],
         },
     ],
-    navSecondary: [
+    navPages: [
         {
-            title: "Settings",
+            name: "Home",
             url: "#",
-            icon: SettingsIcon,
+            route: "home-assets.index",
+            icon: HomeIcon,
+            activeKey: "HomeAsset/Index",
         },
         {
-            title: "Get Help",
+            name: "About",
             url: "#",
             icon: HelpCircleIcon,
+            route: "about-assets.index",
+            activeKey: "AboutAsset/Index",
         },
         {
-            title: "Search",
+            name: "Contact",
             url: "#",
-            icon: SearchIcon,
+            icon: PhoneCallIcon,
+            route: "contact-assets.index",
+            activeKey: "ContactAsset/Index",
         },
     ],
     inventory: [
@@ -223,7 +231,12 @@ export function AppSidebar({ ...props }) {
                     menuName="Inventory & Products"
                 />
                 <NavDocuments items={data.reports} menuName="Orders" />
-                {/* <NavSecondary items={data.navSecondary} className="mt-auto" /> */}
+                <NavDocuments items={data.navPages} menuName="Pages" />
+                {/* <NavSecondary
+                    items={data.navSecondary}
+                    menuName="Pages"
+                    className="mt-auto"
+                /> */}
             </SidebarContent>
             <SidebarFooter>
                 <NavUser user={inertiaProps.auth.user} />

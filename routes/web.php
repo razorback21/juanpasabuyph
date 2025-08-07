@@ -17,6 +17,9 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\OrderStatusTimelineController;
 use App\Http\Controllers\OutOfStockController;
+use App\Http\Controllers\Pages\AboutAssetController;
+use App\Http\Controllers\Pages\ContactAssetController;
+use App\Http\Controllers\Pages\HomeAssetController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
@@ -99,6 +102,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/disabled-products/{product}', [DisabledProductController::class, 'update'])->name('disabled-products.update');
     // Out of Stock
     Route::get('/out-of-stock', [OutOfStockController::class, 'index'])->name('out-of-stock.index');
+    // Pages
+    Route::resource('home-assets', HomeAssetController::class);
+    Route::resource('about-assets', AboutAssetController::class);
+    Route::resource('contact-assets', ContactAssetController::class);
 });
 // Sitemap route
 Route::get('/sitemap.xml', SiteMapController::class)->name('sitemap');
