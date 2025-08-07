@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Actions\HeroImage;
+use App\Actions\StoreHeroImage;
 use App\Http\Controllers\Controller;
-use App\Models\Pages\PageAsset;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Inertia\Inertia;
 
 class HomeAssetController extends Controller
 {
@@ -25,18 +23,7 @@ class HomeAssetController extends Controller
 
     public function store(Request $request)
     {
-        DB::transaction(function () use ($request) {
-            $asset = PageAsset::firstorNew([
-                'code' => $request->code,
-                'section' => $request->section,
-            ]);
-
-            $asset->save();
-
-            $collectionCode = $request->code . '_' . $request->section;
-            $asset->clearMediaCollection($collectionCode);
-            $asset->addMediaFromRequest('image')->toMediaCollection($collectionCode);
-        });
+        StoreHeroImage::run('home', 'hero');
     }
 
     public function update(Request $request)
