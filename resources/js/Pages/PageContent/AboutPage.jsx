@@ -27,8 +27,6 @@ export default function HomePage({ heroImage }) {
         }
 
         const formData = new FormData();
-        formData.append("code", "about");
-        formData.append("section", "hero");
         formData.append("image", file);
 
         router.post(route("about-assets.store"), formData, {
