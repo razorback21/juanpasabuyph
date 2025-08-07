@@ -18,9 +18,11 @@ class PageAsset extends Model implements HasMedia
 
     public function registerMediaConversions(?Media $media = null): void
     {
-        $this->addMediaConversion('webp')
+        $this->addMediaConversion('webp_1080')
             ->format('webp')
-            ->nonQueued(); // Do not queue conversion
+            ->width(1920)
+            ->height(1080)
+            ->nonQueued() // Do not queue conversion
+            ->performOnCollections('home_hero', 'about_hero'); // Only perform this conversion on the 'pages' collection
     }
-
 }
