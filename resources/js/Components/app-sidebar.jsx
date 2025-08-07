@@ -129,13 +129,6 @@ const data = {
             route: "about-assets.index",
             activeKey: "AboutAsset/Index",
         },
-        {
-            name: "Contact",
-            url: "#",
-            icon: PhoneCallIcon,
-            route: "contact-assets.index",
-            activeKey: "ContactAsset/Index",
-        },
     ],
     inventory: [
         {
