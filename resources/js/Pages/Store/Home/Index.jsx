@@ -5,7 +5,12 @@ import Reviews from "../components/Reviews";
 import WhyChoose from "./WhyChoose";
 import { Link, router } from "@inertiajs/react";
 
-export default function ({ title, featuredProducts, popularProducts }) {
+export default function ({
+    title,
+    featuredProducts,
+    popularProducts,
+    heroImage,
+}) {
     const trackRef = useRef(null);
 
     function handleOrderTracking(e) {
@@ -19,8 +24,7 @@ export default function ({ title, featuredProducts, popularProducts }) {
                 <div
                     className="bg-cover bg-no-repeat bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg "
                     style={{
-                        backgroundImage:
-                            'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("/storage/assets/pdala_hero_bg.png")',
+                        backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("${heroImage}")`,
                     }}
                 >
                     <div className="p-8 sm:p-12">

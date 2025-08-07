@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\HeroImage;
 use App\Models\Product;
 use App\Services\ProductService;
 use App\Traits\HasDefaultSeo;
@@ -22,7 +23,7 @@ class HomeController extends Controller
         $title = 'Home';
         $featuredProducts = Product::featuredProduct()->get()->shuffle()->take(4);
         $popularProducts = $this->productService->getPopularProducts()->get()->shuffle()->take(4);
-
-        return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'popularProducts'));
+        $heroImage = $heroImage = HeroImage::run('home');
+        return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'popularProducts', 'heroImage'));
     }
 }
