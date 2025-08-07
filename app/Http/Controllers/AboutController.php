@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\HeroImage;
 use App\Traits\HasDefaultSeo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
