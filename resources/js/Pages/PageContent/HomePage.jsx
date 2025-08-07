@@ -44,8 +44,6 @@ export default function HomePage({ heroImage }) {
             onSuccess: () => {
                 // Clear the file input
                 imageFileRef.current.value = "";
-                imageDesciptionRef.current.firstElementChild.innerHTML = "";
-
                 toast.success("Image uploaded successfully!");
             },
             onError: (errors) => {
