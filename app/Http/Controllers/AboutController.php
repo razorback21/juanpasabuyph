@@ -12,6 +12,7 @@ class AboutController extends Controller
     public function index()
     {
         $this->defaultSeo();
-        return Inertia::render('Store/About/Index');
+        $heroImage = HeroImage::run('about');
+        return Inertia::render('Store/About/Index', compact('heroImage'));
     }
 }
