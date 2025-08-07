@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 export default function ({ order }) {
     return (
         <Layout title="Thank You">
-            <div className="flex items-center justify-between px-10 py-4">
+            <div className="flex items-center justify-between md:px-10 py-4">
                 <div className="w-full max-w-2xl mx-auto">
                     {" "}
                     <div className="bg-white rounded-2xl shadow-lg p-8 md:p-12">
@@ -81,7 +81,7 @@ export default function ({ order }) {
                             </div>
                         </div>
                         <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-                            <button className="w-full sm:w-auto flex-grow text-white bg-red-500 rounded-sm">
+                            <button className="w-full sm:w-auto flex-grow px-4 py-2 bg-red-500 text-white hover:bg-red-600 transition duration-200 rounded-sm">
                                 Order Summary
                             </button>
 
