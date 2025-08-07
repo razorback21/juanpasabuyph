@@ -2,7 +2,8 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, router } from "@inertiajs/react";
-
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import Progressbar from "@/components/ProgressBar";
 
 export default function HomePage({ heroImage }) {
@@ -68,6 +69,8 @@ export default function HomePage({ heroImage }) {
     return (
         <AuthenticatedLayout header="Home Page">
             <Head title="Home Page" />
+            <Toaster />
+
             <div className="flex flex-col px-4 lg:px-6">
                 <div className="flex justify-between items-center">
                     <section
