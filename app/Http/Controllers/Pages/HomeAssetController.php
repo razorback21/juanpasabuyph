@@ -6,6 +6,7 @@ use App\Actions\HeroImage;
 use App\Actions\StoreHeroImage;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class HomeAssetController extends Controller
 {
