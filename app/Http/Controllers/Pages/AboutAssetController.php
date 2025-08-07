@@ -13,7 +13,7 @@ class AboutAssetController extends Controller
 
     public function index()
     {
-        $heroImage = $heroImage = HeroImage::run('about');
+        $heroImage = HeroImage::run('about');
         return Inertia::render("PageContent/AboutPage", compact('heroImage'));
     }
 
