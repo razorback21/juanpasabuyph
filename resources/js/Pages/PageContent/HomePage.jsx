@@ -12,15 +12,6 @@ export default function HomePage({ heroImage }) {
 
     function handleHeroImageChange(e) {
         uploadImageHandler(e);
-
-        // const file = e.target.files[0];
-        // if (file) {
-        //     const reader = new FileReader();
-        //     reader.readAsDataURL(file);
-        //     reader.onloadend = () => {
-        //         console.log(reader.result);
-        //     };
-        // }
     }
 
     const uploadImageHandler = (e) => {
