@@ -274,7 +274,7 @@ export default function ({ title, children }) {
                     </div>
                 </header>
 
-                <main className="px-4 sm:px-6 lg:px-10 xl:px-20 2xl:px-40 flex flex-1 py-8 bg-gray-50">
+                <main className="sm:px-6 lg:px-10 xl:px-20 2xl:px-40 flex flex-1 py-8 bg-gray-50">
                     <div className="px-4 flex flex-1 justify-center py-8">
                         <div className="layout-content-container flex flex-col max-w-screen-xl flex-1">
                             {children}
