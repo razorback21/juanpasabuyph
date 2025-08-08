@@ -58,7 +58,7 @@ class Product extends Model implements HasMedia
 
         $this->addMediaConversion('medium')
             ->format('webp')
-            ->fit(Fit::Fill, 800, 800)
+            ->fit(Fit::Fill, 600, 600)
             ->nonQueued();
 
         $this->addMediaConversion('large')
