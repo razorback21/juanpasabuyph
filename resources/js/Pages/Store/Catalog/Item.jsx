@@ -51,7 +51,7 @@ export default function ({ title, product, category, relatedProducts }) {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
                     <div
-                        className="aspect-[4/3] w-full bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden"
+                        className="aspect-[4/3] w-full bg-center bg-no-repeat bg-contain rounded-lg overflow-hidden"
                         style={{
                             backgroundImage: `url("${product.featured_image_url}")`,
                         }}
