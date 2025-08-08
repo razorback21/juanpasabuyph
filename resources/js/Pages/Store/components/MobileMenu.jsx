@@ -1,75 +1,117 @@
-import { usePage } from "@inertiajs/react";
+import { forwardRef, useState, useImperativeHandle } from "react";
+import MobileMenuItems from "./MobileMenuItems";
+import Logo from "./Logo";
 
-export default function ({ linksData, onLinkClick }) {
-    const page = usePage();
-    function highlightActiveLink(component) {
-        if (page.component === component) {
-            return "text-red-600";
-        } else {
-            return "text-white";
-        }
-    }
+const MobileMenu = forwardRef(({ linksData }, ref) => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+    useImperativeHandle(ref, () => ({
+        toggleMobileMenu: () => {
+            setIsMobileMenuOpen(!isMobileMenuOpen);
+        },
+    }));
 
     return (
-        <nav className="flex flex-col gap-4 ">
-            {linksData.map((link, index) => (
-                // <a
-                //     key={index}
-                //     className={`${highlightActiveLink(
-                //         link.component
-                //     )} hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-blue-200 text-center block transform hover:scale-105 hover:shadow-sm border border-blue-300`}
-                //     href={link.href}
-                //     onClick={onLinkClick}
-                // >
-                //     {link.name}
-                // </a>
-                <a
-                    key={index}
-                    className={`${highlightActiveLink(
-                        link.component
-                    )} hover:text-red-600 hover:underline`}
-                    href={link.href}
-                    onClick={onLinkClick}
-                >
-                    {link.name}
-                </a>
-            ))}
-            {/* Order Search Form */}
-            {/* <div className="mt-6 p-5 bg-white/60 backdrop-blur-sm rounded-mdl border border-gray-100/50 shadow-sm">
-                <h4 className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide">
-                    Track Your Order
-                </h4>
-                <form
-                    className="space-y-4"
-                    onSubmit={(e) => e.preventDefault()}
-                >
-                    <div className="relative">
-                        <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-400">
+        <>
+            {/* Mobile Menu Overlay */}
+            {isMobileMenuOpen && (
+                <div
+                    className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+                    onClick={() => ref.current.toggleMobileMenu()}
+                />
+            )}
+
+            {/* Mobile Menu Sidebar */}
+            <div
+                className={`lg:hidden fixed top-0 left-0 h-full w-80 shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-gray-800 ${
+                    isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+                }`}
+                id="mobile-menu"
+            >
+                <div className="p-4">
+                    <div className="flex items-center justify-between mb-4">
+                        <Logo />
+                        <button
+                            onClick={() => ref.current.toggleMobileMenu()}
+                            className="flex items-center justify-center rounded-lg h-7 w-7 ml-1 bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-colors"
+                        >
                             <svg
-                                fill="currentColor"
-                                height="16px"
-                                viewBox="0 0 256 256"
-                                width="16px"
+                                className="h-5 w-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg"
                             >
-                                <path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path>
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
                             </svg>
-                        </div>
-                        <input
-                            type="text"
-                            className="w-full h-11 pl-10 pr-4 text-sm bg-gray-50/50 border border-gray-200/60 rounded-sm focus:outline-none focus:ring-1 focus:ring-[#e92933]/30 focus:border-[#e92933]/30 focus:bg-white placeholder:text-gray-400 transition-all duration-300"
-                            placeholder="Enter order number"
-                            defaultValue=""
-                        />
+                        </button>
                     </div>
-                    <button
-                        type="submit"
-                        className="w-full h-11 bg-gradient-to-r from-[#e92933]/90 to-[#d41f2a]/90 hover:from-[#e92933] hover:to-[#d41f2a] text-white font-medium text-sm rounded-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#e92933]/20 focus:ring-offset-1"
-                    >
-                        Track Order
-                    </button>
-                </form>
-            </div> */}
-        </nav>
+                    <div className="mt-5 border-t border-gray-700"></div>
+                </div>
+                <div className="py-4 px-6">
+                    <MobileMenuItems linksData={linksData} />
+                    <div className="mt-8 mb-6 border-t border-gray-700"></div>
+                    <div>
+                        <h4 className="text-white text-base font-semibold mb-4">
+                            Follow Us
+                        </h4>
+                        <div className="flex space-x-4">
+                            <a
+                                aria-label="Twitter"
+                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                href="#"
+                            >
+                                <svg
+                                    fill="currentColor"
+                                    height="24"
+                                    width="24"
+                                    viewBox="0 0 256 256"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z" />
+                                </svg>
+                            </a>
+                            <a
+                                aria-label="Instagram"
+                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                href="#"
+                            >
+                                <svg
+                                    fill="currentColor"
+                                    height="24"
+                                    width="24"
+                                    viewBox="0 0 256 256"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z" />
+                                </svg>
+                            </a>
+                            <a
+                                aria-label="Facebook"
+                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                href="#"
+                            >
+                                <svg
+                                    fill="currentColor"
+                                    height="24"
+                                    width="24"
+                                    viewBox="0 0 256 256"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     );
-}
+});
+
+export default MobileMenu;
