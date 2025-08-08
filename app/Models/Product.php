@@ -189,13 +189,7 @@ class Product extends Model implements HasMedia
 
     public function getFeaturedImageUrlAttribute()
     {
-        $media = $this->getMedia('product_feature_image')->first();
-        if ($media) {
-            return $media->getUrl('large');
-        } else {
-            return 'https://imageplaceholder.net/800x800';
-        }
-        //return str_contains($this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
+        return $this->getLargeImageUrlAttribute();
     }
 
 
