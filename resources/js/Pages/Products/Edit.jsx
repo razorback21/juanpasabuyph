@@ -123,7 +123,7 @@ export default function EditProduct({ product, categories, from, uoms }) {
                     </div>
                     <div className={`flex flex-col justify-center`}>
                         <div className="flex justify-center pt-10 pb-5">
-                            {product.featured_image ? (
+                            {product.featured_image_url ? (
                                 <img
                                     ref={imageRef}
                                     src={product.featured_image_url}
