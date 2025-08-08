@@ -1,7 +1,4 @@
 <?php
-
-use App\Enums\OrderStatusEnum;
-use App\Enums\ProductUOMEnum;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CatalogController;
@@ -26,25 +23,9 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\TrackController;
-use App\Models\Customer;
-use App\Models\Inventory;
 use App\Models\Order;
-use App\Models\Product;
-use App\Services\CartService;
-use GuzzleHttp\Middleware;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
-use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 // Checkout
