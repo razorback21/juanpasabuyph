@@ -10,11 +10,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
+use Spatie\Image\Enums\CropPosition;
+use Spatie\Image\Enums\Fit;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
 
     protected $guarded = [
         'created_at',
@@ -39,6 +43,29 @@ class Product extends Model
         'stock_reservation_for_order_quantity',
         'stock_reservation_for_completed_order_quantity',
     ];
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->format('webp')
+            ->fit(Fit::Fill, 150, 150)
+            ->nonQueued();
+
+        $this->addMediaConversion('small')
+            ->format('webp')
+            ->fit(Fit::Fill, 250, 250)
+            ->nonQueued();
+
+        $this->addMediaConversion('medium')
+            ->format('webp')
+            ->fit(Fit::Fill, 800, 800)
+            ->nonQueued();
+
+        $this->addMediaConversion('large')
+            ->format('webp')
+            ->fit(Fit::Fill, 1080, 1080)
+            ->nonQueued();
+    }
 
     /**
      * Get the category that owns the product.
