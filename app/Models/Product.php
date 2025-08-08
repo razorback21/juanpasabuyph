@@ -223,6 +223,16 @@ class Product extends Model implements HasMedia
         }
     }
 
+    public function getFacebookImageUrlAttribute()
+    {
+        $media = $this->getMedia('product_feature_image')->first();
+        if ($media) {
+            return $media->getUrl('facebook');
+        } else {
+            return 'https://imageplaceholder.net/1200x630';
+        }
+    }
+
     /**
      * Get the route key for the model.
      */
