@@ -25,6 +25,7 @@ class Product extends Model implements HasMedia
         'updated_at',
     ];
 
+
     /**
      * The attributes that should be cast.
      *
@@ -38,6 +39,9 @@ class Product extends Model implements HasMedia
     protected $appends = [
         'product_category',
         'featured_image_url',
+        'thumbnail_url',
+        'medium_image_url',
+        'large_image_url',
         'available_stock',
         'current_stock',
         'stock_reservation_for_order_quantity',
@@ -58,12 +62,26 @@ class Product extends Model implements HasMedia
 
         $this->addMediaConversion('medium')
             ->format('webp')
-            ->fit(Fit::Fill, 600, 600)
+            ->fit(Fit::Fill, 450, 450)
+            ->quality(90)
             ->nonQueued();
 
         $this->addMediaConversion('large')
             ->format('webp')
+            ->fit(Fit::Fill, 800, 800)
+            ->quality(80)
+            ->nonQueued();
+
+        $this->addMediaConversion('xlarge')
+            ->format('webp')
             ->fit(Fit::Fill, 1080, 1080)
+            ->quality(80)
+            ->nonQueued();
+
+        $this->addMediaConversion('facebook')
+            ->format('webp')
+            ->fit(Fit::Fill, 1200, 630)
+            ->quality(80)
             ->nonQueued();
     }
 
@@ -171,7 +189,44 @@ class Product extends Model implements HasMedia
 
     public function getFeaturedImageUrlAttribute()
     {
-        return str_contains($this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
+        $media = $this->getMedia('product_feature_image')->first();
+        if ($media) {
+            return $media->getUrl('large');
+        } else {
+            return 'https://imageplaceholder.net/800x800';
+        }
+        //return str_contains($this->featured_image, 'picsum.photos') ? $this->featured_image : Storage::disk('public')->url($this->featured_image);
+    }
+
+
+    public function getThumbnailUrlAttribute()
+    {
+        $media = $this->getMedia('product_feature_image')->first();
+        if ($media) {
+            return $media->getUrl('thumb');
+        } else {
+            return 'https://imageplaceholder.net/150x150';
+        }
+    }
+
+    public function getMediumImageUrlAttribute()
+    {
+        $media = $this->getMedia('product_feature_image')->first();
+        if ($media) {
+            return $media->getUrl('medium');
+        } else {
+            return 'https://imageplaceholder.net/450x450';
+        }
+    }
+
+    public function getLargeImageUrlAttribute()
+    {
+        $media = $this->getMedia('product_feature_image')->first();
+        if ($media) {
+            return $media->getUrl('large');
+        } else {
+            return 'https://imageplaceholder.net/800x800';
+        }
     }
 
     /**
