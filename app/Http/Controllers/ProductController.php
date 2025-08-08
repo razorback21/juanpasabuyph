@@ -117,6 +117,8 @@ class ProductController extends Controller
     {
         Gate::authorize('delete', $product);
 
+        // clear media first before deleting the product model
+        $product->clearMediaCollection('product_feature_image');
         $product->delete();
 
         return redirect()
