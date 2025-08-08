@@ -8,8 +8,8 @@ trait HasProductSeo
 {
     public function productSeo(Product $product)
     {
-        seo()->title($product->title)
-            ->keywords($product->title)
+        seo()->title($product->name)
+            ->keywords($product->name)
             ->description($product->description)
             ->images(
                 url($product->facebook_image_url),
