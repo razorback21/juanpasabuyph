@@ -198,7 +198,7 @@ export default function ({ order }) {
                                         <div
                                             className="w-16 h-16 rounded-lg bg-gray-200 bg-cover bg-center"
                                             style={{
-                                                backgroundImage: `url("${item.product.featured_image_url}")`,
+                                                backgroundImage: `url("${item.product.thumbnail_url}")`,
                                             }}
                                         ></div>
                                         <div>

@@ -35,7 +35,7 @@ export default function OrderSummary({ cartItems, cartTotal }) {
                     <div
                         className="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-16 shadow"
                         style={{
-                            backgroundImage: `url("${item.product.featured_image_url}")`,
+                            backgroundImage: `url("${item.product.thumbnail_url}")`,
                         }}
                     ></div>
                     <div className="flex-1">
