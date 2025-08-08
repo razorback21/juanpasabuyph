@@ -57,10 +57,7 @@ class ProductObserver
      */
     public function deleted(Product $product): void
     {
-        // Delete product image
-        Storage::disk("public")->delete($product->featured_image);
-        // Delete social media image
-        //Storage::disk("public")->deleteDirectory($product->socialmedia_image);
+
     }
 
     /**
