@@ -92,9 +92,9 @@ export default function Footer() {
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-white text-base font-semibold mb-4">
+                        <h5 className="text-white text-base font-semibold mb-4">
                             Follow Us
-                        </h4>
+                        </h5>
                         <div className="flex space-x-4">
                             <a
                                 aria-label="Twitter"

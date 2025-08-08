@@ -60,9 +60,9 @@ export default function ({
             {/* Mobile Tracking */}
             <section className="sm:hidden mb-12 flex justify-center">
                 <div className="p-4 sm:p-6 bg-blue-950 text-white rounded-lg shadow-lg max-w-2xl w-full">
-                    <h4 className="text-xs font-medium text-gray-200 mb-4 uppercase tracking-wide text-center">
+                    <h2 className="text-xs font-medium text-gray-200 mb-4 uppercase tracking-wide text-center">
                         Track Your Order
-                    </h4>
+                    </h2>
                     <form className="flex flex-col sm:flex-row gap-4">
                         <div className="flex-1 relative">
                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
