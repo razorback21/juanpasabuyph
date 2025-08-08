@@ -10,7 +10,7 @@ export default function ({ products }) {
     const dialogRef = useRef(null);
 
     const columns = [
-        columnHelper.accessor("featured_image_url", {
+        columnHelper.accessor("thumbnail_url", {
             cell: (product) => (
                 <Link
                     href={route("products.show", {
