@@ -122,7 +122,7 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()
-            ->route('dashboard', request()->query())
+            ->route('products.index', request()->query())
             ->with('success', 'Product deleted successfully.');
     }
 
