@@ -4,20 +4,30 @@ export default function ({ linksData, onLinkClick }) {
     const page = usePage();
     function highlightActiveLink(component) {
         if (page.component === component) {
-            return "shadow-md bg-[#2c29e9] text-white";
+            return "text-red-600";
         } else {
-            return "text-[#4b5563]";
+            return "text-white";
         }
     }
 
     return (
         <nav className="flex flex-col gap-4 ">
             {linksData.map((link, index) => (
+                // <a
+                //     key={index}
+                //     className={`${highlightActiveLink(
+                //         link.component
+                //     )} hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-blue-200 text-center block transform hover:scale-105 hover:shadow-sm border border-blue-300`}
+                //     href={link.href}
+                //     onClick={onLinkClick}
+                // >
+                //     {link.name}
+                // </a>
                 <a
                     key={index}
                     className={`${highlightActiveLink(
                         link.component
-                    )} hover:text-[#e92933] text-base font-semibold leading-relaxed transition-all duration-300 py-3 px-4 rounded-tl-xl rounded-br-xl hover:bg-blue-200 text-center block transform hover:scale-105 hover:shadow-sm border border-blue-300`}
+                    )} hover:text-red-600 hover:underline`}
                     href={link.href}
                     onClick={onLinkClick}
                 >

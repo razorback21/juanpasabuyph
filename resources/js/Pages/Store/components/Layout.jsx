@@ -170,14 +170,14 @@ export default function ({ title, children }) {
 
                     {/* Mobile Menu Sidebar */}
                     <div
-                        className={`lg:hidden fixed top-0 left-0 h-full w-80 shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-[#c9e3fd] ${
+                        className={`lg:hidden fixed top-0 left-0 h-full w-80 shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-gray-900 ${
                             isMobileMenuOpen
                                 ? "translate-x-0"
                                 : "-translate-x-full"
                         }`}
                         id="mobile-menu"
                     >
-                        <div className="p-4 border-b border-gray-200 bg-[#c9e3fd]">
+                        <div className="p-4">
                             <div className="flex items-center justify-between mb-4">
                                 <Logo />
                                 <button
@@ -200,74 +200,64 @@ export default function ({ title, children }) {
                                     </svg>
                                 </button>
                             </div>
+                            <div className="mt-5 border-t border-gray-700"></div>
                         </div>
-                        <div className="py-4 px-6 bg-[#c9e3fd]">
+                        <div className="py-4 px-6">
                             <MobileMenu
                                 linksData={LinksData}
                                 onLinkClick={toggleMobileMenu}
                             />
-                            <div className="my-12 border-t border-gray-200"></div>
-                            <div className="mb-4">
-                                <h3 className="text-sm font-medium text-gray-700 mb-3 text-center">
+                            <div className="mt-8 mb-6 border-t border-gray-700"></div>
+                            <div>
+                                <h4 className="text-white text-base font-semibold mb-4">
                                     Follow Us
-                                </h3>
-                                <div className="flex gap-3 justify-center">
+                                </h4>
+                                <div className="flex space-x-4">
                                     <a
-                                        href="https://facebook.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                                        aria-label="Twitter"
+                                        className="text-gray-400 hover:text-red-500 transition-colors"
+                                        href="#"
                                     >
                                         <svg
-                                            className="w-5 h-5"
                                             fill="currentColor"
-                                            viewBox="0 0 24 24"
+                                            height="24"
+                                            width="24"
+                                            viewBox="0 0 256 256"
+                                            xmlns="http://www.w3.org/2000/svg"
                                         >
-                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                                        </svg>
-                                    </a>
-                                    {/* <a
-                                        href="https://instagram.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white transition-all"
-                                    >
-                                        <svg
-                                            className="w-5 h-5"
-                                            fill="currentColor"
-                                            viewBox="0 0 24 24"
-                                        >
-                                            <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323C5.902 8.198 7.053 7.708 8.35 7.708s2.448.49 3.323 1.297c.876.876 1.366 2.027 1.366 3.324s-.49 2.448-1.366 3.323c-.875.876-2.026 1.366-3.323 1.366zm7.718 0c-1.297 0-2.448-.49-3.323-1.297-.876-.875-1.366-2.026-1.366-3.323s.49-2.448 1.366-3.323c.875-.876 2.026-1.366 3.323-1.366s2.448.49 3.323 1.366c.876.875 1.366 2.026 1.366 3.323s-.49 2.448-1.366 3.323c-.875.876-2.026 1.366-3.323 1.366z" />
+                                            <path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.18a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.75,1.12,3.75,5.05,11.08,8.72C53.51,229.7,65.48,232,80,232c70.67,0,129.72-54.42,135.75-124.44l29.91-29.9A8,8,0,0,0,247.39,68.94Zm-45,29.41a8,8,0,0,0-2.32,5.14C196,166.58,143.28,216,80,216c-10.56,0-18-1.4-23.22-3.08,11.51-6.25,27.56-17,37.88-32.48A8,8,0,0,0,92,169.08c-.47-.27-43.91-26.34-44-96,16,13,45.25,33.17,78.67,38.79A8,8,0,0,0,136,104V88a32,32,0,0,1,9.6-22.92A30.94,30.94,0,0,1,167.9,56c12.66.16,24.49,7.88,29.44,19.21A8,8,0,0,0,204.67,80h16Z" />
                                         </svg>
                                     </a>
                                     <a
-                                        href="https://twitter.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-black hover:bg-gray-800 text-white transition-colors"
+                                        aria-label="Instagram"
+                                        className="text-gray-400 hover:text-red-500 transition-colors"
+                                        href="#"
                                     >
                                         <svg
-                                            className="w-5 h-5"
                                             fill="currentColor"
-                                            viewBox="0 0 24 24"
+                                            height="24"
+                                            width="24"
+                                            viewBox="0 0 256 256"
+                                            xmlns="http://www.w3.org/2000/svg"
                                         >
-                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                            <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z" />
                                         </svg>
                                     </a>
                                     <a
-                                        href="https://youtube.com"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex items-center justify-center w-10 h-10 rounded-full bg-red-600 hover:bg-red-700 text-white transition-colors"
+                                        aria-label="Facebook"
+                                        className="text-gray-400 hover:text-red-500 transition-colors"
+                                        href="#"
                                     >
                                         <svg
-                                            className="w-5 h-5"
                                             fill="currentColor"
-                                            viewBox="0 0 24 24"
+                                            height="24"
+                                            width="24"
+                                            viewBox="0 0 256 256"
+                                            xmlns="http://www.w3.org/2000/svg"
                                         >
-                                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                                            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z" />
                                         </svg>
-                                    </a> */}
+                                    </a>
                                 </div>
                             </div>
                         </div>
