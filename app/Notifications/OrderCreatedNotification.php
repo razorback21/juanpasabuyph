@@ -66,7 +66,7 @@ class OrderCreatedNotification extends Notification
             $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">' . $item->product->name . '</td>';
             $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">' . $item->quantity . '</td>';
             $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($item->price, 2) . '</td>';
-            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . $item->total . '</td>';
+            $table .= '<td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">₱' . number_format($item->total, 2) . '</td>';
             $table .= '</tr>';
         }
 
