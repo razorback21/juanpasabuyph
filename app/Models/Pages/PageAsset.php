@@ -23,6 +23,13 @@ class PageAsset extends Model implements HasMedia
             ->width(1920)
             ->height(1080)
             ->nonQueued() // Do not queue conversion
-            ->performOnCollections('home_hero', 'about_hero'); // Only perform this conversion on the 'pages' collection
+            ->performOnCollections('home_hero', 'about_hero');
+
+        // $this->addMediaConversion('webp_share')
+        //     ->format('webp')
+        //     ->width(1200)
+        //     ->height(630)
+        //     ->nonQueued() // Do not queue conversion
+        //     ->performOnCollections('home_hero', 'about_hero'); // Only perform this conversion on the 'pages' collection
     }
 }
