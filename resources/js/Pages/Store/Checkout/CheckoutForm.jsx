@@ -199,7 +199,7 @@ export default function CheckOutForm() {
                         onChange={formChangeHandler}
                     />
                 </div>
-                <div className="flex justify-end mt-16">
+                <div className="flex justify-end mt-16 mb-8">
                     <button
                         onClick={placeOrder}
                         className="flex w-full md:w-auto min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-sm h-12 px-6 bg-red-600 hover:bg-red-700 text-white text-base font-semibold leading-normal tracking-[0.015em] transition-colors shadow-sm hover:shadow-md"
