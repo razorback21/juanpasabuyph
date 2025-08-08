@@ -9,9 +9,10 @@ trait HasProductSeo
     public function productSeo(Product $product)
     {
         seo()->title($product->title)
+            ->keywords($product->title)
             ->description($product->description)
             ->images(
-                url('/storage/assets/pdala_hero_bg.png'),
+                url($product->facebook_image_url),
             );
     }
 }
