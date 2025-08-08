@@ -134,7 +134,6 @@ export default function ({ title, products, categories }) {
 
         useImperativeHandle(ref, () => ({
             filter: (category) => {
-                console.log(category, "AAAAAAAAA");
                 if (category == "All") {
                     setFilteredProducts(props.products);
                 } else {
