@@ -12,7 +12,7 @@ export default function ({ products }) {
                         <div
                             className="w-full bg-center bg-no-repeat aspect-square bg-cover transition-transform duration-500 group-hover:scale-110"
                             style={{
-                                backgroundImage: `url(${product.featured_image_url})`,
+                                backgroundImage: `url(${product.medium_image_url})`,
                             }}
                         ></div>
                         {/* Overlay gradient */}
