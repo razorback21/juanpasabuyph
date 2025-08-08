@@ -16,10 +16,10 @@ class StoreProductImage
             $collectionCode = 'product_feature_image';
             $product->clearMediaCollection($collectionCode);
             $product->addMediaFromRequest('image')->toMediaCollection($collectionCode);
-            // $media = $product->getLastMedia($collectionCode);
-            // if ($media) {
-            //     unlink($media->getPath());
-            // }
+            $media = $product->getLastMedia($collectionCode);
+            if ($media) {
+                unlink($media->getPath());
+            }
         });
     }
 }
