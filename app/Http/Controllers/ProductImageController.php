@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\StoreProductImage;
 use App\Http\Requests\ProductImageUploadRequest;
 use App\Models\Product;
 use App\Services\ProductFileUploadService;
@@ -17,15 +18,17 @@ class ProductImageController extends Controller
         }
 
         $product = Product::findOrFail($id);
-        $fileUploadService = new ProductFileUploadService();
+        StoreProductImage::run($product);
+        // $product = Product::findOrFail($id);
+        // $fileUploadService = new ProductFileUploadService();
 
-        // Auto-resolve upload service based on type parameter
-        $imagePath = $fileUploadService->uploadImageByType($product, $request->file('image'), $type);
+        // // Auto-resolve upload service based on type parameter
+        // $imagePath = $fileUploadService->uploadImageByType($product, $request->file('image'), $type);
 
-        // Update product with new image path
-        $product->update([
-            $fileUploadService->getDbField() => $imagePath
-        ]);
+        // // Update product with new image path
+        // $product->update([
+        //     $fileUploadService->getDbField() => $imagePath
+        // ]);
 
         return back()->with('success', 'Product image updated successfully!');
     }
