@@ -4,9 +4,9 @@ export default function ({ linksData }) {
     const page = usePage();
     function highlightActiveLink(component) {
         if (page.component === component) {
-            return "text-red-600";
+            return "text-red-600 font-bold";
         } else {
-            return "text-white";
+            return "text-gray-500 font-bold";
         }
     }
 

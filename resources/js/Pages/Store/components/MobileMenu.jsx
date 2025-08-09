@@ -3,7 +3,7 @@ import MobileMenuItems from "./MobileMenuItems";
 import Logo from "./Logo";
 
 const MobileMenu = forwardRef(({ linksData }, ref) => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
 
     useImperativeHandle(ref, () => ({
         toggleMobileMenu: () => {
@@ -23,7 +23,7 @@ const MobileMenu = forwardRef(({ linksData }, ref) => {
 
             {/* Mobile Menu Sidebar */}
             <div
-                className={`lg:hidden fixed top-0 left-0 h-full w-80 shadow-lg z-50 transform transition-transform duration-300 ease-in-out bg-gray-800 ${
+                className={`bg-white lg:hidden fixed top-0 left-0 h-full w-80 shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
                     isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
                 id="mobile-menu"
@@ -51,19 +51,19 @@ const MobileMenu = forwardRef(({ linksData }, ref) => {
                             </svg>
                         </button>
                     </div>
-                    <div className="mt-5 border-t border-gray-700"></div>
+                    <div className="mt-5 border-t border-gray-200"></div>
                 </div>
                 <div className="py-4 px-6">
                     <MobileMenuItems linksData={linksData} />
-                    <div className="mt-8 mb-6 border-t border-gray-700"></div>
+                    <div className="mt-8 mb-6 border-t border-gray-200"></div>
                     <div>
-                        <h4 className="text-white text-base font-semibold mb-4">
+                        <h4 className="text-gray-500 text-base font-semibold mb-4">
                             Follow Us
                         </h4>
-                        <div className="flex space-x-4">
+                        <div className="flex space-x-3">
                             <a
                                 aria-label="Twitter"
-                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                className="text-white bg-blue-700 hover:bg-red-600 transition-colors p-2  rounded-full"
                                 href="#"
                             >
                                 <svg
@@ -78,7 +78,7 @@ const MobileMenu = forwardRef(({ linksData }, ref) => {
                             </a>
                             <a
                                 aria-label="Instagram"
-                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                className="text-white bg-blue-700 hover:bg-red-600 transition-colors p-2  rounded-full"
                                 href="#"
                             >
                                 <svg
@@ -93,7 +93,7 @@ const MobileMenu = forwardRef(({ linksData }, ref) => {
                             </a>
                             <a
                                 aria-label="Facebook"
-                                className="text-gray-400 hover:text-red-500 transition-colors"
+                                className="text-white bg-blue-700 hover:bg-red-600 transition-colors p-2  rounded-full"
                                 href="#"
                             >
                                 <svg
