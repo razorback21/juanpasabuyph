@@ -11,6 +11,7 @@ import Axios from "@/lib/axios";
 
 export default function Index({ title, categories }) {
     const catalogRef = useRef(null);
+    const loadMoreRef = useRef(null);
     const urlQuery = new URLSearchParams(window.location.search);
     const categoryQuery = urlQuery.get("category") ?? "All";
     const titleRef = useRef(
@@ -32,10 +33,11 @@ export default function Index({ title, categories }) {
 
         function handleCategoryChange(category) {
             const categoryName =
-                typeof category === "string" ? category : category.name;
-            catalogRef.current.filter(categoryName);
+                typeof category === "string" ? category : category.slug;
             titleRef.current =
-                categoryName === "All" ? "All Categories" : categoryName;
+                categoryName === "All"
+                    ? "All Categories"
+                    : categories.find((cat) => cat.slug === categoryName).name;
             setIsDropdownOpen(false);
 
             // Update URL with the selected category
@@ -47,6 +49,7 @@ export default function Index({ title, categories }) {
             }
 
             window.history.pushState({}, "", currentUrl.toString());
+            loadMoreRef.current?.loadCategory(categoryName);
         }
 
         useEffect(() => {
@@ -123,56 +126,47 @@ export default function Index({ title, categories }) {
         );
     }
 
-    const ProductCatalog = forwardRef((props, ref) => {
-        const [filteredProducts, setFilteredProducts] = useState(
-            urlQuery.get("category") == "All" || !urlQuery.get("category")
-                ? props.products
-                : props.products.filter(
-                      (product) =>
-                          product.category.name == urlQuery.get("category")
-                  )
-        );
-
-        useImperativeHandle(ref, () => ({
-            filter: (category) => {
-                if (category == "All") {
-                    setFilteredProducts(props.products);
-                } else {
-                    setFilteredProducts(
-                        props.products.filter(
-                            (product) => product.category.name == category
-                        )
-                    );
-                }
-            },
-        }));
-
-        return (
-            <div>
-                <div className="py-2 text-sm px-4 text-gray-600">
-                    {filteredProducts.length} items found in this category
-                </div>
-                <Products products={filteredProducts} />
-            </div>
-        );
-    });
-
     const LoadMore = forwardRef((props, ref) => {
         const [products, setProducts] = useState([]);
         const [nextPageUrl, setNextPageUrl] = useState("");
         const [isLoading, setIsLoading] = useState(false);
+        const [category, setCategory] = useState("All");
 
         useEffect(() => {
-            Axios.get(route("catalog.paginate")).then((res) => {
+            const currentUrl = new URL(window.location);
+            const categoryName = currentUrl.searchParams.get("category");
+
+            if (categoryName === "All" || categoryName === "") {
+                categoryName = "All";
+            }
+
+            Axios.get(
+                route("catalog.paginate", {
+                    category: categoryName,
+                    page: 1,
+                })
+            ).then((res) => {
                 setProducts(res.data);
                 setNextPageUrl(res.next_page_url);
             });
         }, []);
 
+        useImperativeHandle(ref, () => ({
+            loadCategory: (category) => {
+                console.log(category);
+                Axios.get(
+                    route("catalog.paginate", { category, page: 1 })
+                ).then((res) => {
+                    setProducts(res.data);
+                    setNextPageUrl(res.next_page_url);
+                });
+            },
+        }));
+
         function loadNextProducts() {
             if (nextPageUrl && !isLoading) {
                 setIsLoading(true);
-                Axios.get(nextPageUrl)
+                Axios.get(nextPageUrl, category && { category })
                     .then((res) => {
                         setProducts([...products, ...res.data]);
                         setNextPageUrl(res.next_page_url);
@@ -239,7 +233,7 @@ export default function Index({ title, categories }) {
                 <CategoryDropdown />
             </div>
             <section>
-                <LoadMore />
+                <LoadMore ref={loadMoreRef} />
             </section>
         </Layout>
     );

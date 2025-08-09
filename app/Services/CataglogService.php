@@ -18,13 +18,13 @@ class CataglogService
     public function getPaginatedData($itemPerPage = 10)
     {
         $validated = request()->validate([
-            'category' => 'nullable|string|exists:product_categories,slug',
+            'category' => 'nullable|string',
             'page' => 'nullable|integer|min:1'
         ]);
 
         $products = Product::where('disabled', '=', false)->with('category');
 
-        if (isset($validated['category'])) {
+        if (isset($validated['category']) && $validated['category'] != 'All') {
             $products = $products->whereHas('category', function ($query) use ($validated) {
                 $query->where('slug', $validated['category']);
             });
