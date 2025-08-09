@@ -136,7 +136,7 @@ export default function Index({ title, categories }) {
 
         useEffect(() => {
             const currentUrl = new URL(window.location);
-            const categoryName = currentUrl.searchParams.get("category");
+            let categoryName = currentUrl.searchParams.get("category");
 
             if (categoryName === "All" || categoryName === "") {
                 categoryName = "All";
