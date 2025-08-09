@@ -43,6 +43,7 @@ class CatalogController extends Controller
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
             'product' => $product,
+            'categorySlug' => $product->category->slug,
             'category' => $product->category->name,
             'relatedProducts' => $relatedProducts
         ]);

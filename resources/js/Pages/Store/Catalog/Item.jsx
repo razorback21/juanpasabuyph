@@ -9,7 +9,13 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@inertiajs/react";
 
-export default function Item({ title, product, category, relatedProducts }) {
+export default function Item({
+    title,
+    product,
+    category,
+    categorySlug,
+    relatedProducts,
+}) {
     const page = usePage();
     const quantityInputRef = useRef(null);
 
@@ -40,7 +46,7 @@ export default function Item({ title, product, category, relatedProducts }) {
             <div className="mb-6 text-sm text-[#6b7280]">
                 Category /{" "}
                 <Link
-                    href={`/catalog?category=${category}`}
+                    href={`/catalog?category=${categorySlug}`}
                     className="hover:text-[#e92933] transition-colors"
                 >
                     {category}
