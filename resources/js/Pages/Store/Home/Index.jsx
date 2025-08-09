@@ -207,7 +207,7 @@ export default function Index({
             </section>
 
             {/* Popular Products Section */}
-            <section className="mb-16" role="main">
+            <section className="mb:14 md:mb-16" role="main">
                 <HomeProducts
                     products={popularProducts}
                     title="Popular Products"
