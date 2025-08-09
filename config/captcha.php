@@ -6,9 +6,9 @@ return [
         'height' => 40,
         'quality' => 90,
         'math' => false, //Enable Math Captcha
-        'expire' => 60 * 5, //Captcha expiration
-        'lines' => 5,
+        'expire' => 60 * 3, //Captcha expiration
+        'lines' => 0,
         'bgImage' => true,
-        'bgColor' => '#f5f5f5',
+        'bgColor' => '#f9fafb',
     ]
 ];
