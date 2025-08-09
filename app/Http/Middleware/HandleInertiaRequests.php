@@ -44,6 +44,7 @@ class HandleInertiaRequests extends Middleware
                 'message' => fn() => $request->session()->get('message')
             ],
             'cartCount' => fn() => (new CartService())->getCartCount(),
+            'cartDisabled' => config('store.disable_checkout'),
         ];
     }
 }
