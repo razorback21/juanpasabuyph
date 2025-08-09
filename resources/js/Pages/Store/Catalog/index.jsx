@@ -127,12 +127,21 @@ export default function Index({ title, categories }) {
     }
 
     const LoadMore = forwardRef((props, ref) => {
-        // TODO: refactor use less state
-        const [products, setProducts] = useState([]);
-        const [nextPageUrl, setNextPageUrl] = useState("");
-        const [isLoading, setIsLoading] = useState(false);
-        const [category, setCategory] = useState("All");
-        const [totalProducts, setTotalProducts] = useState(0);
+        // Using refs instead of state for better performance
+        const productsRef = useRef([]);
+        const nextPageUrlRef = useRef("");
+        const isLoadingRef = useRef(false);
+        const categoryRef = useRef("All");
+        const totalProductsRef = useRef(0);
+        const forceUpdateRef = useRef(0);
+        const [, setForceUpdate] = useState({});
+
+        // Helper function to force re-render
+        const forceUpdate = () => {
+            forceUpdateRef.current += 1;
+            // Using a state update to trigger re-render
+            setForceUpdate({});
+        };
 
         useEffect(() => {
             const currentUrl = new URL(window.location);
@@ -148,9 +157,10 @@ export default function Index({ title, categories }) {
                     page: 1,
                 })
             ).then((res) => {
-                setProducts(res.data);
-                setNextPageUrl(res.next_page_url);
-                setTotalProducts(res.total);
+                productsRef.current = res.data;
+                nextPageUrlRef.current = res.next_page_url;
+                totalProductsRef.current = res.total;
+                forceUpdate();
             });
         }, []);
 
@@ -160,30 +170,41 @@ export default function Index({ title, categories }) {
                 Axios.get(
                     route("catalog.paginate", { category, page: 1 })
                 ).then((res) => {
-                    setProducts(res.data);
-                    setNextPageUrl(res.next_page_url);
-                    setTotalProducts(res.total);
+                    productsRef.current = res.data;
+                    nextPageUrlRef.current = res.next_page_url;
+                    totalProductsRef.current = res.total;
+                    forceUpdate();
                 });
             },
         }));
 
         function loadNextProducts() {
-            if (nextPageUrl && !isLoading) {
-                setIsLoading(true);
-                Axios.get(nextPageUrl, category && { category })
+            if (nextPageUrlRef.current && !isLoadingRef.current) {
+                isLoadingRef.current = true;
+                forceUpdate();
+
+                Axios.get(
+                    nextPageUrlRef.current,
+                    categoryRef.current && { category: categoryRef.current }
+                )
                     .then((res) => {
-                        setProducts([...products, ...res.data]);
-                        setNextPageUrl(res.next_page_url);
-                        setIsLoading(false);
-                        setTotalProducts(res.total);
+                        productsRef.current = [
+                            ...productsRef.current,
+                            ...res.data,
+                        ];
+                        nextPageUrlRef.current = res.next_page_url;
+                        totalProductsRef.current = res.total;
+                        isLoadingRef.current = false;
+                        forceUpdate();
                     })
                     .catch(() => {
-                        setIsLoading(false);
+                        isLoadingRef.current = false;
+                        forceUpdate();
                     });
             }
         }
 
-        if (products.length === 0) {
+        if (productsRef.current.length === 0) {
             return (
                 <div className="px-4 my-2 text-sm text-gray-500">
                     <div className="flex items-center justify-center min-h-[200px]">
@@ -220,18 +241,18 @@ export default function Index({ title, categories }) {
         return (
             <div className="grid grid-col-1">
                 <div className="px-4 my-2 text-sm text-gray-500">
-                    {totalProducts} items found in this category
+                    {totalProductsRef.current} items found in this category
                 </div>
-                <Products products={products} />
-                {nextPageUrl && (
+                <Products products={productsRef.current} />
+                {nextPageUrlRef.current && (
                     <div className="grid grid-col-1 mt-10">
                         <div className="flex justify-center px-4 md:px-0">
                             <button
                                 onClick={loadNextProducts}
-                                disabled={isLoading}
+                                disabled={isLoadingRef.current}
                                 className="w-full p-2 text-gray-600 w-full font-bold rounded-md border-2 border-gray-300 border-dashed text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
-                                {isLoading && (
+                                {isLoadingRef.current && (
                                     <svg
                                         className="animate-spin h-4 w-4 text-gray-600"
                                         xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +274,9 @@ export default function Index({ title, categories }) {
                                         ></path>
                                     </svg>
                                 )}
-                                {isLoading ? "Loading..." : "Load More"}
+                                {isLoadingRef.current
+                                    ? "Loading..."
+                                    : "Load More"}
                             </button>
                         </div>
                     </div>
