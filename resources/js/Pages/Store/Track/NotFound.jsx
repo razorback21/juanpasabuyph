@@ -2,7 +2,7 @@ import Layout from "@/Pages/Store/components/Layout.jsx";
 import { useRef } from "react";
 import { router } from "@inertiajs/react";
 
-export default function ({ order }) {
+export default function NotFound({ order }) {
     const orderNumberRef = useRef(null);
     const inputRef = useRef(null);
 

@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import Layout from "@/Pages/Store/components/Layout.jsx";
 import HomeProducts from "../components/HomeProducts";
 import Reviews from "../components/Reviews";
 import WhyChoose from "./WhyChoose";
 import { Link, router } from "@inertiajs/react";
 
-export default function ({
+export default function Index({
     title,
     featuredProducts,
     popularProducts,

@@ -2,7 +2,7 @@ import Layout from "@/Pages/Store/components/Layout.jsx";
 import { dateFormatFriendly } from "@/lib/date";
 import { currencyFormat } from "@/lib/number";
 
-export default function ({ order }) {
+export default function Track({ order }) {
     console.log("order", order);
 
     function timelineLabel(status) {

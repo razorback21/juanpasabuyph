@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-export default function ({
+export default function HomeProducts({
     products,
     title,
     description = "",

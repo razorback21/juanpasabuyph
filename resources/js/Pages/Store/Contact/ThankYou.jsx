@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import Layout from "../components/Layout";
 
-export default function () {
+export default function ThankYou() {
     return (
         <Layout title="Thank You">
             <div className="container mx-auto">

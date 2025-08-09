@@ -1,9 +1,8 @@
 import Layout from "../components/Layout";
 import ContactForm from "./ContactForm";
 import ContactInformation from "./ContactInformation";
-import ThankYou from "./ThankYou";
 
-export default function () {
+export default function Index() {
     return (
         <>
             <Layout title="Contact">

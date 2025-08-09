@@ -1,7 +1,7 @@
 import { Link } from "@inertiajs/react";
 import { usePage } from "@inertiajs/react";
 
-export default function ({ link }) {
+export default function MenuItems({ link }) {
     const page = usePage();
     function activeClass(link) {
         return page.component === link.component

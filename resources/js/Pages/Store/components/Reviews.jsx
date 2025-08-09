@@ -1,4 +1,4 @@
-export default function () {
+export default function Reviews() {
     return (
         <div className="mb-8 sm:mb-12">
             <header>

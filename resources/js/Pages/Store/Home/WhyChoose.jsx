@@ -1,4 +1,4 @@
-export default function () {
+export default function WhyChoose() {
     return (
         <div className="mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 mb-10">

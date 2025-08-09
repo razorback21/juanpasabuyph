@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@inertiajs/react";
 
-export default function ({ title, product, category, relatedProducts }) {
+export default function Item({ title, product, category, relatedProducts }) {
     const page = usePage();
     const quantityInputRef = useRef(null);
 

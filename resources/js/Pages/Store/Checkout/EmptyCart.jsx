@@ -1,6 +1,6 @@
 import { Link } from "@inertiajs/react";
 
-export default function () {
+export default function EmptyCart() {
     return (
         <main className="flex-1 px-6 md:px-16 lg:px-24 xl:px-40 py-10 flex items-center justify-center">
             <div className="text-center space-y-6">

@@ -8,7 +8,7 @@ import {
     useImperativeHandle,
 } from "react";
 
-export default function ({ title, products, categories }) {
+export default function Index({ title, products, categories }) {
     const catalogRef = useRef(null);
     const urlQuery = new URLSearchParams(window.location.search);
     const categoryQuery = urlQuery.get("category") ?? "All";

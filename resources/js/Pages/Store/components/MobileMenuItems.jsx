@@ -1,6 +1,6 @@
 import { usePage } from "@inertiajs/react";
 
-export default function ({ linksData }) {
+export default function MobileMenuItems({ linksData }) {
     const page = usePage();
     function highlightActiveLink(component) {
         if (page.component === component) {

@@ -1,4 +1,4 @@
-export default function () {
+export default function Logo() {
     return (
         <div>
             <h2 className="flex text-[#111827] text-xl font-extrabold leading-tight tracking-[-0.015em]">
