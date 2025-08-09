@@ -6,18 +6,17 @@ export default function Footer() {
         {
             name: "About Us",
             href: "/about",
+            route: "about",
         },
         {
             name: "Contact Us",
             href: "/contact",
+            route: "contact",
         },
         {
             name: "Privacy Policy",
             href: "/privacy-policy",
-        },
-        {
-            name: "Terms of Service",
-            href: "/terms-of-service",
+            route: "privacy-policy",
         },
     ];
 
@@ -79,10 +78,11 @@ export default function Footer() {
                         <ul className="space-y-2">
                             {links.map((link) => {
                                 return (
-                                    <li key={link.href}>
+                                    <li key={link.route}>
                                         <Link
                                             className="hover:text-red-500 transition-colors text-sm"
                                             href={link.href}
+                                            route={link.route}
                                         >
                                             {link.name}
                                         </Link>

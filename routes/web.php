@@ -17,6 +17,7 @@ use App\Http\Controllers\OutOfStockController;
 use App\Http\Controllers\Pages\AboutAssetController;
 use App\Http\Controllers\Pages\ContactAssetController;
 use App\Http\Controllers\Pages\HomeAssetController;
+use App\Http\Controllers\PrivacyPolicyController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductImageController;
@@ -55,6 +56,8 @@ Route::middleware('visitor.request')->group(function () {
     Route::post('/contact/validate', [ContactController::class, 'validate'])->name('contact.validate');
     // Order
     Route::get('/track/{order_id}', [TrackController::class, 'track'])->name('track')->middleware('throttle:20,1');
+    // Privacy Policy
+    Route::get('/privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy');
 });
 // Admin
 Route::middleware(['auth'])->group(function () {
