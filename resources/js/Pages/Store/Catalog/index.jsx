@@ -127,10 +127,12 @@ export default function Index({ title, categories }) {
     }
 
     const LoadMore = forwardRef((props, ref) => {
+        // TODO: refactor use less state
         const [products, setProducts] = useState([]);
         const [nextPageUrl, setNextPageUrl] = useState("");
         const [isLoading, setIsLoading] = useState(false);
         const [category, setCategory] = useState("All");
+        const [totalProducts, setTotalProducts] = useState(0);
 
         useEffect(() => {
             const currentUrl = new URL(window.location);
@@ -148,6 +150,7 @@ export default function Index({ title, categories }) {
             ).then((res) => {
                 setProducts(res.data);
                 setNextPageUrl(res.next_page_url);
+                setTotalProducts(res.total);
             });
         }, []);
 
@@ -159,6 +162,7 @@ export default function Index({ title, categories }) {
                 ).then((res) => {
                     setProducts(res.data);
                     setNextPageUrl(res.next_page_url);
+                    setTotalProducts(res.total);
                 });
             },
         }));
@@ -171,6 +175,7 @@ export default function Index({ title, categories }) {
                         setProducts([...products, ...res.data]);
                         setNextPageUrl(res.next_page_url);
                         setIsLoading(false);
+                        setTotalProducts(res.total);
                     })
                     .catch(() => {
                         setIsLoading(false);
@@ -180,6 +185,9 @@ export default function Index({ title, categories }) {
 
         return (
             <div className="grid grid-col-1">
+                <div className="px-4 my-2 text-sm text-gray-500">
+                    {totalProducts} items found in this category
+                </div>
                 <Products products={products} />
                 {nextPageUrl && (
                     <div className="grid grid-col-1 mt-10">
@@ -187,7 +195,7 @@ export default function Index({ title, categories }) {
                             <button
                                 onClick={loadNextProducts}
                                 disabled={isLoading}
-                                className="w-full p-2 text-gray-600 w-full md:w-1/2 rounded-md border-2 border-gray-300 border-dashed text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                className="w-full p-2 text-gray-600 w-full font-bold rounded-md border-2 border-gray-300 border-dashed text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                             >
                                 {isLoading && (
                                     <svg
@@ -225,8 +233,7 @@ export default function Index({ title, categories }) {
             <div className="flex flex-wrap justify-between items-center gap-4 p-4 mb-6">
                 <h1 className="text-gray-900 text-3xl sm:text-4xl font-bold tracking-tight">
                     All Products
-                </h1>{" "}
-                asas
+                </h1>
             </div>
 
             <div className="flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">

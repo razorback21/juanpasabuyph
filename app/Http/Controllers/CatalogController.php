@@ -25,7 +25,7 @@ class CatalogController extends Controller
 
     public function paginate(Request $request)
     {
-        $paginatedProducts = (new CataglogService())->getPaginatedData(2);
+        $paginatedProducts = (new CataglogService())->getPaginatedData(15);
         return response()->json($paginatedProducts);
     }
 
