@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductCategory;
+use App\Services\CataglogService;
 use App\Traits\HasDefaultSeo;
 use App\Traits\HasProductSeo;
 use Illuminate\Http\Request;
@@ -12,19 +13,20 @@ use Inertia\Inertia;
 class CatalogController extends Controller
 {
     use HasDefaultSeo, HasProductSeo;
-    public function index(Request $user)
+    public function index(Request $request)
     {
         $this->defaultSeo();
-        $products = Product::all();
-        $products->load('category');
         $categories = ProductCategory::all();
-
-
         return Inertia::render("Store/Catalog/Index", [
             'title' => "Catalog",
-            'products' => $products,
             'categories' => $categories,
         ]);
+    }
+
+    public function paginate(Request $request)
+    {
+        $paginatedProducts = (new CataglogService())->getPaginatedData(2);
+        return response()->json($paginatedProducts);
     }
 
     public function item(Request $request, $category, $slug)
