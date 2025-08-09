@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { usePage, router } from "@inertiajs/react";
 import Captcha from "../components/Captcha";
-import { Key } from "lucide-react";
 
 export default function CheckOutForm() {
     const props = usePage().props;
