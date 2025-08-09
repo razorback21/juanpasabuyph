@@ -30,6 +30,14 @@ class CheckoutFormRequest extends FormRequest
             'city' => 'required|string',
             'province' => 'required|string',
             'postal_code' => 'required|numeric',
+            'captcha' => 'required|captcha_api:' . $this->input('key') . ',flat',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'captcha.captcha_api' => 'Captcha code is incorrect.'
         ];
     }
 }

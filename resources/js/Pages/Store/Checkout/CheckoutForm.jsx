@@ -28,8 +28,8 @@ export default function CheckOutForm() {
     }
 
     function placeOrder() {
-        console.log(formData.current);
-        //router.post(route("checkout.store"), formData.current);
+        //console.log(formData.current);
+        router.post(route("checkout.store"), formData.current);
     }
 
     return (
