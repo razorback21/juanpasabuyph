@@ -1,9 +1,13 @@
 import { useRef } from "react";
 import { usePage, router } from "@inertiajs/react";
+import Captcha from "../components/Captcha";
+import { Key } from "lucide-react";
+
 export default function CheckOutForm() {
     const props = usePage().props;
     console.log(props);
     const { flash, errors } = props;
+    const captchaRef = useRef(null);
     const formData = useRef({
         firstname: "",
         lastname: "",
@@ -14,16 +18,18 @@ export default function CheckOutForm() {
         province: "",
         postal_code: "",
         notes: "",
+        Key: "",
     });
 
     function formChangeHandler(e) {
         const { name, value } = e.target;
         formData.current[name] = value;
+        formData.current.key = captchaRef.current?.getKey();
     }
 
     function placeOrder() {
         console.log(formData.current);
-        router.post(route("checkout.store"), formData.current);
+        //router.post(route("checkout.store"), formData.current);
     }
 
     return (
@@ -181,6 +187,34 @@ export default function CheckOutForm() {
                                 {errors.phone}
                             </div>
                         )}
+                    </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+                    <div>
+                        <label
+                            className="block text-sm font-medium leading-normal pb-1.5"
+                            htmlFor="captcha"
+                        >
+                            Captcha *
+                        </label>
+                        <input
+                            className="text-gray-500 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#e3d4d5] bg-white focus:border-[var(--primary-color)] h-12 placeholder:text-[var(--text-secondary)] px-4 text-base font-normal leading-normal transition-colors"
+                            id="captcha"
+                            name="captcha"
+                            placeholder="Enter captcha"
+                            type="text"
+                            onChange={formChangeHandler}
+                        />
+                        {errors.captcha && (
+                            <p className="text-red-500 text-[11px] mt-1 font-normal leading-normal">
+                                {errors.captcha}
+                            </p>
+                        )}
+                    </div>
+                    <div className="mb-[-2rem]">
+                        <div className="flex justify-start pt-8">
+                            <Captcha ref={captchaRef} />
+                        </div>
                     </div>
                 </div>
                 <h2 className="text-[1.3rem] font-bold mt-10">

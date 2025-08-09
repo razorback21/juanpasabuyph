@@ -101,7 +101,7 @@ export default function OrderSummary({ cartItems, cartTotal }) {
             <div className="space-y-6">
                 <div className="flex flex-col gap-4">
                     {cartItems.map((item) => (
-                        <CartItem item={item} />
+                        <CartItem item={item} key={item.product.id} />
                     ))}
                 </div>
             </div>
