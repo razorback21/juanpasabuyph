@@ -143,38 +143,33 @@ export default function Index({ title, categories }) {
             setForceUpdate({});
         };
 
+        const fetchProducts = async (category) => {
+            const response = await Axios.get(
+                route("catalog.paginate", {
+                    category,
+                    page: 1,
+                })
+            );
+            productsRef.current = response.data;
+            nextPageUrlRef.current = response.next_page_url;
+            totalProductsRef.current = response.total;
+            forceUpdate();
+        };
+
         useEffect(() => {
             const currentUrl = new URL(window.location);
             let categoryName = currentUrl.searchParams.get("category");
-
-            if (categoryName === "All" || categoryName === "") {
-                categoryName = "All";
-            }
-
-            Axios.get(
-                route("catalog.paginate", {
-                    category: categoryName,
-                    page: 1,
-                })
-            ).then((res) => {
-                productsRef.current = res.data;
-                nextPageUrlRef.current = res.next_page_url;
-                totalProductsRef.current = res.total;
-                forceUpdate();
-            });
+            categoryName =
+                categoryName === "All" || categoryName === ""
+                    ? "All"
+                    : categoryName;
+            fetchProducts(categoryName);
         }, []);
 
         useImperativeHandle(ref, () => ({
             loadCategory: (category) => {
                 console.log(category);
-                Axios.get(
-                    route("catalog.paginate", { category, page: 1 })
-                ).then((res) => {
-                    productsRef.current = res.data;
-                    nextPageUrlRef.current = res.next_page_url;
-                    totalProductsRef.current = res.total;
-                    forceUpdate();
-                });
+                fetchProducts(category);
             },
         }));
 
