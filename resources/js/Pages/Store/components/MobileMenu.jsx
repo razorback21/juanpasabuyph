@@ -3,7 +3,7 @@ import MobileMenuItems from "./MobileMenuItems";
 import Logo from "./Logo";
 
 const MobileMenu = forwardRef(({ linksData }, ref) => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(true);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
         toggleMobileMenu: () => {
