@@ -24,7 +24,8 @@ import {
 } from "@/components/ui/popover";
 import { CalendarIcon } from "lucide-react";
 import { dateFormatFriendly } from "@/lib/date";
-export default function ({
+
+export default function Show({
     order,
     statusOptions,
     statusCantBeDeleted,

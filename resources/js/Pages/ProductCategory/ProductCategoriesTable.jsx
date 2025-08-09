@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import AlertConfirm from "@/components/AlertConfirm";
 import { Badge } from "@/components/ui/badge";
 
-export default function ({ categories }) {
+export default function ProductCategoriesTable({ categories }) {
     const dialogRef = useRef({});
     const columnHelper = createColumnHelper();
     const deleteHandler = (productCategory) => {

@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/react";
 import AlertConfirm from "@/components/AlertConfirm";
 import { Toaster } from "@/components/ui/sonner";
 
-export default function ({ products }) {
+export default function ProductsTable({ products }) {
     const columnHelper = createColumnHelper();
     const dialogRef = useRef(null);
 

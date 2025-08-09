@@ -8,7 +8,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import AlertConfirm from "@/components/AlertConfirm";
 
-export default function ({ products, categories, active_category }) {
+export default function ProductsTable({
+    products,
+    categories,
+    active_category,
+}) {
     const columnHelper = createColumnHelper();
     const dialogRef = useRef(null);
 

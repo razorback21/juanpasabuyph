@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import ProductsTable from "./ProductsTable";
 import Pagination from "@/components/Pagination";
 
-export default function ({ outOfStockProducts, productCount }) {
+export default function Index({ outOfStockProducts, productCount }) {
     return (
         <AuthenticatedLayout header="Out of Stock">
             <Head title="Out of Stock" />

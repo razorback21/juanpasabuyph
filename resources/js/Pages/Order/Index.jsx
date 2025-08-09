@@ -3,7 +3,7 @@ import { Head } from "@inertiajs/react";
 import OrdersTable from "./OrdersTable";
 import Pagination from "@/components/Pagination";
 
-export default function ({ orders }) {
+export default function Index({ orders }) {
     return (
         <AuthenticatedLayout header="Orders">
             <Head title="Orders" />

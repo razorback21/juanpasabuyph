@@ -12,7 +12,7 @@ import { useRef } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 
-export default function EditProduct({ categories, uoms }) {
+export default function Create({ categories, uoms }) {
     const props = usePage().props;
     const formDataRef = useRef({
         name: "",

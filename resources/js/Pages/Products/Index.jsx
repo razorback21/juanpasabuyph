@@ -4,7 +4,7 @@ import { Head } from "@inertiajs/react";
 import ProductsTable from "./ProductsTable";
 import Pagination from "@/components/Pagination";
 
-export default function (props) {
+export default function Index(props) {
     return (
         <AuthenticatedLayout header="Products">
             <Head title="Dashboard" />

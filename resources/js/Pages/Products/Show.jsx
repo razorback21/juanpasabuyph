@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import { Badge } from "@/components/ui/badge";
 
-export default function EditProduct({ product, movementTypes }) {
+export default function Show({ product, movementTypes }) {
     const props = usePage().props;
     const dialogRef = useRef(null);
     const formRef = useRef(null);

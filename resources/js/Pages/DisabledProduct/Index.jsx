@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import ProductsTable from "./ProductsTable";
 
-export default function ({ disabledProducts }) {
+export default function Index({ disabledProducts }) {
     return (
         <AuthenticatedLayout header="Disabled Products">
             <Head title="Disabled Products" />

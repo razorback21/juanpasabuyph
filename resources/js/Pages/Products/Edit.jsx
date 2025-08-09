@@ -17,7 +17,7 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import ItemPrice from "./ItemPrice";
 
-export default function EditProduct({ product, categories, from, uoms }) {
+export default function Edit({ product, categories, from, uoms }) {
     const props = usePage().props;
     const imageDesciptionRef = useRef(null);
     const imageRef = useRef(null);

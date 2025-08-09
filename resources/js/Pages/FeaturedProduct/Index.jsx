@@ -2,7 +2,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import ProductsTable from "./ProductsTable";
 
-export default function ({ featuredProducts }) {
+export default function Index({ featuredProducts }) {
     return (
         <AuthenticatedLayout header="Featured Products">
             <Head title="Featured Products" />

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import Progressbar from "@/components/ProgressBar";
 
-export default function HomePage({ heroImage }) {
+export default function AboutPage({ heroImage }) {
     const progressBarRef = useRef(null);
     const imageFileRef = useRef(null);
 

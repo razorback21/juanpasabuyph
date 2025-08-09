@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { badgeStatusColor } from "@/lib/order";
 import { Input } from "@/components/ui/input";
 
-export default function ({ orders }) {
+export default function OrdersTable({ orders }) {
     const dialogRef = useRef({});
     const inputQueryRef = useRef({});
     const queryRef = useRef({});

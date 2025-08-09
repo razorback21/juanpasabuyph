@@ -7,7 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { currencyFormat } from "@/lib/number";
-export default function ({ order, statusCantBeDeleted, readOnly = false }) {
+
+export default function OrdersTableShow({
+    order,
+    statusCantBeDeleted,
+    readOnly = false,
+}) {
     const dialogRef = useRef({});
     const columnHelper = createColumnHelper();
     const quantityHandler = (item, quantity) => {
