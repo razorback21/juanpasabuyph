@@ -89,7 +89,7 @@ export default function Index({ title }) {
                                             </p>
                                         </summary>
                                         <div className="px-4 pb-4">
-                                            <p className="text-gray-400 text-sm font-normal leading-relaxed">
+                                            <p className="text-gray-600  text-sm font-normal leading-relaxed">
                                                 {question.content}
                                             </p>
                                         </div>
