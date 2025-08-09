@@ -51,11 +51,11 @@ const MobileMenu = forwardRef(({ linksData }, ref) => {
                             </svg>
                         </button>
                     </div>
-                    <div className="mt-5 border-t border-gray-200"></div>
+                    {/* <div className="mt-5 border-t border-gray-200"></div> */}
                 </div>
                 <div className="py-4 px-6">
                     <MobileMenuItems linksData={linksData} />
-                    <div className="mt-8 mb-6 border-t border-gray-200"></div>
+                    <div className="my-10 border-t border-gray-200"></div>
                     <div>
                         <h4 className="text-gray-500 text-base font-semibold mb-4">
                             Follow Us
