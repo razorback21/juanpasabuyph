@@ -192,7 +192,6 @@ export default function OrdersTableShow({
                                                     description:
                                                         "Error deleting order.",
                                                 });
-                                                console.log(error);
                                             },
                                         }
                                     );

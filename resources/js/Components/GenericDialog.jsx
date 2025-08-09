@@ -32,7 +32,6 @@ const GenericDialog = forwardRef(({ children }, ref) => {
         },
         close: () => {
             setOpen(false);
-            console.log("close dialog");
         },
     }));
 

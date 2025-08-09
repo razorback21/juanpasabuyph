@@ -48,7 +48,6 @@ export default function AboutPage({ heroImage }) {
                 progressBarRef.current?.reset();
             },
             onProgress: (event) => {
-                console.log(event);
                 progressBarRef.current?.show(true);
                 progressBarRef.current?.setValue(event.percentage || 0);
             },

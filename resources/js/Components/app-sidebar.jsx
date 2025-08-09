@@ -195,9 +195,9 @@ const data = {
 
 export function AppSidebar({ ...props }) {
     const page = usePage();
-    console.log(page);
+
     const inertiaProps = usePage().props;
-    console.log(inertiaProps);
+
     return (
         <Sidebar collapsible="offcanvas" {...props}>
             <SidebarHeader>

@@ -3,8 +3,6 @@ import { dateFormatFriendly } from "@/lib/date";
 import { currencyFormat } from "@/lib/number";
 
 export default function Track({ order }) {
-    console.log("order", order);
-
     function timelineLabel(status) {
         switch (status) {
             case "placed":

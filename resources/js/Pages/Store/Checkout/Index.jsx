@@ -4,8 +4,6 @@ import OrderSummary from "@/Pages/Store/Checkout/OrderSummary.jsx";
 import EmptyCart from "@/Pages/Store/Checkout/EmptyCart.jsx";
 
 export default function Index({ cartItems, cartTotal }) {
-    console.log(cartItems);
-
     if (cartItems.length === 0) {
         return (
             <Layout title="Checkout">

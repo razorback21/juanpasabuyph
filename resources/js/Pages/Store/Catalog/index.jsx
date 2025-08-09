@@ -168,7 +168,6 @@ export default function Index({ title, categories }) {
 
         useImperativeHandle(ref, () => ({
             loadCategory: (category) => {
-                console.log(category);
                 fetchProducts(category);
             },
         }));

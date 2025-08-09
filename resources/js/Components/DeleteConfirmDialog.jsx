@@ -21,7 +21,6 @@ const DeleteConfirmDialog = forwardRef((props, ref) => {
         },
         close: () => {
             setOpen(false);
-            console.log("close dialog");
         },
     }));
 

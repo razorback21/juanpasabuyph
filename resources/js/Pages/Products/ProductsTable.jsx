@@ -113,7 +113,7 @@ export default function ProductsTable({
 
     const deleteHandler = (row) => {
         router.delete(route("products.destroy", row) + window.location.search);
-        console.log(dialogRef.current, "FFFFF");
+
         dialogRef.current?.close();
     };
 

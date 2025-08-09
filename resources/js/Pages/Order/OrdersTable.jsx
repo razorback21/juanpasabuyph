@@ -75,7 +75,7 @@ export default function OrdersTable({ orders }) {
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
                                 queryRef.current.value = e.target.value;
-                                console.log(e.target.value);
+
                                 router.get(
                                     route("orders.index") +
                                         "?query=" +

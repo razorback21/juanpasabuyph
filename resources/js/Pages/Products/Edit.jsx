@@ -92,7 +92,6 @@ export default function Edit({ product, categories, from, uoms }) {
                     progressBarRef.current?.reset();
                 },
                 onProgress: (event) => {
-                    console.log(event);
                     progressBarRef.current?.show(true);
                     progressBarRef.current?.setValue(event.percentage || 0);
                 },

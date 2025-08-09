@@ -25,7 +25,7 @@ export default function Create({ categories, uoms }) {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        console.log(formDataRef.current);
+
         router.post(route("products.store"), formDataRef.current);
     };
 

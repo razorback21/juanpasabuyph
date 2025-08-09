@@ -16,11 +16,9 @@ export default function ContactForm() {
     function handleFormData(e) {
         formDataRef.current[e.target.name] = e.target.value;
         formDataRef.current.key = captchaRef.current?.getKey();
-        console.log(captchaRef.current?.getKey());
     }
 
     function handleSubmit() {
-        console.log(formDataRef.current);
         router.post(route("contact.store"), formDataRef.current);
     }
 
