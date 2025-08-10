@@ -7,7 +7,7 @@ export default function Reviews() {
                 <h2 className="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight">
                     What Our Customers Say
                 </h2>
-                <p className={`text-gray-500 px-4 pb-6 pt-2`}>
+                <p className={`text-gray-500 pb-6 pt-2`}>
                     Read testimonials from satisfied customers who trust
                     JuanPasabuyPH for their Dubai shopping needs.
                 </p>

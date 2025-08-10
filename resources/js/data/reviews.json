@@ -18,9 +18,33 @@
   {
     "id": 3,
     "name": "Sofia Mendoza",
-    "rating": 5,
+    "rating": 4,
     "date": "2024-04-25",
     "review": "Game-changer talaga ang JuanPasabuy! Mapagkakatiwalaan ang mga shoppers at laging on-time ang delivery. 5 stars!",
     "avatar": "/images/avatars/avatar-5.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Maria Santos",
+    "rating": 5,
+    "date": "2024-05-15",
+    "review": "Amazing experience! The shopper was very professional and found exactly what I needed from Dubai. Highly recommended!",
+    "avatar": "/images/avatars/avatar-1.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Anna Dela Cruz",
+    "rating": 5,
+    "date": "2025-06-20",
+    "review": "Sobrang ganda ng service! Nakuha ko lahat ng gusto ko from Dubai Mall. Thank you JuanPasabuy for making it possible!",
+    "avatar": "/images/avatars/avatar-6.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Lisa Tan",
+    "rating": 4,
+    "date": "2025-07-25",
+    "review": "Best pasabuy service ever! Fast, reliable, and affordable. Got my designer bags from Dubai without any hassle.",
+    "avatar": "/images/avatars/avatar-8.jpg"
   }
 ]
