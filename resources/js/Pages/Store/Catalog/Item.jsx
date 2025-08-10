@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@inertiajs/react";
+import Lightbox from "../components/Lightbox";
 
 export default function Item({
     title,
@@ -18,6 +19,7 @@ export default function Item({
 }) {
     const page = usePage();
     const quantityInputRef = useRef(null);
+    const lightboxRef = useRef(null);
 
     const handlerAddToCart = (e) => {
         e.preventDefault();
@@ -43,6 +45,10 @@ export default function Item({
     return (
         <Layout title={product.name} category={category}>
             <Toaster />
+            <Lightbox
+                ref={lightboxRef}
+                sources={[product.featured_image_url]}
+            />
             <div className="mb-6 text-sm text-[#6b7280]">
                 Category /{" "}
                 <Link
@@ -57,6 +63,7 @@ export default function Item({
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
                     <div
+                        onClick={() => lightboxRef.current.toggle()}
                         className="aspect-[4/3] w-full bg-center bg-no-repeat bg-contain rounded-lg overflow-hidden"
                         style={{
                             backgroundImage: `url("${product.featured_image_url}")`,
