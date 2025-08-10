@@ -43,13 +43,13 @@ export default function ContactInformation() {
                         Our Location
                     </h3>
                     <div className="aspect-video w-full overflow-hidden rounded-xl shadow-md">
-                        <div
-                            className="h-full w-full bg-cover bg-center"
-                            style={{
-                                backgroundImage:
-                                    'url("https://lh3.googleusercontent.com/aida-public/AB6AXuDSxhId38rEiiD9-sQw2z6v_gepgR7ldo4mFJ9T42S7t5Kuz6pngqQnTSJflxJJ7LJzQZ-d9NaN0PzYr9v9lMQmaiaxcPDqEfTX3N8sVUwgloDF7JIekg8yAV9uqAyRGCx2B2DQ2GvEyFQ75-XSgezY1BSeu6HDEiiNsWggfHcLmKmBPiQOjWnrf-7cxJYMk9fGopu3OGphzlnxy_qX1PSkpKu_m8BzJDdWSEFRdnYsw-ILl_f0MQjLa0kBRu4vORUCb-Gb6RQuJ3ol")',
-                            }}
-                        ></div>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125759.21790223029!2d122.49021340895536!3d10.720321225892454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aee538f5949953%3A0xfc3237e476112591!2sIloilo%20City%2C%20Iloilo%2C%20Philippines!5e0!3m2!1sen!2s!4v1710400561983!5m2!1sen!2s&z=12"
+                            className="h-full w-full border-0"
+                            allowFullScreen={true}
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                        ></iframe>
                     </div>
                 </div>
             </div>
