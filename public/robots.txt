@@ -2,7 +2,7 @@
 # Dubai Products to Philippines Online Store
 
 User-agent: *
-Allow: /
+Disallow: /
 Disallow: /admin/
 Disallow: /dashboard/
 Disallow: /profile/
