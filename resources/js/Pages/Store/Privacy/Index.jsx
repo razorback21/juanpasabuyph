@@ -24,7 +24,7 @@ export default function Index() {
 
                             <p className="text-gray-600  text-sm font-normal leading-relaxed mb-6">
                                 <strong>Your Privacy Matters:</strong>{" "}
-                                JuanPasabuy PH is committed to protecting your
+                                JuanPasabuyph is committed to protecting your
                                 personal information and ensuring transparency
                                 in how we collect, use, and safeguard your data.
                                 This Privacy Policy explains our practices
@@ -485,19 +485,15 @@ export default function Index() {
 
                                 <p className="text-gray-600  text-sm font-normal leading-relaxed mb-2">
                                     <strong>
-                                        JuanPasabuy PH - Data Protection Officer
+                                        JuanPasabuyph - Data Protection Officer
                                     </strong>
                                 </p>
                                 <p className="text-gray-600  text-sm font-normal leading-relaxed mb-2">
                                     <strong>Email:</strong>{" "}
-                                    privacy@juanpasabuyph.com
+                                    johndonellsustiguer@gmail.com
                                 </p>
                                 <p className="text-gray-600  text-sm font-normal leading-relaxed mb-2">
-                                    <strong>Customer Service:</strong>{" "}
-                                    support@juanpasabuyph.com
-                                </p>
-                                <p className="text-gray-600  text-sm font-normal leading-relaxed mb-2">
-                                    <strong>Phone:</strong> +63 (XXX) XXX-XXXX
+                                    <strong>Phone:</strong> +971 56 185 4485
                                 </p>
                                 <p className="text-gray-600  text-sm font-normal leading-relaxed mb-4">
                                     <strong>Business Hours:</strong> Monday -
@@ -507,9 +503,9 @@ export default function Index() {
                                 <p className="text-gray-600  text-sm font-normal leading-relaxed mb-4">
                                     <strong>Mailing Address:</strong>
                                     <br />
-                                    JuanPasabuy PH
+                                    JuanPasabuyph
                                     <br />
-                                    [Complete Business Address]
+                                    Iloilo City, Iloilo City, Philippines, 5000
                                     <br />
                                     Philippines
                                 </p>
@@ -544,7 +540,7 @@ export default function Index() {
                                     <strong>
                                         Data Privacy Act Compliance:
                                     </strong>{" "}
-                                    JuanPasabuy PH is committed to full
+                                    JuanPasabuyph is committed to full
                                     compliance with the Philippine Data Privacy
                                     Act and maintains registration with the
                                     National Privacy Commission as required by
