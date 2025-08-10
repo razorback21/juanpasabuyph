@@ -1,3 +1,5 @@
+import reviewsData from "../../../data/reviews.json";
+
 export default function Reviews() {
     return (
         <div className="mb-8 sm:mb-12">
@@ -12,39 +14,57 @@ export default function Reviews() {
             </header>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4">
-                {[
-                    {
-                        title: "Smartwatch is a game-changer!",
-                        review: "Absolutely love the new smartwatch! The battery life is amazing, and it tracks my workouts perfectly. Highly recommend it for anyone looking to stay active and connected.",
-                        rating: 4,
-                        author: "Sarah M.",
-                    },
-                    {
-                        title: "Designer Handbag is stunning!",
-                        review: "The quality of this handbag is exceptional. It's even more beautiful in person! I've received so many compliments. A perfect addition to my collection.",
-                        rating: 5,
-                        author: "John B.",
-                    },
-                    {
-                        title: "Best Headphones I've owned!",
-                        review: "The sound quality of these wireless headphones is incredible! They are comfortable for long listening sessions and the noise cancellation is top-notch. Definitely worth the price.",
-                        rating: 5,
-                        author: "Emily K.",
-                    },
-                ].map((review, index) => (
+                {reviewsData.map((review) => (
                     <div
-                        key={index}
+                        key={review.id}
                         className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow flex flex-col"
                     >
-                        <div className="flex items-center mb-3">
-                            <h4 className="text-gray-800 text-base sm:text-lg font-semibold">
-                                {review.title}
-                            </h4>
+                        <div className="flex items-start mb-4">
+                            {/* <img
+                                src={review.avatar}
+                                alt={review.name}
+                                className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-gray-200"
+                                onError={(e) => {
+                                    e.target.src =
+                                        "/images/avatars/default-avatar.jpg";
+                                }}
+                            /> */}
+                            <div className="mr-4 w-12 h-12 rounded-full border-2 border-gray-200 flex items-center justify-center">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="lucide lucide-user-round-icon lucide-user-round"
+                                >
+                                    <circle cx="12" cy="8" r="5" />
+                                    <path d="M20 21a8 8 0 0 0-16 0" />
+                                </svg>
+                            </div>
+
+                            <div className="flex-1">
+                                <h4 className="text-gray-800 text-base sm:text-lg font-semibold">
+                                    {review.name}
+                                </h4>
+                                <p className="text-gray-500 text-xs">
+                                    {new Date(review.date).toLocaleDateString(
+                                        "en-US",
+                                        {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        }
+                                    )}
+                                </p>
+                            </div>
                         </div>
-                        <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                            "{review.review}"
-                        </p>
-                        <div className="mr-3 text-yellow-400 flex">
+
+                        <div className="mr-3 text-yellow-400 flex mb-3">
                             {[...Array(5)].map((_, i) => (
                                 <svg
                                     key={i}
@@ -61,8 +81,9 @@ export default function Reviews() {
                                 </svg>
                             ))}
                         </div>
-                        <p className="text-gray-700 text-sm font-medium mt-auto">
-                            - {review.author}
+
+                        <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-grow">
+                            "{review.review}"
                         </p>
                     </div>
                 ))}

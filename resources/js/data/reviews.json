@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "John Petrona",
+    "rating": 5,
+    "date": "2024-02-10", 
+    "review": "Great service! My items were delivered on time and the shopper kept me updated throughout the process. Will definitely use again!",
+    "avatar": "/images/avatars/avatar-2.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Mike Garcia",
+    "rating": 5,
+    "date": "2024-03-30",
+    "review": "Excellent platform! Saved me so much time and effort. The prices are reasonable and the service is top-notch.",
+    "avatar": "/images/avatars/avatar-4.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Sofia Mendoza",
+    "rating": 5,
+    "date": "2024-04-25",
+    "review": "Game-changer talaga ang JuanPasabuy! Mapagkakatiwalaan ang mga shoppers at laging on-time ang delivery. 5 stars!",
+    "avatar": "/images/avatars/avatar-5.jpg"
+  }
+]
