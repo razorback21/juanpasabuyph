@@ -21,7 +21,12 @@ return Application::configure(basePath: dirname(__DIR__))
             'visitor.request' => VisitorRequest::class,
         ]);
         $middleware->statefulApi();
-        //
+
+        $middleware->group('auth', [
+            \Illuminate\Cookie\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            \Illuminate\Auth\Middleware\Authenticate::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

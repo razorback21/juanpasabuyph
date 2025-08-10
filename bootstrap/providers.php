@@ -6,4 +6,5 @@ return [
     App\Providers\TelescopeServiceProvider::class,
     Buglinjo\LaravelWebp\WebpServiceProvider::class,
     Mews\Captcha\CaptchaServiceProvider::class,
+    Onecentlin\Adminer\ServiceProvider::class,
 ];

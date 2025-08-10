@@ -26,6 +26,7 @@ use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\TrackController;
 use App\Models\Order;
 use Illuminate\Support\Facades\Route;
+use Onecentlin\Adminer\Http\Controllers\AdminerController;
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
