@@ -4,7 +4,7 @@ export default function Reviews() {
     return (
         <div className="mb-8 sm:mb-12">
             <header>
-                <h2 className="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight px-4">
+                <h2 className="text-gray-900 text-2xl sm:text-3xl font-bold leading-tight tracking-tight">
                     What Our Customers Say
                 </h2>
                 <p className={`text-gray-500 px-4 pb-6 pt-2`}>
@@ -13,7 +13,7 @@ export default function Reviews() {
                 </p>
             </header>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 py-4">
                 {reviewsData.map((review) => (
                     <div
                         key={review.id}
