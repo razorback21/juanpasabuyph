@@ -19,16 +19,21 @@ class CataglogService
     {
         $validated = request()->validate([
             'category' => 'nullable|string',
-            'page' => 'nullable|integer|min:1'
+            'page' => 'nullable|integer|min:1',
+            'search' => 'nullable|string',
         ]);
 
         $products = Product::where('disabled', '=', false)->with('category');
-
+        if (isset($validated['search'])) {
+            $products = $products->whereAny(['name', 'description'], 'like', '%' . $validated['search'] . '%');
+        }
         if (isset($validated['category']) && $validated['category'] != 'All') {
             $products = $products->whereHas('category', function ($query) use ($validated) {
                 $query->where('slug', $validated['category']);
             });
         }
+
+
 
         return $products->paginate($itemPerPage)->withQueryString();
     }

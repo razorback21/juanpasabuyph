@@ -8,14 +8,19 @@ import {
     useImperativeHandle,
 } from "react";
 import Axios from "@/lib/axios";
+import { router } from "@inertiajs/react";
 
 export default function Index({ title, categories }) {
     const loadMoreRef = useRef(null);
-    const urlQuery = new URLSearchParams(window.location.search);
-    const categoryQuery = urlQuery.get("category") ?? "All";
+    const categoryQuery = requestCategory();
     const titleRef = useRef(
         categoryQuery == "All" ? "All Categories" : categoryQuery
     );
+
+    function requestCategory() {
+        const urlQuery = new URLSearchParams(window.location.search);
+        return urlQuery.get("category") ?? "All";
+    }
 
     function CategoryDropdown() {
         const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -130,6 +135,7 @@ export default function Index({ title, categories }) {
         const productsRef = useRef([]);
         const nextPageUrlRef = useRef("");
         const isLoadingRef = useRef(false);
+        const isFetchingRef = useRef(false);
         const categoryRef = useRef("All");
         const totalProductsRef = useRef(0);
         const forceUpdateRef = useRef(0);
@@ -142,16 +148,21 @@ export default function Index({ title, categories }) {
             setForceUpdate({});
         };
 
-        const fetchProducts = async (category) => {
+        const fetchProducts = async (category, search = null) => {
+            isFetchingRef.current = true;
             const response = await Axios.get(
                 route("catalog.paginate", {
                     category,
                     page: 1,
+                    search,
                 })
-            );
+            ).finally(() => {
+                isFetchingRef.current = false;
+            });
             productsRef.current = response.data;
             nextPageUrlRef.current = response.next_page_url;
             totalProductsRef.current = response.total;
+            categoryRef.current = category;
             forceUpdate();
         };
 
@@ -168,6 +179,9 @@ export default function Index({ title, categories }) {
         useImperativeHandle(ref, () => ({
             loadCategory: (category) => {
                 fetchProducts(category);
+            },
+            loadSearch: (search) => {
+                fetchProducts(categoryRef.current, search);
             },
         }));
 
@@ -197,7 +211,7 @@ export default function Index({ title, categories }) {
             }
         }
 
-        if (productsRef.current.length === 0) {
+        if (isFetchingRef.current) {
             return (
                 <div className="px-4 my-2 text-sm text-gray-500">
                     <div className="flex items-center justify-center min-h-[200px]">
@@ -278,6 +292,62 @@ export default function Index({ title, categories }) {
         );
     });
 
+    function SearchProducts(e) {
+        const searchInputRef = useRef(null);
+
+        function searchValue(e) {
+            e.preventDefault();
+            searchInputRef.current.value = e.target.value;
+        }
+
+        function handleSearch(e) {
+            const searchTerm = searchInputRef.current.value;
+            loadMoreRef.current?.loadSearch(searchTerm);
+        }
+
+        function handleKeyUp(e) {
+            if (e.key === "Enter") {
+                handleSearch(e);
+            }
+        }
+
+        return (
+            <>
+                <div className="relative w-full sm:w-auto sm:ml-auto">
+                    <div className="flex items-center">
+                        <input
+                            ref={searchInputRef}
+                            onChange={searchValue}
+                            onKeyUp={handleKeyUp}
+                            type="text"
+                            placeholder="Search products..."
+                            className="h-10 w-full sm:w-64 rounded-lg bg-gray-100 px-4 text-sm focus:outline-none border-0 focus:ring-2 focus:ring-blue-500"
+                        />
+                        <button
+                            onClick={handleSearch}
+                            className="absolute right-3 text-gray-500 hover:text-red-600"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                strokeWidth={2}
+                                stroke="currentColor"
+                                className="h-5 w-5"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </>
+        );
+    }
+
     return (
         <Layout title={title}>
             <div className="flex flex-wrap justify-between items-center gap-4 p-4 mb-6">
@@ -286,8 +356,9 @@ export default function Index({ title, categories }) {
                 </h1>
             </div>
 
-            <div className="flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
                 <CategoryDropdown />
+                <SearchProducts />
             </div>
             <section>
                 <LoadMore ref={loadMoreRef} />
