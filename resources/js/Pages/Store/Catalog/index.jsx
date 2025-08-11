@@ -135,7 +135,7 @@ export default function Index({ title, categories }) {
         const productsRef = useRef([]);
         const nextPageUrlRef = useRef("");
         const isLoadingRef = useRef(false);
-        const isFetchingRef = useRef(false);
+        const isFetchingRef = useRef(true);
         const categoryRef = useRef("All");
         const totalProductsRef = useRef(0);
         const forceUpdateRef = useRef(0);
@@ -149,20 +149,18 @@ export default function Index({ title, categories }) {
         };
 
         const fetchProducts = async (category, search = null) => {
-            isFetchingRef.current = true;
             const response = await Axios.get(
                 route("catalog.paginate", {
                     category,
                     page: 1,
                     search,
                 })
-            ).finally(() => {
-                isFetchingRef.current = false;
-            });
+            );
             productsRef.current = response.data;
             nextPageUrlRef.current = response.next_page_url;
             totalProductsRef.current = response.total;
             categoryRef.current = category;
+            isFetchingRef.current = false;
             forceUpdate();
         };
 
