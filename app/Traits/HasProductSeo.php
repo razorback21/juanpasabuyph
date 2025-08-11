@@ -8,11 +8,13 @@ trait HasProductSeo
 {
     public function productSeo(Product $product)
     {
-        seo()->title($product->name)
-            ->keywords($product->name)
-            ->description($product->description)
-            ->images(
-                url($product->facebook_image_url),
-            );
+        $seo = seo()->title($product->name)
+            ->keywords($product->name);
+        if ($product->description) {
+            $seo->description($product->description);
+        }
+        $seo->images(
+            url($product->facebook_image_url),
+        );
     }
 }
