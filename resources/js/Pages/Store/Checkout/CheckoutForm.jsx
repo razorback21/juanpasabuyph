@@ -150,7 +150,7 @@ export default function CheckOutForm() {
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
-                            placeholder="Enter state or province"
+                            placeholder="Enter your province"
                             type="text"
                             name="province"
                             defaultValue={formData.current.province}
@@ -168,7 +168,7 @@ export default function CheckOutForm() {
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
-                            placeholder="Enter zip or postal code"
+                            placeholder="Enter your postal code"
                             type="text"
                             name="postal_code"
                             defaultValue={formData.current.postal_code}
@@ -206,7 +206,7 @@ export default function CheckOutForm() {
                         </label>
                         <input
                             className="ext-gray-600 form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg focus:outline-0 focus:ring-2 border border-[#dfe0e2] bg-white h-12 placeholder:text-gray-500 px-4 text-base font-normal leading-normal transition-colors"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your cell phone number"
                             type="tel"
                             name="phone"
                             defaultValue={formData.current.phone}
