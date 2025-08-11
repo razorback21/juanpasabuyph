@@ -11,12 +11,13 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\HtmlString;
 
-class OrderCreatedNotification extends Notification
+class OrderCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
     protected $order;
 
+    public $tries = 2;
     /**
      * Create a new notification instance.
      */
