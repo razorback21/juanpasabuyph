@@ -1,5 +1,6 @@
-import { useState, useReducer } from "react";
+import { useState } from "react";
 import { router } from "@inertiajs/react";
+import { currencyFormat } from "@/lib/number";
 
 export default function OrderSummary({ cartItems, cartTotal }) {
     function CartItem({ item }) {
@@ -40,11 +41,11 @@ export default function OrderSummary({ cartItems, cartTotal }) {
                     ></div>
                     <div className="flex-1">
                         <p className="text-sm font-medium leading-normal">
-                            {item.product.name}
+                            {item.product.name}{" "}
                         </p>
                         <p className="text-xs font-normal leading-normal">
                             <span className="text-gray-500">
-                                ₱{item.product.price}
+                                {currencyFormat(item.product.price)}
                             </span>
                         </p>
                         <div className="flex items-center gap-2 mt-2">

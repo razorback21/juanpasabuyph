@@ -4,7 +4,8 @@ const pesoFormatter = new Intl.NumberFormat("en-PH", {
 });
 
 const currencyFormat = (value) => {
-    if (typeof value !== "number" || !Number.isFinite(value)) return "";
-    return pesoFormatter.format(value);
+    let number = parseFloat(value);
+    //if (typeof value !== "number" || !Number.isFinite(value)) return "";
+    return pesoFormatter.format(number);
 };
 export { currencyFormat };
