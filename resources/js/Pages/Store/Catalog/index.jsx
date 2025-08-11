@@ -10,7 +10,6 @@ import {
 import Axios from "@/lib/axios";
 
 export default function Index({ title, categories }) {
-    const catalogRef = useRef(null);
     const loadMoreRef = useRef(null);
     const urlQuery = new URLSearchParams(window.location.search);
     const categoryQuery = urlQuery.get("category") ?? "All";
