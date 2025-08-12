@@ -35,10 +35,7 @@ class CatalogController extends Controller
         $product = Product::where('slug', $slug)->first();
         $this->productSeo($product);
         $product->load('category');
-        $relatedProducts = Product::get()
-            ->where('category_id', $product->category_id)
-            ->where('id', '!=', $product->id)
-            ->random(4);
+        $relatedProducts = $product->related_products;
 
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
