@@ -24,9 +24,7 @@ use App\Http\Controllers\ProductImageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\TrackController;
-use App\Models\Order;
 use Illuminate\Support\Facades\Route;
-use Onecentlin\Adminer\Http\Controllers\AdminerController;
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
@@ -98,8 +96,7 @@ Route::get('/sitemap.xml', SiteMapController::class)->name('sitemap');
 
 // test
 Route::get('/test', function () {
-    $OrderCount = Order::where('status', '=', 'placed')->count();
-    dd($OrderCount);
+
 });
 
 require __DIR__ . '/auth.php';
