@@ -12,6 +12,7 @@ use App\Observers\Order\OrderObserver;
 use App\Observers\Order\OrderStatusTimelineObserver;
 use App\Observers\Product\ProductCategoryObserver;
 use App\Observers\Product\ProductObserver;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -40,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
         Product::observe(ProductObserver::class);
         ProductCategory::observe(ProductCategoryObserver::class);
 
+        $this->configureCommands();
+        $this->configureModels();
+
         // Dump sql queries. use only for debug purposes
         // DB::listen(function ($query) {
         //     dump(
@@ -50,5 +54,15 @@ class AppServiceProvider extends ServiceProvider
         //         ],
         //     );
         // });
+    }
+
+    private function configureCommands()
+    {
+        DB::prohibitDestructiveCommands($this->app->isProduction());
+    }
+
+    private function configureModels()
+    {
+        Model::shouldBeStrict(true);
     }
 }
