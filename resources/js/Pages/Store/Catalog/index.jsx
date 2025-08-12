@@ -335,6 +335,8 @@ export default function Index({ title, categories }) {
         function handleKeyUp(e) {
             if (e.key === "Enter") {
                 handleSearch(e);
+            } else if (e.target.value == "") {
+                handleSearch(e);
             }
         }
 
