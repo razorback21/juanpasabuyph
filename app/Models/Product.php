@@ -265,4 +265,10 @@ class Product extends Model implements HasMedia
         return $query->where(['disabled' => true]);
     }
 
+    public function getRelatedProductsAttribute()
+    {
+        return self::get()
+            ->where('category_id', $this->category_id)
+            ->where('id', '!=', $this->id)->shuffle()->take(4);
+    }
 }
