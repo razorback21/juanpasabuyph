@@ -25,7 +25,7 @@ class ProductController extends Controller
     {
         $filter = new ProductFilterService($request);
 
-        $products = $filter->getQuery()->paginate(10)
+        $products = $filter->getQuery()->with('category')->paginate(10)
             ->withQueryString()
             ->through(function ($product) {
                 return [
@@ -125,59 +125,4 @@ class ProductController extends Controller
             ->route('products.index', request()->query())
             ->with('success', 'Product deleted successfully.');
     }
-
-    /**
-     * Search products based on criteria.
-     */
-    // public function search(Request $request)
-    // {
-    //     $validator = Validator::make($request->all(), [
-    //         'query' => 'nullable|string|max:255',
-    //         'min_price' => 'nullable|numeric|min:0',
-    //         'max_price' => 'nullable|numeric|min:0',
-    //         'in_stock' => 'nullable|boolean',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return response()->json([
-    //             'errors' => $validator->errors()
-    //         ], 422);
-    //     }
-
-    //     $query = Product::query()
-    //         ->withCount([
-    //             'inventory as stock' => function ($query) {
-    //                 $query->selectRaw('COALESCE(SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END), 0)');
-    //             }
-    //         ]);
-
-    //     // Apply search filters
-    //     if ($request->filled('query')) {
-    //         $searchQuery = $request->input('query');
-    //         $query->where(function ($q) use ($searchQuery) {
-    //             $q->where('name', 'like', "%{$searchQuery}%")
-    //                 ->orWhere('description', 'like', "%{$searchQuery}%");
-    //         });
-    //     }
-
-    //     if ($request->filled('min_price')) {
-    //         $query->where('price', '>=', (float) $request->input('min_price'));
-    //     }
-
-    //     if ($request->filled('max_price')) {
-    //         $query->where('price', '<=', (float) $request->input('max_price'));
-    //     }
-
-    //     if ($request->boolean('in_stock')) {
-    //         $query->whereHas('inventory', function ($q) {
-    //             $q->selectRaw('product_id, SUM(CASE WHEN movement_type = "in" THEN quantity ELSE -quantity END) as stock')
-    //                 ->groupBy('product_id')
-    //                 ->havingRaw('stock > 0');
-    //         });
-    //     }
-
-    //     $products = $query->latest()->paginate(10);
-
-    //     return response()->json($products);
-    // }
 }

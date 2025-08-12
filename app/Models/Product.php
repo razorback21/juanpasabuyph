@@ -183,7 +183,7 @@ class Product extends Model implements HasMedia
     public function productCategory(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->category ? ucwords($this->category->name) : null,
+            get: fn() => $this->load('category')->category ? ucwords($this->category->name) : null,
         );
     }
 
@@ -268,7 +268,7 @@ class Product extends Model implements HasMedia
     public function getRelatedProductsAttribute()
     {
         return self::get()
-            ->where('category_id', $this->category_id)
+            ->where('product_category_id', $this->product_category_id)
             ->where('id', '!=', $this->id)->shuffle()->take(4);
     }
 }
