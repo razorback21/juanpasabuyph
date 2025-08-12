@@ -12,6 +12,7 @@ use App\Observers\Order\OrderObserver;
 use App\Observers\Order\OrderStatusTimelineObserver;
 use App\Observers\Product\ProductCategoryObserver;
 use App\Observers\Product\ProductObserver;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -38,5 +39,16 @@ class AppServiceProvider extends ServiceProvider
         OrderStatusTimeline::observe(OrderStatusTimelineObserver::class);
         Product::observe(ProductObserver::class);
         ProductCategory::observe(ProductCategoryObserver::class);
+
+        // Dump sql queries. use only for debug purposes
+        // DB::listen(function ($query) {
+        //     dump(
+        //         $query->sql,
+        //         [
+        //             'bindings' => $query->bindings,
+        //             'time' => $query->time
+        //         ],
+        //     );
+        // });
     }
 }
