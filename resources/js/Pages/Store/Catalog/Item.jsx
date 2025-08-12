@@ -149,13 +149,15 @@ export default function Item({
                     )}
                 </div>
             </div>
-            <div className="mt-12">
-                <HomeProducts
-                    products={relatedProducts}
-                    title="Related Products"
-                    titleTextSize="text-2xl"
-                />
-            </div>
+            {relatedProducts.length > 0 && (
+                <div className="mt-12">
+                    <HomeProducts
+                        products={relatedProducts}
+                        title="Related Products"
+                        titleTextSize="text-2xl"
+                    />
+                </div>
+            )}
         </Layout>
     );
 }
