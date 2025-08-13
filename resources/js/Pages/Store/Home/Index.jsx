@@ -59,8 +59,8 @@ export default function Index({
             </section>
             {/* Mobile Tracking */}
             <section className="sm:hidden mb-12 flex justify-center">
-                <div className="p-4 sm:p-6 bg-blue-950 text-white rounded-lg shadow-lg max-w-2xl w-full">
-                    <h2 className="text-xs font-medium text-gray-200 mb-4 uppercase tracking-wide text-center">
+                <div className="p-4 sm:p-6 bg-white rounded-lg shadow-lg max-w-2xl w-full border border-gray-200">
+                    <h2 className="text-xs font-medium text-gray-500 mb-4 uppercase tracking-wide text-center">
                         Track Your Order
                     </h2>
                     <form className="flex flex-col sm:flex-row gap-4">
@@ -91,8 +91,8 @@ export default function Index({
                             </div>
                             <input
                                 type="text"
-                                className="w-full text-center py-3 rounded-lg border border-[#d1d5db] bg-white pl-10 pr-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors uppercase"
-                                placeholder="Enter your order number."
+                                className="w-full text-center py-3 rounded-md border border-[#d1d5db] bg-white pl-10 pr-4 text-lg text-gray-600 font-extrabold placeholder:font-normal placeholder:text-gray-400 focus:outline-none transition-colors"
+                                placeholder="Enter your order number"
                                 defaultValue=""
                                 ref={trackRef}
                             />
