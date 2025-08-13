@@ -8,7 +8,6 @@ import {
     useImperativeHandle,
 } from "react";
 import Axios from "@/lib/axios";
-import { router } from "@inertiajs/react";
 
 export default function Index({ title, categories }) {
     const loadMoreRef = useRef(null);
@@ -248,7 +247,7 @@ export default function Index({ title, categories }) {
                 <div className="px-4 my-2 text-sm text-gray-500">
                     {totalProductsRef.current} items found in this category
                 </div>
-                {productsRef.current.length === 0 && (
+                {productsRef.current?.length === 0 && (
                     <div className="flex items-center justify-center min-h-[200px]">
                         <div className="flex flex-col items-center gap-4">
                             <svg
