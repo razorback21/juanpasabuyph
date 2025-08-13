@@ -26,6 +26,8 @@ class CreateOrder
     public function handle(array $validated, Request $request)
     {
         return DB::transaction(function () use ($validated, $request) {
+            // 0. remove captcha from validated data
+            unset($validated['captcha']);
             // 1. create customer
             $customer = Customer::create($validated);
             // 2. create order

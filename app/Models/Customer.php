@@ -14,25 +14,20 @@ class Customer extends Model
     /** @use HasFactory<\Database\Factories\CustomerFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
-        'phone',
-        'address',
-        'city',
-        'province',
-        'postal_code',
-    ];
 
+    protected $guarded = [
+        'created_at',
+        'updated_at',
+    ];
     protected $appends = [
         'fullname',
     ];
+
+
+    public function isFillable($key)
+    {
+        return $key === 'captcha' || parent::isFillable($key);
+    }
 
     /**
      * Get the customer's full name.
