@@ -43,7 +43,7 @@ class OrderCreated extends Mailable implements ShouldQueue
         return new Content(
             view: 'mail.order_created',
             with: [
-                'order' => $this->order->name,
+                'order' => $this->order,
                 'user' => $this->user,
             ],
         );

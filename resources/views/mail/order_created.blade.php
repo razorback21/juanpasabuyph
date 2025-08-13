@@ -119,7 +119,7 @@
                                                         and paste the URL below
                                                         into your web browser: <span class="break-all"
                                                             style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; word-break: break-all;"><a
-                                                                href="{{ url("/order/{$order->id}") }}"
+                                                                href="{{ url("/orders/{$order->id}") }}"
                                                                 style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; color: #3869d4; word-break: break-all;">{{ url("/order/{$order->id}") }}</a></span>
                                                     </p>
 
