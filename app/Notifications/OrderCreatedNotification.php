@@ -45,7 +45,7 @@ class OrderCreatedNotification extends Notification implements ShouldQueue
         return (new MailMessage)
             ->subject('Juanpasabuyph - Order Confirmation (' . $this->order->order_number . ')')
             ->greeting('Hello ' . $notifiable->fullname)
-            ->line('Your order has been placed with order #' . $this->order->order_number . '. We will keep you posted of your order status.')
+            ->line('Thank you for your order! Your order #' . $this->order->order_number . ' has been successfully placed. You can track your order status by visiting our ' . '<a href="' . route('track', $this->order->order_number) . '">website</a>' . ', and we will send you updates as your order progresses.')
             ->line(new HtmlString($this->orderHTML($this->order)))
             ->line('Thank you for shopping at juanpasabuyph.com')
             ->line(new HtmlString("For any questions. Please contact us in our facebook page or email directly to  <a href='mailto:" . config('app.admin_email') . "'>" . config('app.admin_email') . "</a>"));
