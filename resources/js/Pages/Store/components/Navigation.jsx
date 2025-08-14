@@ -50,6 +50,10 @@ export default function Navigation() {
     };
 
     function handleOrderTracking(e) {
+        if (!trackRef.current.value.length) {
+            trackRef.current.focus();
+            return;
+        }
         router.get(route("track", { order_id: trackRef.current.value }));
     }
 
