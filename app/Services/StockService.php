@@ -26,4 +26,18 @@ class StockService
         $noStockIds = $result->pluck('id')->toArray();
         return Product::whereIn('id', $noStockIds);
     }
+
+    public function getPurchasedCost(): float
+    {
+        //todo: refactor query. This not a performant query, best only few rows of products
+        $result = Product::all()->where('available_stock', '>',0);
+        return $result->sum('cost_price');
+    }
+
+    public function getTotalSRPFromPurchase(): float
+    {
+        //todo: refactor query. This not a performant query, best only few rows of products
+        $result = Product::all()->where('available_stock', '>',0);
+        return $result->sum('price');
+    }
 }

@@ -32,7 +32,8 @@ class DashboardController extends Controller
         $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
         $orderCount = Order::where('status', '=', 'placed')->count();
         $chartData = Visitor::where('created_at', '>=', now()->subDays(90))->get();
-
-        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'orderCount', 'chartData'));
+        $purchaseCost = (string)$this->stockService->getPurchasedCost();
+        $totalSRPFromPurchased = (string)$this->stockService->getTotalSRPFromPurchase();
+        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'orderCount', 'chartData', 'purchaseCost', 'totalSRPFromPurchased'));
     }
 }
