@@ -223,7 +223,7 @@ export function AppSidebar({ ...props }) {
                     items={data.inventory}
                     menuName="Inventory & Products"
                 />
-                <NavDocuments items={data.reports} menuName="Orders" />
+                <NavDocuments items={data.reports} menuName="Transactions" />
                 <NavDocuments items={data.navPages} menuName="Pages" />
                 {/* <NavSecondary
                     items={data.navSecondary}
