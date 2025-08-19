@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Inventory;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class StockService
 {
@@ -14,30 +16,59 @@ class StockService
 
     }
 
-
     public function getOutOfStockProducts()
     {
-        //todo: refactor query. This not a performant query, best only few rows of products
-        $result = Product::all()->where('available_stock', 0);
-        $productCount = $result->count();
-        if (!$productCount) {
-            return collect([]);
-        }
-        $noStockIds = $result->pluck('id')->toArray();
-        return Product::whereIn('id', $noStockIds);
+        $productStocks = $this->productStocks();
+        return $productStocks->where('stocks', '<', 1);
+
+    }
+
+    public function productStocks()
+    {
+        $stocks = DB::raw("SUM(CASE
+                WHEN movement_type IN ('inbound', 'adjustment_up', 'returns')
+                THEN quantity
+                ELSE -quantity
+            END) AS stocks");
+
+        $result = Inventory::select([
+            'product_id',
+            'disabled',
+            'cost_price',
+            'price',
+            $stocks
+        ])->join('products', 'inventories.product_id', '=', 'products.id')
+            ->groupBy('inventories.product_id')->get();
+        return $result;
     }
 
     public function getPurchasedCost(): float
     {
-        //todo: refactor query. This not a performant query, best only few rows of products
-        $result = Product::all()->where('available_stock', '>',0);
-        return $result->sum('cost_price');
+        $productStocks = $this->productStocks();
+        $result = $productStocks->where('stocks', '>', 0)
+            ->where('disabled', 0)->map(function (Inventory $item) {
+                return [
+                    'product_id', $item->product_id,
+                    'cost' => $item->stocks > 0 ? $item->cost_price * $item->stocks : 0,
+                ];
+            })->sum('cost');
+
+
+        return $result;
     }
 
     public function getTotalSRPFromPurchase(): float
     {
-        //todo: refactor query. This not a performant query, best only few rows of products
-        $result = Product::all()->where('available_stock', '>',0);
-        return $result->sum('price');
+        $productStocks = $this->productStocks();
+        $result = $productStocks->where('stocks', '>', 0)
+            ->where('disabled', 0)->map(function (Inventory $item) {
+                return [
+                    'product_id', $item->product_id,
+                    'srp' => $item->stocks > 0 ? $item->price * $item->stocks : 0,
+                ];
+            })->sum('srp');
+
+
+        return $result;
     }
 }
