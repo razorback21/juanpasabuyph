@@ -28,7 +28,7 @@ class DashboardController extends Controller
     {
         $categories = ProductCategory::all();
         $activeCategory = $request->query('active_category') ?? 'All';
-        $outOfStock = $this->stockService->getOutOfStockProducts()->count();
+        $outOfStock = $this->stockService->getOutOfStockProducts()->get()->count();
         $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
         $orderCount = Order::where('status', '=', 'placed')->count();
         $chartData = Visitor::where('created_at', '>=', now()->subDays(90))->get();
