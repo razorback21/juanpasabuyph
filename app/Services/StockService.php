@@ -19,7 +19,8 @@ class StockService
     public function getOutOfStockProducts()
     {
         $productStocks = $this->productStocks();
-        return $productStocks->where('stocks', '<', 1);
+        $products =  $productStocks->where('stocks', '<', 1);
+        return Product::whereIn('id', $products->pluck('product_id'));
 
     }
 
