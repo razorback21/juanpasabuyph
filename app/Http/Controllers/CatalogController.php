@@ -35,6 +35,7 @@ class CatalogController extends Controller
 
         $product = (new ProductService())->getActiveProductBySlug($slug);
         if(!$product) {
+            // TODO: create custom 404 not found page
             abort(404);
         }
 
