@@ -1,13 +1,13 @@
-import { useRef, useEffect } from "react";
-import { createColumnHelper } from "@tanstack/react-table";
+import {useRef, useEffect} from "react";
+import {createColumnHelper} from "@tanstack/react-table";
 import DataTable from "@/components/DataTable";
-import { Link, router } from "@inertiajs/react";
+import {Link, router} from "@inertiajs/react";
 import AlertConfirm from "@/components/AlertConfirm";
-import { Badge } from "@/components/ui/badge";
-import { badgeStatusColor } from "@/lib/order";
-import { Input } from "@/components/ui/input";
+import {Badge} from "@/components/ui/badge";
+import {badgeStatusColor} from "@/lib/order";
+import {Input} from "@/components/ui/input";
 
-export default function OrdersTable({ orders }) {
+export default function OrdersTable({orders}) {
     const dialogRef = useRef({});
     const inputQueryRef = useRef({});
     const queryRef = useRef({});
@@ -16,6 +16,13 @@ export default function OrdersTable({ orders }) {
     useEffect(() => {
         inputQueryRef.current.focus();
     }, []);
+
+    const handleSearch = (e) => {
+        queryRef.current.value = e.target.value;
+        router.get(
+            route("orders.index") + "?query=" + e.target.value
+        );
+    }
 
     const columns = [
         columnHelper.accessor("order_number", {
@@ -74,18 +81,17 @@ export default function OrdersTable({ orders }) {
                         className="w-full font-bold"
                         onKeyDown={(e) => {
                             if (e.key === "Enter") {
-                                queryRef.current.value = e.target.value;
-
-                                router.get(
-                                    route("orders.index") +
-                                        "?query=" +
-                                        e.target.value
-                                );
+                                handleSearch(e);
+                            }
+                        }}
+                        onChange={(e) => {
+                            if (!e.target.value.length) {
+                                router.get(route("orders.index"));
                             }
                         }}
                     />
                 </div>
-                <DataTable columns={columns} data={orders.data} />
+                <DataTable columns={columns} data={orders.data}/>
             </div>
         </>
     );
