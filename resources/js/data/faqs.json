@@ -12,7 +12,7 @@
             },
             {
                 "title": "How do I track my order?",
-                "content": "Once your order has shipped, you will receive a shipping confirmation email containing a tracking number. You can use this number to track your package on the carrier's website. You can also use the tracking number to check the status of your order."
+                "content": "Once your order has shipped, you will receive a shipping confirmation email containing a tracking number. You can use this number to track your package on the website. You can also use the tracking number to check the status of your order."
             }
         ]
     },
@@ -21,15 +21,11 @@
         "questions": [
             {
                 "title": "How long does shipping take?",
-                "content": "Shipping times vary depending on your location and the shipping method selected at checkout. Standard shipping typically takes 3-7 business days within the continental US. Expedited shipping options are available for faster delivery."
-            },
-            {
-                "title": "Do you offer international shipping?",
-                "content": "Yes, we offer international shipping to select countries. Shipping costs and delivery times will vary based on the destination. Please note that international orders may be subject to customs duties and taxes, which are the responsibility of the recipient."
+                "content": "JuanPasabuy PH uses a padala-style shipping service designed for those who are willing to wait for authentic products delivered from Dubai. Shipping times vary depending on your location and the logistics schedule. Estimated arrival date will be posted on your Order Status page on the website."
             },
             {
                 "title": "What are the shipping costs?",
-                "content": "Shipping costs are calculated at checkout based on the weight of your order and your shipping destination. We offer free standard shipping on orders over a certain amount (details available on our shipping policy page)."
+                "content": "Shipping fees are already included in the product price, no surprises at checkout."
             }
         ]
     },
