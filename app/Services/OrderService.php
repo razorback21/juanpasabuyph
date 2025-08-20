@@ -10,14 +10,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class OrderService extends Model
+class OrderService
 {
 
-    public function getNewOrders() {
+    public function getNewOrders()
+    {
         return Order::where('status', '=', 'placed');
     }
 
-    public function getNewOrderCount() {
+    public function getNewOrderCount()
+    {
         return $this->getNewOrders()->count();
     }
 
