@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductService
 {
@@ -14,5 +13,10 @@ class ProductService
                 ->groupBy('order_items.product_id')
                 ->orderByDesc('orders_count');
         });
+    }
+
+    public function getActiveProductBySlug($slug)
+    {
+        return Product::where(['slug' => $slug, 'disabled' => 0])->first();
     }
 }

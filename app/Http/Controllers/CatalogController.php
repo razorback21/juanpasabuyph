@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Services\CataglogService;
+use App\Services\ProductService;
 use App\Traits\HasDefaultSeo;
 use App\Traits\HasProductSeo;
 use Illuminate\Http\Request;
@@ -32,9 +33,14 @@ class CatalogController extends Controller
     public function item(Request $request, $category, $slug)
     {
 
-        $product = Product::where('slug', $slug)->first();
+        $product = (new ProductService())->getActiveProductBySlug($slug);
+        if(!$product) {
+            abort(404);
+        }
+
         $this->productSeo($product);
         $product->load('category');
+
         $relatedProducts = $product->related_products;
 
         return Inertia::render("Store/Catalog/Item", [
