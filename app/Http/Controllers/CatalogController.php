@@ -16,7 +16,7 @@ class CatalogController extends Controller
     public function index(Request $request)
     {
         $this->defaultSeo();
-        $categories = ProductCategory::all();
+        $categories = ProductCategory::whereHas('products')->get();
         return Inertia::render("Store/Catalog/Index", [
             'title' => "Catalog",
             'categories' => $categories,
