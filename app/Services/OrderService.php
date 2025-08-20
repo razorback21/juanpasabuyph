@@ -5,7 +5,6 @@ namespace App\Services;
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
