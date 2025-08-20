@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\DB;
 
 class OrderService extends Model
 {
+
+    public function getNewOrders() {
+        return Order::where('status', '=', 'placed');
+    }
+
+    public function getNewOrderCount() {
+        return $this->getNewOrders()->count();
+    }
+
     public function createOrder($validated)
     {
         return DB::transaction(function () use ($validated) {

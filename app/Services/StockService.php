@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 
+
 class StockService
 {
     /**
@@ -18,9 +19,14 @@ class StockService
 
     }
 
+    public function getOutOfStockProductsCount(): int
+    {
+        return $this->getOutOfStockProducts()->get()->count();
+    }
+
     public function getOutOfStockProducts(): Builder
     {
-        return $this->productStocks()->whereNull(['stocks'])->orWhere("stocks", "<", 1);
+        return $this->productStocks()->whereNull('stocks')->orWhere("stocks", "<", 1);
     }
 
     public function productStocks(): Builder
@@ -34,7 +40,7 @@ class StockService
         $productStocks = Inventory::select([
             'product_id',
             $stocksField
-        ])->groupBy('product_id');
+        ])->groupBy(['product_id']);
 
         return Product::leftJoinSub(
             $productStocks,
@@ -42,7 +48,7 @@ class StockService
             function ($join) {
                 $join->on('products.id', '=', 'stocks_table.product_id');
             }
-        )->addSelect("products.*", "stocks_table.*")
+        )->addSelect(["products.*", "stocks_table.*"])
             ->where('disabled', false);
     }
 
