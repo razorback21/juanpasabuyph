@@ -34,14 +34,12 @@ class DashboardController extends Controller
 
     public function index(Request $request)
     {
-        $categories = ProductCategory::all();
-        $activeCategory = $request->query('active_category') ?? 'All';
         $outOfStock = $this->stockService->getOutOfStockProductsCount();
         $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
         $orderCount = $this->orderService->getNewOrderCount();
         $chartData = $this->visitorService->getVisitorsByNumMonths(3);
         $purchaseCost = $this->purchaseService->getPurchasedCost();
         $totalSRPFromPurchased = $this->purchaseService->getTotalSRPFromPurchase();
-        return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'orderCount', 'chartData', 'purchaseCost', 'totalSRPFromPurchased'));
+        return Inertia::render('Dashboard/Index', compact('outOfStock', 'profitThisMonth', 'orderCount', 'chartData', 'purchaseCost', 'totalSRPFromPurchased'));
     }
 }
