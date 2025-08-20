@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Models\Visitor;
 use App\Services\ProductFilterService;
+use App\Services\PurchaseService;
 use App\Services\SaleService;
 use App\Services\StockService;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,7 +20,10 @@ use Inertia\Inertia;
 class DashboardController extends Controller
 {
 
-    public function __construct(private StockService $stockService, private SaleService $saleService)
+    public function __construct(private StockService $stockService,
+                                private SaleService $saleService,
+                                private PurchaseService $purchaseService
+    )
     {
 
     }
@@ -32,8 +36,8 @@ class DashboardController extends Controller
         $profitThisMonth = $this->saleService->getSaleProfitThisMonth();
         $orderCount = Order::where('status', '=', 'placed')->count();
         $chartData = Visitor::where('created_at', '>=', now()->subDays(90))->get();
-        $purchaseCost = (string)$this->stockService->getPurchasedCost();
-        $totalSRPFromPurchased = (string)$this->stockService->getTotalSRPFromPurchase();
+        $purchaseCost = $this->purchaseService->getPurchasedCost();
+        $totalSRPFromPurchased = $this->purchaseService->getTotalSRPFromPurchase();
         return Inertia::render('Dashboard/Index', compact('categories', 'activeCategory', 'outOfStock', 'profitThisMonth', 'orderCount', 'chartData', 'purchaseCost', 'totalSRPFromPurchased'));
     }
 }
