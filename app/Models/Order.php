@@ -108,4 +108,9 @@ class Order extends Model
     {
         return $this->total();
     }
+
+    public function scopeNewOrders($query)
+    {
+        return $query->where('status', '=', OrderStatusEnum::PLACED);
+    }
 }
