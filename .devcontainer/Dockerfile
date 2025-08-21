@@ -11,7 +11,9 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip \
-    && docker-php-ext-install exif
+    && docker-php-ext-install exif \
+    && docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-install pcntl
 
 # Install node js
 RUN apt-get install -y curl \

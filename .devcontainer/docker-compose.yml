@@ -19,6 +19,8 @@ services:
             - "5173:5173"
         expose:
             - 8001
+        labels:
+            - "traefik.enable=true"
 
 networks:
     juan_network:

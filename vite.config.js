@@ -4,13 +4,16 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
     server: {
-        host: true, // This is equivalent to host: '0.0.0.0'
+        host: 'juanpasabuyph.loc',
         port: 5173,
         strictPort: true,
+        origin: 'http://juanpasabuyph.loc:5173',
+        cors: true,
         hmr: {
             port: 5173,
             host: 'localhost',
         },
+
     },
     plugins: [
         laravel({
