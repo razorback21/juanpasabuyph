@@ -1,0 +1,26 @@
+services:
+    app:
+        privileged: true
+        build:
+            context: .
+            dockerfile: Dockerfile
+        # use by curl
+        hostname: juanpasabuyph.loc
+        container_name: juanpasabuyph_app
+        networks:
+            - juan_network
+        volumes:
+            - ../..:/workspaces:cached
+        # Overrides default command so things don't shut down after the process ends.
+        command: sleep infinity
+        ports:
+            - "8000:8000"
+            - "9000:9000"
+            - "5173:5173"
+        expose:
+            - 8001
+
+networks:
+    juan_network:
+        external: true
+        name: donz_network
