@@ -22,17 +22,6 @@ services:
         labels:
             - "traefik.enable=true"
 
-    redis:
-        image: redis:alpine
-        hostname: redis.loc
-        container_name: juanpasabuyph_redis
-        networks:
-            - juan_network
-        ports:
-            - "6379:6379"
-        expose:
-            - 6379
-
 networks:
     juan_network:
         external: true
