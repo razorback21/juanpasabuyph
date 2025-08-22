@@ -25,7 +25,7 @@ services:
     redis:
         image: redis:alpine
         hostname: redis.loc
-        container_name: juanpasabuyph_app
+        container_name: juanpasabuyph_redis
         networks:
             - juan_network
         ports:
