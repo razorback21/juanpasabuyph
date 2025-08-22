@@ -2,10 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/php
 {
     "name": "PHP 8.4",
-    "workspaceFolder": "/workspace/juanpasabuyph",
-    "mounts": [
-        "source=${localWorkspaceFolder},target=/workspace/juanpasabuyph,type=bind"
-    ],
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
     //"image": "mcr.microsoft.com/devcontainers/php:1-8.4-bullseye",
     "dockerComposeFile": "docker-compose.yml",
@@ -35,7 +31,7 @@
 //            "label": "PHP Debug",
 //            "onAutoForward": "notify"
 //        }
-    }
+//    }
 
     // Use 'postCreateCommand' to run commands after the container is created.
     //"postCreateCommand": "cd /workspaces/juanpasabuyph && php artisan storage:link",
