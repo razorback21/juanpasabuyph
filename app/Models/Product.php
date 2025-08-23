@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Facades\Storage;
 use Spatie\Image\Enums\CropPosition;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -117,16 +116,16 @@ class Product extends Model implements HasMedia
     public function getCurrentStockAttribute()
     {
         $stock = $this->inventory()
-            ->selectRaw('SUM(CASE 
-                WHEN movement_type IN (?, ?, ?) THEN quantity 
-                WHEN movement_type IN (?, ?, ?) THEN -quantity 
-                ELSE 0 
+            ->selectRaw('SUM(CASE
+                WHEN movement_type IN (?, ?, ?) THEN quantity
+                WHEN movement_type IN (?, ?, ?) THEN -quantity
+                ELSE 0
             END) as stock', [
-                    // Plus
+                // Plus
                 MovementTypeEnum::INBOUND,
                 MovementTypeEnum::RETURNED,
                 MovementTypeEnum::ADJUSTMENT_UP,
-                    // Minus
+                // Minus
                 MovementTypeEnum::OUTBOUND,
                 MovementTypeEnum::DAMAGE,
                 MovementTypeEnum::ADJUSTMENT_DOWN
@@ -143,9 +142,9 @@ class Product extends Model implements HasMedia
     {
         // available stock is current stock minus reserved stock
         return $this->current_stock - $this->stockReservations()->whereIn('reservation_status', [
-            StockReservationStatusEnum::CONFIRMED->value,
-            StockReservationStatusEnum::RELEASED->value
-        ])->sum('quantity');
+                StockReservationStatusEnum::CONFIRMED->value,
+                StockReservationStatusEnum::RELEASED->value
+            ])->sum('quantity');
     }
 
     public function stockReservationsForOrder(): HasMany
@@ -154,8 +153,8 @@ class Product extends Model implements HasMedia
             'reservation_type',
             StockReservationTypeEnum::ORDER->value,
         )->whereIn('reservation_status', [
-                    StockReservationStatusEnum::CONFIRMED->value,
-                ]);
+            StockReservationStatusEnum::CONFIRMED->value,
+        ]);
     }
 
     public function stockReservationsForCompletedOrder(): HasMany
@@ -164,8 +163,8 @@ class Product extends Model implements HasMedia
             'reservation_type',
             StockReservationTypeEnum::ORDER->value,
         )->whereIn('reservation_status', [
-                    StockReservationStatusEnum::RELEASED->value,
-                ]);
+            StockReservationStatusEnum::RELEASED->value,
+        ]);
     }
 
 
