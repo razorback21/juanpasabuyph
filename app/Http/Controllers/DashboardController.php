@@ -13,11 +13,11 @@ use Inertia\Inertia;
 class DashboardController extends Controller
 {
 
-    public function __construct(private StockService    $stockService,
-                                private SaleService     $saleService,
-                                private PurchaseService $purchaseService,
-                                private OrderService    $orderService,
-                                private VisitorService  $visitorService,
+    public function __construct(
+        private StockService    $stockService,
+        private SaleService     $saleService,
+        private PurchaseService $purchaseService,
+        private VisitorService  $visitorService,
     )
     {
 
