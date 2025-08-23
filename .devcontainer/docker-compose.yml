@@ -4,6 +4,11 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        # limit memory
+        deploy:
+            resources:
+                limits:
+                    memory: 256M
         # use by curl
         hostname: juanpasabuyph.loc
         container_name: juanpasabuyph_app
