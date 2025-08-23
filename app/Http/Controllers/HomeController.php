@@ -21,9 +21,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $title = 'Home';
-        $featuredProducts = Product::featuredProduct()->get()->shuffle()->take(4);
-        $popularProducts = $this->productService->getPopularProducts()->get()->shuffle()->take(4);
-        $heroImage = $heroImage = HeroImage::run('home');
+        $featuredProducts = Product::featuredProduct()->inRandomOrder()->limit(4)->get();
+        $popularProducts = $this->productService->getPopularProducts()->inRandomOrder()->limit(4)->get();
+        $heroImage = HeroImage::run('home');
         return Inertia::render("Store/Home/Index", compact('title', 'featuredProducts', 'popularProducts', 'heroImage'));
     }
 }
