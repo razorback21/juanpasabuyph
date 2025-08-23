@@ -23,7 +23,7 @@ services:
             - "9000:9000"
             - "5173:5173"
         expose:
-            - 8001
+            - 8000
         labels:
             - "traefik.enable=true"
 
