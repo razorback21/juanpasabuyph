@@ -17,25 +17,17 @@ services:
         volumes:
             - ../..:/workspaces:cached
         # Overrides default command so things don't shut down after the process ends.
-        command:
-            - "sleep infinity"
-            - "composer run devc"
+        command: sleep infinity
         ports:
             - "8000:8000"
-            - "9000:9000"
             - "5173:5173"
+            - "9000:9000"
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.jquanpasabuyph.rule=Host(`juanpasabuyph.loc`)"
             - "traefik.http.routers.juanpasabuyph.entrypoints=web"
             - "traefik.http.routers.juanpasabuyph.service=juanpasabuyph"
             - "traefik.http.services.juanpasabuyph.loadbalancer.server.port=8000"
-        environment:
-            - XDEBUG_MODE=debug
-            - XDEBUG_START_WITH_REQUEST=yes
-            - XDEBUG_CLIENT_HOST=host.docker.internal
-            - XDEBUG_CLIENT_PORT=9003
-            - XDEBUG_IDEKEY=VSCODE
 
 networks:
     juan_network:
