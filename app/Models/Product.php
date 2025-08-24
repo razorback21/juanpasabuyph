@@ -120,6 +120,9 @@ class Product extends Model implements HasMedia
             ->where('id', '!=', $this->id);
     }
 
+    /**
+     * TODO: Optimize this query or put this into a scope or a separate service. Do not use this in a loop.
+     */
     public function getCurrentStockAttribute()
     {
         $stock = $this->inventory()
@@ -144,6 +147,7 @@ class Product extends Model implements HasMedia
 
     /**
      * Get inventory available stock
+     * TODO: Optimize this query or put this into a scope or a separate service. Do not use this in a loop.
      */
     public function getAvailableStockAttribute(): int
     {
@@ -154,6 +158,9 @@ class Product extends Model implements HasMedia
             ])->sum('quantity');
     }
 
+    /**
+     * TODO: Optimize this query or put this into a scope or a separate service. Do not use this in a loop.
+     */
     public function stockReservationsForOrder(): HasMany
     {
         return $this->stockReservations()->where(
@@ -164,6 +171,9 @@ class Product extends Model implements HasMedia
         ]);
     }
 
+    /**
+     * TODO: Optimize this query or put this into a scope or a separate service this. Do not use this in a loop.
+     */
     public function stockReservationsForCompletedOrder(): HasMany
     {
         return $this->stockReservations()->where(
@@ -174,12 +184,17 @@ class Product extends Model implements HasMedia
         ]);
     }
 
-
+    /**
+     * TODO: Optimize this query or put this into a scope or a separate service this. Do not use this in a loop.
+     */
     public function getStockReservationForOrderQuantityAttribute()
     {
         return $this->stockReservationsForOrder()->sum('quantity');
     }
 
+    /**
+     * TODO: Optimize this query or put this into a scope or a separate service this. Do not use this in a loop.
+     */
     public function getStockReservationForCompletedOrderQuantityAttribute()
     {
         return $this->stockReservationsForCompletedOrder()->sum('quantity');
