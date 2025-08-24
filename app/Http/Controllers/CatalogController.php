@@ -14,7 +14,8 @@ use Inertia\Inertia;
 class CatalogController extends Controller
 {
     use HasDefaultSeo, HasProductSeo;
-    public function index(Request $request)
+
+    public function index()
     {
         $this->defaultSeo();
         $categories = ProductCategory::whereHas('products')->get();
@@ -24,7 +25,7 @@ class CatalogController extends Controller
         ]);
     }
 
-    public function paginate(Request $request)
+    public function paginate()
     {
         $paginatedProducts = (new CataglogService())->getPaginatedData(15);
         return response()->json($paginatedProducts);
@@ -33,11 +34,7 @@ class CatalogController extends Controller
     public function item(Request $request, $category, $slug)
     {
 
-        $product = (new ProductService())->getActiveProductBySlug($slug);
-        if(!$product) {
-            // TODO: create custom 404 not found page
-            abort(404);
-        }
+        $product = Product::findActiveProductBySlug($slug);
 
         $this->productSeo($product);
         $product->load('category');

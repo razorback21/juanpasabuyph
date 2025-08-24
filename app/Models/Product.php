@@ -271,7 +271,7 @@ class Product extends Model implements HasMedia
             ->where('id', '!=', $this->id)->shuffle()->take(4);
     }
 
-    public function scopeActiveProductBySlug($query, $slug): Product
+    public function scopeFindActiveProductBySlug($query, $slug): Product
     {
         return $query->where(['disabled' => false, 'slug' => $slug])->firstOrfail();
     }
