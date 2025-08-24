@@ -266,9 +266,8 @@ class Product extends Model implements HasMedia
 
     public function getRelatedProductsAttribute()
     {
-        return self::get()
-            ->where('product_category_id', $this->product_category_id)
-            ->where('id', '!=', $this->id)->shuffle()->take(4);
+        return self::where('product_category_id', $this->product_category_id)
+            ->where('id', '!=', $this->id)->limit(4)->inRandomOrder()->get();
     }
 
     public function scopeFindActiveProductBySlug($query, $slug): Product
