@@ -14,9 +14,4 @@ class ProductService
                 ->orderByDesc('orders_count');
         });
     }
-
-    public function getActiveProductBySlug($slug)
-    {
-        return Product::where(['slug' => $slug, 'disabled' => 0])->first();
-    }
 }
