@@ -30,6 +30,12 @@ services:
             - "traefik.http.routers.juanpasabuyph.entrypoints=web"
             - "traefik.http.routers.juanpasabuyph.service=juanpasabuyph"
             - "traefik.http.services.juanpasabuyph.loadbalancer.server.port=8000"
+        environment:
+            - XDEBUG_MODE=debug
+            - XDEBUG_START_WITH_REQUEST=yes
+            - XDEBUG_CLIENT_HOST=host.docker.internal
+            - XDEBUG_CLIENT_PORT=9003
+            - XDEBUG_IDEKEY=VSCODE
 
 networks:
     juan_network:
