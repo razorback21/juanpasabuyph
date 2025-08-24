@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Query\Builder;
 use Spatie\Image\Enums\CropPosition;
 use Spatie\Image\Enums\Fit;
 use Spatie\MediaLibrary\HasMedia;
@@ -111,6 +112,12 @@ class Product extends Model implements HasMedia
     public function stockReservations(): HasMany
     {
         return $this->hasMany(StockReservation::class);
+    }
+
+    public function getCategoryProductsAttribute()
+    {
+        return $this->category()->with('products')->products()
+            ->where('id', '!=', $this->id);
     }
 
     public function getCurrentStockAttribute()
@@ -248,7 +255,7 @@ class Product extends Model implements HasMedia
         return $this->where('slug', $value)->firstOrFail();
     }
 
-    public function scopeFeaturedProduct($query)
+    public function scopeFeaturedProducts($query)
     {
         return $query->where(['is_featured' => true, 'disabled' => false]);
     }
@@ -264,11 +271,6 @@ class Product extends Model implements HasMedia
         return $query->where(['disabled' => true]);
     }
 
-    public function getRelatedProductsAttribute()
-    {
-        return self::where('product_category_id', $this->product_category_id)
-            ->where('id', '!=', $this->id)->limit(4)->inRandomOrder()->get();
-    }
 
     public function scopeFindActiveProductBySlug($query, $slug): Product
     {
