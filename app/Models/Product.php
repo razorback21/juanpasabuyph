@@ -121,7 +121,8 @@ class Product extends Model implements HasMedia
     }
 
     /**
-     * TODO: Optimize this query or put this into a scope or a separate service. Do not use this in a loop.
+     * Do not use this in a loop
+     * TODO: Move this into a query scope, a separate service, or a query repository.
      */
     public function getCurrentStockAttribute()
     {
@@ -146,8 +147,34 @@ class Product extends Model implements HasMedia
     }
 
     /**
+     * Query with current stock
+     * @param $query
+     * @return void
+     */
+    public function scopeWithCurrentStock($query)
+    {
+        $query->addSelect([
+            'current_stock' => $this->inventory()->selectRaw('SUM(CASE
+                WHEN movement_type IN (?, ?, ?) THEN quantity
+                WHEN movement_type IN (?, ?, ?) THEN -quantity
+                ELSE 0
+            END) as stock', [
+                // Plus
+                MovementTypeEnum::INBOUND,
+                MovementTypeEnum::RETURNED,
+                MovementTypeEnum::ADJUSTMENT_UP,
+                // Minus
+                MovementTypeEnum::OUTBOUND,
+                MovementTypeEnum::DAMAGE,
+                MovementTypeEnum::ADJUSTMENT_DOWN
+            ])
+        ]);
+    }
+
+    /**
      * Get inventory available stock
-     * TODO: Optimize this query or put this into a scope or a separate service. Do not use this in a loop.
+     * Do not use this in a loop
+     * TODO: Move this into a query scope, a separate service, or a query repository.
      */
     public function getAvailableStockAttribute(): int
     {
@@ -159,7 +186,8 @@ class Product extends Model implements HasMedia
     }
 
     /**
-     * TODO: Optimize this query or put this into a scope or a separate service. Do not use this in a loop.
+     * Do not use this in a loop
+     * TODO: Move this into a query scope, a separate service, or a query repository.
      */
     public function stockReservationsForOrder(): HasMany
     {
@@ -172,7 +200,7 @@ class Product extends Model implements HasMedia
     }
 
     /**
-     * TODO: Optimize this query or put this into a scope or a separate service this. Do not use this in a loop.
+     * TODO: Move this into a scope or a separate service this. Do not use this in a loop.
      */
     public function stockReservationsForCompletedOrder(): HasMany
     {
@@ -185,7 +213,7 @@ class Product extends Model implements HasMedia
     }
 
     /**
-     * TODO: Optimize this query or put this into a scope or a separate service this. Do not use this in a loop.
+     * TODO: Move this into a scope or a separate service this. Do not use this in a loop.
      */
     public function getStockReservationForOrderQuantityAttribute()
     {
@@ -193,7 +221,7 @@ class Product extends Model implements HasMedia
     }
 
     /**
-     * TODO: Optimize this query or put this into a scope or a separate service this. Do not use this in a loop.
+     * TODO: Move this into a scope or a separate service this. Do not use this in a loop.
      */
     public function getStockReservationForCompletedOrderQuantityAttribute()
     {
