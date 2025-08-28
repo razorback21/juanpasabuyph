@@ -19,8 +19,6 @@ class VisitorRequest
         return $next($request);
     }
 
-    // run only after the response is sent
-    // we can moved this into a service class
     public function terminate(Request $request, Response $response)
     {
         LogVisitor::run();
