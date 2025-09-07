@@ -21,7 +21,6 @@ services:
         ports:
             - "8000:8000"
             - "5173:5173"
-            - "9000:9000"
         labels:
             - "traefik.enable=true"
             - "traefik.http.routers.jquanpasabuyph.rule=Host(`juanpasabuyph.loc`)"

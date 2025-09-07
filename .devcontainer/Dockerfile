@@ -24,8 +24,10 @@ RUN apt-get install -y curl \
 RUN pecl install redis \
     && docker-php-ext-enable redis
 
-RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+#RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
+# Disable xdebug
+ENV XDEBUG_MODE=off
 
 USER vscode
 WORKDIR /workspaces/juanpasabuyph
