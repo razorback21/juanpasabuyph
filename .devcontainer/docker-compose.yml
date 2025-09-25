@@ -23,7 +23,7 @@ services:
             - "5173:5173"
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.jquanpasabuyph.rule=Host(`juanpasabuyph.loc`)"
+            - "traefik.http.routers.juanpasabuyph.rule=Host(`juanpasabuyph.loc`)"
             - "traefik.http.routers.juanpasabuyph.entrypoints=web"
             - "traefik.http.routers.juanpasabuyph.service=juanpasabuyph"
             - "traefik.http.services.juanpasabuyph.loadbalancer.server.port=8000"
