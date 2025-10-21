@@ -13,7 +13,7 @@ class FeaturedProductController extends Controller
      */
     public function index()
     {
-        $featuredProducts = Product::featuredProduct()->get();
+        $featuredProducts = Product::featuredProducts()->get();
         return Inertia::render('FeaturedProduct/Index', compact('featuredProducts'));
     }
 
