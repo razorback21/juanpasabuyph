@@ -15,6 +15,6 @@ class SaleService
             ->select(DB::raw('SUM((price - cost_price) * quantity) as profit'))
             ->whereIn('order_id', $orders->pluck('id')->toArray())
             ->groupBy('order_id');
-        return (float) $orderItems->first()->profit ?? 0;;
+        return  $orderItems->first() ? (float) $orderItems->first()->profit : 0;
     }
 }
