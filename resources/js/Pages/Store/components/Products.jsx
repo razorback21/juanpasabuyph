@@ -2,7 +2,7 @@ import { Link } from "@inertiajs/react";
 
 export default function Products({ products }) {
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 p-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 p-3 sm:p-4">
             {products.map((product) => (
                 <div
                     key={product.id}
@@ -28,7 +28,7 @@ export default function Products({ products }) {
                                 minimumFractionDigits: 2,
                             })}
                         </p>
-                        <p className="text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
+                        <p className="hidden text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
                             {product.description.slice(0, 50)}
                         </p>
                     </div>
