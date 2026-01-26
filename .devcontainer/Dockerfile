@@ -1,12 +1,19 @@
 FROM mcr.microsoft.com/devcontainers/php:1-8.4-bullseye
 
+RUN curl -fsSL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/yarn.gpg] https://dl.yarnpkg.com/debian stable main" \
+    | tee /etc/apt/sources.list.d/yarn.list
+
+
 # Install PHP extensions
 RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libpng-dev \
-        libzip-dev \
-        libexif-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+    libzip-dev \
+    libexif-dev \
+    imagemagick \
+    libmagickwand-dev \
     && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install gd \
@@ -21,8 +28,9 @@ RUN apt-get install -y curl \
     && apt-get install -y nodejs
 
 # Install PECL extensions
-RUN pecl install redis \
-    && docker-php-ext-enable redis
+RUN pecl install redis imagick \
+    && docker-php-ext-enable redis imagick
+
 
 #RUN echo "xdebug.client_host=host.docker.internal" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
