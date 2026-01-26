@@ -13,6 +13,8 @@ export default function Track({ order }) {
                 return "Shipped";
             case "delivered":
                 return "Delivered";
+            case "cancelled":
+                return "Delivered";
             default:
                 return "pending";
         }
@@ -42,7 +44,7 @@ export default function Track({ order }) {
                             Estimated Delivery:{" "}
                             <span className="text-[var(--text-primary)] font-semibold">
                                 {dateFormatFriendly(
-                                    order.estimated_delivery_date
+                                    order.estimated_delivery_date,
                                 ) ?? "N/A"}
                             </span>
                         </p>
@@ -63,12 +65,12 @@ export default function Track({ order }) {
                                                     <div className="ml-6">
                                                         <h3 className="timeline-title text-lg font-semibold text-gray-900">
                                                             {timelineLabel(
-                                                                item.status
+                                                                item.status,
                                                             )}
                                                         </h3>
                                                         <p className="timeline-description text-gray-500 text-sm">
                                                             {dateFormatFriendly(
-                                                                order.created_at
+                                                                order.created_at,
                                                             )}
                                                         </p>
                                                         {item.description && (
@@ -90,12 +92,12 @@ export default function Track({ order }) {
                                                     <div className="ml-6">
                                                         <h3 className="timeline-title text-lg font-semibold text-gray-500">
                                                             {timelineLabel(
-                                                                item.status
+                                                                item.status,
                                                             )}
                                                         </h3>
                                                         <p className="timeline-description text-gray-500 text-sm">
                                                             {dateFormatFriendly(
-                                                                item.created_at
+                                                                item.created_at,
                                                             )}
                                                         </p>
                                                         {item.description && (
@@ -205,7 +207,7 @@ export default function Track({ order }) {
                                             </p>
                                             <p className="text-sm text-gray-500">
                                                 {currencyFormat(
-                                                    item.product.price
+                                                    item.product.price,
                                                 )}{" "}
                                                 x {item.quantity}
                                             </p>
