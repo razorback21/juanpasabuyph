@@ -14,8 +14,9 @@ RUN apt-get update && apt-get install -y \
     libexif-dev \
     imagemagick \
     libmagickwand-dev \
+    libwebp-dev \
     && rm -rf /var/lib/apt/lists/* \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg --with-webp \
     && docker-php-ext-install gd \
     && docker-php-ext-install zip \
     && docker-php-ext-install exif \
