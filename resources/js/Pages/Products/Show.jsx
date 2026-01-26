@@ -48,7 +48,7 @@ export default function Show({ product, movementTypes }) {
                     dialogRef.current.close();
                     toast.success(response.props.flash.message);
                 },
-            }
+            },
         );
     };
 
@@ -151,7 +151,7 @@ export default function Show({ product, movementTypes }) {
                                         {
                                             minimumFractionDigits: 2,
                                             maximumFractionDigits: 2,
-                                        }
+                                        },
                                     )}
                                     )
                                 </span>
@@ -192,7 +192,7 @@ export default function Show({ product, movementTypes }) {
                                     href={
                                         route("products.edit", product) +
                                         "?from=/products/" +
-                                        product.id
+                                        product.slug
                                     }
                                 >
                                     Edit
