@@ -14,7 +14,7 @@ export default function Track({ order }) {
             case "delivered":
                 return "Delivered";
             case "cancelled":
-                return "Delivered";
+                return "Order Cancelled";
             default:
                 return "pending";
         }
