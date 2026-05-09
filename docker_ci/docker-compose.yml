@@ -17,9 +17,9 @@ services:
             #PHP_OPCACHE_ENABLE: "1"
         labels:
         - "traefik.enable=true"
-        - "traefik.http.routers.timetracker.rule=Host(`timetracker.loc`)"
-        - "traefik.http.routers.timetracker.entrypoints=web"
-        - "traefik.http.services.timetracker.loadbalancer.server.port=8080"
+        - "traefik.http.routers.juanpasabuy_local.rule=Host(`juanpasabuyph.loc`)"
+        - "traefik.http.routers.juanpasabuy_local.entrypoints=web"
+        - "traefik.http.services.juanpasabuy_local.loadbalancer.server.port=8080"
 
 
 networks:
