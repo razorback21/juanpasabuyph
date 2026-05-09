@@ -23,8 +23,10 @@ RUN install-php-extensions gd
 
 WORKDIR /var/www/html
 
+COPY --from=composer-builder /app ./
 # Copy built frontend assets
 COPY --from=node-builder /app/public ./public
+
 
 
 #WORKDIR /
