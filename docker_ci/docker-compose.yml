@@ -12,9 +12,9 @@ services:
             - "8443"
         networks:
             - dokploy-network
-        #environment:
-            #AUTORUN_ENABLED: "true"
-            #PHP_OPCACHE_ENABLE: "1"
+        environment:
+            AUTORUN_ENABLED: "true"
+            PHP_OPCACHE_ENABLE: "1"
         labels:
         - "traefik.enable=true"
         - "traefik.http.routers.juanpasabuy_local.rule=Host(`juanpasabuyph.loc`)"
