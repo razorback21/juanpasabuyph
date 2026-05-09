@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
 
-export default function Index() {
+export default function Index({ heroImage }) {
     return (
         <>
             <Layout title="About Us">
