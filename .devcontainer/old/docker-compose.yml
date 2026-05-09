@@ -1,0 +1,37 @@
+services:
+    juanpasabuyph:
+        privileged: true
+        build:
+            context: .
+            dockerfile: Dockerfile
+        # limit memory
+        deploy:
+            resources:
+                limits:
+                    memory: 512M
+        # use by curl
+        hostname: juanpasabuyph.loc
+        container_name: juanpasabuyph_app
+        networks:
+            - juan_network
+        volumes:
+            - ../..:/workspaces:cached
+        # Overrides default command so things don't shut down after the process ends.
+        command: sleep infinity
+        ports:
+            - "8000:8000"
+            - "5173:5173"
+        expose:
+            - 8000
+            - 5173
+        labels:
+            - "traefik.enable=true"
+            - "traefik.http.routers.juanpasabuyph.rule=Host(`juanpasabuyph.loc`)"
+            - "traefik.http.routers.juanpasabuyph.entrypoints=web"
+            - "traefik.http.routers.juanpasabuyph.service=juanpasabuyph"
+            - "traefik.http.services.juanpasabuyph.loadbalancer.server.port=8000"
+
+networks:
+    juan_network:
+        external: true
+        name: donz_network
