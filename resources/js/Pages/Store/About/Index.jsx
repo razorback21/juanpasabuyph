@@ -8,8 +8,7 @@ export default function Index() {
                     <div
                         className="bg-cover bg-no-repeat bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[400px] sm:min-h-[500px] shadow-lg"
                         style={{
-                            backgroundImage:
-                                'linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("/storage/assets/about.jpg")',
+                            backgroundImage: `linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.1) 40%), url("${heroImage}")`,
                         }}
                     >
                         <div className="p-8 sm:p-12">
