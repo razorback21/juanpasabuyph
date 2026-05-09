@@ -17,16 +17,14 @@ RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoload
 COPY . .
 
 FROM serversideup/php:8.5-fpm-nginx
-USER root
-RUN install-php-extensions gd
 
 WORKDIR /var/www/html
 # Copy PHP application (including vendor)
 COPY --from=composer-builder /app ./
 # Copy built frontend assets
 COPY --from=node-builder /app/public ./public
-
-
+USER root
+RUN install-php-extensions gd
 #WORKDIR /
 #COPY /.nginx/nginx_livewire.conf /etc/nginx/conf.d/custom.conf
 
