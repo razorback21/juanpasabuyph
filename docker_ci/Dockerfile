@@ -1,3 +1,11 @@
+FROM composer:2 AS composer-builder
+WORKDIR /app
+
+COPY composer.json composer.lock ./
+RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts --ignore-platform-req=ext-exif --ignore-platform-req=ext-gd --ignore-platform-req=ext-pcntl
+
+COPY . .
+
 FROM node:22-alpine AS node-builder
 WORKDIR /app
 
@@ -7,14 +15,6 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-
-FROM composer:2 AS composer-builder
-WORKDIR /app
-
-COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts --ignore-platform-req=ext-exif --ignore-platform-req=ext-gd --ignore-platform-req=ext-pcntl
-
-COPY . .
 
 FROM serversideup/php:8.5-fpm-nginx
 
