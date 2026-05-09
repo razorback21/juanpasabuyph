@@ -50,7 +50,7 @@ export default function HomeProducts({
                                 )}
                             </p>
                             <p className="text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
-                                {product.description.slice(0, 80) + "..."}
+                                {product.description?.slice(0, 80) + "..." || "No description available"}
                             </p>
                         </div>
                         {/* Enhanced Buy Now Overlay */}
