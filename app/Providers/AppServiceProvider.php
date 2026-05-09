@@ -14,6 +14,7 @@ use App\Observers\Product\ProductCategoryObserver;
 use App\Observers\Product\ProductObserver;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -43,6 +44,10 @@ class AppServiceProvider extends ServiceProvider
 
         $this->configureCommands();
         $this->configureModels();
+
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
+        }
 
         // Dump sql queries. use only for debug purposes
         // DB::listen(function ($query) {
