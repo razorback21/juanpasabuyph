@@ -35,3 +35,7 @@ CLAUDE.md
 .gitignore
 .windsurfrules
 /public/sitemap.xml
+
+# MemPalace per-project files (issue #185)
+mempalace.yaml
+entities.json
