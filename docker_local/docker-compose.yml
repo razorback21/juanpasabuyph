@@ -18,7 +18,8 @@ services:
         labels:
         - "traefik.enable=true"
         - "traefik.http.routers.juanpasabuy_local.rule=Host(`juanpasabuyph.loc`)"
-        - "traefik.http.routers.juanpasabuy_local.entrypoints=web"
+        - "traefik.http.routers.juanpasabuy_local.entrypoints=websecure"
+        - "traefik.http.routers.juanpasabuy_local.tls=true"
         - "traefik.http.services.juanpasabuy_local.loadbalancer.server.port=8080"
 
 
