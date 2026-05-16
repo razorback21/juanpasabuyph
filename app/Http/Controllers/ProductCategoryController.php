@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GenarateSlug;
 use App\Models\ProductCategory;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -39,7 +40,9 @@ class ProductCategoryController extends Controller
             'description' => 'nullable|string|max:255',
         ]);
 
-        ProductCategory::create($validated);
+        $category = new ProductCategory($validated);
+        $category->slug = GenarateSlug::run($category, 'name');
+        $category->save();
 
         return redirect()->route('product-categories.index');
     }
@@ -72,7 +75,11 @@ class ProductCategoryController extends Controller
             'description' => 'nullable|string|max:255',
         ]);
 
-        $productCategory->update($validated);
+        $productCategory->fill($validated);
+        $productCategory->slug = GenarateSlug::run($productCategory, 'name');
+
+
+        $productCategory->save();
 
         return redirect()->route('product-categories.index')
             ->with('success', 'Product category updated successfully.');
