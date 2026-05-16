@@ -29,13 +29,13 @@ export default function Products({ products }) {
                             })}
                         </p>
                         <p className="hidden text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
-                            {product.description.slice(0, 50)}
+                            {product?.description?.slice(0, 50)}
                         </p>
                     </div>
                     {/* Enhanced Add to Cart Overlay */}
                     <div className="add-to-cart absolute z-2 bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
                         <Link
-                            href={`/catalog/${product.category?.slug}/${product?.slug}`}
+                            href={`/catalog/${product?.category?.slug}/${product?.slug}`}
                             className="transition-all duration-300"
                         >
                             <button className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold py-3 px-4 rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95">
