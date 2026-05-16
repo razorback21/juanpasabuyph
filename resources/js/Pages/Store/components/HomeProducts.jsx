@@ -46,17 +46,18 @@ export default function HomeProducts({
                                     "en-US",
                                     {
                                         minimumFractionDigits: 2,
-                                    }
+                                    },
                                 )}
                             </p>
                             <p className="text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
-                                {product.description?.slice(0, 80) + "..." || "No description available"}
+                                {product.description?.slice(0, 80) + "..." ||
+                                    "No description available"}
                             </p>
                         </div>
                         {/* Enhanced Buy Now Overlay */}
                         <div className="add-to-cart absolute z-20 bottom-0 left-0 right-0 p-4 opacity-0 transform translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out">
                             <Link
-                                href={`/catalog/${product.category?.slug}/${product?.slug}`}
+                                href={`/catalog/${product.category?.slug ?? product.category.name}/${product?.slug}`}
                                 className="transition-all duration-300"
                             >
                                 <button
