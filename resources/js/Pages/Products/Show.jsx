@@ -120,7 +120,7 @@ export default function Show({ product, movementTypes }) {
                         </LinkButton>
                     </div>
                     <div className="flex pt-10 pb-5 gap-10">
-                        {product.featured_image ? (
+                        {product.featured_image_url ? (
                             <img
                                 src={product.featured_image_url}
                                 alt={product.name}
