@@ -33,7 +33,7 @@ Capture and store planning context from agent conversations to MemPalace for per
 
 Store to MemPalace using:
 
-- **Wing**: `tickettimetracker` (or relevant project)
+- **Wing**: `juanpasabuyph` (or relevant project)
 - **Room**: `planning`
 - **Content**: Structured with clear headings
   Example structure:
