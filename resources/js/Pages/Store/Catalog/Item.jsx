@@ -55,7 +55,12 @@ export default function Item({
     };
 
     const handleMainImageClick = () => {
-        lightboxRef.current.goTo(activeIndex);
+        console.log('Main image clicked', { lightboxRef: lightboxRef.current, activeIndex });
+        if (lightboxRef.current) {
+            lightboxRef.current.goTo(activeIndex);
+        } else {
+            console.error('Lightbox ref is null');
+        }
     };
 
     const lightboxSources = displayImages.map((img) => img.large_url);

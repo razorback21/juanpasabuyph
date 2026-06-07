@@ -3,30 +3,30 @@ import FsLightbox from "fslightbox-react";
 
 const Lightbox = forwardRef(({ sources }, ref) => {
     const [slide, setSlide] = useState(0);
-    const [open, setOpen] = useState(false);
-    const [key, setKey] = useState(0);
+    const [toggler, setToggler] = useState(false);
 
     useImperativeHandle(ref, () => ({
         open: (index = 0) => {
+            console.log('Lightbox open called with index:', index);
             setSlide(index);
-            setKey((k) => k + 1);
-            setOpen(true);
+            setToggler(!toggler);
         },
-        close: () => setOpen(false),
+        close: () => {
+            console.log('Lightbox close called');
+            setToggler(!toggler);
+        },
         goTo: (index) => {
+            console.log('Lightbox goTo called with index:', index);
             setSlide(index);
-            setKey((k) => k + 1);
-            setOpen(true);
+            setToggler(!toggler);
         },
     }));
 
     return (
         <FsLightbox
-            key={key}
-            toggler={open}
+            toggler={toggler}
             sources={sources}
             slide={slide + 1}
-            onClose={() => setOpen(false)}
         />
     );
 });
