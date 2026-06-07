@@ -36,7 +36,7 @@ class ProductImageGalleryTest extends TestCase
                 'images' => [$file],
             ]);
 
-        $response->assertOk();
+        $response->assertRedirect();
         $this->assertNotEmpty($this->product->fresh()->featured_media_id);
         $this->assertEquals(1, $this->product->fresh()->getMedia('product_feature_image')->count());
     }
@@ -56,7 +56,7 @@ class ProductImageGalleryTest extends TestCase
                 'images' => $files,
             ]);
 
-        $response->assertOk();
+        $response->assertRedirect();
         $gallery = $this->product->fresh()->gallery_images;
 
         $this->assertCount(5, $gallery);

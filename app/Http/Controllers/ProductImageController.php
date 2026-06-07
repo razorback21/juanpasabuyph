@@ -10,7 +10,6 @@ use App\Http\Requests\ProductGalleryUploadRequest;
 use App\Http\Requests\ProductImageUploadRequest;
 use App\Models\Product;
 use App\Services\ProductFileUploadService;
-use Illuminate\Http\JsonResponse;
 
 class ProductImageController extends Controller
 {
@@ -27,39 +26,26 @@ class ProductImageController extends Controller
         return back()->with('success', 'Product image updated successfully!');
     }
 
-    public function uploadGallery(ProductGalleryUploadRequest $request, Product $product): JsonResponse
+    public function uploadGallery(ProductGalleryUploadRequest $request, Product $product)
     {
         foreach ($request->file('images', []) as $file) {
             StoreProductGalleryImage::run($product, $file);
         }
 
-        $product->refresh();
-
-        return response()->json([
-            'gallery_images' => $product->gallery_images,
-            'featured_media_id' => $product->featured_media_id,
-        ]);
+        return back()->with('success', 'Gallery images uploaded!');
     }
 
-    public function deleteImage(Product $product, int $mediaId): JsonResponse
+    public function deleteImage(Product $product, int $mediaId)
     {
         DeleteProductGalleryImage::run($product, $mediaId);
-        $product->refresh();
 
-        return response()->json([
-            'gallery_images' => $product->gallery_images,
-            'featured_media_id' => $product->featured_media_id,
-        ]);
+        return back()->with('success', 'Image deleted!');
     }
 
-    public function setFeatured(Product $product, int $mediaId): JsonResponse
+    public function setFeatured(Product $product, int $mediaId)
     {
         SetProductFeaturedImage::run($product, $mediaId);
-        $product->refresh();
 
-        return response()->json([
-            'featured_media_id' => $product->featured_media_id,
-            'featured_image_url' => $product->featured_image_url,
-        ]);
+        return back()->with('success', 'Featured image updated!');
     }
 }

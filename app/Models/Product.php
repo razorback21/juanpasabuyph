@@ -54,6 +54,7 @@ class Product extends Model implements HasMedia
         'current_stock',
         'stock_reservation_for_order_quantity',
         'stock_reservation_for_completed_order_quantity',
+        'gallery_images',
     ];
 
     public function registerMediaConversions(?Media $media = null): void
@@ -303,9 +304,9 @@ class Product extends Model implements HasMedia
         return $this->getMedia('product_feature_image')
             ->map(fn ($media) => [
                 'id' => $media->id,
-                'thumb_url' => $media->getUrl('thumb'),
-                'medium_url' => $media->getUrl('medium'),
-                'large_url' => $media->getUrl('large'),
+                'thumb_url' => $media->getFullUrl('thumb'),
+                'medium_url' => $media->getFullUrl('medium'),
+                'large_url' => $media->getFullUrl('large'),
             ])
             ->toArray();
     }

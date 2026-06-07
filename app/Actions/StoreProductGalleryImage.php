@@ -16,7 +16,7 @@ class StoreProductGalleryImage
         DB::transaction(function () use ($product, $file) {
             $collectionName = 'product_feature_image';
             $media = $product->addMedia($file)
-                ->toMediaCollection($collectionName, 'local');
+                ->toMediaCollection($collectionName);
 
             if (!$product->featured_media_id) {
                 $product->update(['featured_media_id' => $media->id]);

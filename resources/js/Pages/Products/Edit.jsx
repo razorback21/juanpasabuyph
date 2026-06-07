@@ -103,26 +103,15 @@ export default function Edit({ product, categories, from, uoms }) {
 
     const handleGalleryChange = (e) => {
         const files = Array.from(e.target.files);
-        galleryDescriptionRef.current.firstElementChild.textContent =
-            files.map((f) => f.name).join(", ");
-    };
-
-    const uploadGalleryHandler = (e) => {
-        e.preventDefault();
-
-        const files = galleryFileRef.current.files;
-        if (!files || files.length === 0) {
-            alertRef.current.open({
-                title: "Error",
-                description: "Please select at least one image",
-            });
-            return;
-        }
+        if (!files || files.length === 0) return;
 
         const formData = new FormData();
-        Array.from(files).forEach((file) => {
+        files.forEach((file) => {
             formData.append("images[]", file);
         });
+
+        galleryDescriptionRef.current.firstElementChild.textContent =
+            files.map((f) => f.name).join(", ");
 
         router.post(
             route("productimages.upload-gallery", product.slug),
@@ -264,7 +253,10 @@ export default function Edit({ product, categories, from, uoms }) {
 
                         <div className="flex-1 min-w-0">
                             <h3 className="text-sm font-medium text-gray-700 mb-2">Gallery Images</h3>
-                            <div className="flex items-center gap-4 mb-3">
+                            <div
+                                className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-colors mb-3"
+                                onClick={() => galleryFileRef.current.click()}
+                            >
                                 <input
                                     ref={galleryFileRef}
                                     type="file"
@@ -274,16 +266,13 @@ export default function Edit({ product, categories, from, uoms }) {
                                     multiple
                                     onChange={handleGalleryChange}
                                 />
-                                <Progressbar ref={galleryProgressBarRef} />
-                                <Button
-                                    variant="outline"
-                                    ref={galleryDescriptionRef}
-                                    className="text-center text-xs"
-                                    onClick={uploadGalleryHandler}
-                                >
-                                    Upload Gallery Images : <span></span>
-                                </Button>
+                                <svg className="mx-auto h-10 w-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 16V4m0 0L8 8m4-4l4 4M4 14v6h16v-6" />
+                                </svg>
+                                <p className="text-sm text-gray-600">Click to select images</p>
+                                <p ref={galleryDescriptionRef} className="text-xs text-gray-400 mt-1"><span></span></p>
                             </div>
+                            <Progressbar ref={galleryProgressBarRef} />
                             {(product.gallery_images || []).length > 0 ? (
                                 <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
                                     {(product.gallery_images || []).map((image) => (
