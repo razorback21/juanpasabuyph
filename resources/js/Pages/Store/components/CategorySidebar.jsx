@@ -1,13 +1,18 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import { Link, router } from "@inertiajs/react";
 
-function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
+export function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
     const [minVal, setMinVal] = useState(initialMin);
     const [maxVal, setMaxVal] = useState(initialMax);
     const minRef = useRef(null);
     const maxRef = useRef(null);
     const range = useRef(null);
-    const [isDragging, setIsDragging] = useState(false);
+    const debounceRef = useRef(null);
+
+    useEffect(() => {
+        setMinVal(initialMin);
+        setMaxVal(initialMax);
+    }, [initialMin, initialMax]);
 
     const getPercent = useCallback(
         (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -16,15 +21,16 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
 
     useEffect(() => {
         if (minRef.current && range.current) {
-            const minPercent = getPercent(minVal);
+            const minPercent = Math.max(0, Math.min(100, getPercent(minVal)));
             range.current.style.left = `${minPercent}%`;
         }
     }, [minVal, getPercent]);
 
     useEffect(() => {
         if (maxRef.current && range.current) {
-            const maxPercent = getPercent(maxVal);
-            range.current.style.width = `${maxPercent - getPercent(minVal)}%`;
+            const minPercent = getPercent(minVal);
+            const maxPercent = Math.max(0, Math.min(100, getPercent(maxVal)));
+            range.current.style.width = `${Math.max(0, maxPercent - minPercent)}%`;
         }
     }, [maxVal, getPercent, minVal]);
 
@@ -32,16 +38,36 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
         return getPercent(minVal);
     }
 
+    const debouncedOnChange = useCallback(
+        (value) => {
+            if (debounceRef.current) {
+                clearTimeout(debounceRef.current);
+            }
+            debounceRef.current = setTimeout(() => {
+                onChange(value);
+            }, 300);
+        },
+        [onChange]
+    );
+
+    useEffect(() => {
+        return () => {
+            if (debounceRef.current) {
+                clearTimeout(debounceRef.current);
+            }
+        };
+    }, []);
+
     const handleMinChange = (e) => {
         const value = Math.min(Number(e.target.value), maxVal - 1);
         setMinVal(value);
-        onChange({ min: value, max: maxVal });
+        debouncedOnChange({ min: value, max: maxVal });
     };
 
     const handleMaxChange = (e) => {
         const value = Math.max(Number(e.target.value), minVal + 1);
         setMaxVal(value);
-        onChange({ min: minVal, max: value });
+        debouncedOnChange({ min: minVal, max: value });
     };
 
     const handleMinInput = (e) => {
@@ -61,17 +87,17 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
     };
 
     const handleMinBlur = () => {
-        onChange({ min: minVal, max: maxVal });
+        debouncedOnChange({ min: minVal, max: maxVal });
     };
 
     const handleMaxBlur = () => {
-        onChange({ min: minVal, max: maxVal });
+        debouncedOnChange({ min: minVal, max: maxVal });
     };
 
     return (
-        <div className="mt-3">
-            <div className="relative h-2 mb-6">
-                <div className="absolute inset-0 h-2 rounded-full bg-gray-200" />
+        <div className="mt-3 w-full">
+            <div className="relative h-2 mb-6 w-full">
+                <div className="absolute inset-0 h-2 rounded-full bg-gray-200 w-full" />
                 <div
                     ref={range}
                     className="absolute h-2 rounded-full bg-gradient-to-r from-[#e92933] to-[#ff6b6b]"
@@ -83,7 +109,7 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                     max={max}
                     value={minVal}
                     onChange={handleMinChange}
-                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
+                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none z-10 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#ff6b6b] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#ff6b6b] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
                 />
                 <input
                     ref={maxRef}
@@ -92,18 +118,12 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                     max={max}
                     value={maxVal}
                     onChange={handleMaxChange}
-                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
-                />
-                <div
-                    className="absolute top-1/2 -translate-y-1/2 pointer-events-none w-0.5 h-0.5 bg-white rounded-full z-10"
-                    style={{
-                        left: `${((minVal - min) / (max - min)) * 100}%`,
-                    }}
+                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none z-10 [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
                 />
             </div>
             <div className="flex items-center gap-3">
-                <div className="relative flex-1">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium">
+                <div className="relative flex-1 min-w-0">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium whitespace-nowrap z-10">
                         ₱
                     </span>
                     <input
@@ -114,9 +134,9 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                         className="w-full h-9 pl-7 pr-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e92933]/30 focus:border-[#e92933] transition-all"
                     />
                 </div>
-                <span className="text-gray-300 text-sm font-medium">—</span>
-                <div className="relative flex-1">
-                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium">
+                <span className="text-gray-300 text-sm font-medium shrink-0">—</span>
+                <div className="relative flex-1 min-w-0">
+                    <span className="absolute left-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 font-medium whitespace-nowrap z-10">
                         ₱
                     </span>
                     <input
@@ -137,6 +157,7 @@ export default function CategorySidebar({
     activeCategorySlug,
     priceRange,
     onPriceFilterChange,
+    mobileOnly = false,
 }) {
     const [priceFilter, setPriceFilter] = useState({
         min: priceRange.min,
@@ -144,6 +165,10 @@ export default function CategorySidebar({
     });
     const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
     const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        setPriceFilter({ min: priceRange.min, max: priceRange.max });
+    }, [activeCategorySlug, priceRange.min, priceRange.max]);
 
     function handleClickOutside(event) {
         if (
@@ -255,17 +280,17 @@ export default function CategorySidebar({
                 </div>
             </aside>
 
-            <div className="lg:hidden" ref={dropdownRef}>
+            <div className="lg:hidden relative w-full" ref={dropdownRef}>
                 <button
                     onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
-                    className="flex h-10 items-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors"
+                    className="flex h-10 items-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors w-full"
                 >
                     <div className="text-gray-500">Filter:</div>
                     <div className="text-sm font-medium">
                         {activeCategoryName}
                     </div>
                     <div
-                        className={`text-gray-500 hover:text-red-600 cursor-pointer transition-transform duration-200 ${
+                        className={`text-gray-500 hover:text-red-600 cursor-pointer transition-transform duration-200 ml-auto ${
                             isMobileFilterOpen ? "rotate-180" : ""
                         }`}
                     >
@@ -282,7 +307,7 @@ export default function CategorySidebar({
                 </button>
 
                 {isMobileFilterOpen && (
-                    <div className="absolute top-full left-0 right-0 mt-2 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50 p-4">
+                    <div className="mt-2 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50 p-4">
                         <div className="space-y-4">
                             <div>
                                 <h3 className="text-sm font-semibold text-gray-900 mb-3">
@@ -313,19 +338,6 @@ export default function CategorySidebar({
                                         </button>
                                     ))}
                                 </div>
-                            </div>
-
-                            <div className="border-t border-gray-200 pt-4">
-                                <h3 className="text-sm font-semibold text-gray-900 mb-3">
-                                    Price Range
-                                </h3>
-                                <PriceRangeSlider
-                                    min={priceRange.min}
-                                    max={priceRange.max}
-                                    initialMin={priceRange.min}
-                                    initialMax={priceRange.max}
-                                    onChange={handlePriceChange}
-                                />
                             </div>
                         </div>
                     </div>

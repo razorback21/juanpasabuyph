@@ -19,13 +19,20 @@ class CatalogController extends Controller
     {
         $this->defaultSeo();
 
+        $categorySlug = request()->get('category');
         $categories = ProductCategory::whereHas('products')->withCount(['products' => function ($query) {
             $query->where('disabled', false);
         }])->get();
 
-        $priceRange = Product::where('disabled', false)
-            ->selectRaw('MIN(price) as min_price, MAX(price) as max_price')
-            ->first();
+        $productsQuery = Product::where('disabled', false);
+
+        if ($categorySlug && $categorySlug != 'All' && $categorySlug != 'all') {
+            $productsQuery->whereHas('category', function ($query) use ($categorySlug) {
+                $query->where('slug', $categorySlug);
+            });
+        }
+
+        $priceRange = $productsQuery->selectRaw('MIN(price) as min_price, MAX(price) as max_price')->first();
 
         return Inertia::render("Store/Catalog/Index", [
             'title' => "Catalog",

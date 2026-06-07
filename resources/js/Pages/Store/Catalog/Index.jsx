@@ -1,6 +1,7 @@
 import Layout from "@/Pages/Store/components/Layout.jsx";
 import Products from "../components/Products";
 import CategorySidebar from "../components/CategorySidebar";
+import { PriceRangeSlider } from "../components/CategorySidebar";
 import {
     useState,
     useEffect,
@@ -13,6 +14,7 @@ import Axios from "@/lib/axios";
 export default function Index({ title, categories, priceRange = { min: 0, max: 10000 } }) {
     const loadMoreRef = useRef(null);
     const categoryQuery = requestCategory();
+    const previousCategoryQueryRef = useRef(categoryQuery);
     const titleRef = useRef(
         categoryQuery == "All" ? "All Categories" : categoryQuery
     );
@@ -27,7 +29,7 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
         return null;
     }
 
-    const LoadMore = forwardRef((props, ref) => {
+    const LoadMore = forwardRef(({ priceFilter: priceFilterProp }, ref) => {
         const productsRef = useRef([]);
         const allProductsRef = useRef([]);
         const nextPageUrlRef = useRef("");
@@ -45,8 +47,8 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
 
         const filterProductsByPrice = (products) => {
             return products.filter(product =>
-                parseFloat(product.price) >= priceFilter.min &&
-                parseFloat(product.price) <= priceFilter.max
+                parseFloat(product.price) >= priceFilterProp.min &&
+                parseFloat(product.price) <= priceFilterProp.max
             );
         };
 
@@ -58,9 +60,9 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                     search,
                 })
             );
-            allProductsRef.current = response.data;
-            productsRef.current = filterProductsByPrice(response.data);
-            nextPageUrlRef.current = response.next_page_url;
+        allProductsRef.current = response.data;
+        productsRef.current = filterProductsByPrice(response.data);
+        nextPageUrlRef.current = response.next_page_url;
             totalProductsRef.current = response.total;
             categoryRef.current = category;
             isFetchingRef.current = false;
@@ -77,46 +79,58 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
             fetchProducts(categoryName);
         }, []);
 
-        useEffect(() => {
-            productsRef.current = filterProductsByPrice(allProductsRef.current);
+    useEffect(() => {
+        productsRef.current = filterProductsByPrice(allProductsRef.current);
+        forceUpdate();
+    }, [priceFilterProp]);
+
+    const previousCategoryRef = useRef(categoryQuery);
+
+    useEffect(() => {
+        if (previousCategoryRef.current !== categoryQuery) {
+            setPriceFilter({ min: priceRange.min, max: priceRange.max });
+            previousCategoryRef.current = categoryQuery;
+        }
+    }, [categoryQuery]);
+
+    function loadNextProducts() {
+        if (nextPageUrlRef.current && !isLoadingRef.current) {
+            isLoadingRef.current = true;
             forceUpdate();
-        }, [priceFilter]);
+
+            Axios.get(
+                nextPageUrlRef.current,
+                categoryRef.current && { category: categoryRef.current }
+            )
+                .then((res) => {
+                    allProductsRef.current = [
+                        ...allProductsRef.current,
+                        ...res.data,
+                    ];
+                    productsRef.current = filterProductsByPrice(allProductsRef.current);
+                    nextPageUrlRef.current = res.next_page_url;
+                    totalProductsRef.current = res.total;
+                    isLoadingRef.current = false;
+                    forceUpdate();
+                })
+                .catch(() => {
+                    isLoadingRef.current = false;
+                    forceUpdate();
+                });
+        }
+    }
+
+    function loadSearch(searchTerm) {
+            isLoadingRef.current = true;
+            forceUpdate();
+
+            fetchProducts(categoryRef.current, searchTerm || null);
+        }
 
         useImperativeHandle(ref, () => ({
-            loadCategory: (category) => {
-                fetchProducts(category);
-            },
-            loadSearch: (search) => {
-                fetchProducts(categoryRef.current, search);
-            },
+            loadNextProducts,
+            loadSearch
         }));
-
-        function loadNextProducts() {
-            if (nextPageUrlRef.current && !isLoadingRef.current) {
-                isLoadingRef.current = true;
-                forceUpdate();
-
-                Axios.get(
-                    nextPageUrlRef.current,
-                    categoryRef.current && { category: categoryRef.current }
-                )
-                    .then((res) => {
-                        allProductsRef.current = [
-                            ...allProductsRef.current,
-                            ...res.data,
-                        ];
-                        productsRef.current = filterProductsByPrice(allProductsRef.current);
-                        nextPageUrlRef.current = res.next_page_url;
-                        totalProductsRef.current = res.total;
-                        isLoadingRef.current = false;
-                        forceUpdate();
-                    })
-                    .catch(() => {
-                        isLoadingRef.current = false;
-                        forceUpdate();
-                    });
-            }
-        }
 
         if (isFetchingRef.current) {
             return (
@@ -251,7 +265,7 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
 
         return (
             <>
-                <div className="relative w-full sm:w-auto sm:ml-auto">
+                <div className="relative w-full">
                     <div className="flex items-center">
                         <input
                             ref={searchInputRef}
@@ -259,7 +273,7 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                             onKeyUp={handleKeyUp}
                             type="text"
                             placeholder="Search products..."
-                            className="h-10 w-full sm:w-64 rounded-lg bg-gray-100 px-4 text-sm focus:outline-none border-0 focus:ring-2 focus:ring-blue-500"
+                            className="h-10 w-full rounded-lg bg-gray-100 px-4 text-sm focus:outline-none border-0 focus:ring-2 focus:ring-blue-500"
                         />
                         <button
                             onClick={handleSearch}
@@ -294,8 +308,31 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                 </h1>
             </div>
 
-            <div className="flex flex-col lg:flex-row gap-6">
-                <div className="w-full lg:w-64 xl:w-72 shrink-0 lg:static relative">
+            <div className="lg:hidden px-4 mb-6 space-y-2">
+                <SearchProducts />
+                <div className="bg-white rounded-lg shadow-sm p-4">
+                    <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                        Price Range
+                    </h3>
+                    <PriceRangeSlider
+                        min={priceRange.min}
+                        max={priceRange.max}
+                        initialMin={priceRange.min}
+                        initialMax={priceRange.max}
+                        onChange={setPriceFilter}
+                    />
+                </div>
+                <CategorySidebar
+                    categories={categories}
+                    activeCategorySlug={categoryQuery}
+                    priceRange={priceRange}
+                    onPriceFilterChange={setPriceFilter}
+                    mobileOnly
+                />
+            </div>
+
+            <div className="hidden lg:flex flex-col lg:flex-row gap-6">
+                <div className="lg:w-64 xl:w-72 shrink-0 lg:sticky lg:top-24">
                     <CategorySidebar
                         categories={categories}
                         activeCategorySlug={categoryQuery}
@@ -308,9 +345,13 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                         <SearchProducts />
                     </div>
                     <section>
-                        <LoadMore ref={loadMoreRef} />
+                        <LoadMore ref={loadMoreRef} priceFilter={priceFilter} />
                     </section>
                 </div>
+            </div>
+
+            <div className="lg:hidden">
+                <LoadMore ref={loadMoreRef} priceFilter={priceFilter} />
             </div>
         </Layout>
     );
