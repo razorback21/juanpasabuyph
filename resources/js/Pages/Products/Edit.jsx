@@ -6,12 +6,10 @@ import PrimaryButton from "@/components/PrimaryButton";
 import { Button } from "@/components/ui/button";
 import LinkButton from "@/components/LinkButton";
 import Textarea from "@/components/Textarea";
-import NoImage from "@/components/NoImage";
 import AlertConfirm from "@/components/AlertConfirm";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
-import Progressbar from "@/components/ProgressBar";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import ItemPrice from "./ItemPrice";
@@ -21,8 +19,7 @@ export default function Edit({ product, categories, from, uoms }) {
     const alertRef = useRef(null);
 
     const galleryFileRef = useRef(null);
-    const galleryDescriptionRef = useRef(null);
-    const galleryProgressBarRef = useRef(null);
+    const [uploading, setUploading] = useState(false);
 
     const formDataRef = useRef({
         name: product.name,
@@ -51,8 +48,7 @@ export default function Edit({ product, categories, from, uoms }) {
             formData.append("images[]", file);
         });
 
-        galleryDescriptionRef.current.firstElementChild.textContent =
-            files.map((f) => f.name).join(", ");
+        setUploading(true);
 
         router.post(
             route("productimages.upload-gallery", product.slug),
@@ -61,25 +57,18 @@ export default function Edit({ product, categories, from, uoms }) {
                 forceFormData: true,
                 onSuccess: () => {
                     galleryFileRef.current.value = "";
-                    galleryDescriptionRef.current.firstElementChild.textContent = "";
-                    galleryProgressBarRef.current?.reset();
                     router.reload({ only: ["product"] });
                     toast.success("Gallery images uploaded!");
                 },
-                onError: (errors) => {
+                onError: () => {
+                    setUploading(false);
                     alertRef.current.open({
                         title: "Error",
-                        description: `Failed to upload gallery images. ${props.errors.images || ""}`,
+                        description: "Failed to upload gallery images.",
                     });
-                    galleryProgressBarRef.current?.show(false);
-                    galleryProgressBarRef.current?.reset();
                 },
-                onStart: () => {
-                    galleryProgressBarRef.current?.reset();
-                },
-                onProgress: (event) => {
-                    galleryProgressBarRef.current?.show(true);
-                    galleryProgressBarRef.current?.setValue(event.percentage || 0);
+                onFinish: () => {
+                    setUploading(false);
                 },
             }
         );
@@ -155,8 +144,12 @@ export default function Edit({ product, categories, from, uoms }) {
                         <div className="w-full">
                             <h3 className="text-sm font-medium text-gray-700 mb-2">Gallery Images</h3>
                             <div
-                                className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-colors mb-3"
-                                onClick={() => galleryFileRef.current.click()}
+                                className={`border-2 border-dashed rounded-lg p-6 text-center transition-colors mb-3 ${
+                                    uploading
+                                        ? "border-blue-300 bg-blue-50 cursor-wait"
+                                        : "border-gray-300 cursor-pointer hover:border-gray-400 hover:bg-gray-50"
+                                }`}
+                                onClick={() => !uploading && galleryFileRef.current.click()}
                             >
                                 <input
                                     ref={galleryFileRef}
@@ -167,13 +160,23 @@ export default function Edit({ product, categories, from, uoms }) {
                                     multiple
                                     onChange={handleGalleryChange}
                                 />
-                                <svg className="mx-auto h-10 w-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 16V4m0 0L8 8m4-4l4 4M4 14v6h16v-6" />
-                                </svg>
-                                <p className="text-sm text-gray-600">Click to select images</p>
-                                <p ref={galleryDescriptionRef} className="text-xs text-gray-400 mt-1"><span></span></p>
+                                {uploading ? (
+                                    <>
+                                        <svg className="mx-auto h-8 w-8 text-blue-500 animate-spin mb-2" fill="none" viewBox="0 0 24 24">
+                                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                                        </svg>
+                                        <p className="text-sm text-blue-600 font-medium">Uploading, please wait…</p>
+                                    </>
+                                ) : (
+                                    <>
+                                        <svg className="mx-auto h-10 w-10 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 16V4m0 0L8 8m4-4l4 4M4 14v6h16v-6" />
+                                        </svg>
+                                        <p className="text-sm text-gray-600">Click to select images</p>
+                                    </>
+                                )}
                             </div>
-                            <Progressbar ref={galleryProgressBarRef} />
                             {(product.gallery_images || []).length > 0 ? (
                                 <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
                                     {(product.gallery_images || []).map((image) => (
