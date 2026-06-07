@@ -18,11 +18,7 @@ import ItemPrice from "./ItemPrice";
 
 export default function Edit({ product, categories, from, uoms }) {
     const props = usePage().props;
-    const imageDesciptionRef = useRef(null);
-    const imageRef = useRef(null);
-    const imageFileRef = useRef(null);
     const alertRef = useRef(null);
-    const progressBarRef = useRef(null);
 
     const galleryFileRef = useRef(null);
     const galleryDescriptionRef = useRef(null);
@@ -44,61 +40,6 @@ export default function Edit({ product, categories, from, uoms }) {
 
     const formInputHandler = (e) => {
         formDataRef.current[e.target.name] = e.target.value;
-    };
-
-    const handleImageClick = () => {
-        imageFileRef.current.click();
-    };
-
-    const handleImageChange = (e) => {
-        progressBarRef.current?.show(false);
-        imageDesciptionRef.current.firstElementChild.innerHTML =
-            e.target.files[0].name;
-    };
-
-    const uploadImageHandler = (e) => {
-        e.preventDefault();
-
-        const file = imageFileRef.current.files[0];
-        if (!file) {
-            alertRef.current.open({
-                title: "Error",
-                description: "Please select an image",
-            });
-            return;
-        }
-
-        const formData = new FormData();
-        formData.append("image", file);
-
-        router.post(
-            "/productimages/upload/" + product.id + "/featured",
-            formData,
-            {
-                forceFormData: true,
-                onSuccess: () => {
-                    imageFileRef.current.value = "";
-                    imageDesciptionRef.current.firstElementChild.innerHTML = "";
-                    router.reload({ only: ["product"] });
-                    toast.success("Image uploaded successfully!");
-                },
-                onError: (errors) => {
-                    alertRef.current.open({
-                        title: "Error",
-                        description: `Failed to upload image. ${props.errors.image}`,
-                    });
-                    progressBarRef.current?.show(false);
-                    progressBarRef.current?.reset();
-                },
-                onStart: () => {
-                    progressBarRef.current?.reset();
-                },
-                onProgress: (event) => {
-                    progressBarRef.current?.show(true);
-                    progressBarRef.current?.setValue(event.percentage || 0);
-                },
-            }
-        );
     };
 
     const handleGalleryChange = (e) => {
@@ -210,48 +151,8 @@ export default function Edit({ product, categories, from, uoms }) {
                             Back
                         </LinkButton>
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-6 pt-8 pb-6 px-6">
-                        <div className="flex flex-col items-center sm:w-1/4 shrink-0">
-                            <p className="text-sm font-medium text-gray-700 mb-2">Featured Image</p>
-                            <div
-                                className="w-full max-w-[180px] aspect-square border-2 border-dashed border-gray-300 rounded-lg overflow-hidden cursor-pointer hover:border-indigo-400 transition-colors flex items-center justify-center"
-                                onClick={handleImageClick}
-                            >
-                                {product.featured_image_url ? (
-                                    <img
-                                        ref={imageRef}
-                                        src={product.featured_image_url}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover"
-                                    />
-                                ) : (
-                                    <NoImage
-                                        hoverText="Click to Upload"
-                                        onClick={handleImageClick}
-                                    />
-                                )}
-                            </div>
-
-                            <input
-                                ref={imageFileRef}
-                                type="file"
-                                name="featured_image"
-                                className="hidden"
-                                accept=".jpg,.jpeg,.png,.webp"
-                                onChange={handleImageChange}
-                            />
-                            <Progressbar ref={progressBarRef} />
-                            <Button
-                                variant="outline"
-                                ref={imageDesciptionRef}
-                                className="text-center mt-2 text-xs"
-                                onClick={uploadImageHandler}
-                            >
-                                Upload Image : <span></span>
-                            </Button>
-                        </div>
-
-                        <div className="flex-1 min-w-0">
+                    <div className="flex flex-col pt-8 pb-6 px-6">
+                        <div className="w-full">
                             <h3 className="text-sm font-medium text-gray-700 mb-2">Gallery Images</h3>
                             <div
                                 className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center cursor-pointer hover:border-gray-400 hover:bg-gray-50 transition-colors mb-3"
