@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function () {
     // Product 
     Route::resource('products', ProductController::class);
     Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
+    Route::post('/productimages/upload-gallery/{product}', [ProductImageController::class, 'uploadGallery'])->name('productimages.upload-gallery');
+    Route::delete('/productimages/{product}/{mediaId}', [ProductImageController::class, 'deleteImage'])->name('productimages.delete');
+    Route::put('/productimages/{product}/featured/{mediaId}', [ProductImageController::class, 'setFeatured'])->name('productimages.set-featured');
     // Product category
     Route::resource('product-categories', ProductCategoryController::class);
     // Inventory

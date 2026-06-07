@@ -25,7 +25,7 @@ class ProductController extends Controller
     {
         $filter = new ProductFilterService($request);
 
-        $products = $filter->getQuery()->with('category')->paginate(10)
+        $products = $filter->getQuery()->with(['category', 'media'])->paginate(10)
             ->withQueryString()
             ->through(function ($product) {
                 return [
@@ -73,13 +73,14 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $product->load([
+            'media',
             'inventory' => function ($query) {
                 $query->oldest();
             }
         ]);
 
         return Inertia::render('Products/Show', [
-            'product' => $product,
+            'product' => $product->append('gallery_images'),
             'movementTypes' => MovementTypeEnum::getOptions(),
         ]);
     }
@@ -91,7 +92,7 @@ class ProductController extends Controller
     {
         return Inertia::render('Products/Edit', [
             'categories' => ProductCategory::all()->toArray(),
-            'product' => $product,
+            'product' => $product->load('media'),
             'from' => request()->query('from'),
             'uoms' => ProductUOMEnum::getOptions(),
         ]);

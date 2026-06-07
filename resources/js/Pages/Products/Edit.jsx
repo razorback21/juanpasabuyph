@@ -11,7 +11,6 @@ import AlertConfirm from "@/components/AlertConfirm";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import Progressbar from "@/components/ProgressBar";
-// /import Dropdown from "@/components/Dropdown";
 import { useRef } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -24,6 +23,10 @@ export default function Edit({ product, categories, from, uoms }) {
     const imageFileRef = useRef(null);
     const alertRef = useRef(null);
     const progressBarRef = useRef(null);
+
+    const galleryFileRef = useRef(null);
+    const galleryDescriptionRef = useRef(null);
+    const galleryProgressBarRef = useRef(null);
 
     const formDataRef = useRef({
         name: product.name,
@@ -74,10 +77,9 @@ export default function Edit({ product, categories, from, uoms }) {
             {
                 forceFormData: true,
                 onSuccess: () => {
-                    // Clear the file input
                     imageFileRef.current.value = "";
                     imageDesciptionRef.current.firstElementChild.innerHTML = "";
-
+                    router.reload({ only: ["product"] });
                     toast.success("Image uploaded successfully!");
                 },
                 onError: (errors) => {
@@ -94,6 +96,105 @@ export default function Edit({ product, categories, from, uoms }) {
                 onProgress: (event) => {
                     progressBarRef.current?.show(true);
                     progressBarRef.current?.setValue(event.percentage || 0);
+                },
+            }
+        );
+    };
+
+    const handleGalleryChange = (e) => {
+        const files = Array.from(e.target.files);
+        galleryDescriptionRef.current.firstElementChild.textContent =
+            files.map((f) => f.name).join(", ");
+    };
+
+    const uploadGalleryHandler = (e) => {
+        e.preventDefault();
+
+        const files = galleryFileRef.current.files;
+        if (!files || files.length === 0) {
+            alertRef.current.open({
+                title: "Error",
+                description: "Please select at least one image",
+            });
+            return;
+        }
+
+        const formData = new FormData();
+        Array.from(files).forEach((file) => {
+            formData.append("images[]", file);
+        });
+
+        router.post(
+            route("productimages.upload-gallery", product.slug),
+            formData,
+            {
+                forceFormData: true,
+                onSuccess: () => {
+                    galleryFileRef.current.value = "";
+                    galleryDescriptionRef.current.firstElementChild.textContent = "";
+                    galleryProgressBarRef.current?.reset();
+                    router.reload({ only: ["product"] });
+                    toast.success("Gallery images uploaded!");
+                },
+                onError: (errors) => {
+                    alertRef.current.open({
+                        title: "Error",
+                        description: `Failed to upload gallery images. ${props.errors.images || ""}`,
+                    });
+                    galleryProgressBarRef.current?.show(false);
+                    galleryProgressBarRef.current?.reset();
+                },
+                onStart: () => {
+                    galleryProgressBarRef.current?.reset();
+                },
+                onProgress: (event) => {
+                    galleryProgressBarRef.current?.show(true);
+                    galleryProgressBarRef.current?.setValue(event.percentage || 0);
+                },
+            }
+        );
+    };
+
+    const handleDeleteImage = (mediaId) => {
+        if (!confirm("Delete this image?")) return;
+
+        router.delete(
+            route("productimages.delete", {
+                product: product.slug,
+                mediaId,
+            }),
+            {
+                onSuccess: () => {
+                    router.reload({ only: ["product"] });
+                    toast.success("Image deleted successfully!");
+                },
+                onError: () => {
+                    alertRef.current.open({
+                        title: "Error",
+                        description: "Failed to delete image.",
+                    });
+                },
+            }
+        );
+    };
+
+    const handleSetFeatured = (mediaId) => {
+        router.put(
+            route("productimages.set-featured", {
+                product: product.slug,
+                mediaId,
+            }),
+            {},
+            {
+                onSuccess: () => {
+                    router.reload({ only: ["product"] });
+                    toast.success("Featured image updated!");
+                },
+                onError: () => {
+                    alertRef.current.open({
+                        title: "Error",
+                        description: "Failed to set featured image.",
+                    });
                 },
             }
         );
@@ -293,6 +394,76 @@ export default function Edit({ product, categories, from, uoms }) {
                                 Save
                             </PrimaryButton>
                         </div>
+                    </div>
+
+                    <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg mt-6">
+                        <h3 className="text-lg font-medium text-gray-900 mb-4">
+                            Gallery
+                        </h3>
+                        <div className="flex items-center gap-4 mb-4">
+                            <input
+                                ref={galleryFileRef}
+                                type="file"
+                                name="gallery_images"
+                                className="hidden"
+                                accept=".jpg,.jpeg,.png,.webp"
+                                multiple
+                                onChange={handleGalleryChange}
+                            />
+                            <Progressbar ref={galleryProgressBarRef} />
+                            <Button
+                                variant="outline"
+                                ref={galleryDescriptionRef}
+                                className="text-center"
+                                onClick={uploadGalleryHandler}
+                            >
+                                Upload Gallery Images : <span></span>
+                            </Button>
+                        </div>
+                        {(product.gallery_images || []).length > 0 && (
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                {(product.gallery_images || []).map((image) => (
+                                    <div
+                                        key={image.id}
+                                        className="relative group border rounded-md overflow-hidden"
+                                    >
+                                        <img
+                                            src={image.medium_url}
+                                            alt="Product gallery"
+                                            className="w-full h-24 object-cover"
+                                        />
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                            <button
+                                                onClick={() => handleSetFeatured(image.id)}
+                                                className={`px-2 py-1 text-xs rounded ${
+                                                    product.featured_media_id === image.id
+                                                        ? "bg-blue-500 text-white"
+                                                        : "bg-white text-gray-800"
+                                                }`}
+                                            >
+                                                ★
+                                            </button>
+                                            <button
+                                                onClick={() => handleDeleteImage(image.id)}
+                                                className="px-2 py-1 text-xs bg-red-500 text-white rounded"
+                                            >
+                                                ×
+                                            </button>
+                                        </div>
+                                        {product.featured_media_id === image.id && (
+                                            <div className="absolute top-1 left-1 bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded">
+                                                Featured
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        {(product.gallery_images || []).length === 0 && (
+                            <p className="text-sm text-gray-500">
+                                No gallery images yet. Upload images using the button above.
+                            </p>
+                        )}
                     </div>
                 </div>
             </div>

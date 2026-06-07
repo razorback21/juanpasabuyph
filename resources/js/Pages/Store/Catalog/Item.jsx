@@ -5,7 +5,7 @@ import QuantityInput from "../components/QuantityInput";
 import { router, usePage } from "@inertiajs/react";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "@inertiajs/react";
 import Lightbox from "../components/Lightbox";
@@ -20,6 +20,12 @@ export default function Item({
     const page = usePage();
     const quantityInputRef = useRef(null);
     const lightboxRef = useRef(null);
+    const [activeImage, setActiveImage] = useState(product.featured_image_url);
+
+    const galleryImages = product.gallery_images || [];
+    const displayImages = galleryImages.length > 0 ? galleryImages : [
+        { id: null, large_url: product.featured_image_url, medium_url: product.featured_image_url, thumb_url: product.featured_image_url }
+    ];
 
     const handlerAddToCart = (e) => {
         e.preventDefault();
@@ -42,12 +48,18 @@ export default function Item({
         return product.available_stock === 0 || product.disabled;
     }
 
+    const handleThumbnailClick = (image) => {
+        setActiveImage(image.large_url || image.medium_url);
+    };
+
+    const lightboxSources = displayImages.map((img) => img.large_url);
+
     return (
         <Layout title={product.name} category={category}>
             <Toaster />
             <Lightbox
                 ref={lightboxRef}
-                sources={[product.featured_image_url]}
+                sources={lightboxSources}
             />
             <div className="mb-6 text-sm text-[#6b7280]">
                 Category /{" "}
@@ -64,11 +76,33 @@ export default function Item({
                 <div className="bg-white p-6 rounded-xl shadow-lg">
                     <div
                         onClick={() => lightboxRef.current.toggle()}
-                        className="aspect-[4/3] w-full bg-center bg-no-repeat bg-contain rounded-lg overflow-hidden"
+                        className="aspect-[4/3] w-full bg-center bg-no-repeat bg-contain rounded-lg overflow-hidden cursor-pointer"
                         style={{
-                            backgroundImage: `url("${product.featured_image_url}")`,
+                            backgroundImage: `url("${activeImage?.large_url || product.featured_image_url}")`,
                         }}
                     ></div>
+
+                    {displayImages.length > 1 && (
+                        <div className="flex gap-2 mt-4 flex-wrap">
+                            {displayImages.map((image, index) => (
+                                <div
+                                    key={image.id || index}
+                                    onClick={() => handleThumbnailClick(image)}
+                                    className={`w-16 h-16 rounded-md overflow-hidden border-2 cursor-pointer transition-all ${
+                                        activeImage?.id === image.id
+                                            ? "border-blue-500 opacity-100"
+                                            : "border-transparent opacity-70 hover:opacity-100"
+                                    }`}
+                                >
+                                    <img
+                                        src={image.thumb_url || image.medium_url}
+                                        alt={`Thumbnail ${index + 1}`}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
                 <div className="bg-white p-8 rounded-xl shadow-lg">
                     <h1 className="text-3xl font-bold text-[#1f2937] mb-2">

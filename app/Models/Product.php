@@ -20,9 +20,17 @@ class Product extends Model implements HasMedia
 {
     use HasFactory, InteractsWithMedia;
 
-    protected $guarded = [
-        'created_at',
-        'updated_at',
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'price',
+        'cost_price',
+        'product_category_id',
+        'sale_uom',
+        'is_featured',
+        'disabled',
+        'featured_media_id',
     ];
 
 
@@ -91,6 +99,11 @@ class Product extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(ProductCategory::class, 'product_category_id');
+    }
+
+    public function featuredMedia()
+    {
+        return $this->belongsTo(Media::class, 'featured_media_id');
     }
 
     /**
@@ -232,7 +245,7 @@ class Product extends Model implements HasMedia
     public function productCategory(): Attribute
     {
         return Attribute::make(
-            get: fn() => $this->load('category')->category ? ucwords($this->category->name) : null,
+            get: fn($value, $attributes) => !empty($attributes['product_category_id']) ? ucwords($this->category->name ?? '') : null,
         );
     }
 
@@ -241,45 +254,60 @@ class Product extends Model implements HasMedia
         return $this->getLargeImageUrlAttribute();
     }
 
+    private function getFeaturedMedia()
+    {
+        if (! array_key_exists('featured_media_id', $this->attributes)) {
+            return null;
+        }
+
+        $media = null;
+
+        if ($this->getAttributeFromArray('featured_media_id')) {
+            $media = $this->getMedia('product_feature_image')
+                ->firstWhere('id', $this->getAttributeFromArray('featured_media_id'));
+        }
+
+        if (!$media) {
+            $media = $this->getMedia('product_feature_image')->first();
+        }
+
+        return $media;
+    }
 
     public function getThumbnailUrlAttribute()
     {
-        $media = $this->getMedia('product_feature_image')->first();
-        if ($media) {
-            return $media->getUrl('thumb');
-        } else {
-            return 'https://imageplaceholder.net/150x150';
-        }
+        $media = $this->getFeaturedMedia();
+        return $media ? $media->getUrl('thumb') : 'https://imageplaceholder.net/150x150';
     }
 
     public function getMediumImageUrlAttribute()
     {
-        $media = $this->getMedia('product_feature_image')->first();
-        if ($media) {
-            return $media->getUrl('medium');
-        } else {
-            return 'https://imageplaceholder.net/450x450';
-        }
+        $media = $this->getFeaturedMedia();
+        return $media ? $media->getUrl('medium') : 'https://imageplaceholder.net/450x450';
     }
 
     public function getLargeImageUrlAttribute()
     {
-        $media = $this->getMedia('product_feature_image')->first();
-        if ($media) {
-            return $media->getUrl('large');
-        } else {
-            return 'https://imageplaceholder.net/800x800';
-        }
+        $media = $this->getFeaturedMedia();
+        return $media ? $media->getUrl('large') : 'https://imageplaceholder.net/800x800';
     }
 
     public function getFacebookImageUrlAttribute()
     {
-        $media = $this->getMedia('product_feature_image')->first();
-        if ($media) {
-            return $media->getUrl('facebook');
-        } else {
-            return 'https://imageplaceholder.net/1200x630';
-        }
+        $media = $this->getFeaturedMedia();
+        return $media ? $media->getUrl('facebook') : 'https://imageplaceholder.net/1200x630';
+    }
+
+    public function getGalleryImagesAttribute(): array
+    {
+        return $this->getMedia('product_feature_image')
+            ->map(fn ($media) => [
+                'id' => $media->id,
+                'thumb_url' => $media->getUrl('thumb'),
+                'medium_url' => $media->getUrl('medium'),
+                'large_url' => $media->getUrl('large'),
+            ])
+            ->toArray();
     }
 
     /**

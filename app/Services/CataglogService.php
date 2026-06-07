@@ -23,7 +23,7 @@ class CataglogService
             'search' => 'nullable|string',
         ]);
 
-        $products = Product::where('disabled', '=', false)->with('category');
+        $products = Product::where('disabled', '=', false)->with(['category', 'media']);
         if (isset($validated['search'])) {
             $products = $products->whereAny(['name', 'description'], 'like', '%' . $validated['search'] . '%');
         }

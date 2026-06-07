@@ -18,7 +18,7 @@ class OutOfStockController extends Controller
      */
     public function index()
     {
-        $outOfStockProducts = $this->stockService->getOutOfStockProducts()->paginate(10);
+        $outOfStockProducts = $this->stockService->getOutOfStockProducts()->with('category')->paginate(10);
         $productCount = $outOfStockProducts->total();
         return Inertia::render('OutOfStock/Index', compact('outOfStockProducts', 'productCount'));
     }

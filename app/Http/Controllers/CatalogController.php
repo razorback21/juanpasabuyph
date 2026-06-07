@@ -33,14 +33,16 @@ class CatalogController extends Controller
 
     public function item(Request $request, $category, $slug)
     {
-        $product = Product::findActiveProductBySlug($slug);
-        $product->load('category');
-        $category = $product->category()->with('products')->first();
-        $relatedProducts = $category->products()->where("id", "!=", $product->id)->limit(4)->inRandomOrder()->get();
+        $product = Product::where("disabled", false)->where("slug", $slug)->firstOrFail();
+        $product->load(['category', 'media']);
+        $category = $product->category()->with(['products' => function ($query) {
+            $query->with('media');
+        }])->first();
+        $relatedProducts = $category->products()->with('category')->where("id", "!=", $product->id)->limit(4)->inRandomOrder()->get();
 
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
-            'product' => $product,
+            'product' => $product->append('gallery_images'),
             'categorySlug' => $product->category->slug,
             'category' => $product->category->name,
             'relatedProducts' => $relatedProducts

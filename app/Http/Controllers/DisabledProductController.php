@@ -13,7 +13,7 @@ class DisabledProductController extends Controller
      */
     public function index()
     {
-        $disabledProducts = Product::disabledProducts()->get();
+        $disabledProducts = Product::disabledProducts()->with(['category', 'media'])->get();
         return Inertia::render('DisabledProduct/Index', compact('disabledProducts'));
     }
 
