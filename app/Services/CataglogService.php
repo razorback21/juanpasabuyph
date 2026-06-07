@@ -27,7 +27,7 @@ class CataglogService
         if (isset($validated['search'])) {
             $products = $products->whereAny(['name', 'description'], 'like', '%' . $validated['search'] . '%');
         }
-        if (isset($validated['category']) && $validated['category'] != 'All' && $validated['category'] != 'all') {
+        if (isset($validated['category']) && !in_array($validated['category'], ['All', 'all'], true)) {
             $products = $products->whereHas('category', function ($query) use ($validated) {
                 $query->where('slug', $validated['category']);
             });

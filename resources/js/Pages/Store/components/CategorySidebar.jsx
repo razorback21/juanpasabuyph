@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from "react";
-import { Link, router } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 
 export function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
     const [minVal, setMinVal] = useState(initialMin);
@@ -33,10 +33,6 @@ export function PriceRangeSlider({ min, max, initialMin, initialMax, onChange })
             range.current.style.width = `${Math.max(0, maxPercent - minPercent)}%`;
         }
     }, [maxVal, getPercent, minVal]);
-
-    function minPercent() {
-        return getPercent(minVal);
-    }
 
     const debouncedOnChange = useCallback(
         (value) => {
@@ -157,18 +153,9 @@ export default function CategorySidebar({
     activeCategorySlug,
     priceRange,
     onPriceFilterChange,
-    mobileOnly = false,
 }) {
-    const [priceFilter, setPriceFilter] = useState({
-        min: priceRange.min,
-        max: priceRange.max,
-    });
     const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
     const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        setPriceFilter({ min: priceRange.min, max: priceRange.max });
-    }, [activeCategorySlug, priceRange.min, priceRange.max]);
 
     function handleClickOutside(event) {
         if (
@@ -196,7 +183,6 @@ export default function CategorySidebar({
     };
 
     const handlePriceChange = (newPriceFilter) => {
-        setPriceFilter(newPriceFilter);
         if (onPriceFilterChange) {
             onPriceFilterChange(newPriceFilter);
         }

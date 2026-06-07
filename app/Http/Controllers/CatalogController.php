@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\ProductCategory;
 use App\Services\CataglogService;
-use App\Services\ProductService;
 use App\Traits\HasDefaultSeo;
 use App\Traits\HasProductSeo;
 use Illuminate\Http\Request;
@@ -20,27 +19,13 @@ class CatalogController extends Controller
         $this->defaultSeo();
 
         $categorySlug = request()->get('category');
-        $categories = ProductCategory::whereHas('products')->withCount(['products' => function ($query) {
-            $query->where('disabled', false);
-        }])->get();
-
-        $productsQuery = Product::where('disabled', false);
-
-        if ($categorySlug && $categorySlug != 'All' && $categorySlug != 'all') {
-            $productsQuery->whereHas('category', function ($query) use ($categorySlug) {
-                $query->where('slug', $categorySlug);
-            });
-        }
-
-        $priceRange = $productsQuery->selectRaw('MIN(price) as min_price, MAX(price) as max_price')->first();
+        $categories = $this->getCategoriesWithCount();
+        $priceRange = $this->getPriceRange($categorySlug);
 
         return Inertia::render("Store/Catalog/Index", [
             'title' => "Catalog",
             'categories' => $categories,
-            'priceRange' => [
-                'min' => (float) ($priceRange->min_price ?? 0),
-                'max' => (float) ($priceRange->max_price ?? 10000),
-            ],
+            'priceRange' => $priceRange,
         ]);
     }
 
@@ -59,27 +44,39 @@ class CatalogController extends Controller
         }])->first();
         $relatedProducts = $category->products()->with('category')->where("id", "!=", $product->id)->limit(4)->inRandomOrder()->get();
 
-        $categories = ProductCategory::whereHas('products', function ($query) {
-            $query->where('disabled', false);
-        })->withCount(['products' => function ($query) {
-            $query->where('disabled', false);
-        }])->get();
-
-        $priceRange = Product::where('disabled', false)
-            ->selectRaw('MIN(price) as min_price, MAX(price) as max_price')
-            ->first();
-
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
             'product' => $product->append('gallery_images'),
             'categorySlug' => $product->category->slug,
             'category' => $product->category->name,
             'relatedProducts' => $relatedProducts,
-            'categories' => $categories,
-            'priceRange' => [
-                'min' => (float) ($priceRange->min_price ?? 0),
-                'max' => (float) ($priceRange->max_price ?? 10000),
-            ],
         ]);
+    }
+
+    private function getCategoriesWithCount()
+    {
+        return ProductCategory::whereHas('products', function ($query) {
+            $query->where('disabled', false);
+        })->withCount(['products' => function ($query) {
+            $query->where('disabled', false);
+        }])->get();
+    }
+
+    private function getPriceRange(?string $categorySlug = null): array
+    {
+        $query = Product::where('disabled', false);
+
+        if ($categorySlug && !in_array($categorySlug, ['All', 'all'], true)) {
+            $query->whereHas('category', function ($q) use ($categorySlug) {
+                $q->where('slug', $categorySlug);
+            });
+        }
+
+        $range = $query->selectRaw('MIN(price) as min_price, MAX(price) as max_price')->first();
+
+        return [
+            'min' => (float) ($range->min_price ?? 0),
+            'max' => (float) ($range->max_price ?? 10000),
+        ];
     }
 }
