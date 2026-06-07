@@ -12,7 +12,8 @@ import {
 import Axios from "@/lib/axios";
 
 export default function Index({ title, categories, priceRange = { min: 0, max: 10000 } }) {
-    const loadMoreRef = useRef(null);
+    const desktopLoadMoreRef = useRef(null);
+    const mobileLoadMoreRef = useRef(null);
     const categoryQuery = requestCategory();
     const previousCategoryQueryRef = useRef(categoryQuery);
     const titleRef = useRef(
@@ -242,7 +243,7 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
         );
     });
 
-    function SearchProducts(e) {
+    function SearchProducts({ loadMoreRef }) {
         const searchInputRef = useRef(null);
 
         function searchValue(e) {
@@ -309,7 +310,7 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
             </div>
 
             <div className="lg:hidden px-4 mb-6 space-y-2">
-                <SearchProducts />
+                <SearchProducts loadMoreRef={mobileLoadMoreRef} />
                 <div className="bg-white rounded-lg shadow-sm p-4">
                     <h3 className="text-sm font-semibold text-gray-900 mb-3">
                         Price Range
@@ -342,16 +343,16 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                 </div>
                 <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
-                        <SearchProducts />
+                        <SearchProducts loadMoreRef={desktopLoadMoreRef} />
                     </div>
                     <section>
-                        <LoadMore ref={loadMoreRef} priceFilter={priceFilter} />
+                        <LoadMore ref={desktopLoadMoreRef} priceFilter={priceFilter} />
                     </section>
                 </div>
             </div>
 
             <div className="lg:hidden">
-                <LoadMore ref={loadMoreRef} priceFilter={priceFilter} />
+                <LoadMore ref={mobileLoadMoreRef} priceFilter={priceFilter} />
             </div>
         </Layout>
     );
