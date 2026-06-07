@@ -52,7 +52,6 @@ export default function Item({
 
     const handleThumbnailClick = (image, index) => {
         setActiveIndex(index);
-        lightboxRef.current.goTo(index);
     };
 
     const handleMainImageClick = () => {

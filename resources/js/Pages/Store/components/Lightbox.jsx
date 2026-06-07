@@ -1,34 +1,33 @@
 import React, { useState, forwardRef, useImperativeHandle } from "react";
 import FsLightbox from "fslightbox-react";
 
-const Lightbox = forwardRef(({ sources, slide }, ref) => {
-    const [toggler, setToggler] = useState(false);
-    const [currentSlide, setCurrentSlide] = useState(0);
+const Lightbox = forwardRef(({ sources }, ref) => {
+    const [slide, setSlide] = useState(0);
+    const [open, setOpen] = useState(false);
+    const [key, setKey] = useState(0);
 
     useImperativeHandle(ref, () => ({
         open: (index = 0) => {
-            setCurrentSlide(index);
-            setToggler(true);
+            setSlide(index);
+            setKey((k) => k + 1);
+            setOpen(true);
         },
-        close: () => setToggler(false),
-        toggle: () => {
-            if (!toggler) setCurrentSlide(0);
-            setToggler(!toggler);
-        },
+        close: () => setOpen(false),
         goTo: (index) => {
-            setCurrentSlide(index);
-            setToggler(true);
+            setSlide(index);
+            setKey((k) => k + 1);
+            setOpen(true);
         },
     }));
 
     return (
-        <>
-            <FsLightbox
-                toggler={toggler}
-                sources={sources}
-                slide={currentSlide + 1}
-            />
-        </>
+        <FsLightbox
+            key={key}
+            toggler={open}
+            sources={sources}
+            slide={slide + 1}
+            onClose={() => setOpen(false)}
+        />
     );
 });
 
