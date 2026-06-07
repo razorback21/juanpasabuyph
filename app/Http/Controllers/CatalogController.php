@@ -40,12 +40,27 @@ class CatalogController extends Controller
         }])->first();
         $relatedProducts = $category->products()->with('category')->where("id", "!=", $product->id)->limit(4)->inRandomOrder()->get();
 
+        $categories = ProductCategory::whereHas('products', function ($query) {
+            $query->where('disabled', false);
+        })->withCount(['products' => function ($query) {
+            $query->where('disabled', false);
+        }])->get();
+
+        $priceRange = Product::where('disabled', false)
+            ->selectRaw('MIN(price) as min_price, MAX(price) as max_price')
+            ->first();
+
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
             'product' => $product->append('gallery_images'),
             'categorySlug' => $product->category->slug,
             'category' => $product->category->name,
-            'relatedProducts' => $relatedProducts
+            'relatedProducts' => $relatedProducts,
+            'categories' => $categories,
+            'priceRange' => [
+                'min' => (float) ($priceRange->min_price ?? 0),
+                'max' => (float) ($priceRange->max_price ?? 10000),
+            ],
         ]);
     }
 }
