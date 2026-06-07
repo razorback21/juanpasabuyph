@@ -27,13 +27,11 @@ class CataglogService
         if (isset($validated['search'])) {
             $products = $products->whereAny(['name', 'description'], 'like', '%' . $validated['search'] . '%');
         }
-        if (isset($validated['category']) && $validated['category'] != 'All') {
+        if (isset($validated['category']) && $validated['category'] != 'All' && $validated['category'] != 'all') {
             $products = $products->whereHas('category', function ($query) use ($validated) {
                 $query->where('slug', $validated['category']);
             });
         }
-
-
 
         return $products->paginate($itemPerPage)->withQueryString();
     }

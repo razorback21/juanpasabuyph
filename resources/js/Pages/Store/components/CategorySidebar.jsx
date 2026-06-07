@@ -7,6 +7,7 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
     const minRef = useRef(null);
     const maxRef = useRef(null);
     const range = useRef(null);
+    const [isDragging, setIsDragging] = useState(false);
 
     const getPercent = useCallback(
         (value) => Math.round(((value - min) / (max - min)) * 100),
@@ -43,6 +44,30 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
         onChange({ min: minVal, max: value });
     };
 
+    const handleMinInput = (e) => {
+        const val = Math.max(
+            min,
+            Math.min(Number(e.target.value), maxVal - 1)
+        );
+        setMinVal(val);
+    };
+
+    const handleMaxInput = (e) => {
+        const val = Math.min(
+            max,
+            Math.max(Number(e.target.value), minVal + 1)
+        );
+        setMaxVal(val);
+    };
+
+    const handleMinBlur = () => {
+        onChange({ min: minVal, max: maxVal });
+    };
+
+    const handleMaxBlur = () => {
+        onChange({ min: minVal, max: maxVal });
+    };
+
     return (
         <div className="mt-3">
             <div className="relative h-2 mb-6">
@@ -58,7 +83,7 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                     max={max}
                     value={minVal}
                     onChange={handleMinChange}
-                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
+                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-webkit-slider-thumb]:relative [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
                 />
                 <input
                     ref={maxRef}
@@ -67,7 +92,13 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                     max={max}
                     value={maxVal}
                     onChange={handleMaxChange}
-                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
+                    className="absolute w-full h-2 bg-transparent appearance-none cursor-pointer pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e92933] [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:transition-transform [&::-webkit-slider-thumb]:duration-150 [&::-webkit-slider-thumb]:hover:scale-110 [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:appearance-none [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#e92933] [&::-moz-range-thumb]:shadow-md [&::-moz-range-thumb]:cursor-pointer"
+                />
+                <div
+                    className="absolute top-1/2 -translate-y-1/2 pointer-events-none w-0.5 h-0.5 bg-white rounded-full z-10"
+                    style={{
+                        left: `${((minVal - min) / (max - min)) * 100}%`,
+                    }}
                 />
             </div>
             <div className="flex items-center gap-3">
@@ -78,14 +109,8 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                     <input
                         type="number"
                         value={minVal}
-                        onChange={(e) => {
-                            const val = Math.max(
-                                min,
-                                Math.min(Number(e.target.value), maxVal - 1)
-                            );
-                            setMinVal(val);
-                            onChange({ min: val, max: maxVal });
-                        }}
+                        onChange={handleMinInput}
+                        onBlur={handleMinBlur}
                         className="w-full h-9 pl-7 pr-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e92933]/30 focus:border-[#e92933] transition-all"
                     />
                 </div>
@@ -97,14 +122,8 @@ function PriceRangeSlider({ min, max, initialMin, initialMax, onChange }) {
                     <input
                         type="number"
                         value={maxVal}
-                        onChange={(e) => {
-                            const val = Math.min(
-                                max,
-                                Math.max(Number(e.target.value), minVal + 1)
-                            );
-                            setMaxVal(val);
-                            onChange({ min: minVal, max: val });
-                        }}
+                        onChange={handleMaxInput}
+                        onBlur={handleMaxBlur}
                         className="w-full h-9 pl-7 pr-2 text-sm text-gray-700 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#e92933]/30 focus:border-[#e92933] transition-all"
                     />
                 </div>
@@ -117,13 +136,33 @@ export default function CategorySidebar({
     categories,
     activeCategorySlug,
     priceRange,
+    onPriceFilterChange,
 }) {
     const [priceFilter, setPriceFilter] = useState({
         min: priceRange.min,
         max: priceRange.max,
     });
+    const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    function handleClickOutside(event) {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
+            setIsMobileFilterOpen(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const handleCategoryClick = (slug) => {
+        setIsMobileFilterOpen(false);
         router.get(
             route("catalog"),
             { category: slug },
@@ -131,76 +170,71 @@ export default function CategorySidebar({
         );
     };
 
-    const handleApplyPriceFilter = () => {
-        router.get(
-            route("catalog"),
-            {
-                category: activeCategorySlug || undefined,
-                price_min: priceFilter.min,
-                price_max: priceFilter.max,
-            },
-            { preserveState: true, replace: true }
-        );
+    const handlePriceChange = (newPriceFilter) => {
+        setPriceFilter(newPriceFilter);
+        if (onPriceFilterChange) {
+            onPriceFilterChange(newPriceFilter);
+        }
     };
 
-    const handleResetFilters = () => {
-        setPriceFilter({ min: priceRange.min, max: priceRange.max });
-        router.get(route("catalog"), {}, { preserveState: true, replace: true });
-    };
+    const activeCategoryName = !activeCategorySlug || activeCategorySlug === "all"
+        ? "All Products"
+        : categories.find((cat) => cat.slug === activeCategorySlug)?.name || "All Products";
 
     return (
-        <aside className="w-full lg:w-64 xl:w-72 shrink-0">
-            <div className="sticky top-24 space-y-5">
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="px-5 py-4 border-b border-gray-50">
-                        <h3 className="text-sm font-semibold text-gray-900 tracking-wide uppercase">
-                            Categories
-                        </h3>
-                    </div>
-                    <div className="p-3">
-                        <button
-                            onClick={() => handleCategoryClick("all")}
-                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                                !activeCategorySlug || activeCategorySlug === "all"
-                                    ? "bg-[#e92933]/10 text-[#e92933]"
-                                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                            }`}
-                        >
-                            <span
-                                className={`flex items-center justify-center w-6 h-6 rounded-lg text-xs font-bold ${
-                                    !activeCategorySlug || activeCategorySlug === "all"
-                                        ? "bg-[#e92933] text-white"
-                                        : "bg-gray-100 text-gray-500"
-                                }`}
-                            >
-                                All
-                            </span>
-                            <span>All Products</span>
-                        </button>
-                        {categories.map((cat) => (
+        <>
+            <aside className="hidden lg:block w-full lg:w-64 xl:w-72 shrink-0">
+                <div className="sticky top-24 space-y-5">
+                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="px-5 py-4 border-b border-gray-50">
+                            <h3 className="text-sm font-semibold text-gray-900 tracking-wide uppercase">
+                                Categories
+                            </h3>
+                        </div>
+                        <div className="p-3">
                             <button
-                                key={cat.id}
-                                onClick={() => handleCategoryClick(cat.slug)}
+                                onClick={() => handleCategoryClick("all")}
                                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
-                                    activeCategorySlug === cat.slug
+                                    !activeCategorySlug || activeCategorySlug === "all"
                                         ? "bg-[#e92933]/10 text-[#e92933]"
                                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                                 }`}
                             >
                                 <span
-                                    className={`flex items-center justify-center min-w-[1.5rem] h-6 rounded-lg text-xs font-bold ${
-                                        activeCategorySlug === cat.slug
+                                    className={`flex items-center justify-center w-6 h-6 rounded-lg text-xs font-bold ${
+                                        !activeCategorySlug || activeCategorySlug === "all"
                                             ? "bg-[#e92933] text-white"
                                             : "bg-gray-100 text-gray-500"
                                     }`}
                                 >
-                                    {cat.products_count}
+                                    All
                                 </span>
-                                <span className="truncate">{cat.name}</span>
+                                <span>All Products</span>
                             </button>
-                        ))}
+                            {categories.map((cat) => (
+                                <button
+                                    key={cat.id}
+                                    onClick={() => handleCategoryClick(cat.slug)}
+                                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                                        activeCategorySlug === cat.slug
+                                            ? "bg-[#e92933]/10 text-[#e92933]"
+                                            : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                    }`}
+                                >
+                                    <span
+                                        className={`flex items-center justify-center min-w-[1.5rem] h-6 rounded-lg text-xs font-bold ${
+                                            activeCategorySlug === cat.slug
+                                                ? "bg-[#e92933] text-white"
+                                                : "bg-gray-100 text-gray-500"
+                                        }`}
+                                    >
+                                        {cat.products_count}
+                                    </span>
+                                    <span className="truncate">{cat.name}</span>
+                                </button>
+                            ))}
+                        </div>
                     </div>
-                </div>
 
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                     <div className="px-5 py-4 border-b border-gray-50">
@@ -214,25 +248,89 @@ export default function CategorySidebar({
                             max={priceRange.max}
                             initialMin={priceRange.min}
                             initialMax={priceRange.max}
-                            onChange={setPriceFilter}
+                            onChange={handlePriceChange}
                         />
-                        <div className="mt-5 flex gap-2">
-                            <button
-                                onClick={handleApplyPriceFilter}
-                                className="flex-1 h-10 rounded-xl bg-[#e92933] text-white text-sm font-semibold hover:bg-[#ce2b30] transition-colors shadow-sm hover:shadow-md active:scale-[0.98]"
-                            >
-                                Apply
-                            </button>
-                            <button
-                                onClick={handleResetFilters}
-                                className="h-10 px-4 rounded-xl bg-gray-100 text-gray-600 text-sm font-medium hover:bg-gray-200 transition-colors active:scale-[0.98]"
-                            >
-                                Reset
-                            </button>
-                        </div>
                     </div>
                 </div>
+                </div>
+            </aside>
+
+            <div className="lg:hidden" ref={dropdownRef}>
+                <button
+                    onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                    className="flex h-10 items-center gap-x-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-700 hover:text-red-600 px-4 transition-colors"
+                >
+                    <div className="text-gray-500">Filter:</div>
+                    <div className="text-sm font-medium">
+                        {activeCategoryName}
+                    </div>
+                    <div
+                        className={`text-gray-500 hover:text-red-600 cursor-pointer transition-transform duration-200 ${
+                            isMobileFilterOpen ? "rotate-180" : ""
+                        }`}
+                    >
+                        <svg
+                            fill="currentColor"
+                            height="18px"
+                            viewBox="0 0 256 256"
+                            width="18px"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
+                        </svg>
+                    </div>
+                </button>
+
+                {isMobileFilterOpen && (
+                    <div className="absolute top-full left-0 right-0 mt-2 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 z-50 p-4">
+                        <div className="space-y-4">
+                            <div>
+                                <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                                    Categories
+                                </h3>
+                                <div className="space-y-1">
+                                    <button
+                                        onClick={() => handleCategoryClick("all")}
+                                        className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                                            !activeCategorySlug || activeCategorySlug === "all"
+                                                ? "bg-[#e92933]/10 text-[#e92933]"
+                                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                        }`}
+                                    >
+                                        <span>All Products</span>
+                                    </button>
+                                    {categories.map((cat) => (
+                                        <button
+                                            key={cat.id}
+                                            onClick={() => handleCategoryClick(cat.slug)}
+                                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                                                activeCategorySlug === cat.slug
+                                                    ? "bg-[#e92933]/10 text-[#e92933]"
+                                                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                                            }`}
+                                        >
+                                            <span>{cat.name}</span>
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="border-t border-gray-200 pt-4">
+                                <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                                    Price Range
+                                </h3>
+                                <PriceRangeSlider
+                                    min={priceRange.min}
+                                    max={priceRange.max}
+                                    initialMin={priceRange.min}
+                                    initialMax={priceRange.max}
+                                    onChange={handlePriceChange}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
-        </aside>
+        </>
     );
 }
