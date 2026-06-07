@@ -221,22 +221,27 @@ export default function Edit({ product, categories, from, uoms }) {
                             Back
                         </LinkButton>
                     </div>
-                    <div className={`flex flex-col justify-center`}>
-                        <div className="flex justify-center pt-10 pb-5">
-                            {product.featured_image_url ? (
-                                <img
-                                    ref={imageRef}
-                                    src={product.featured_image_url}
-                                    alt={product.name}
-                                    className="h-[300px] max-w-[300px] object-cover rounded-md"
-                                    onClick={handleImageClick}
-                                />
-                            ) : (
-                                <NoImage
-                                    hoverText="Click to Upload"
-                                    onClick={handleImageClick}
-                                />
-                            )}
+                    <div className="flex flex-col sm:flex-row gap-6 pt-8 pb-6 px-6">
+                        <div className="flex flex-col items-center sm:w-1/4 shrink-0">
+                            <p className="text-sm font-medium text-gray-700 mb-2">Featured Image</p>
+                            <div
+                                className="w-full max-w-[180px] aspect-square border-2 border-dashed border-gray-300 rounded-lg overflow-hidden cursor-pointer hover:border-indigo-400 transition-colors flex items-center justify-center"
+                                onClick={handleImageClick}
+                            >
+                                {product.featured_image_url ? (
+                                    <img
+                                        ref={imageRef}
+                                        src={product.featured_image_url}
+                                        alt={product.name}
+                                        className="w-full h-full object-cover"
+                                    />
+                                ) : (
+                                    <NoImage
+                                        hoverText="Click to Upload"
+                                        onClick={handleImageClick}
+                                    />
+                                )}
+                            </div>
 
                             <input
                                 ref={imageFileRef}
@@ -246,17 +251,82 @@ export default function Edit({ product, categories, from, uoms }) {
                                 accept=".jpg,.jpeg,.png,.webp"
                                 onChange={handleImageChange}
                             />
-                        </div>
-                        <div className="flex flex-col items-center">
                             <Progressbar ref={progressBarRef} />
                             <Button
                                 variant="outline"
                                 ref={imageDesciptionRef}
-                                className="text-center mt-2"
+                                className="text-center mt-2 text-xs"
                                 onClick={uploadImageHandler}
                             >
                                 Upload Image : <span></span>
                             </Button>
+                        </div>
+
+                        <div className="flex-1 min-w-0">
+                            <h3 className="text-sm font-medium text-gray-700 mb-2">Gallery Images</h3>
+                            <div className="flex items-center gap-4 mb-3">
+                                <input
+                                    ref={galleryFileRef}
+                                    type="file"
+                                    name="gallery_images"
+                                    className="hidden"
+                                    accept=".jpg,.jpeg,.png,.webp"
+                                    multiple
+                                    onChange={handleGalleryChange}
+                                />
+                                <Progressbar ref={galleryProgressBarRef} />
+                                <Button
+                                    variant="outline"
+                                    ref={galleryDescriptionRef}
+                                    className="text-center text-xs"
+                                    onClick={uploadGalleryHandler}
+                                >
+                                    Upload Gallery Images : <span></span>
+                                </Button>
+                            </div>
+                            {(product.gallery_images || []).length > 0 ? (
+                                <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-3">
+                                    {(product.gallery_images || []).map((image) => (
+                                        <div
+                                            key={image.id}
+                                            className="relative group border rounded-md overflow-hidden"
+                                        >
+                                            <img
+                                                src={image.medium_url}
+                                                alt="Product gallery"
+                                                className="w-full h-24 object-cover"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                                <button
+                                                    onClick={() => handleSetFeatured(image.id)}
+                                                    className={`px-2 py-1 text-xs rounded ${
+                                                        product.featured_media_id === image.id
+                                                            ? "bg-blue-500 text-white"
+                                                            : "bg-white text-gray-800"
+                                                    }`}
+                                                >
+                                                    ★
+                                                </button>
+                                                <button
+                                                    onClick={() => handleDeleteImage(image.id)}
+                                                    className="px-2 py-1 text-xs bg-red-500 text-white rounded"
+                                                >
+                                                    ×
+                                                </button>
+                                            </div>
+                                            {product.featured_media_id === image.id && (
+                                                <div className="absolute top-1 left-1 bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded">
+                                                    Featured
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <p className="text-sm text-gray-500">
+                                    No gallery images yet. Upload images using the button above.
+                                </p>
+                            )}
                         </div>
                     </div>
 
@@ -396,75 +466,7 @@ export default function Edit({ product, categories, from, uoms }) {
                         </div>
                     </div>
 
-                    <div className="overflow-hidden px-6 py-6 bg-white shadow-sm sm:rounded-lg mt-6">
-                        <h3 className="text-lg font-medium text-gray-900 mb-4">
-                            Gallery
-                        </h3>
-                        <div className="flex items-center gap-4 mb-4">
-                            <input
-                                ref={galleryFileRef}
-                                type="file"
-                                name="gallery_images"
-                                className="hidden"
-                                accept=".jpg,.jpeg,.png,.webp"
-                                multiple
-                                onChange={handleGalleryChange}
-                            />
-                            <Progressbar ref={galleryProgressBarRef} />
-                            <Button
-                                variant="outline"
-                                ref={galleryDescriptionRef}
-                                className="text-center"
-                                onClick={uploadGalleryHandler}
-                            >
-                                Upload Gallery Images : <span></span>
-                            </Button>
-                        </div>
-                        {(product.gallery_images || []).length > 0 && (
-                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                                {(product.gallery_images || []).map((image) => (
-                                    <div
-                                        key={image.id}
-                                        className="relative group border rounded-md overflow-hidden"
-                                    >
-                                        <img
-                                            src={image.medium_url}
-                                            alt="Product gallery"
-                                            className="w-full h-24 object-cover"
-                                        />
-                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                                            <button
-                                                onClick={() => handleSetFeatured(image.id)}
-                                                className={`px-2 py-1 text-xs rounded ${
-                                                    product.featured_media_id === image.id
-                                                        ? "bg-blue-500 text-white"
-                                                        : "bg-white text-gray-800"
-                                                }`}
-                                            >
-                                                ★
-                                            </button>
-                                            <button
-                                                onClick={() => handleDeleteImage(image.id)}
-                                                className="px-2 py-1 text-xs bg-red-500 text-white rounded"
-                                            >
-                                                ×
-                                            </button>
-                                        </div>
-                                        {product.featured_media_id === image.id && (
-                                            <div className="absolute top-1 left-1 bg-blue-500 text-white text-xs px-1.5 py-0.5 rounded">
-                                                Featured
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                        {(product.gallery_images || []).length === 0 && (
-                            <p className="text-sm text-gray-500">
-                                No gallery images yet. Upload images using the button above.
-                            </p>
-                        )}
-                    </div>
+
                 </div>
             </div>
         </AuthenticatedLayout>
