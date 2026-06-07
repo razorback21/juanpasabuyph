@@ -110,10 +110,11 @@ export default function Item({
                                         <div
                                             key={image.id || index}
                                             onClick={() => handleThumbnailClick(image, index)}
-                                            className={`w-16 h-16 rounded-md overflow-hidden border-2 cursor-pointer transition-all ${activeIndex === index
+                                            className={`w-16 h-16 rounded-md overflow-hidden border-2 cursor-pointer transition-all ${
+                                                activeIndex === index
                                                     ? "border-blue-500 opacity-100"
                                                     : "border-transparent opacity-70 hover:opacity-100"
-                                                }`}
+                                            }`}
                                         >
                                             <img
                                                 src={image.thumb_url || image.medium_url}
