@@ -85,26 +85,20 @@ export default function Item({
                 <div className="bg-white p-6 rounded-xl shadow-lg">
                     <div
                         onClick={handleMainImageClick}
-                        className="aspect-[4/3] w-full rounded-lg overflow-hidden cursor-pointer"
-                    >
-                        <img
-                            src={activeImage.large_url || activeImage.medium_url}
-                            alt={product.name}
-                            className="w-full h-full object-contain"
-                        />
-                    </div>
+                        className="aspect-[4/3] w-full bg-center bg-no-repeat bg-cover rounded-lg overflow-hidden cursor-pointer"
+                        style={{ backgroundImage: `url("${activeImage.large_url || activeImage.medium_url}")` }}
+                    ></div>
 
                     {displayImages.length > 1 && (
-                        <div className="flex gap-2 mt-4 flex-wrap">
+                        <div className="flex gap-2 mt-1 flex-wrap">
                             {displayImages.map((image, index) => (
                                 <div
                                     key={image.id || index}
                                     onClick={() => handleThumbnailClick(image, index)}
-                                    className={`w-16 h-16 rounded-md overflow-hidden border-2 cursor-pointer transition-all ${
-                                        activeIndex === index
+                                    className={`w-16 h-16 rounded-md overflow-hidden border-2 cursor-pointer transition-all ${activeIndex === index
                                             ? "border-blue-500 opacity-100"
                                             : "border-transparent opacity-70 hover:opacity-100"
-                                    }`}
+                                        }`}
                                 >
                                     <img
                                         src={image.thumb_url || image.medium_url}
