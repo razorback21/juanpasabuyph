@@ -23,7 +23,6 @@ class ContactFormRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'required|email',
             'subject' => 'required|string',
             'message' => 'required|string',
             'captcha' => 'required|captcha_api:' . $this->input('key') . ',flat',
