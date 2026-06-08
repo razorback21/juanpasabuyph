@@ -1,12 +1,13 @@
 import { useState, useRef } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import LinkButton from "@/components/LinkButton";
 import Dropdown from "@/components/Dropdown";
 import DataTable from "@/components/DataTable";
 import { Link, router } from "@inertiajs/react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import AlertConfirm from "@/components/AlertConfirm";
+import { toast } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
+import { Pencil, Trash2, Filter } from "lucide-react";
 
 export default function ProductsTable({
     products,
@@ -14,7 +15,17 @@ export default function ProductsTable({
     active_category,
 }) {
     const columnHelper = createColumnHelper();
-    const dialogRef = useRef(null);
+
+    const deleteHandler = (row) => {
+        router.delete(route("products.destroy", row) + window.location.search, {
+            onSuccess: () => {
+                toast.success("Product deleted!");
+            },
+            onError: () => {
+                toast.error("Failed to delete product.");
+            },
+        });
+    };
 
     const columns = [
         columnHelper.accessor("thumbnail_url", {
@@ -23,13 +34,18 @@ export default function ProductsTable({
                     href={route("products.show", {
                         product: product.row.original,
                     })}
-                    className="hover:underline cursor-pointer"
                 >
-                    <img
-                        src={product.getValue()}
-                        alt={product.getValue()}
-                        className="w-12 h-12 rounded-[10px]"
-                    />
+                    {product.getValue() ? (
+                        <img
+                            src={product.getValue()}
+                            alt=""
+                            className="h-10 w-10 rounded-lg object-cover"
+                        />
+                    ) : (
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100">
+                            <Package size={16} className="text-gray-400" />
+                        </div>
+                    )}
                 </Link>
             ),
             header: () => <span>Image</span>,
@@ -40,31 +56,37 @@ export default function ProductsTable({
                     href={route("products.show", {
                         product: product.row.original,
                     })}
-                    className="hover:underline cursor-pointer"
+                    className="group"
                 >
-                    <div>
+                    <span className="text-sm font-medium text-gray-900 group-hover:text-primary transition-colors">
                         {product.getValue()}
-                        <p className="mt-1">
-                            {product.row.original.disabled ? (
-                                <Badge variant="outline">Disabled</Badge>
-                            ) : null}
-                        </p>
-                    </div>
+                    </span>
+                    {product.row.original.disabled && (
+                        <Badge variant="secondary" className="ml-2">Disabled</Badge>
+                    )}
                 </Link>
             ),
             header: () => <span>Name</span>,
         }),
         columnHelper.accessor("available_stock", {
-            cell: (product) => product.getValue(),
+            cell: (product) => {
+                const stock = product.getValue() ?? 0;
+                const color = stock === 0 ? "text-red-600" : stock <= 10 ? "text-amber-600" : "text-gray-900";
+                return <span className={`text-sm font-medium ${color}`}>{stock}</span>;
+            },
             header: () => <span>Stocks</span>,
         }),
         columnHelper.accessor("product_category", {
-            cell: (product) => product.getValue(),
+            cell: (product) => (
+                <span className="text-sm text-gray-500">{product.getValue()}</span>
+            ),
             header: () => <span>Category</span>,
         }),
         columnHelper.accessor("description", {
-            cell: (product) => product.getValue(),
-            header: () => <div>Description</div>,
+            cell: (product) => (
+                <span className="text-sm text-gray-500 line-clamp-2">{product.getValue()}</span>
+            ),
+            header: () => <span>Description</span>,
             size: 270,
         }),
         columnHelper.accessor("is_featured", {
@@ -72,103 +94,83 @@ export default function ProductsTable({
                 !product.getValue() ? (
                     ""
                 ) : (
-                    <Badge variant="secondary">Yes</Badge>
+                    <Badge variant="secondary" className="text-xs">Yes</Badge>
                 ),
             header: () => <span>Feat. Product</span>,
         }),
         columnHelper.accessor("price", {
-            cell: (product) => product.getValue(),
+            cell: (product) => (
+                <span className="text-sm font-medium">
+                    ₱{Number(product.getValue()).toLocaleString("en-US", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                    })}
+                </span>
+            ),
             header: () => <span>Price</span>,
         }),
         columnHelper.accessor("actions", {
             cell: (product) => (
-                <div className="flex items-center justify-end gap-2">
-                    <LinkButton
+                <div className="flex items-center justify-end gap-1">
+                    <Link
                         href={route("products.edit", {
                             product: product.row.original,
                         })}
+                        className="flex h-8 w-8 items-center justify-center rounded-md border border-gray-200 bg-white text-gray-500 transition-colors hover:bg-gray-50 hover:text-gray-700"
                     >
-                        Edit
-                    </LinkButton>
-                    <Button
+                        <Pencil size={14} />
+                    </Link>
+                    <button
+                        type="button"
                         onClick={() => {
-                            dialogRef.current?.open({
-                                title: `${product.row.original.name}`,
-                                description: `Are you sure you want to delete this product?`,
-                                product,
-                                buttonName: "Yes delete it.",
-                                onContinue: () =>
-                                    deleteHandler(product.row.original),
-                            });
+                            if (!confirm(`Delete "${product.row.original.name}"?`)) return;
+                            deleteHandler(product.row.original);
                         }}
-                        variant="destructive"
+                        className="flex h-8 w-8 items-center justify-center rounded-md border border-red-200 bg-white text-red-500 transition-colors hover:bg-red-50 hover:text-red-600"
                     >
-                        DELETE
-                    </Button>
+                        <Trash2 size={14} />
+                    </button>
                 </div>
             ),
-            header: () => <div className="flex justify-end mr-2">Actions</div>,
+            header: () => <div className="flex justify-end">Actions</div>,
         }),
     ];
 
-    const deleteHandler = (row) => {
-        router.delete(route("products.destroy", row) + window.location.search);
-
-        dialogRef.current?.close();
-    };
-
-    function CategoryFilter({ categories }) {
-        const [categoryName, setCategoryName] = useState("All");
-
-        return (
-            <Dropdown align="left" width="48">
-                <Dropdown.Trigger>
-                    <span className="mr-2 font-medium">
-                        {active_category} :{" "}
-                    </span>
-                    <Button variant="outline">Categories</Button>
-                </Dropdown.Trigger>
-
-                <Dropdown.Content>
-                    <Dropdown.Link href={route("products.index")}>
-                        All
-                    </Dropdown.Link>
-                    {categories.map((category) => {
-                        return (
-                            <Dropdown.Link
-                                key={category.id}
-                                href={
-                                    route("products.index") +
-                                    "?category=" +
-                                    category.id +
-                                    "&active_category=" +
-                                    category.name
-                                }
-                                onClick={() => {
-                                    setCategoryName(category.name);
-                                }}
-                            >
-                                {category.name}
-                            </Dropdown.Link>
-                        );
-                    })}
-                </Dropdown.Content>
-            </Dropdown>
-        );
-    }
-
     return (
         <>
-            <div className="flex justify-end mb-2">
-                <CategoryFilter categories={categories} />
-                <Link href={route("products.create")}>
-                    <Button className="ml-2">+ Add Product</Button>
-                </Link>
-            </div>
-            <div>
-                <AlertConfirm ref={dialogRef}></AlertConfirm>
-                <DataTable columns={columns} data={products.data} />
-            </div>
+            <DataTable columns={columns} data={products.data} />
         </>
     );
 }
+
+ProductsTable.FilterButton = function FilterButton({ categories, activeCategory }) {
+    return (
+        <Dropdown align="left" width="48">
+            <Dropdown.Trigger>
+                <Button variant="outline" size="sm" className="gap-1.5">
+                    <Filter size={14} />
+                    {activeCategory}
+                </Button>
+            </Dropdown.Trigger>
+            <Dropdown.Content>
+                <Dropdown.Link href={route("products.index")}>
+                    All
+                </Dropdown.Link>
+                {categories.map((category) => (
+                    <Dropdown.Link
+                        key={category.id}
+                        href={
+                            route("products.index") +
+                            "?category=" +
+                            category.id +
+                            "&active_category=" +
+                            category.name
+                        }
+                    >
+                        {category.name}
+                    </Dropdown.Link>
+                ))}
+            </Dropdown.Content>
+        </Dropdown>
+    );
+};
