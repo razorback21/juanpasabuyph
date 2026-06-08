@@ -15,6 +15,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import ProductGroupingDialog from "@/components/ProductGroupingDialog";
 import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
     ArrowLeft,
     Pencil,
     Package,
@@ -453,37 +459,33 @@ export default function Show({ product, movementTypes, allProducts }) {
                             </CardHeader>
                             <CardContent>
                                 {(product.grouped_products || []).length > 0 ? (
-                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-                                        {product.grouped_products.map((gp) => (
-                                            <div
-                                                key={gp.id}
-                                                className="relative group flex items-center gap-3 rounded-lg border border-gray-200 p-3 bg-white hover:bg-gray-50 transition-colors"
-                                            >
-                                                <button
-                                                    onClick={() => handleRemoveGrouping(gp.id)}
-                                                    className="absolute -top-1.5 -right-1.5 opacity-0 group-hover:opacity-100 transition-opacity flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600"
-                                                >
-                                                    <X size={12} />
-                                                </button>
-                                                <img
-                                                    src={gp.thumbnail_url}
-                                                    alt={gp.name}
-                                                    className="h-10 w-10 rounded-md object-cover"
-                                                />
-                                                <div className="min-w-0 flex-1">
-                                                    <p className="text-sm font-medium text-gray-900 truncate">
-                                                        {gp.name}
-                                                    </p>
-                                                    <p className="text-xs text-gray-500">
-                                                        ₱
-                                                        {Number(gp.price).toLocaleString("en-US", {
-                                                            minimumFractionDigits: 2,
-                                                        })}
-                                                    </p>
+                                    <TooltipProvider>
+                                        <div className="flex flex-wrap gap-3">
+                                            {product.grouped_products.map((gp) => (
+                                                <div key={gp.id} className="relative group">
+                                                    <button
+                                                        onClick={() => handleRemoveGrouping(gp.id)}
+                                                        className="absolute -top-1.5 -right-1.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600 shadow-sm"
+                                                    >
+                                                        <X size={10} />
+                                                    </button>
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <div className="w-20 h-[60px] rounded-lg overflow-hidden bg-cover bg-center cursor-default transition-all duration-300 hover:scale-105 hover:shadow-lg ring-1 ring-gray-200 hover:ring-gray-300"
+                                                                style={{ backgroundImage: `url("${gp.thumbnail_url}")` }}
+                                                            />
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>
+                                                            <p className="font-medium">{gp.name}</p>
+                                                            <p className="text-white/70">
+                                                                ₱{Number(gp.price).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                                                            </p>
+                                                        </TooltipContent>
+                                                    </Tooltip>
                                                 </div>
-                                            </div>
-                                        ))}
-                                    </div>
+                                            ))}
+                                        </div>
+                                    </TooltipProvider>
                                 ) : (
                                     <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-200 bg-gray-50/50 py-12">
                                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">

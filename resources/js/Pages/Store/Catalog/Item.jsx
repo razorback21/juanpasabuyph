@@ -6,6 +6,7 @@ import { router, usePage } from "@inertiajs/react";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { useRef, useState } from "react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
 import { Link } from "@inertiajs/react";
 import Lightbox from "../components/Lightbox";
@@ -120,35 +121,28 @@ export default function Item({
                     </p>
                     {groupedProducts.length > 0 && (
                         <div className="mb-6">
-                            <h3 className="text-sm font-semibold text-[#1f2937] mb-3">
+                            <h3 className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-2.5">
                                 Also Available
                             </h3>
-                            <div className="flex gap-3 overflow-x-auto pb-2">
+                            <TooltipProvider>
+                            <div className="flex flex-wrap gap-2.5 px-2 pb-3 pt-3">
                                 {groupedProducts.map((gp) => (
-                                    <Link
-                                        key={gp.id}
-                                        href={`/catalog/${gp.category?.slug ?? ""}/${gp.slug}`}
-                                        className="flex-shrink-0 flex items-center gap-2.5 rounded-lg border border-gray-200 p-2.5 bg-white hover:bg-gray-50 transition-colors w-40"
-                                    >
-                                        <img
-                                            src={gp.thumbnail_url}
-                                            alt={gp.name}
-                                            className="h-12 w-12 rounded-md object-cover flex-shrink-0"
-                                        />
-                                        <div className="min-w-0 flex-1">
-                                            <p className="text-xs font-medium text-gray-900 truncate leading-tight">
-                                                {gp.name}
-                                            </p>
-                                            <p className="text-xs text-red-600 font-bold mt-0.5">
-                                                ₱
-                                                {parseFloat(gp.price).toLocaleString("en-US", {
-                                                    minimumFractionDigits: 2,
-                                                })}
-                                            </p>
-                                        </div>
-                                    </Link>
+                                    <Tooltip key={gp.id}>
+                                        <TooltipTrigger asChild>
+                                            <Link
+                                                href={`/catalog/${gp.category?.slug ?? ""}/${gp.slug}`}
+                                                className="relative flex-shrink-0 w-16 h-16 rounded-lg bg-cover bg-center border-2 border-gray-200 hover:border-red-400 hover:shadow-lg hover:scale-110 transition-all duration-200 p-1"
+                                                style={{ backgroundImage: `url("${gp.thumbnail_url}")` }}
+                                            />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p className="font-medium">{gp.name}</p>
+                                            <p className="text-white/70">₱{parseFloat(gp.price).toLocaleString("en-US", { minimumFractionDigits: 2 })}</p>
+                                        </TooltipContent>
+                                    </Tooltip>
                                 ))}
                             </div>
+                            </TooltipProvider>
                         </div>
                     )}
                     <div className="mb-6">
