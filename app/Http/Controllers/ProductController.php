@@ -11,6 +11,7 @@ use App\Models\ProductCategory;
 use App\Services\ProductDeleteService;
 use App\Services\ProductFilterService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -107,25 +108,18 @@ class ProductController extends Controller
             'grouped_product_ids.*' => 'exists:products,id',
         ]);
 
-        $ids = array_filter($validated['grouped_product_ids'], fn ($id) => $id != $product->id);
+        $ids = array_values(array_filter($validated['grouped_product_ids'], fn ($id) => $id != $product->id));
+        $groupMembers = array_unique(array_merge([$product->id], $ids));
 
-        $product->groupedProducts()->sync($ids);
+        DB::table('product_groupings')
+            ->whereIn('product_id', $groupMembers)
+            ->orWhereIn('grouped_product_id', $groupMembers)
+            ->delete();
 
-        foreach ($ids as $groupedId) {
-            $grouped = Product::find($groupedId);
-            $existing = $grouped->groupedProducts()->where('grouped_product_id', $product->id)->exists();
-            if (!$existing) {
-                $grouped->groupedProducts()->syncWithoutDetaching([$product->id]);
-            }
-        }
-
-        $currentGroupedIds = $product->groupedProducts()->pluck('grouped_product_id')->toArray();
-        $reverseProducts = Product::whereHas('groupedProducts', fn ($q) => $q->where('grouped_product_id', $product->id))
-            ->whereNotIn('id', [...$ids, $product->id])
-            ->get();
-
-        foreach ($reverseProducts as $rp) {
-            $rp->groupedProducts()->detach($product->id);
+        foreach ($groupMembers as $memberId) {
+            $others = array_values(array_diff($groupMembers, [$memberId]));
+            $member = Product::find($memberId);
+            $member->groupedProducts()->sync($others);
         }
 
         return to_route('products.show', $product)
