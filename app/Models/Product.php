@@ -8,6 +8,7 @@ use App\Enums\StockReservationTypeEnum;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Query\Builder;
 use Spatie\Image\Enums\CropPosition;
@@ -113,6 +114,11 @@ class Product extends Model implements HasMedia
     public function inventory(): HasMany
     {
         return $this->hasMany(Inventory::class);
+    }
+
+    public function groupedProducts(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_groupings', 'product_id', 'grouped_product_id')->withTimestamps();
     }
 
     /**

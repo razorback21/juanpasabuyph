@@ -13,6 +13,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import ProductGroupingDialog from "@/components/ProductGroupingDialog";
 import {
     ArrowLeft,
     Pencil,
@@ -24,6 +25,7 @@ import {
     Layers,
     Plus,
     Box,
+    X,
 } from "lucide-react";
 
 function StockMetric({ label, value, icon: Icon, color = "text-gray-700" }) {
@@ -63,9 +65,10 @@ function PriceDisplay({ label, price, sublabel = false }) {
     );
 }
 
-export default function Show({ product, movementTypes }) {
+export default function Show({ product, movementTypes, allProducts }) {
     const props = usePage().props;
     const dialogRef = useRef(null);
+    const groupingDialogRef = useRef(null);
     const formRef = useRef(null);
     const formDataRef = useRef({
         movement_type: "",
@@ -92,6 +95,32 @@ export default function Show({ product, movementTypes }) {
                 onSuccess: (response) => {
                     dialogRef.current.close();
                     toast.success(response.props.flash.message);
+                },
+            },
+        );
+    };
+
+    const handleSaveGroupings = (selectedIds) => {
+        router.put(
+            route("products.groupings.update", product),
+            { grouped_product_ids: selectedIds },
+            {
+                onSuccess: () => {
+                    toast.success("Variants updated successfully.");
+                },
+            },
+        );
+    };
+
+    const handleRemoveGrouping = (groupedProductId) => {
+        const currentIds = (product.grouped_products || []).map((p) => p.id);
+        const newIds = currentIds.filter((id) => id !== groupedProductId);
+        router.put(
+            route("products.groupings.update", product),
+            { grouped_product_ids: newIds },
+            {
+                onSuccess: () => {
+                    toast.success("Variant removed.");
                 },
             },
         );
@@ -200,6 +229,13 @@ export default function Show({ product, movementTypes }) {
                     </div>
                 </form>
             </AddInventoryDialog>
+
+            <ProductGroupingDialog
+                ref={groupingDialogRef}
+                products={allProducts || []}
+                currentProduct={product}
+                onSave={handleSaveGroupings}
+            />
 
             <div className="py-8">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -405,7 +441,10 @@ export default function Show({ product, movementTypes }) {
                                         variant="outline"
                                         size="sm"
                                         className="gap-1.5"
-                                        disabled
+                                        onClick={() => {
+                                            const currentIds = (product.grouped_products || []).map((p) => p.id);
+                                            groupingDialogRef.current.open(currentIds);
+                                        }}
                                     >
                                         <Plus size={14} />
                                         Add Variant
@@ -413,21 +452,55 @@ export default function Show({ product, movementTypes }) {
                                 </div>
                             </CardHeader>
                             <CardContent>
-                                <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-200 bg-gray-50/50 py-12">
-                                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
-                                        <Box
-                                            size={20}
-                                            className="text-gray-400"
-                                        />
+                                {(product.grouped_products || []).length > 0 ? (
+                                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                                        {product.grouped_products.map((gp) => (
+                                            <div
+                                                key={gp.id}
+                                                className="relative group flex items-center gap-3 rounded-lg border border-gray-200 p-3 bg-white hover:bg-gray-50 transition-colors"
+                                            >
+                                                <button
+                                                    onClick={() => handleRemoveGrouping(gp.id)}
+                                                    className="absolute -top-1.5 -right-1.5 opacity-0 group-hover:opacity-100 transition-opacity flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-white hover:bg-red-600"
+                                                >
+                                                    <X size={12} />
+                                                </button>
+                                                <img
+                                                    src={gp.thumbnail_url}
+                                                    alt={gp.name}
+                                                    className="h-10 w-10 rounded-md object-cover"
+                                                />
+                                                <div className="min-w-0 flex-1">
+                                                    <p className="text-sm font-medium text-gray-900 truncate">
+                                                        {gp.name}
+                                                    </p>
+                                                    <p className="text-xs text-gray-500">
+                                                        ₱
+                                                        {Number(gp.price).toLocaleString("en-US", {
+                                                            minimumFractionDigits: 2,
+                                                        })}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
-                                    <p className="mt-3 text-sm font-medium text-gray-500">
-                                        No variants configured
-                                    </p>
-                                    <p className="mt-1 text-xs text-gray-400">
-                                        Add size, color, or other variations for
-                                        this product
-                                    </p>
-                                </div>
+                                ) : (
+                                    <div className="flex flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-200 bg-gray-50/50 py-12">
+                                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-100">
+                                            <Box
+                                                size={20}
+                                                className="text-gray-400"
+                                            />
+                                        </div>
+                                        <p className="mt-3 text-sm font-medium text-gray-500">
+                                            No variants configured
+                                        </p>
+                                        <p className="mt-1 text-xs text-gray-400">
+                                            Add size, color, or other variations for
+                                            this product
+                                        </p>
+                                    </div>
+                                )}
                             </CardContent>
                         </Card>
                     </div>

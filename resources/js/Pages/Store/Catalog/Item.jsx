@@ -16,6 +16,7 @@ export default function Item({
     category,
     categorySlug,
     relatedProducts,
+    groupedProducts = [],
 }) {
     const page = usePage();
     const quantityInputRef = useRef(null);
@@ -117,6 +118,39 @@ export default function Item({
                     <p className="text-[#4b5563] text-base leading-relaxed mb-6">
                         {product.description}
                     </p>
+                    {groupedProducts.length > 0 && (
+                        <div className="mb-6">
+                            <h3 className="text-sm font-semibold text-[#1f2937] mb-3">
+                                Also Available
+                            </h3>
+                            <div className="flex gap-3 overflow-x-auto pb-2">
+                                {groupedProducts.map((gp) => (
+                                    <Link
+                                        key={gp.id}
+                                        href={`/catalog/${gp.category?.slug ?? ""}/${gp.slug}`}
+                                        className="flex-shrink-0 flex items-center gap-2.5 rounded-lg border border-gray-200 p-2.5 bg-white hover:bg-gray-50 transition-colors w-40"
+                                    >
+                                        <img
+                                            src={gp.thumbnail_url}
+                                            alt={gp.name}
+                                            className="h-12 w-12 rounded-md object-cover flex-shrink-0"
+                                        />
+                                        <div className="min-w-0 flex-1">
+                                            <p className="text-xs font-medium text-gray-900 truncate leading-tight">
+                                                {gp.name}
+                                            </p>
+                                            <p className="text-xs text-red-600 font-bold mt-0.5">
+                                                ₱
+                                                {parseFloat(gp.price).toLocaleString("en-US", {
+                                                    minimumFractionDigits: 2,
+                                                })}
+                                            </p>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                     <div className="mb-6">
                         <h3 className="text-sm font-semibold text-[#1f2937] mb-1">
                             Price:

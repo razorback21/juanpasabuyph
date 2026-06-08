@@ -66,6 +66,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     // Product 
     Route::resource('products', ProductController::class);
+    Route::put('/products/{product}/groupings', [ProductController::class, 'updateGroupings'])->name('products.groupings.update');
     Route::post('/productimages/upload/{id}/{type}', [ProductImageController::class, 'upload']);
     Route::post('/productimages/upload-gallery/{product}', [ProductImageController::class, 'uploadGallery'])->name('productimages.upload-gallery');
     Route::delete('/productimages/{product}/{mediaId}', [ProductImageController::class, 'deleteImage'])->name('productimages.delete');

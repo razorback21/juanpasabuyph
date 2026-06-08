@@ -39,6 +39,9 @@ class CatalogController extends Controller
     {
         $product = Product::where("disabled", false)->where("slug", $slug)->firstOrFail();
         $product->load(['category', 'media']);
+        $product->load(['groupedProducts' => function ($query) {
+            $query->with('media', 'category')->where('disabled', false);
+        }]);
         $category = $product->category()->with(['products' => function ($query) {
             $query->with('media');
         }])->first();
@@ -50,6 +53,7 @@ class CatalogController extends Controller
             'categorySlug' => $product->category->slug,
             'category' => $product->category->name,
             'relatedProducts' => $relatedProducts,
+            'groupedProducts' => $product->groupedProducts,
         ]);
     }
 

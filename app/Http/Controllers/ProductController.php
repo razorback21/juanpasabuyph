@@ -79,10 +79,57 @@ class ProductController extends Controller
             }
         ]);
 
+        $product->load('groupedProducts.media', 'groupedProducts.category');
+
+        $allProducts = Product::where('id', '!=', $product->id)
+            ->select('id', 'name', 'slug', 'price')
+            ->with('media')
+            ->get()
+            ->map(fn ($p) => [
+                'id' => $p->id,
+                'name' => $p->name,
+                'slug' => $p->slug,
+                'price' => $p->price,
+                'thumbnail_url' => $p->thumbnail_url,
+            ]);
+
         return Inertia::render('Products/Show', [
             'product' => $product->append('gallery_images'),
             'movementTypes' => MovementTypeEnum::getOptions(),
+            'allProducts' => $allProducts,
         ]);
+    }
+
+    public function updateGroupings(Request $request, Product $product)
+    {
+        $validated = $request->validate([
+            'grouped_product_ids' => 'required|array',
+            'grouped_product_ids.*' => 'exists:products,id',
+        ]);
+
+        $ids = array_filter($validated['grouped_product_ids'], fn ($id) => $id != $product->id);
+
+        $product->groupedProducts()->sync($ids);
+
+        foreach ($ids as $groupedId) {
+            $grouped = Product::find($groupedId);
+            $existing = $grouped->groupedProducts()->where('grouped_product_id', $product->id)->exists();
+            if (!$existing) {
+                $grouped->groupedProducts()->syncWithoutDetaching([$product->id]);
+            }
+        }
+
+        $currentGroupedIds = $product->groupedProducts()->pluck('grouped_product_id')->toArray();
+        $reverseProducts = Product::whereHas('groupedProducts', fn ($q) => $q->where('grouped_product_id', $product->id))
+            ->whereNotIn('id', [...$ids, $product->id])
+            ->get();
+
+        foreach ($reverseProducts as $rp) {
+            $rp->groupedProducts()->detach($product->id);
+        }
+
+        return to_route('products.show', $product)
+            ->with('success', 'Product groupings updated successfully.');
     }
 
     /**
