@@ -50,6 +50,11 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
 
     useEffect(() => {
         const currentUrl = new URL(window.location);
+        const searchParam = currentUrl.searchParams.get('search');
+        if (searchParam) {
+            fetchProducts('All', searchParam);
+            return;
+        }
         let categoryName = currentUrl.searchParams.get("category");
         categoryName =
             categoryName === "All" || categoryName === ""
@@ -82,11 +87,11 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
         }
     }
 
-    function loadSearch(searchTerm) {
+    function loadSearch(searchTerm, category = 'All') {
         isLoadingRef.current = true;
         forceUpdate();
 
-        fetchProducts(categoryRef.current, searchTerm || null);
+        fetchProducts(category, searchTerm || null);
     }
 
     useImperativeHandle(ref, () => ({
@@ -207,6 +212,14 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
 function SearchProducts({ loadMoreRef }) {
     const searchInputRef = useRef(null);
 
+    useEffect(() => {
+        const currentUrl = new URL(window.location);
+        const searchParam = currentUrl.searchParams.get('search');
+        if (searchParam && searchInputRef.current) {
+            searchInputRef.current.value = searchParam;
+        }
+    }, []);
+
     function searchValue(e) {
         e.preventDefault();
         searchInputRef.current.value = e.target.value;
@@ -214,7 +227,15 @@ function SearchProducts({ loadMoreRef }) {
 
     function handleSearch(e) {
         const searchTerm = searchInputRef.current.value;
-        loadMoreRef.current?.loadSearch(searchTerm);
+        const url = new URL(window.location);
+        url.searchParams.delete('category');
+        if (searchTerm) {
+            url.searchParams.set('search', searchTerm);
+        } else {
+            url.searchParams.delete('search');
+        }
+        window.history.pushState({}, '', url);
+        loadMoreRef.current?.loadSearch(searchTerm, 'All');
     }
 
     function handleKeyUp(e) {
