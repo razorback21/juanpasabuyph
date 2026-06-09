@@ -210,7 +210,7 @@ export function AppSidebar({ ...props }) {
                             <Link href="/">
                                 <ArrowUpCircleIcon className="h-5 w-5" />
                                 <span className="text-base font-semibold">
-                                    JUANPSABUYPH
+                                    JUANPSABUYDUBAI
                                 </span>
                             </Link>
                         </SidebarMenuButton>

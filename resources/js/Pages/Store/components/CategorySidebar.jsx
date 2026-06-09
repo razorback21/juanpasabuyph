@@ -246,23 +246,6 @@ export default function CategorySidebar({
                             ))}
                         </div>
                     </div>
-
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="px-5 py-4 border-b border-gray-50">
-                        <h3 className="text-sm font-semibold text-gray-900 tracking-wide uppercase">
-                            Price Range
-                        </h3>
-                    </div>
-                    <div className="p-5">
-                        <PriceRangeSlider
-                            min={priceRange.min}
-                            max={priceRange.max}
-                            initialMin={priceRange.min}
-                            initialMax={priceRange.max}
-                            onChange={handlePriceChange}
-                        />
-                    </div>
-                </div>
                 </div>
             </aside>
 

@@ -27,23 +27,20 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
         setForceUpdate({});
     };
 
-    const filterProductsByPrice = (products) => {
-        return products.filter(product =>
-            parseFloat(product.price) >= priceFilter.min &&
-            parseFloat(product.price) <= priceFilter.max
-        );
-    };
-
     const fetchProducts = async (category, search = null) => {
+        console.log('fetchProducts called:', { category, priceFilter, search });
         const response = await Axios.get(
             route("catalog.paginate", {
                 category,
                 page: 1,
                 search,
+                min_price: priceFilter.min,
+                max_price: priceFilter.max,
             })
         );
+        console.log('API response:', { dataLength: response.data.length, total: response.total });
         allProductsRef.current = response.data;
-        productsRef.current = filterProductsByPrice(response.data);
+        productsRef.current = response.data;
         nextPageUrlRef.current = response.next_page_url;
         totalProductsRef.current = response.total;
         categoryRef.current = category;
@@ -59,11 +56,6 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
                 ? "All"
                 : categoryName;
         fetchProducts(categoryName);
-    }, []);
-
-    useEffect(() => {
-        productsRef.current = filterProductsByPrice(allProductsRef.current);
-        forceUpdate();
     }, [priceFilter]);
 
     function loadNextProducts() {
@@ -71,16 +63,13 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
             isLoadingRef.current = true;
             forceUpdate();
 
-            Axios.get(
-                nextPageUrlRef.current,
-                categoryRef.current && { category: categoryRef.current }
-            )
+            Axios.get(nextPageUrlRef.current)
                 .then((res) => {
                     allProductsRef.current = [
                         ...allProductsRef.current,
                         ...res.data,
                     ];
-                    productsRef.current = filterProductsByPrice(allProductsRef.current);
+                    productsRef.current = allProductsRef.current;
                     nextPageUrlRef.current = res.next_page_url;
                     totalProductsRef.current = res.total;
                     isLoadingRef.current = false;
@@ -323,7 +312,19 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
             </div>
 
             <div className="flex flex-col lg:flex-row gap-6">
-                <div className="hidden lg:block lg:w-64 xl:w-72 shrink-0 lg:sticky lg:top-24">
+                <div className="hidden lg:block lg:w-64 xl:w-72 shrink-0 lg:sticky lg:top-24 space-y-4">
+                    <div className="bg-white rounded-lg shadow-sm p-4">
+                        <h3 className="text-sm font-semibold text-gray-900 mb-3">
+                            Price Range
+                        </h3>
+                        <PriceRangeSlider
+                            min={priceRange.min}
+                            max={priceRange.max}
+                            initialMin={priceRange.min}
+                            initialMax={priceRange.max}
+                            onChange={setPriceFilter}
+                        />
+                    </div>
                     <CategorySidebar
                         categories={categories}
                         activeCategorySlug={categoryQuery}
