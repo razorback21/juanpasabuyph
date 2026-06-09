@@ -45,7 +45,7 @@ class CatalogController extends Controller
         $category = $product->category()->with(['products' => function ($query) {
             $query->with('media');
         }])->first();
-        $relatedProducts = $category->products()->with('category')->where("id", "!=", $product->id)->limit(4)->inRandomOrder()->get();
+        $relatedProducts = $category->products()->with('category')->where("id", "!=", $product->id)->limit(5)->inRandomOrder()->get();
 
         return Inertia::render("Store/Catalog/Item", [
             'title' => $product->name,
