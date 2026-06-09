@@ -61,7 +61,7 @@ export default function HomeProducts({
                                 </div>
                                 <Link
                                     href={route("cart.update")}
-                                    method="post"
+                                    method="put"
                                     data={{ product_id: product.id, quantity: 1 }}
                                     as="button"
                                     className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-base font-semibold py-3.5 px-8 rounded-2xl shadow-xl shadow-red-500/30 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/40 active:scale-95"
