@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 export default function HomeProducts({
     products,
     title,
-    description = "",
+    description,
     titleTextSize = "text-3xl",
 }) {
     return (
@@ -14,11 +14,11 @@ export default function HomeProducts({
                 >
                     {title}
                 </h2>
-                <p className={`text-gray-500 px-4 pb-6 pt-2`}>
-                    {description}
-                    {/* Handpicked premium products from Dubai's top retailers. Each
-                item is personally sourced and verified for authenticity. */}
-                </p>
+                {description && description !== "undefined" && description.trim() !== "" && (
+                    <p className="text-gray-500 px-4 pb-6 pt-2">
+                        {description}
+                    </p>
+                )}
             </header>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 p-4">
                 {products.map((product) => (
@@ -50,8 +50,9 @@ export default function HomeProducts({
                                 )}
                             </p>
                             <p className="text-gray-500 text-xs font-normal leading-normal flex-grow transition-colors duration-300 group-hover:text-gray-600">
-                                {product.description?.slice(0, 80) + "..." ||
-                                    "No description available"}
+                                {product?.description
+                                    ? product.description.slice(0, 80) + "..."
+                                    : ""}
                             </p>
                         </div>
                         {/* Enhanced Buy Now Overlay */}
