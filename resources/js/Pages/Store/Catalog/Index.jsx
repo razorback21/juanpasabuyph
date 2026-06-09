@@ -11,7 +11,7 @@ import {
 } from "react";
 import Axios from "@/lib/axios";
 
-const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) => {
+const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange, onPriceRangeChange, onSearchCleared }, ref) => {
     const productsRef = useRef([]);
     const allProductsRef = useRef([]);
     const nextPageUrlRef = useRef("");
@@ -20,6 +20,7 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
     const categoryRef = useRef("All");
     const totalProductsRef = useRef(0);
     const forceUpdateRef = useRef(0);
+    const currentSearchTermRef = useRef(null);
     const [, setForceUpdate] = useState({});
 
     const forceUpdate = () => {
@@ -45,10 +46,20 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
         totalProductsRef.current = response.total;
         categoryRef.current = category;
         isFetchingRef.current = false;
+
+        if (search && response.priceRange && onPriceRangeChange) {
+            currentSearchTermRef.current = search;
+            onPriceRangeChange(response.priceRange);
+        }
+
         forceUpdate();
     };
 
     useEffect(() => {
+        if (currentSearchTermRef.current !== null) {
+            currentSearchTermRef.current = null;
+            return;
+        }
         const currentUrl = new URL(window.location);
         const searchParam = currentUrl.searchParams.get('search');
         if (searchParam) {
@@ -90,6 +101,10 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
     function loadSearch(searchTerm, category = 'All') {
         isLoadingRef.current = true;
         forceUpdate();
+
+        if (!searchTerm && onSearchCleared) {
+            onSearchCleared();
+        }
 
         fetchProducts(category, searchTerm || null);
     }
@@ -209,7 +224,7 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange }, ref) =>
     );
 });
 
-function SearchProducts({ loadMoreRef }) {
+function SearchProducts({ loadMoreRef, activeCategory = 'All' }) {
     const searchInputRef = useRef(null);
 
     useEffect(() => {
@@ -228,14 +243,18 @@ function SearchProducts({ loadMoreRef }) {
     function handleSearch(e) {
         const searchTerm = searchInputRef.current.value;
         const url = new URL(window.location);
-        url.searchParams.delete('category');
+        if (activeCategory && activeCategory !== 'All') {
+            url.searchParams.set('category', activeCategory);
+        } else {
+            url.searchParams.delete('category');
+        }
         if (searchTerm) {
             url.searchParams.set('search', searchTerm);
         } else {
             url.searchParams.delete('search');
         }
         window.history.pushState({}, '', url);
-        loadMoreRef.current?.loadSearch(searchTerm, 'All');
+        loadMoreRef.current?.loadSearch(searchTerm, activeCategory);
     }
 
     function handleKeyUp(e) {
@@ -292,15 +311,38 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
     const loadMoreRef = useRef(null);
     const categoryQuery = requestCategory();
     const [priceFilter, setPriceFilter] = useState({ min: priceRange.min, max: priceRange.max });
+    const [sliderRange, setSliderRange] = useState(priceRange);
+    const suppressOnChangeRef = useRef(false);
 
     const previousCategoryRef = useRef(categoryQuery);
 
     useEffect(() => {
         if (previousCategoryRef.current !== categoryQuery) {
             setPriceFilter({ min: priceRange.min, max: priceRange.max });
+            setSliderRange(priceRange);
             previousCategoryRef.current = categoryQuery;
         }
     }, [categoryQuery]);
+
+    const handleSearchPriceRangeChange = (newRange) => {
+        setPriceFilter({ min: newRange.min, max: newRange.max });
+        suppressOnChangeRef.current = true;
+        setSliderRange({ min: newRange.min, max: newRange.max });
+        setTimeout(() => {
+            suppressOnChangeRef.current = false;
+        }, 500);
+    };
+
+    const handleSearchCleared = () => {
+        setPriceFilter({ min: priceRange.min, max: priceRange.max });
+        setSliderRange(priceRange);
+    };
+
+    const handleSliderChange = (value) => {
+        if (!suppressOnChangeRef.current) {
+            setPriceFilter(value);
+        }
+    };
 
     return (
         <Layout title={title}>
@@ -311,17 +353,17 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
             </div>
 
             <div className="lg:hidden px-4 mb-6 space-y-2">
-                <SearchProducts loadMoreRef={loadMoreRef} />
+                <SearchProducts loadMoreRef={loadMoreRef} activeCategory={categoryQuery} />
                 <div className="bg-white rounded-lg shadow-sm p-4">
                     <h3 className="text-sm font-semibold text-gray-900 mb-3">
                         Price Range
                     </h3>
                     <PriceRangeSlider
-                        min={priceRange.min}
-                        max={priceRange.max}
-                        initialMin={priceRange.min}
-                        initialMax={priceRange.max}
-                        onChange={setPriceFilter}
+                        min={sliderRange.min}
+                        max={sliderRange.max}
+                        initialMin={sliderRange.min}
+                        initialMax={sliderRange.max}
+                        onChange={handleSliderChange}
                     />
                 </div>
                 <CategorySidebar
@@ -339,11 +381,11 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                             Price Range
                         </h3>
                         <PriceRangeSlider
-                            min={priceRange.min}
-                            max={priceRange.max}
-                            initialMin={priceRange.min}
-                            initialMax={priceRange.max}
-                            onChange={setPriceFilter}
+                            min={sliderRange.min}
+                            max={sliderRange.max}
+                            initialMin={sliderRange.min}
+                            initialMax={sliderRange.max}
+                            onChange={handleSliderChange}
                         />
                     </div>
                     <CategorySidebar
@@ -355,7 +397,7 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                 </div>
                 <div className="flex-1 min-w-0">
                     <div className="hidden lg:flex flex-wrap gap-3 p-4 mb-6 bg-white rounded-lg shadow-sm">
-                        <SearchProducts loadMoreRef={loadMoreRef} />
+                        <SearchProducts loadMoreRef={loadMoreRef} activeCategory={categoryQuery} />
                     </div>
                     <section>
                         <LoadMore
@@ -363,6 +405,8 @@ export default function Index({ title, categories, priceRange = { min: 0, max: 1
                             priceFilter={priceFilter}
                             categoryQuery={categoryQuery}
                             priceRange={priceRange}
+                            onPriceRangeChange={handleSearchPriceRangeChange}
+                            onSearchCleared={handleSearchCleared}
                         />
                     </section>
                 </div>

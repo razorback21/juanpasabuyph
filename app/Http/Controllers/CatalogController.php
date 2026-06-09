@@ -32,7 +32,10 @@ class CatalogController extends Controller
     public function paginate()
     {
         $paginatedProducts = (new CataglogService())->getPaginatedData(15);
-        return response()->json($paginatedProducts);
+        $data = $paginatedProducts->toArray();
+        $data['priceRange'] = $paginatedProducts->priceRange ?? ['min' => 0, 'max' => 0];
+
+        return response()->json($data);
     }
 
     public function item(Request $request, $category, $slug)

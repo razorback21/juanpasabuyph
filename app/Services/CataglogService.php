@@ -39,7 +39,14 @@ class CataglogService
             $products = $products->where('price', '<=', $validated['max_price']);
         }
 
+        $priceRange = [
+            'min' => (float) $products->min('price'),
+            'max' => (float) $products->max('price'),
+        ];
+
         $result = $products->orderBy('price', 'asc')->paginate($itemPerPage)->withQueryString();
+        $result->priceRange = $priceRange;
+
         \Log::info('CataglogService response', ['total' => $result->total(), 'count' => $result->count()]);
 
         return $result;
