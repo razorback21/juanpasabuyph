@@ -1,6 +1,6 @@
 ---
 name: use-existing-browser
-description: Instructs the agent to connect to the existing browser instance via Chrome DevTools instead of spawning a new one. Use when the agent needs to view, interact with, or test the application in a browser — includes project URL, admin credentials, and Chrome DevTools workflow.
+description: Instructs the agent to connect to the existing browser instance via Chrome DevTools instead of spawning a new one. Use when the agent needs to spawn a server or view, interact with, or test the application in a browser — includes project URL, admin credentials, and Chrome DevTools workflow.
 ---
 
 # Use Existing Browser
@@ -32,8 +32,10 @@ https://juanpasabuyph.loc/
 
 ```
 1. Navigate to https://juanpasabuyph.loc/login
-2. Fill email and password fields
-3. Click the submit button
+2. Click advance
+3. Click continue unsafe link
+4. Fill email and password fields
+5. Click the submit button
 ```
 
 ## Common Tasks
