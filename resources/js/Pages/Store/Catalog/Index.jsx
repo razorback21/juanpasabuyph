@@ -10,6 +10,7 @@ import {
     useImperativeHandle,
 } from "react";
 import Axios from "@/lib/axios";
+import { toast } from "sonner";
 
 const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange, onPriceRangeChange, onSearchCleared }, ref) => {
     const productsRef = useRef([]);
@@ -29,30 +30,33 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange, onPriceRa
     };
 
     const fetchProducts = async (category, search = null) => {
-        console.log('fetchProducts called:', { category, priceFilter, search });
-        const response = await Axios.get(
-            route("catalog.paginate", {
-                category,
-                page: 1,
-                search,
-                min_price: priceFilter.min,
-                max_price: priceFilter.max,
-            })
-        );
-        console.log('API response:', { dataLength: response.data.length, total: response.total });
-        allProductsRef.current = response.data;
-        productsRef.current = response.data;
-        nextPageUrlRef.current = response.next_page_url;
-        totalProductsRef.current = response.total;
-        categoryRef.current = category;
-        isFetchingRef.current = false;
+        try {
+            const response = await Axios.get(
+                route("catalog.paginate", {
+                    category,
+                    page: 1,
+                    search,
+                    min_price: priceFilter.min,
+                    max_price: priceFilter.max,
+                })
+            );
+            allProductsRef.current = response.data;
+            productsRef.current = response.data;
+            nextPageUrlRef.current = response.next_page_url;
+            totalProductsRef.current = response.total;
+            categoryRef.current = category;
 
-        if (search && response.priceRange && onPriceRangeChange) {
-            currentSearchTermRef.current = search;
-            onPriceRangeChange(response.priceRange);
+            if (search && response.priceRange && onPriceRangeChange) {
+                currentSearchTermRef.current = search;
+                onPriceRangeChange(response.priceRange);
+            }
+        } catch (e) {
+            toast.error("Failed to load products. Please try again.");
+        } finally {
+            isLoadingRef.current = false;
+            isFetchingRef.current = false;
+            forceUpdate();
         }
-
-        forceUpdate();
     };
 
     useEffect(() => {
@@ -72,7 +76,7 @@ const LoadMore = forwardRef(({ priceFilter, categoryQuery, priceRange, onPriceRa
                 ? "All"
                 : categoryName;
         fetchProducts(categoryName);
-    }, [priceFilter]);
+    }, [priceFilter, categoryQuery]);
 
     function loadNextProducts() {
         if (nextPageUrlRef.current && !isLoadingRef.current) {
