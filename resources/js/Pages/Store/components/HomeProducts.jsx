@@ -1,4 +1,4 @@
-import { Link } from "@inertiajs/react";
+import { Link, router } from "@inertiajs/react";
 
 export default function HomeProducts({
     products,
@@ -27,8 +27,8 @@ export default function HomeProducts({
                         href={`/catalog/${product.category?.slug ?? product.category.name}/${product?.slug}`}
                         className="product-card flex flex-col bg-white rounded-xl shadow-lg overflow-hidden group relative transition-shadow duration-300 hover:shadow-2xl cursor-pointer"
                     >
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/80 to-white/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out z-10 flex flex-col items-center justify-center p-3 md:p-6">
-                        <div className="w-full transform translate-y-2 group-hover:translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                    <div className="absolute inset-0 bg-gradient-to-t from-white/95 via-white/80 to-white/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out z-10 flex flex-col items-center justify-center p-3 md:p-6 pointer-events-none">
+                        <div className="w-full transform translate-y-2 group-hover:translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 ease-out pointer-events-auto">
                             <div className="text-center mb-2 md:mb-4">
                                 <div className="inline-flex items-center justify-center w-8 h-8 md:w-12 md:h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full mb-1.5 md:mb-3 shadow-md md:shadow-lg shadow-red-500/20 md:shadow-red-500/30">
                                     <svg
@@ -59,15 +59,19 @@ export default function HomeProducts({
                                     )}
                                 </p>
                             </div>
-                            <Link
-                                href={route("cart.update")}
-                                method="put"
-                                data={{ product_id: product.id, quantity: 1 }}
-                                as="button"
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    router.put(route("cart.update"), {
+                                        product_id: product.id,
+                                        quantity: 1,
+                                    });
+                                }}
                                 className="w-full flex items-center justify-center bg-gradient-to-r from-red-600 to-red-500 hover:from-red-700 hover:to-red-600 text-white text-xs md:text-base font-semibold py-2 md:py-3.5 px-4 md:px-8 rounded-xl md:rounded-2xl shadow-lg md:shadow-xl shadow-red-500/20 md:shadow-red-500/30 transition-all duration-300 transform hover:scale-105 hover:shadow-xl md:hover:shadow-2xl hover:shadow-red-500/30 md:hover:shadow-red-500/40 active:scale-95"
                             >
-                                <span>Add to Cart</span>
-                            </Link>
+                                <span>Buy Now</span>
+                            </button>
                         </div>
                     </div>
                         <div>
