@@ -15,7 +15,10 @@ class ProductFilterService
     {
         $this->query = Product::query();
 
-        // Apply category filter
+        if ($request->filled('search')) {
+            $this->query->where('name', 'like', '%' . $request->input('search') . '%');
+        }
+
         if ($request->filled('category')) {
             $this->query->where('product_category_id', $request->input('category'));
         }
