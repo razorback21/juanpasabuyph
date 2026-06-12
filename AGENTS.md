@@ -15,3 +15,8 @@
 - Use `gitnexus_impact()` for blast radius analysis before code changes
 - Use `gitnexus_detect_changes()` before committing
 - Fall back to grep only when GitNexus tools fail or return no results
+
+## Memory Recall Priority
+- Always check MemPalace first before using other methods for recalling information
+- Use `mempalace_search()` for quick queries, `mempalace_kg_query()` for facts, `mempalace_list_drawers()` for specific content
+- Only fall back to grep/read/webfetch if MemPalace returns no results
