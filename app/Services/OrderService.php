@@ -8,18 +8,18 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-
 class OrderService
 {
     public function createOrder($validated)
     {
         return DB::transaction(function () use ($validated) {
             $order = Order::create($validated);
-            $cart_items = []; //cart items are coming from session
+            $cart_items = []; // cart items are coming from session
             if (empty($cart_items)) {
-                throw new \Exception("Order failed: Cart is empty");
+                throw new \Exception('Order failed: Cart is empty');
             }
             $this->createOrderItems($order, $cart_items);
+
             return $order;
 
             // send order confirmation to customer and admin
@@ -34,7 +34,7 @@ class OrderService
             $order->items()->create([
                 'product_id' => $item['product_id'],
                 'quantity' => $item['quantity'],
-                'price' => $product->price
+                'price' => $product->price,
             ]);
 
         }
@@ -42,15 +42,23 @@ class OrderService
 
     public function orderStatusOptions(Order $order)
     {
+        if ($order->status->value === OrderStatusEnum::SHIPPED->value) {
+            return [
+                OrderStatusEnum::PROCESSING->value,
+                OrderStatusEnum::CANCELLED->value,
+            ];
+        }
+
         $order->load('timeline');
-        $timelimeStatus = $order->timeline->pluck('status')->toArray();
-        $enumesStatus = OrderStatusEnum::getOptions();
-        return array_diff($enumesStatus, $timelimeStatus);
+        $timelineStatus = $order->timeline->pluck('status')->toArray();
+        $enumStatus = OrderStatusEnum::getOptions();
+
+        return array_diff($enumStatus, $timelineStatus);
     }
 
     public function canBeDeleted(Order $order)
     {
-        return !in_array($order->status->value, $this->statusCantBeDeleted());
+        return ! in_array($order->status->value, $this->statusCantBeDeleted());
     }
 
     // Status that cannot be deleted
@@ -62,7 +70,7 @@ class OrderService
     // Status that cannot be updated. Also use to controll UI read only status
     public function readOnlyStatus(Order $order)
     {
-        return in_array($order->status->value, [OrderStatusEnum::CANCELLED->value, OrderStatusEnum::SHIPPED->value]);
+        return $order->status->value === OrderStatusEnum::CANCELLED->value;
     }
 
     public function paginatedOrdersQuery(Request $request)
@@ -86,9 +94,8 @@ class OrderService
                 'orders.notes',
                 DB::raw("(customers.firstname || ' ' || customers.lastname)"),
                 DB::raw("strftime('%m/%d/%Y', orders.created_at)"),
-            ], 'like', '%' . $request->query('query') . '%')
+            ], 'like', '%'.$request->query('query').'%')
             ->orderBy('status_order', 'asc')
             ->paginate(10)->withQueryString();
     }
-
 }

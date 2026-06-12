@@ -152,7 +152,7 @@ export default function Show({
     }
 
     function disabledActionbyStatus(order) {
-        return order.status === "cancelled" || order.status === "shipped";
+        return order.status === "cancelled";
     }
 
     return (
