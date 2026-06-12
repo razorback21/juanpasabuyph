@@ -1,5 +1,5 @@
 ## Agent Session Start
-1. Always run caveman skill and read ./CLAUDE.md and tell the user that you are ready to work
+1. Always run caveman skill if not loaded and read ./CLAUDE.md if not yet loaded and then must tell the user that you are ready to Rock N' Roll.
 
 ## Memory Store
 - Use MemPalace for session memories and knowledge storage
