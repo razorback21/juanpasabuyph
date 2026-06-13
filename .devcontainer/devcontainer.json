@@ -5,35 +5,10 @@
     // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
     //"image": "mcr.microsoft.com/devcontainers/php:1-8.4-bullseye",
     "dockerComposeFile": "docker-compose.yml",
-    "service": "juanpasabuyph",
-    "workspaceFolder": "/workspaces/juanpasabuyph",
+    "service": "local",
+    "workspaceFolder": "/var/www/html",
     // Features to add to the dev container. More info: https://containers.dev/features.
     //"features": {},
-
-    // Configure tool-specific properties.
-
-    // "customizations" : {
-    //     "jetbrains" : {
-    //         "backend" : "PhpStorm"
-    //     }
-    // },
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-//    "forwardPorts": ["8000:8000", "9003:9003", "5173:5173"],
-//    "portsAttributes": {
-//        "5173": {
-//            "label": "Vite Dev Server",
-//            "onAutoForward": "notify"
-//        },
-//        "8000": {
-//            "label": "Laravel App",
-//            "onAutoForward": "notify"
-//        },
-//        "9003": {
-//            "label": "PHP Debug",
-//            "onAutoForward": "notify"
-//        }
-//    }
-
     // Use 'postCreateCommand' to run commands after the container is created.
     //  "postCreateCommand": "cd /workspaces/juanpasabuyph && su vscode && composer run devc",
 

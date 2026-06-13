@@ -1,37 +1,33 @@
 services:
-    juanpasabuyph:
-        privileged: true
+    local:
         build:
             context: .
             dockerfile: Dockerfile
-        # limit memory
-        deploy:
-            resources:
-                limits:
-                    memory: 512M
-        # use by curl
-        hostname: juanpasabuyph.loc
-        container_name: juanpasabuyph_app
-        networks:
-            - juan_network
         volumes:
-            - ../..:/workspaces:cached
-        # Overrides default command so things don't shut down after the process ends.
-        command: sleep infinity
-        ports:
-            - "8000:8000"
-            - "5173:5173"
+            - ${DOKPLOY_HOST_APP_PATH:-../}:/var/www/html
+            #- db:/var/www/html/database/database
+            #- storage:/var/www/html/storage
         expose:
-            - 8000
-            - 5173
+            - "8080"
+            - "8443"
+            - "5173"
+        networks:
+            - dokploy-network
+        #environment:
+        #AUTORUN_ENABLED: "true"
+        #PHP_OPCACHE_ENABLE: "1"
         labels:
             - "traefik.enable=true"
-            - "traefik.http.routers.juanpasabuyph.rule=Host(`juanpasabuyph.loc`)"
-            - "traefik.http.routers.juanpasabuyph.entrypoints=web"
-            - "traefik.http.routers.juanpasabuyph.service=juanpasabuyph"
-            - "traefik.http.services.juanpasabuyph.loadbalancer.server.port=8000"
+            - "traefik.http.routers.juanpasabuy_local.rule=Host(`juanpasabuyph.loc`)"
+            - "traefik.http.routers.juanpasabuy_local.entrypoints=websecure"
+            - "traefik.http.routers.juanpasabuy_local.tls=true"
+            - "traefik.http.services.juanpasabuy_local.loadbalancer.server.port=8080"
 
 networks:
-    juan_network:
+    dokploy-network:
+        name: dokploy-network
         external: true
-        name: donz_network
+
+volumes:
+    db:
+    storage:
