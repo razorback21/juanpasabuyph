@@ -5,37 +5,29 @@ services:
             dockerfile: Dockerfile
         volumes:
             - ${DOKPLOY_HOST_APP_PATH:-../}:/var/www/html
-            - db:/var/www/html/database/database
-            - storage:/var/www/html/storage
+            #- db:/var/www/html/database/database
+            #- storage:/var/www/html/storage
         expose:
             - "8080"
             - "8443"
+            - "5173"
         networks:
             - dokploy-network
         #environment:
-            #AUTORUN_ENABLED: "true"
-            #PHP_OPCACHE_ENABLE: "1"
+        #AUTORUN_ENABLED: "true"
+        #PHP_OPCACHE_ENABLE: "1"
         labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.juanpasabuy_local.rule=Host(`juanpasabuyph.loc`)"
-        - "traefik.http.routers.juanpasabuy_local.entrypoints=websecure"
-        - "traefik.http.routers.juanpasabuy_local.tls=true"
-        - "traefik.http.services.juanpasabuy_local.loadbalancer.server.port=8080"
-
+            - "traefik.enable=true"
+            - "traefik.http.routers.juanpasabuy_local.rule=Host(`juanpasabuyph.loc`)"
+            - "traefik.http.routers.juanpasabuy_local.entrypoints=websecure"
+            - "traefik.http.routers.juanpasabuy_local.tls=true"
+            - "traefik.http.services.juanpasabuy_local.loadbalancer.server.port=8080"
 
 networks:
-  dokploy-network:
-    name: dokploy-network
-    external: true
+    dokploy-network:
+        name: dokploy-network
+        external: true
 
 volumes:
-  db:
-  storage:
-
-
-
-
-
-
-
-
+    db:
+    storage:
