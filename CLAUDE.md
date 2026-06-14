@@ -235,7 +235,7 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **juanpasabuyph** (3098 symbols, 5677 relationships, 51 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **juanpasabuyph** (3147 symbols, 5744 relationships, 52 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
