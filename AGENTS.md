@@ -4,6 +4,7 @@
 
 1. **Load Caveman Skill**: Always run caveman skill if not already loaded
 2. **Read Context Files**: MUST read ALL files below before ANY other work:
+   - `./context/OVERVIEW.md` — Project overview
    - `./CLAUDE.md` — Main project context
    - `./context/CODING_BEHAVIOR.md` — Coding behavior guidelines
    - `./context/CODING_STANDARDS.md` — Code style and conventions
