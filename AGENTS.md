@@ -2,7 +2,7 @@
 
 ## MANDATORY STARTUP STEPS
 
-1. **Load Caveman Skill and ponytail**: Always run caveman and pony tail skill if not already loaded
+1. **Load Caveman and Ponytail skill**: Always run caveman and pony tail skill if not already loaded
 2. **Read Context Files**: MUST read ALL files below before ANY other work:
    - `./context/OVERVIEW.md` — Project overview
    - `./CLAUDE.md` — Main project context
